@@ -7,12 +7,12 @@ import os
 class QWEN(Model):
     NAME = MODEL_TO_NAME[ModelType.QWEN]
     
-    def __init__(self, tempature, modelName):
+    def __init__(self, temperture, modelName):
         if modelName == None:
             modelName = "qwen3-8b"
             print(f"Log: 'modelName' default to {modelName}.")
 
-        super().__init__(tempature, modelName)
+        super().__init__(temperture, modelName)
         self.name: str = QWEN.NAME
         self.client = OpenAI(
             api_key=os.getenv("QWEN_API_KEY"),
@@ -30,7 +30,7 @@ class QWEN(Model):
                 extra_body={"enable_thinking": False},
                 messages=[{"role": "user", "content": prompt}],
                 max_tokens=8192,
-                temperature=self.tempature
+                temperature=self.temperture
             )
             return response.choices[0].message.content
         except Exception as e:
@@ -43,7 +43,7 @@ class QWEN(Model):
                 extra_body={"enable_thinking": False},
                 messages=promptList,
                 max_tokens=8192,
-                temperature=self.tempature
+                temperature=self.temperture
             )
             return response.choices[0].message.content
         except Exception as e:

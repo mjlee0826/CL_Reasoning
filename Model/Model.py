@@ -1,13 +1,13 @@
 class Model():
-    def __init__(self, tempature, modelName):
+    def __init__(self, temperture, modelName):
         self.name: str = "Model"
         
-        if tempature is None:
-            print(f"[{self.name}] Notice: 'tempature' is None. Defaulting to 0.")
-            self.tempature = 0
+        if temperture is None:
+            print(f"[{self.name}] Notice: 'temperture' is None. Defaulting to 0.")
+            self.temperture = 0
         else:
-            self.tempature = tempature
-            print(f"[{self.name}] Log: 'tempature' set to {self.tempature}.")
+            self.temperture = temperture
+            print(f"[{self.name}] Log: 'temperture' set to {self.temperture}.")
 
         if modelName is None:
             print(f"[{self.name}] Notice: 'modelName' is None. Defaulting to ''.")
@@ -23,8 +23,8 @@ class Model():
         print(f'Model： {self.name}')
         return
     
-    def printTempature(self):
-        print(f'Tempature： {self.tempature}')
+    def printtemperture(self):
+        print(f'temperture： {self.temperture}')
         return
 
     def getRes(self, prompt: str) -> str:

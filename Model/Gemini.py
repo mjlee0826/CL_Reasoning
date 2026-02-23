@@ -7,12 +7,12 @@ import os
 class Gemini(Model):
     NAME = MODEL_TO_NAME[ModelType.GEMINI]
 
-    def __init__(self, tempature, modelName):
+    def __init__(self, temperture, modelName):
         if modelName == None:
             modelName = "gemini-2.5-flash-lite"
             print(f"Log: 'modelName' default to {modelName}.")
 
-        super().__init__(tempature, modelName)
+        super().__init__(temperture, modelName)
         self.name: str = Gemini.NAME
 
         self.client = OpenAI(
@@ -26,7 +26,7 @@ class Gemini(Model):
                 model=self.modelName,
                 messages=[{"role": "user", "content": prompt}],
                 max_tokens=8192,
-                temperature=self.tempature,
+                temperature=self.temperture,
                 stream=False
             )
             if response.choices[0].message.content:
@@ -41,7 +41,7 @@ class Gemini(Model):
                 model=self.modelName,
                 messages=promptList,
                 max_tokens=8192,
-                temperature=self.tempature,
+                temperature=self.temperture,
                 stream=False
             )
 
