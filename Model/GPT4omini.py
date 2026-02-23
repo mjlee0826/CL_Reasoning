@@ -7,10 +7,13 @@ import os
 class GPT4omini(Model):
     NAME = MODEL_TO_NAME[ModelType.GPT4OMINI]
     
-    def __init__(self, tempature):
-        super().__init__(tempature)
+    def __init__(self, tempature, modelName):
+        if modelName == None:
+            modelName = "gpt-4o-mini-2024-07-18"
+            print(f"Log: 'modelName' default to {modelName}.")
+
+        super().__init__(tempature, modelName)
         self.name: str = GPT4omini.NAME
-        self.modelName = "gpt-4o-mini-2024-07-18"
         self.client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
         self.enc = tiktoken.get_encoding("cl100k_base")
     

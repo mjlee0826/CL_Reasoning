@@ -7,10 +7,14 @@ import os
 class Deepseek(Model):
     NAME = MODEL_TO_NAME[ModelType.DEEPSEEK.value]
 
-    def __init__(self, tempature):
-        super().__init__(tempature)
+    def __init__(self, tempature, modelName):
+        if modelName == None:
+            modelName = "deepseek-chat"
+            print(f"Log: 'modelName' default to {modelName}.")
+
+        super().__init__(tempature, modelName)
         self.name: str = Deepseek.NAME
-        self.modelName = "deepseek-chat"
+
         self.client = OpenAI(
             api_key=os.getenv('DEEPSEEK_API_KEY'),
             base_url="https://api.deepseek.com"

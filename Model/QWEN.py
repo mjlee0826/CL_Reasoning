@@ -7,10 +7,13 @@ import os
 class QWEN(Model):
     NAME = MODEL_TO_NAME[ModelType.QWEN]
     
-    def __init__(self, tempature):
-        super().__init__(tempature)
+    def __init__(self, tempature, modelName):
+        if modelName == None:
+            modelName = "qwen3-8b"
+            print(f"Log: 'modelName' default to {modelName}.")
+
+        super().__init__(tempature, modelName)
         self.name: str = QWEN.NAME
-        self.modelName = "qwen3-8b"
         self.client = OpenAI(
             api_key=os.getenv("QWEN_API_KEY"),
             base_url="https://dashscope-intl.aliyuncs.com/compatible-mode/v1",

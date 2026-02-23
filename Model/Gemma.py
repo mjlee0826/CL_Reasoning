@@ -6,10 +6,13 @@ import os
 class Gemma(Model):
     NAME = MODEL_TO_NAME[ModelType.GEMMA]
 
-    def __init__(self, tempature):
-        super().__init__(tempature)
+    def __init__(self, tempature, modelName):
+        if modelName == None:
+            modelName = "models/gemma-3-27b-it"
+            print(f"Log: 'modelName' default to {modelName}.")
+
+        super().__init__(tempature, modelName)
         self.name: str = Gemma.NAME
-        self.modelName = "models/gemma-3-27b-it"  # Using strongest Gemma model
         genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
         self.model = genai.GenerativeModel(self.modelName)
     

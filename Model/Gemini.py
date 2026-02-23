@@ -7,10 +7,14 @@ import os
 class Gemini(Model):
     NAME = MODEL_TO_NAME[ModelType.GEMINI]
 
-    def __init__(self, tempature):
-        super().__init__(tempature)
+    def __init__(self, tempature, modelName):
+        if modelName == None:
+            modelName = "gemini-2.5-flash-lite"
+            print(f"Log: 'modelName' default to {modelName}.")
+
+        super().__init__(tempature, modelName)
         self.name: str = Gemini.NAME
-        self.modelName: str = "gemini-2.5-flash-lite"  # 用新版 Gemini Pro
+
         self.client = OpenAI(
             api_key=os.getenv('GEMINI_API_KEY'),
             base_url="https://generativelanguage.googleapis.com/v1beta/openai/"

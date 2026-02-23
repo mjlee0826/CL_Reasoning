@@ -22,6 +22,13 @@ class StrategyNameType(str, Enum):
     GETONEOUTPUT = "Get One Output"
     REPAIR = "Repair"
 
+class LanguageType(str, Enum):
+    CHINESE = 'Chinese',
+    ENGLISH = 'English',
+    SPANISH = 'Spanish',
+    JAPANESE = 'Japanese',
+    RUSSIAN = 'Russian'
+
 # 直接取出 value，會是字串
 STRATEGY_LIST = [s.value for s in StrategyType]
 
@@ -35,11 +42,11 @@ NAME_TO_STRATEGY = {
 }
 
 STRATEGY_TO_LANGUAGE = {
-    StrategyType.ONLYCHINESE.value: 'Chinese',
-    StrategyType.ONLYENGLISH.value: 'English',
-    StrategyType.ONLYSPANISH.value: 'Spanish',
-    StrategyType.ONLYJAPANESE.value: 'Japanese',
-    StrategyType.ONLYRUSSIAN.value: 'Russian',
+    StrategyType.ONLYCHINESE.value: LanguageType.CHINESE.value,
+    StrategyType.ONLYENGLISH.value: LanguageType.ENGLISH.value,
+    StrategyType.ONLYSPANISH.value: LanguageType.SPANISH.value,
+    StrategyType.ONLYJAPANESE.value: LanguageType.JAPANESE.value,
+    StrategyType.ONLYRUSSIAN.value: LanguageType.RUSSIAN.value,
 }
 
 def get_strategy_map():
