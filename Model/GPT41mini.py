@@ -22,7 +22,7 @@ class GPT41mini(Model):
             response = self.client.chat.completions.create(
                 model=self.modelName,
                 messages=[{"role": "user", "content": prompt}],
-                max_tokens=8192,
+                max_completion_tokens=8192,
                 temperature=self.temperature
             )
             return response.choices[0].message.content
@@ -34,7 +34,7 @@ class GPT41mini(Model):
             response = self.client.chat.completions.create(
                 model=self.modelName,
                 messages=promptList,
-                max_tokens=8192,
+                max_completion_tokens=8192,
                 temperature=self.temperature
             )
             return response.choices[0].message.content
