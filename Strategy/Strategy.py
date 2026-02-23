@@ -9,7 +9,7 @@ class Strategy():
         self.name: str = "Strategy"
     
     def printName(self):
-        print(f'Strategy {self.name}')
+        print(f'Strategy: {self.name}')
 
     def parseAnswer(self, answer: str) -> str:
         result: str = ""

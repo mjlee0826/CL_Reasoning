@@ -48,5 +48,5 @@ def get_dataset_map():
 
 # key 改成字串，對應 dataset 名稱
 DATASET_TO_NAME = {
-    member: DatasetNameType[member.name] for member in DatasetType
+    member: DatasetNameType[member.name].value for member in DatasetType
 }

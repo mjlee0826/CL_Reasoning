@@ -17,7 +17,7 @@ class ModelNameType(str, Enum):
     QWEN = 'QWEN'
     
 MODEL_TO_NAME = {
-    member: ModelNameType[member.name] for member in ModelType
+    member: ModelNameType[member.name].value for member in ModelType
 }
 
 MODEL_LIST = [m.value for m in ModelType]

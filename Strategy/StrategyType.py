@@ -34,11 +34,11 @@ STRATEGY_LIST = [s.value for s in StrategyType]
 
 # 用字串當 key，比較方便查
 STRATEGY_TO_NAME = {
-    member: StrategyNameType[member.name] for member in StrategyType
+    member: StrategyNameType[member.name].value for member in StrategyType
 }
 
 NAME_TO_STRATEGY = {
-    member: StrategyType[member.name] for member in StrategyNameType
+    member: StrategyType[member.name].value for member in StrategyNameType
 }
 
 STRATEGY_TO_LANGUAGE = {
