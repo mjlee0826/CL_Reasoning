@@ -8,7 +8,7 @@ class OneAgentLog(Log):
         print('=' * 30)
         print(f'Log Information')
         strategy.printName()
-        model.printName()
+        model.printModelName()
         model.printTemperature()
         dataset.printName()
         dataset.printDataNums()

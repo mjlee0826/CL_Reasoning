@@ -18,9 +18,16 @@ class Model():
 
     def getName(self) -> str:
         return self.name
+
+    def getModelName(self) -> str:
+        return self.modelName
     
     def printName(self):
         print(f'Model： {self.name}')
+        return
+    
+    def printModelName(self):
+        print(f'Model： {self.modelName}')
         return
     
     def printTemperature(self):

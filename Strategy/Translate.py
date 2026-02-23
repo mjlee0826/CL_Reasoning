@@ -25,7 +25,7 @@ class Translate(Strategy):
 
         database = self.dataset.getData()
         result = [{
-            "Model": self.model.getName(),
+            "Model": self.model.getModelName(),
             "Dataset": self.dataset.getName(),
             "Strategy": self.name,
             "Data Nums": self.dataset.getNums(),
