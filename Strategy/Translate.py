@@ -8,10 +8,6 @@ from Strategy.PromptAbstractFactory.PromptTranslateFactory import PromptTranslat
 from tqdm import tqdm
 
 class Translate(Strategy):
-    """
-    A strategy implementation that translates questions into a specific target language
-    before performing reasoning (Chain-of-Thought) to generate an answer.
-    """
     def __init__(self, model: Model, dataset: Dataset, log: Log, type):
         super().__init__()
         self.name: str = f'{STRATEGY_TO_LANGUAGE[type]} Tranlated'
@@ -38,7 +34,7 @@ class Translate(Strategy):
 
         pbar = tqdm(total=self.dataset.getDataNums())
         for data in database:
-            translateQuestion = self.model.getRes(self.getPrompt(self.type, data["question"]))
+            translateQuestion = self.model.getRes(self.getPrompt(data["question"]))
             result.append({
                 "id": data["id"],
                 "Question": data["question"],
@@ -55,4 +51,4 @@ class Translate(Strategy):
     
     @staticmethod
     def getTokenLens(model: Model, data):
-        return model.getTokenLens(data["Result"]) + model.getTokenLens(data["Translated"])
+        return model.getTokenLens(data["Translated"])
