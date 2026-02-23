@@ -3,12 +3,12 @@ from Dataset.path import commensenseqa_path
 from Dataset.DatasetType import DATASET_TO_NAME, DatasetType
 import json
 
-class CommonsenseseQA(Dataset):
+class CommonsenseQA(Dataset):
     NAME = DATASET_TO_NAME[DatasetType.COMMONSENSEQA]
     
     def __init__(self, nums=-1, sample=1):
         super().__init__(nums, sample)
-        self.name: str = CommonsenseseQA.NAME
+        self.name: str = CommonsenseQA.NAME
 
         with open(commensenseqa_path, "r") as f:
             originData = json.load(f)

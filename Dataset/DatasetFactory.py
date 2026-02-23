@@ -1,6 +1,6 @@
 from Dataset.Dataset import Dataset
 from Dataset.MathQA import MathQA
-from Dataset.CommonsenseQA import CommenseQA
+from Dataset.CommonsenseQA import CommonsenseQA
 from Dataset.MGSM import MGSM
 from Dataset.MMLU import MMLU
 from Dataset.TruthfulQA import TruthfulQA
@@ -17,8 +17,8 @@ class DatasetFactory():
     def buildDataset(self, type, *args, **kwargs) -> Dataset:
         if type == DatasetType.MATHQA:
             return MathQA(*args, **kwargs)
-        elif type == DatasetType.COMMENSEQA:
-            return CommenseQA(*args, **kwargs)
+        elif type == DatasetType.COMMONSENSEQA:
+            return CommonsenseQA(*args, **kwargs)
         elif type == DatasetType.MGSM:
             return MGSM(*args, **kwargs)
         elif type == DatasetType.MMLU:
