@@ -23,7 +23,7 @@ class Model():
         print(f'Model： {self.name}')
         return
     
-    def printtemperature(self):
+    def printTemperature(self):
         print(f'temperature： {self.temperature}')
         return
 
