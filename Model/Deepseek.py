@@ -7,12 +7,12 @@ import os
 class Deepseek(Model):
     NAME = MODEL_TO_NAME[ModelType.DEEPSEEK.value]
 
-    def __init__(self, temperture, modelName):
+    def __init__(self, temperature, modelName):
         if modelName == None:
             modelName = "deepseek-chat"
             print(f"Log: 'modelName' default to {modelName}.")
 
-        super().__init__(temperture, modelName)
+        super().__init__(temperature, modelName)
         self.name: str = Deepseek.NAME
 
         self.client = OpenAI(
@@ -30,7 +30,7 @@ class Deepseek(Model):
                 model=self.modelName,
                 messages=[{"role": "user", "content": prompt}],
                 max_tokens=8192,
-                temperature=self.temperture,
+                temperature=self.temperature,
                 stream=False
             )
             return response.choices[0].message.content
@@ -43,7 +43,7 @@ class Deepseek(Model):
                 model=self.modelName,
                 messages=promptList,
                 max_tokens=8192,
-                temperature=self.temperture
+                temperature=self.temperature
             )
             return response.choices[0].message.content
         except Exception as e:

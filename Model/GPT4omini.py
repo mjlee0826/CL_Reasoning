@@ -7,12 +7,12 @@ import os
 class GPT4omini(Model):
     NAME = MODEL_TO_NAME[ModelType.GPT4OMINI]
     
-    def __init__(self, temperture, modelName):
+    def __init__(self, temperature, modelName):
         if modelName == None:
             modelName = "gpt-4o-mini-2024-07-18"
             print(f"Log: 'modelName' default to {modelName}.")
 
-        super().__init__(temperture, modelName)
+        super().__init__(temperature, modelName)
         self.name: str = GPT4omini.NAME
         self.client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
         self.enc = tiktoken.get_encoding("cl100k_base")
@@ -23,7 +23,7 @@ class GPT4omini(Model):
                 model=self.modelName,
                 messages=[{"role": "user", "content": prompt}],
                 max_tokens=8192,
-                temperature=self.temperture
+                temperature=self.temperature
             )
             return response.choices[0].message.content
         except Exception as e:
@@ -35,7 +35,7 @@ class GPT4omini(Model):
                 model=self.modelName,
                 messages=promptList,
                 max_tokens=8192,
-                temperature=self.temperture
+                temperature=self.temperature
             )
             return response.choices[0].message.content
         except Exception as e:
