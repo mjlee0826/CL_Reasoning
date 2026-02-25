@@ -74,14 +74,16 @@ if __name__ == "__main__":
     # 這裡填入您訓練輸出的資料夾路徑
     # 如果您有設 load_best_model_at_end=True，最好的模型會在 checkpoint 資料夾裡
     # 或者直接指到 output_dir (如果訓練正常結束)
-    MODEL_PATH = "./xlm-roberta-multilabel-output4/checkpoint-3900" # 範例路徑，請修改
+    MODEL_PATH = "./xlm-roberta-multilabel-output6/checkpoint-1500" # 範例路徑，請修改
 
     # 初始化預測器
     predictor = ModelPredictor(MODEL_PATH)
 
     # 測試一個新問題
-    new_question = "問題：\nあるクラスの15人の生徒の平均年Есть задача: \nРаботу, которую можно было бы закончить за 7 дней, закончили на 3 дня раньше после того, как присоединилось ещё 10 человек. Каково было количество занятых рабочих?.\nИ есть 5 вариантов ответа\na ) 22 , b ) 20 , c ) 60 , d ) 71 , e ) 11\nПожалуйста, выберите вариант, основываясь на вопросе.\nВ конце вашего ответа предоставьте его в точности в этом JSON-формате:\n{\"answer\": \"your_letter_choice\"}\nОтвет должен быть одной английской буквой (a-e). Вы должны использовать двойные кавычки. Вы должны вывести только одну строку."
+    # new_question = "問題：\nあるクラスの15人の生徒の平均年Есть задача: \nРаботу, которую можно было бы закончить за 7 дней, закончили на 3 дня раньше после того, как присоединилось ещё 10 человек. Каково было количество занятых рабочих?.\nИ есть 5 вариантов ответа\na ) 22 , b ) 20 , c ) 60 , d ) 71 , e ) 11\nПожалуйста, выберите вариант, основываясь на вопросе.\nВ конце вашего ответа предоставьте его в точности в этом JSON-формате:\n{\"answer\": \"your_letter_choice\"}\nОтвет должен быть одной английской буквой (a-e). Вы должны использовать двойные кавычки. Вы должны вывести только одну строку."
     # 進行預測 (閾值可以設高一點，例如 0.75，來過濾沒信心的)
+    # new_question = "Hay una Pregunta:  \nUn grano de arena podría causarte molestias si se mete en tu ¿qué?  \n\nY hay 5 opciones:  \nA) cubo, B) montón de arena, C) playa, D) almeja, E) traje de baño  \n\nPor favor, elige una opción basándote en la pregunta.  \nAl final de tu respuesta, proporciona tu respuesta en este formato JSON exacto:  \n{\"answer\": \"tu_letra_elegida\"}  \nLa respuesta debe ser una sola letra en inglés (A-E). Debes usar comillas dobles. Debes generar solo una línea."
+    new_question = "質問があります：\nグル・ナーナクと彼の後継者たちは、以下のうちどれを促進するために特定のシク教ラーガの使用を指示しましたか？\n\n選択肢：\nA: 調和と均衡\nB: 献身と敬虔\nC: 愛と情熱\nD: 善意と愛\n\n質問に基づいて選択肢を選んでください。\n回答の最後に、以下の正確なJSON形式で答えを提供してください：\n{\"answer\": \"your_letter_choice\"}\n答えは単一の英字（A-D）でなければなりません。二重引用符を出力する必要があります。出力は一行のみである必要があります。"
     labels, details = predictor.predict(new_question, threshold=0.5)
     
     print("\n最終推薦策略:", labels)
