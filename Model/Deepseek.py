@@ -5,7 +5,7 @@ from Model.ModelType import ModelType, MODEL_TO_NAME
 import os
 
 class Deepseek(Model):
-    NAME = MODEL_TO_NAME[ModelType.DEEPSEEK.value]
+    NAME = MODEL_TO_NAME[ModelType.DEEPSEEK].value
 
     def __init__(self, temperature, modelName):
         if modelName == None:
