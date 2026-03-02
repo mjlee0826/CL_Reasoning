@@ -1,19 +1,12 @@
 from Model.Model import Model
 from openai import OpenAI
 from transformers import AutoTokenizer
-from Model.ModelType import ModelType, MODEL_TO_NAME
+from Model.ModelConfig import ModelConfig
 import os
 
 class Deepseek(Model):
-    NAME = MODEL_TO_NAME[ModelType.DEEPSEEK].value
-
-    def __init__(self, temperature, modelName):
-        if modelName == None:
-            modelName = "deepseek-chat"
-            print(f"Log: 'modelName' default to {modelName}.")
-
-        super().__init__(temperature, modelName)
-        self.name: str = Deepseek.NAME
+    def __init__(self, config: ModelConfig):
+        super().__init__(config)
 
         self.client = OpenAI(
             api_key=os.getenv('DEEPSEEK_API_KEY'),

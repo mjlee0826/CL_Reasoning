@@ -1,4 +1,5 @@
 from Model.ModelConfig import ModelConfig
+from Model.ModelType import MODEL_TO_DISPLAYNAME, MODEL_TO_DEFAULT_MODELNAME
 
 class Model():
     """
@@ -14,6 +15,8 @@ class Model():
             config (ModelConfig): An instance containing model parameters (e.g., temperature, modelName).
         """
         self.config: ModelConfig = config
+        self.config.displayName = MODEL_TO_DISPLAYNAME[self.config.modelType].value
+        self.config.modelName = self.config.modelName or MODEL_TO_DEFAULT_MODELNAME[self.config.modelType].value
     
     def __getattr__(self, name):
         """
@@ -23,7 +26,6 @@ class Model():
         
         Example: Accessing model.temperature will return self.config.temperature.
         """
-        # Note: Changed 'self.support' to 'self.config' to match your __init__
         return getattr(self.config, name)
     
     def getRes(self, prompt: str) -> str:

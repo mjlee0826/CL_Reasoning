@@ -1,16 +1,13 @@
 from Dataset.Dataset import Dataset
-from Dataset.DatasetType import DATASET_TO_NAME, DatasetType
+from Dataset.DatasetConfig import DatasetConfig
 from datasets import load_dataset
 import string
 
 letters = list(string.ascii_uppercase)
 
 class TruthfulQA(Dataset):
-    NAME = DATASET_TO_NAME[DatasetType.TRUTHFULQA]
-
-    def __init__(self, nums = -1, sample = 1):
-        super().__init__(nums, sample)
-        self.name: str = TruthfulQA.NAME
+    def __init__(self, config: DatasetConfig):
+        super().__init__(config)
         
         dataset = load_dataset("truthfulqa/truthful_qa", "multiple_choice", split="validation")
         
@@ -25,7 +22,7 @@ class TruthfulQA(Dataset):
             })
         
         if self.nums == -1 or self.nums > len(self.data):
-            self.nums = len(self.data)
+            self.config.nums = len(self.data)
 
 
     def createQuestion(self, question, choices):

@@ -1,30 +1,35 @@
 from Model.Model import Model
-from Model.GPT41mini import GPT41mini
-from Model.GPT4omini import GPT4omini
-from Model.Deepseek import Deepseek
-from Model.Gemini import Gemini
-from Model.Gemma import Gemma
-from Model.QWEN import QWEN
-
-from Model.ModelType import ModelType
+from Model.ModelType import ModelType, get_model_map
 
 class ModelFactory():
+    """
+    Factory class responsible for instantiating the appropriate language model.
+    By centralizing the creation logic here, the main application doesn't need 
+    to know the specific implementation details of each model.
+    """
     def __init__(self):
+        # Constructor currently requires no initialization logic.
         pass
 
-    def buildModel(self, type, *args, **kwargs) -> Model:
-        if type == ModelType.GPT41MINI:
-            return GPT41mini(*args, **kwargs)
-        elif type == ModelType.GPT4OMINI:
-            return GPT4omini(*args, **kwargs)
-        elif type == ModelType.DEEPSEEK:
-            return Deepseek(*args, **kwargs)
-        elif type == ModelType.GEMINI:
-            return Gemini(*args, **kwargs)
-        elif type == ModelType.GEMMA:
-            return Gemma(*args, **kwargs)
-        elif type == ModelType.QWEN:
-            return QWEN(*args, **kwargs)
-        else:
-            print('Model doesn\'t exist!')
+    def buildModel(self, type: ModelType, *args, **kwargs) -> Model:
+        """
+        Creates and returns an instance of the specified model type.
+        
+        Args:
+            type (ModelType): The enum identifier for the requested model.
+            *args: Variable length argument list to pass to the model's constructor.
+            **kwargs: Arbitrary keyword arguments (like a ModelConfig object) 
+            to pass to the model's constructor.
+            
+        Returns:
+            Model: An instantiated concrete model object, or None if the type is invalid.
+        """
+        
+        model_map = get_model_map()
+        modelcls = model_map.get(type)
+
+        if not modelcls:
+            print("Error: Model doesn't exist!")
             return None
+        
+        return modelcls(*args, **kwargs)

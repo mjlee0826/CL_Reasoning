@@ -1,14 +1,11 @@
 from Dataset.Dataset import Dataset
 from Dataset.path import mgsm_en_path
-from Dataset.DatasetType import DATASET_TO_NAME, DatasetType
+from Dataset.DatasetConfig import DatasetConfig
 import json
 
 class MGSM(Dataset):
-    NAME = DATASET_TO_NAME[DatasetType.MGSM]
-
-    def __init__(self, nums=-1, sample=1):
-        super().__init__(nums, sample)
-        self.name: str = MGSM.NAME
+    def __init__(self, config: DatasetConfig):
+        super().__init__(config)
 
         # 載入 MGSM 數據
         with open(mgsm_en_path, 'r', encoding='utf-8') as f:
@@ -26,7 +23,7 @@ class MGSM(Dataset):
             })
 
         if self.nums == -1 or self.nums > len(self.data):
-            self.nums = len(self.data)
+            self.config.nums = len(self.data)
 
     def createQuestion(self, question: str) -> str:
         """

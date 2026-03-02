@@ -1,13 +1,10 @@
 from Dataset.Dataset import Dataset
-from Dataset.DatasetType import DATASET_TO_NAME, DatasetType
+from Dataset.DatasetConfig import DatasetConfig
 from datasets import load_dataset
 
 class MLECQA(Dataset):
-    NAME = DATASET_TO_NAME[DatasetType.MLECQA]
-
-    def __init__(self, nums = -1, sample = 1):
-        super().__init__(nums, sample)
-        self.name: str = MLECQA.NAME
+    def __init__(self, config: DatasetConfig):
+        super().__init__(config)
         
         dataset = load_dataset("shuyuej/MLEC-QA-Benchmark", split="test")
         
@@ -22,7 +19,7 @@ class MLECQA(Dataset):
             })
         
         if self.nums == -1 or self.nums > len(self.data):
-            self.nums = len(self.data)
+            self.config.nums = len(self.data)
 
 
     def createQuestion(self, question, choices):

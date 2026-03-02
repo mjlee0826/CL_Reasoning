@@ -1,14 +1,11 @@
 from Dataset.Dataset import Dataset
-from Dataset.DatasetType import DATASET_TO_NAME, DatasetType
+from Dataset.DatasetConfig import DatasetConfig
 from Dataset.path import cmb_path
 import json
 
 class CMBExam(Dataset):
-    NAME = DATASET_TO_NAME[DatasetType.CMBEXAM]
-
-    def __init__(self, nums = -1, sample = 1):
-        super().__init__(nums, sample)
-        self.name: str = CMBExam.NAME
+    def __init__(self, config: DatasetConfig):
+        super().__init__(config)
         
         with open(cmb_path, "r") as f:
             dataset = json.load(f)
@@ -26,7 +23,7 @@ class CMBExam(Dataset):
             })
         
         if self.nums == -1 or self.nums > len(self.data):
-            self.nums = len(self.data)
+            self.config.nums = len(self.data)
 
 
     def createQuestion(self, question, choices):

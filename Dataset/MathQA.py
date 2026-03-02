@@ -1,14 +1,11 @@
 from Dataset.Dataset import Dataset
 from Dataset.path import mathqa_path
-from Dataset.DatasetType import DATASET_TO_NAME, DatasetType
+from Dataset.DatasetConfig import DatasetConfig
 import json
 
 class MathQA(Dataset):
-    NAME = DATASET_TO_NAME[DatasetType.MATHQA]
-
-    def __init__(self, nums = -1, sample = 1):
-        super().__init__(nums, sample)
-        self.name: str = MathQA.NAME
+    def __init__(self, config: DatasetConfig):
+        super().__init__(config)
 
         with open(mathqa_path, 'r') as f:
             originData = json.load(f)
@@ -24,7 +21,7 @@ class MathQA(Dataset):
             })
         
         if self.nums == -1 or self.nums > len(self.data):
-            self.nums = len(self.data)
+            self.config.nums = len(self.data)
 
     def createQuestion(self, question, choices) -> str:
         result = f'There is a Problem: \n{question}.\n' \

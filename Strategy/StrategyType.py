@@ -10,8 +10,9 @@ class StrategyType(str, Enum):
     SELFREFLECTION = "selfreflection"
     GETONEOUTPUT = 'getoneresult'
     REPAIR = 'repair'
+    TRANSLATE = 'translate'
 
-class StrategyNameType(str, Enum):
+class StrategyDisplayNameType(str, Enum):
     ONLYCHINESE = "Only Chinese"
     ONLYENGLISH = "Only English"
     ONLYSPANISH = "Only Spanish"
@@ -21,6 +22,7 @@ class StrategyNameType(str, Enum):
     CHALLENGE = "Challenge"
     GETONEOUTPUT = "Get One Output"
     REPAIR = "Repair"
+    TRANSLATE = 'Translate'
 
 class LanguageType(str, Enum):
     CHINESE = 'Chinese',
@@ -30,7 +32,7 @@ class LanguageType(str, Enum):
     RUSSIAN = 'Russian'
 
 # 直接取出 value，會是字串
-STRATEGY_LIST = [s.value for s in StrategyType]
+STRATEGY_STR_LIST = [s.value for s in StrategyType]
 
 # 用字串當 key，比較方便查
 STRATEGY_TO_NAME = {

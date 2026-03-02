@@ -1,14 +1,11 @@
 from Dataset.Dataset import Dataset
-from Dataset.DatasetType import DATASET_TO_NAME, DatasetType
+from Dataset.DatasetConfig import DatasetConfig
 from Dataset.path import xcopa_path
 import json
 
 class XCOPA(Dataset):
-    NAME = DATASET_TO_NAME[DatasetType.XCOPA]
-
-    def __init__(self, nums = -1, sample = 1):
-        super().__init__(nums, sample)
-        self.name: str = XCOPA.NAME
+    def __init__(self, config: DatasetConfig):
+        super().__init__(config)
         
         with open(xcopa_path, 'r', encoding='utf-8') as f:
             idx = 0
@@ -25,7 +22,7 @@ class XCOPA(Dataset):
                 idx += 1
         
         if self.nums == -1 or self.nums > len(self.data):
-            self.nums = len(self.data)
+            self.config.nums = len(self.data)
 
     def createQuestion(self, premise, choice1, choice2, question_type) -> str:
         question_word = "cause" if question_type == "cause" else "effect"

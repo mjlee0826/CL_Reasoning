@@ -1,19 +1,12 @@
 from openai import OpenAI
 from Model.Model import Model
-from Model.ModelType import ModelType, MODEL_TO_NAME
+from Model.ModelConfig import ModelConfig
 from google.generativeai import GenerativeModel
 import os
 
 class Gemini(Model):
-    NAME = MODEL_TO_NAME[ModelType.GEMINI]
-
-    def __init__(self, temperature, modelName):
-        if modelName == None:
-            modelName = "gemini-2.5-flash-lite"
-            print(f"Log: 'modelName' default to {modelName}.")
-
-        super().__init__(temperature, modelName)
-        self.name: str = Gemini.NAME
+    def __init__(self, config: ModelConfig):
+        super().__init__(config)
 
         self.client = OpenAI(
             api_key=os.getenv('GEMINI_API_KEY'),

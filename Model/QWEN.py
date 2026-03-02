@@ -1,19 +1,13 @@
 from openai import OpenAI
 from Model.Model import Model
-from Model.ModelType import ModelType, MODEL_TO_NAME
+from Model.ModelConfig import ModelConfig
 from transformers import AutoTokenizer
 import os
 
 class QWEN(Model):
-    NAME = MODEL_TO_NAME[ModelType.QWEN]
-    
-    def __init__(self, temperature, modelName):
-        if modelName == None:
-            modelName = "qwen3-8b"
-            print(f"Log: 'modelName' default to {modelName}.")
+    def __init__(self, config: ModelConfig):
+        super().__init__(config)
 
-        super().__init__(temperature, modelName)
-        self.name: str = QWEN.NAME
         self.client = OpenAI(
             api_key=os.getenv("QWEN_API_KEY"),
             base_url="https://dashscope-intl.aliyuncs.com/compatible-mode/v1",

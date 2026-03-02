@@ -1,14 +1,11 @@
 from Dataset.Dataset import Dataset
 from Dataset.path import commensenseqa_path
-from Dataset.DatasetType import DATASET_TO_NAME, DatasetType
+from Dataset.DatasetConfig import DatasetConfig
 import json
 
 class CommonsenseQA(Dataset):
-    NAME = DATASET_TO_NAME[DatasetType.COMMONSENSEQA]
-    
-    def __init__(self, nums=-1, sample=1):
-        super().__init__(nums, sample)
-        self.name: str = CommonsenseQA.NAME
+    def __init__(self, config: DatasetConfig):
+        super().__init__(config)
 
         with open(commensenseqa_path, "r") as f:
             originData = json.load(f)
@@ -23,7 +20,7 @@ class CommonsenseQA(Dataset):
             })
 
         if self.nums == -1 or self.nums > len(self.data):
-            self.nums = len(self.data)
+            self.config.nums = len(self.data)
 
     def createQuestion(self, question, labels, texts) -> str:
         # format choices as: A) ignore, B) enforce, ...

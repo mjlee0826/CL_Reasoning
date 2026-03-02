@@ -1,15 +1,13 @@
 from Dataset.Dataset import Dataset
 from datasets import load_dataset
-from Dataset.DatasetType import DATASET_TO_NAME, DatasetType
+from Dataset.DatasetConfig import DatasetConfig
 import pandas as pd
 
 class MMLU(Dataset):
-    NAME = DATASET_TO_NAME[DatasetType.MMLU]
     letters = ['A', 'B', 'C', 'D']
 
-    def __init__(self, nums = -1, sample = 1):
-        super().__init__(nums, sample)
-        self.name: str = MMLU.NAME
+    def __init__(self, config: DatasetConfig):
+        super().__init__(config)
 
         self.type: dict = {}
 
@@ -30,10 +28,10 @@ class MMLU(Dataset):
             self.type[data['subject']].append(data_info)
 
         if self.nums == -1 or self.nums > len(self.data):
-            self.nums = len(self.data)
+            self.config.nums = len(self.data)
         
         self.realData = self.getRealData()
-        self.nums = len(self.realData)
+        self.config.nums = len(self.realData)
 
     def createQuestion(self, question, choices) -> str:
         choicesPrompt = ""

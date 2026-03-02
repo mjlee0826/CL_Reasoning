@@ -1,4 +1,4 @@
-from dataclasses import dataclass, fields
+from dataclasses import dataclass, fields, asdict
 
 @dataclass
 class ModelConfig:
@@ -6,9 +6,10 @@ class ModelConfig:
     Data container for model configurations.
     Uses Python dataclass to automatically generate __init__, __repr__, and __eq__.
     """
-    name: str = ''
+    modelType: str = ''
     temperature: float = 0
     modelName: str = ''
+    displayName: str = ''
 
     @classmethod
     def from_args(cls, args):
@@ -32,3 +33,9 @@ class ModelConfig:
 
         # Unpack the filtered dictionary into the class constructor
         return cls(**filtered_data)
+    
+    def to_dict(self) -> dict:
+        """
+        Convert the dataclass instance to a standard dictionary.
+        """
+        return asdict(self)

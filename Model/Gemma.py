@@ -1,17 +1,11 @@
 import google.generativeai as genai
 from Model.Model import Model
-from Model.ModelType import ModelType, MODEL_TO_NAME
+from Model.ModelConfig import ModelConfig
 import os
 
 class Gemma(Model):
-    NAME = MODEL_TO_NAME[ModelType.GEMMA]
-
-    def __init__(self, temperature, modelName):
-        if modelName == None:
-            modelName = "models/gemma-3-27b-it"
-            print(f"Log: 'modelName' default to {modelName}.")
-
-        super().__init__(temperature, modelName)
+    def __init__(self, config: ModelConfig):
+        super().__init__(config)
         self.name: str = Gemma.NAME
         genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
         self.model = genai.GenerativeModel(self.modelName)

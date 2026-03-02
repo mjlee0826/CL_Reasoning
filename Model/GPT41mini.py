@@ -1,19 +1,13 @@
 from openai import OpenAI
 from Model.Model import Model
-from Model.ModelType import ModelType, MODEL_TO_NAME
+from Model.ModelConfig import ModelConfig
 import tiktoken
 import os
 
 class GPT41mini(Model):
-    NAME = MODEL_TO_NAME[ModelType.GPT41MINI]
+    def __init__(self, config: ModelConfig):
+        super().__init__(config)
 
-    def __init__(self, temperature, modelName):
-        if modelName == None:
-            modelName = "gpt-4.1-mini-2025-04-14"
-            print(f"Log: 'modelName' default to {modelName}.")
-
-        super().__init__(temperature, modelName)
-        self.name: str = GPT41mini.NAME
         self.client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
         self.enc = tiktoken.get_encoding("cl100k_base")
     
