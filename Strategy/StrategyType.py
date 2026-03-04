@@ -28,6 +28,10 @@ class LanguageType(str, Enum):
 # Extract pure string values for quick validation
 STRATEGY_STR_LIST = [s.value for s in StrategyType]
 
+# Extract pure string values for quick validation
+LANGUAGE_STR_LIST = [s.value for s in LanguageType]
+
+
 # Mapping dictionary for display names. Maps StrategyType Enum to StrategyDisplayNameType Enum.
 STRATEGY_TO_DISPLAYNAME = {
     member: StrategyDisplayNameType[member.name] for member in StrategyType

@@ -9,7 +9,7 @@ class StrategyConfig:
     displayName: str = ''
     
     # which would cause all instances to share the same list in memory.
-    languages: list = field(default_factory=list)
+    languages: list[str] = field(default_factory=list)
 
     @classmethod
     def from_args(cls, args):
