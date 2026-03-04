@@ -55,7 +55,6 @@ def runExperiment(args):
     # 3. Build Dataset 
     datasetFactory = DatasetFactory()
     
-    # 🚨 BUG FIX: Added 'language' to the config dictionary.
     # Without this, DatasetConfig would default to English and fail to load translated files!
     dataset_config = {
         'datasetType': args.dataset,
