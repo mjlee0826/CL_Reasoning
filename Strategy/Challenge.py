@@ -1,184 +1,221 @@
 from Model.Model import Model
 from Dataset.Dataset import Dataset
 from Strategy.Strategy import Strategy
+from Strategy.StrategyConfig import StrategyConfig
 from Log.Log import Log
-from File.File import File
-from File.FileFactory import FileFactory
-from Strategy.StrategyType import StrategyNameType, NAME_TO_STRATEGY
+from File.File import File  # 引入你封裝好的 File 類別
 
 from Strategy.PromptAbstractFactory.PromptFormatFactory import PromptFormatFactory
 from Strategy.PromptAbstractFactory.PromptTwoResultCOTFactory import PromptTwoResultCOTFactory
-from Strategy.PromptAbstractFactory.PromptDebateCOTFacroty import PromptDebateCOTFactory
-
+from Strategy.PromptAbstractFactory.PromptDebateCOTFactory import PromptDebateCOTFactory
 from tqdm import tqdm
 
 class Challenge(Strategy):
     """
-    Implements a 'Challenge' (or Debate) strategy where two agents (or the same model acting as two)
-    debate their answers until they reach a consensus or a threshold is met.
-    If consensus is not reached, a third 'judge' step is invoked.
+    Implements a 'Challenge' (or Debate) strategy where two agents (representing two different 
+    languages or prompting techniques) debate their answers until they reach a consensus.
+    If consensus is not reached within a given threshold, a third 'judge' step is invoked.
     """
-    NAME = StrategyNameType.CHALLENGE.value
-    def __init__(self, model: Model, dataset: Dataset, log: Log, threshold: int, dataFile1: File, dataFile2: File):
-        super().__init__()
-        self.name: str = Challenge.NAME
+    def __init__(self, config: StrategyConfig, model: Model, dataset: Dataset, log: Log, file1: File, file2: File, threshold: int = 3):
+        super().__init__(config)
         self.model: Model = model
         self.dataset: Dataset = dataset
         self.log: Log = log
-        self.threshold = 3 if threshold == None else threshold
-        self.dataFile1 = dataFile1
-        self.dataFile2 = dataFile2
+        self.threshold = threshold
 
-        if dataFile1 == None or dataFile2 == None:
-            print(f"[{self.name}] Warning: One or both input files are None. Attempting to load default files...")
-            self.dataFile1 = FileFactory().getFileByPath(f'result/{model.getName()}_{dataset.getName()}_{StrategyNameType.ONLYCHINESE}.json')
-            self.dataFile2 = FileFactory().getFileByPath(f'result/{model.getName()}_{dataset.getName()}_{StrategyNameType.ONLYENGLISH}.json')
+        # Directly store the pre-parsed File objects
+        self.file1 = file1
+        self.file2 = file2
 
-            if self.dataFile1 is None:
-                raise Exception("[{self.name}] Error: Failed to load default file 1 at {path1}")
-                
-            else:
-                print(f"[{self.name}] Success: Loaded default file 1: {path1}")
+        # Safely extract languages from the File objects (fallback to english if missing)
+        langs1 = self.file1.getLanguage()
+        langs2 = self.file2.getLanguage()
+        self.lang1 = langs1[0] if isinstance(langs1, list) and langs1 else "english"
+        self.lang2 = langs2[0] if isinstance(langs2, list) and langs2 else "english"
 
-            if self.dataFile2 is None:
-                raise Exception(f"[{self.name}] Error: Failed to load default file 2 at {path2}")
-            else:
-                print(f"[{self.name}] Success: Loaded default file 2: {path2}")
-        
-        self.type1 = NAME_TO_STRATEGY[self.dataFile1.getStrategyName()]
-        self.type2 = NAME_TO_STRATEGY[self.dataFile2.getStrategyName()]
-        
-    def getPrompt(self, type, new_answer):
-        prompt = PromptDebateCOTFactory().getPrompt(type, new_answer) + PromptFormatFactory().getPrompt(type)
+        # Dynamically update the display name to reflect the battling languages
+        self.config.displayName = f"Challenge ({self.lang1} vs {self.lang2})"
+
+    def getDebatePrompt(self, target_lang: str, opponent_answer: str) -> str:
+        """Constructs the prompt used during the back-and-forth debate phase."""
+        prompt = PromptDebateCOTFactory().getPrompt(target_lang, opponent_answer) + PromptFormatFactory().getPrompt(target_lang)
         return prompt
     
-    def cot_Prompt(self, question1, result1, result2):
-        prompt = PromptTwoResultCOTFactory().englishPrompt(question1, result1, result2, self.type1, self.type2) \
-            + PromptFormatFactory().englishPrompt()
+    def getJudgePrompt(self, target_lang: str, question: str, result1: str, result2: str) -> str:
+        """Constructs the prompt for the final judge if consensus is not reached."""
+        prompt = PromptTwoResultCOTFactory().getPrompt(target_lang, question, result1, result2, self.lang1, self.lang2) \
+                + PromptFormatFactory().getPrompt(target_lang)
         return prompt
     
-    def runChallenge(self, model: Model, dataset: Dataset, question1, question2, result1, result2, answer1, answer2):
-        response1, response2 = result1, result2
-        answerRecord1, answerRecord2 = [answer1], [answer2]
-        record1, record2 = [
+    def runChallenge(self, question1: str, question2: str, result1: str, result2: str, answer1: str, answer2: str):
+        """
+        Executes the debate loop between the two agents.
+        """
+        # Initialize chat histories
+        record1 = [
             {"role": "user", "content": question1},
             {"role": "assistant", "content": result1}
-        ], [
+        ]
+        record2 = [
             {"role": "user", "content": question2},
             {"role": "assistant", "content": result2}
         ]
+        
+        answerRecord1, answerRecord2 = [answer1], [answer2]
+        cur_turn = 0
 
-        cur = 0
-        while not dataset.compareTwoAnswer(answer1, answer2) and cur < self.threshold:
-            prompt1, prompt2 = self.getPrompt(self.type1, response2), self.getPrompt(self.type2, response1)
+        # Loop until answers match or threshold is reached
+        while not self.dataset.compareTwoAnswer(answer1, answer2) and cur_turn < self.threshold:
+            # Generate debate prompts using the opponent's previous full result
+            prompt1 = self.getDebatePrompt(self.lang1, result2)
+            prompt2 = self.getDebatePrompt(self.lang2, result1)
+
             record1.append({"role": "user", "content": prompt1})
             record2.append({"role": "user", "content": prompt2})
-            response1, response2 = model.getListRes(record1), model.getListRes(record2)
-            record1.append({"role": "assistant", "content": response1})
-            record2.append({"role": "assistant", "content": response2})
-            answer1, answer2 = self.parseAnswer(response1), self.parseAnswer(response2)
+
+            # Get new responses using conversational history
+            result1 = self.model.getListRes(record1)
+            result2 = self.model.getListRes(record2)
+
+            record1.append({"role": "assistant", "content": result1})
+            record2.append({"role": "assistant", "content": result2})
+
+            # Parse the new extracted answers
+            answer1, answer2 = self.parseAnswer(result1), self.parseAnswer(result2)
             answerRecord1.append(answer1)
             answerRecord2.append(answer2)
 
-            cur += 1
-        return record1, record2, answer1, answer2, answerRecord1, answerRecord2, cur
+            cur_turn += 1
+            
+        return record1, record2, result1, result2, answer1, answer2, answerRecord1, answerRecord2, cur_turn
     
     def getRes(self) -> list:
-        self.log.logInfo(self, self.model, self.dataset, self.dataFile1, self.dataFile2)
-
-        if self.dataFile1.getNums() < self.dataset.getNums() or self.dataFile1.getSample() != self.dataset.getSample() \
-            or self.dataFile2.getNums() < self.dataset.getNums() or self.dataFile2.getSample() != self.dataset.getSample():
-            
-            raise Exception(f'\nNums or Samples of Data in path1 or path2 doesn\'t match your setting!')
-
+        """
+        Executes the main evaluation loop. Pre-calculates discrepancies to show 
+        an accurate progress bar, then iterates through the dataset to perform debates.
+        """
+        self.log.logInfo(self, self.model, self.dataset)
 
         result = [{
-            "Model": self.model.getName(),
-            "Dataset": self.dataset.getName(),
-            "Strategy": self.name,
-            "Data Nums": self.dataset.getNums(),
-            "Data Samples": self.dataset.getSample()
+            "Model": self.model.config.to_dict(),
+            "Dataset": self.dataset.config.to_dict(),
+            "Strategy": self.config.to_dict(),
+            "File1": {
+                "path": self.file1.file_path,
+                "Model": self.file1.getModelConfig().to_dict(),
+                "Dataset": self.file1.getDatasetConfig().to_dict(),
+                "Strategy": self.file1.getStrategyConfig().to_dict(),
+            },
+            "File2": {
+                "path": self.file2.file_path,
+                "Model": self.file2.getModelConfig().to_dict(),
+                "Dataset": self.file2.getDatasetConfig().to_dict(),
+                "Strategy": self.file2.getStrategyConfig().to_dict(),
+            }
         }]
 
-        data1 = self.dataFile1.getData()
-        data2 = self.dataFile2.getData()
-        different_cnt = 0
+        database = self.dataset.getData()
+        discrepancy_ids = []
         
-        for i in range(self.dataset.getDataNums()):
-            if data1[i]["id"] != data2[i]["id"]:
-                raise Exception(f'[Warning] ID mismatch found at data1 id {data1["id"]} and data2 id {data2["id"]}!')
-            datasetData = self.dataset.getDataById(data1["id"])
-            if datasetData == None:
-                raise Exception(f'[Warning] ID mismatch found at id {data1["id"]}!')
+        # 1. Pre-calculate discrepancies using the File class's O(1) ID lookup
+        for data in database:
+            q_id = data["id"]
+            rec1 = self.file1.getRecordById(q_id)
+            rec2 = self.file2.getRecordById(q_id)
+            
+            # Skip if the record is missing in either file
+            if not rec1 or not rec2:
+                continue
+                
+            ans1 = rec1.get("MyAnswer", "")
+            ans2 = rec2.get("MyAnswer", "")
+            
+            if not self.dataset.compareTwoAnswer(ans1, ans2):
+                discrepancy_ids.append(q_id)
 
-        for i in range(self.dataset.getDataNums()):
-            if not self.dataset.compareTwoAnswer(data1[i]["MyAnswer"], data2[i]["MyAnswer"]):
-                different_cnt += 1
-        self.log.logMessage(f'Different Answer: {different_cnt} / {self.dataset.getDataNums()}')
+        self.log.logMessage(f'Total Discrepancies to Debate: {len(discrepancy_ids)} / {len(database)}')
+        pbar = tqdm(total=len(discrepancy_ids), desc="Debating")
 
-        pbar = tqdm(total=different_cnt)
+        # 2. Main Evaluation Loop
+        for data in database:
+            q_id = data.get("id")
+            
+            # Instantly fetch records using the File getter
+            rec1 = self.file1.getRecordById(q_id)
+            rec2 = self.file2.getRecordById(q_id)
+            
+            if not rec1 or not rec2:
+                continue
 
-        for i in range(self.dataset.getDataNums()):    
-            question1, question2, result1, result2 = \
-                data1[i]["Translated"], data2[i]["Translated"], data1[i]["Result"], data2[i]["Result"]
-            answer1, answer2 = data1[i]["MyAnswer"], data2[i]["MyAnswer"]
-            correct_answer = data2[i]["Answer"]
+            question1, question2 = rec1.get("Question", ""), rec2.get("Question", "")
+            result1, result2 = rec1.get("Result", ""), rec2.get("Result", "")
+            answer1, answer2 = rec1.get("MyAnswer", ""), rec2.get("MyAnswer", "")
+            correct_answer = data.get("answer", "")
 
-            cur = 0
+            cur_turn = 0
             resultOutput3 = ""
             myAnswer = ""
             record1, record2 = [], []
             answerRecord1, answerRecord2 = [], []
 
+            # Case A: They already agree. No debate needed.
             if self.dataset.compareTwoAnswer(answer1, answer2):
                 myAnswer = answer1
 
+            # Case B: They disagree. Initiate Challenge/Debate.
             else:
-                record1, record2, answer1, answer2, answerRecord1, answerRecord2, cur = \
-                    self.runChallenge(self.model, self.dataset, question1, question2, result1, result2, answer1, answer2) 
+                record1, record2, result1, result2, answer1, answer2, answerRecord1, answerRecord2, cur_turn = \
+                    self.runChallenge(question1, question2, result1, result2, answer1, answer2) 
 
                 self.log.logMessage(f'Record1：\n{record1}')
                 self.log.logMessage(f'結果1：\n{answerRecord1}')
                 self.log.logMessage(f'Record2：\n{record2}')
                 self.log.logMessage(f'結果2：\n{answerRecord2}')
-                self.log.logMessage(f'Times：\n{cur}')
-
+                self.log.logMessage(f'Times：\n{cur_turn}')
+                
+                # Check if consensus was reached after the debate
                 if self.dataset.compareTwoAnswer(answer1, answer2):
                     myAnswer = answer1
-
-                    self.log.logMessage(f'結果：兩個Agent有相同結果！')
+                    self.log.logMessage(f'Result: Agents reached consensus!')
                 else:
-                    resultOutput3 = self.model.getRes(self.cot_Prompt(question1, result1, result2))
+                    # Case C: Still disagree after threshold. Call the Judge.
+                    judge_lang = getattr(self.dataset.config, "language", "english")
+                    resultOutput3 = self.model.getRes(self.getJudgePrompt(judge_lang, question1, result1, result2))
                     myAnswer = self.parseAnswer(resultOutput3)
+                    self.log.logMessage(f'Result 3 (Judge): \n{resultOutput3}')
 
-                    self.log.logMessage(f'結果3：\n{resultOutput3}')
-
-                self.log.logMessage(f'My Answer: {myAnswer}\nCorrect Answer: {correct_answer}')
+                self.log.logMessage(f'My Answer: {myAnswer} | Correct Answer: {correct_answer}\n')
                 pbar.update()
 
+            # Append the comprehensive debate log to the final result
             result.append({
+                "id": q_id,
                 "Question1": question1,
                 "Question2": question2,
                 "Record1": record1,
                 "Record2": record2,
                 "AnswerRecord1": answerRecord1,
                 "AnswerRecord2": answerRecord2,
-                "Times": cur,
+                "Times": cur_turn,
                 "Result3": resultOutput3,
                 "Answer": correct_answer,
                 "MyAnswer": myAnswer
             })
         
         pbar.close()
-
         return result
     
     @staticmethod
     def getTokenLens(model: Model, data):
-        result = model.getTokenLens(data["Question1"]) + model.getTokenLens(data["Question2"])
-        for r in data["Record1"]:
-            if r["role"] == "assistant":
-                result += model.getTokenLens(r["content"]) + model.getTokenLens(r["content"])
-        if data["Result3"] != "":
+        """Calculates total token usage across all debate turns and the judge phase."""
+        result = model.getTokenLens(data.get("Question1", "")) + model.getTokenLens(data.get("Question2", ""))
+        
+        for r in data.get("Record1", []):
+            if r.get("role") == "assistant":
+                # Assuming symmetric token usage tracking, calculate token cost for content
+                result += model.getTokenLens(r.get("content", "")) * 2 
+                
+        if data.get("Result3"):
             result += model.getTokenLens(data["Result3"])
+            
         return result

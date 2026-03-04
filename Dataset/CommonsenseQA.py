@@ -21,6 +21,9 @@ class CommonsenseQA(Dataset):
 
         if self.nums == -1 or self.nums > len(self.data):
             self.config.nums = len(self.data)
+            self.config.dataNums = self.config.nums * self.config.sample
+
+        self.config.dataNums = self.config.nums * self.config.sample
 
     def createQuestion(self, question, labels, texts) -> str:
         # format choices as: A) ignore, B) enforce, ...

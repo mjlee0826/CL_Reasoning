@@ -1,11 +1,8 @@
 from enum import Enum
 
+# Define available testing strategies for the framework
 class StrategyType(str, Enum):
-    ONLYCHINESE = "onlyChinese"
-    ONLYENGLISH = "onlyEnglish"
-    ONLYSPANISH = "onlySpanish"
-    ONLYJAPANESE = "onlyJapanese"
-    ONLYRUSSIAN = "onlyRussian"
+    ONELANGUAGE = "onelanguage"
     CHALLENGE = "challenge"
     SELFREFLECTION = "selfreflection"
     GETONEOUTPUT = 'getoneresult'
@@ -13,56 +10,42 @@ class StrategyType(str, Enum):
     TRANSLATE = 'translate'
 
 class StrategyDisplayNameType(str, Enum):
-    ONLYCHINESE = "Only Chinese"
-    ONLYENGLISH = "Only English"
-    ONLYSPANISH = "Only Spanish"
-    ONLYJAPANESE = "Only Japanese"
-    ONLYRUSSIAN = "Only Russian"
+    ONELANGUAGE = "One Language"
     SELFREFLECTION = "Self Reflection"
     CHALLENGE = "Challenge"
     GETONEOUTPUT = "Get One Output"
     REPAIR = "Repair"
     TRANSLATE = 'Translate'
 
+# Trailing commas turn the assigned value into a Tuple, breaking string comparisons.
 class LanguageType(str, Enum):
-    CHINESE = 'Chinese',
-    ENGLISH = 'English',
-    SPANISH = 'Spanish',
-    JAPANESE = 'Japanese',
-    RUSSIAN = 'Russian'
+    CHINESE = 'chinese'
+    ENGLISH = 'english'
+    SPANISH = 'spanish'
+    JAPANESE = 'japanese'
+    RUSSIAN = 'russian'
 
-# 直接取出 value，會是字串
+# Extract pure string values for quick validation
 STRATEGY_STR_LIST = [s.value for s in StrategyType]
 
-# 用字串當 key，比較方便查
-STRATEGY_TO_NAME = {
-    member: StrategyNameType[member.name].value for member in StrategyType
-}
-
-NAME_TO_STRATEGY = {
-    member: StrategyType[member.name].value for member in StrategyNameType
-}
-
-STRATEGY_TO_LANGUAGE = {
-    StrategyType.ONLYCHINESE.value: LanguageType.CHINESE.value,
-    StrategyType.ONLYENGLISH.value: LanguageType.ENGLISH.value,
-    StrategyType.ONLYSPANISH.value: LanguageType.SPANISH.value,
-    StrategyType.ONLYJAPANESE.value: LanguageType.JAPANESE.value,
-    StrategyType.ONLYRUSSIAN.value: LanguageType.RUSSIAN.value,
+# Mapping dictionary for display names. Maps StrategyType Enum to StrategyDisplayNameType Enum.
+STRATEGY_TO_DISPLAYNAME = {
+    member: StrategyDisplayNameType[member.name] for member in StrategyType
 }
 
 def get_strategy_map():
-    # ← 只有真正用到時才 import，不會循環
+    """
+    Returns a mapping of StrategyTypes to their respective concrete classes.
+    Uses lazy importing to prevent circular dependency issues during initialization.
+    """
+    from Strategy.Translate import Translate
     from Strategy.OnlyOneLanguage import OnlyOneLanguage
     from Strategy.SelfReflection import SelfReflection
     from Strategy.Challenge import Challenge
 
     return {
-        StrategyNameType.ONLYCHINESE.value: OnlyOneLanguage,
-        StrategyNameType.ONLYENGLISH.value: OnlyOneLanguage,
-        StrategyNameType.ONLYSPANISH.value: OnlyOneLanguage,
-        StrategyNameType.ONLYJAPANESE.value: OnlyOneLanguage,
-        StrategyNameType.ONLYRUSSIAN.value: OnlyOneLanguage,
-        StrategyNameType.SELFREFLECTION.value: SelfReflection,
-        StrategyNameType.CHALLENGE.value: Challenge,
+        StrategyType.TRANSLATE: Translate,
+        StrategyType.ONELANGUAGE: OnlyOneLanguage,
+        StrategyType.SELFREFLECTION: SelfReflection,
+        StrategyType.CHALLENGE: Challenge,
     }

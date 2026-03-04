@@ -29,9 +29,13 @@ class MMLU(Dataset):
 
         if self.nums == -1 or self.nums > len(self.data):
             self.config.nums = len(self.data)
+            self.config.dataNums = self.config.nums * self.config.sample
         
         self.realData = self.getRealData()
         self.config.nums = len(self.realData)
+        self.config.dataNums = self.config.nums * self.config.sample
+        
+        self._apply_translation()
 
     def createQuestion(self, question, choices) -> str:
         choicesPrompt = ""

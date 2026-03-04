@@ -1,4 +1,5 @@
 from dataclasses import dataclass, fields, asdict, field
+from Strategy.StrategyType import LanguageType
 
 @dataclass
 class DatasetConfig:
@@ -9,6 +10,8 @@ class DatasetConfig:
     displayName: str = ''
     nums: int = -1
     sample: int = 1
+
+    language: LanguageType = LanguageType.ENGLISH.value
     
     # Use field(init=False) so this attribute is not expected in the __init__ arguments.
     # It will be calculated dynamically after initialization.
@@ -41,10 +44,28 @@ class DatasetConfig:
 
         # Unpack the filtered dictionary to instantiate the class
         return cls(**filtered_data)
+
+    @classmethod
+    def from_dict(cls, data_dict: dict):
+        """
+        從 JSON 字典建立 Config 實例。
+        會自動過濾掉 data_dict 中不屬於此 dataclass 的 key，避免 TypeError。
+        """
+        # 取得這個 dataclass 允許在 __init__ 中初始化的所有欄位名稱
+        valid_keys = {f.name for f in fields(cls) if f.init}
+        
+        # 過濾傳入的字典，只保留合法的 key
+        filtered_data = {
+            key: value 
+            for key, value in data_dict.items() 
+            if key in valid_keys
+        }
     
     def to_dict(self) -> dict:
         """
         Convert the dataclass instance to a standard dictionary.
         This will include the calculated 'dataNums' field as well.
         """
+
+        self.dataNums = self.nums * self.sample
         return asdict(self)

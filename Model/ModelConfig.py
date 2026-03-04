@@ -34,6 +34,22 @@ class ModelConfig:
         # Unpack the filtered dictionary into the class constructor
         return cls(**filtered_data)
     
+    @classmethod
+    def from_dict(cls, data_dict: dict):
+        """
+        從 JSON 字典建立 Config 實例。
+        會自動過濾掉 data_dict 中不屬於此 dataclass 的 key，避免 TypeError。
+        """
+        # 取得這個 dataclass 允許在 __init__ 中初始化的所有欄位名稱
+        valid_keys = {f.name for f in fields(cls) if f.init}
+        
+        # 過濾傳入的字典，只保留合法的 key
+        filtered_data = {
+            key: value 
+            for key, value in data_dict.items() 
+            if key in valid_keys
+        }
+    
     def to_dict(self) -> dict:
         """
         Convert the dataclass instance to a standard dictionary.
