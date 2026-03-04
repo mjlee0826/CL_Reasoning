@@ -49,6 +49,7 @@ class ModelConfig:
             for key, value in data_dict.items() 
             if key in valid_keys
         }
+        return cls(**filtered_data)
     
     def to_dict(self) -> dict:
         """

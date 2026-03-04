@@ -50,7 +50,6 @@ def runExperiment(args):
         'modelType': args.model,
         'temperature': args.temperature
     }
-    print(ModelConfig.from_dict(model_config))
     model: Model = modelFactory.buildModel(ModelType(args.model), ModelConfig.from_dict(model_config))
 
     # 3. Build Dataset 
