@@ -14,9 +14,6 @@ def parseArgs():
     parser = ArgumentParser()
     parser.add_argument("--log", action="store_true", help="log to terminal")
 
-    parser.add_argument("--dirpath", help="your dir path")
-    parser.add_argument("--filepath", help="your file path")
-
     parser.add_argument("-t", "--testmode", choices=TEST_STR_LIST, default='testem', help="choose your test stratey")
     parser.add_argument("--testfile", nargs="+", help="The file need to be test")
     parser.add_argument("--testdir", help="The dir need to be test")
