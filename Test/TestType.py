@@ -7,4 +7,4 @@ class TestType(str, Enum):
     TESTPVALUE = "testp"
     TESTTOKEN = "testtoken"
 
-TEST_LIST = [t.value for t in TestType]
+TEST_STR_LIST = [t.value for t in TestType]

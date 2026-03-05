@@ -94,7 +94,7 @@ class Challenge(Strategy):
         Executes the main evaluation loop. Pre-calculates discrepancies to show 
         an accurate progress bar, then iterates through the dataset to perform debates.
         """
-        self.log.logInfo(self, self.model, self.dataset)
+        self.log.logInfo(self, self.model, self.dataset, self.file1, self.file2)
 
         result = [{
             "Model": self.model.config.to_dict(),

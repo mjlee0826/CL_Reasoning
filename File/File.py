@@ -12,7 +12,7 @@ class File:
     """
     def __init__(self, file_path: str):
         """
-        Initializes the ResultFile instance and automatically loads the data.
+        Initializes the File instance and automatically loads the data.
         
         Args:
             file_path (str): The relative or absolute path to the JSON result file.
@@ -60,28 +60,18 @@ class File:
     def getRecordById(self, q_id: int) -> dict:
         """
         Retrieves a specific evaluation record by its question ID.
-        
-        Args:
-            q_id (int): The unique identifier of the question.
-            
-        Returns:
-            dict or None: The record dictionary if found, otherwise None.
         """
         return self.records_map.get(q_id)
 
     def getLanguage(self) -> list[str]:
         """
         Returns the list of languages used to generate this result file.
-        
-        Returns:
-            list[str]: A list of language strings (e.g., ['chinese']).
         """
         return self.languages
     
     def getModelConfig(self) -> ModelConfig:
         """
         Deserializes the 'Model' metadata dictionary into a ModelConfig object.
-        Uses .get() to provide an empty dictionary fallback, preventing KeyErrors.
         """
         return ModelConfig.from_dict(self.metadata.get("Model", {}))
     
@@ -96,3 +86,38 @@ class File:
         Deserializes the 'Strategy' metadata dictionary into a StrategyConfig object.
         """
         return StrategyConfig.from_dict(self.metadata.get("Strategy", {}))
+
+    def updateMetadata(self, key: str, value):
+        """
+        Updates or adds a new key-value pair to the metadata dictionary.
+        Note: You must call save() to write these changes to the physical JSON file.
+        
+        Args:
+            key (str): The metadata key to update (e.g., 'Accuracy', 'TotalTime').
+            value (any): The value to store. Can be float, int, str, dict, etc.
+        """
+        self.metadata[key] = value
+
+    def save(self):
+        """
+        Saves the current metadata and records back to the physical JSON file.
+        It reconstructs the original list format [metadata, record1, record2, ...]
+        and ensures records are sorted by their ID to maintain consistency.
+        """
+        # 1. Start with the metadata at index 0
+        full_data = [self.metadata]
+        
+        # 2. Extract records from the hash map, sorting them by ID to keep the file tidy
+        sorted_records = [
+            self.records_map[q_id] 
+            for q_id in sorted(self.records_map.keys())
+        ]
+        
+        # Append all records after the metadata
+        full_data.extend(sorted_records)
+
+        # 3. Write back to the file path
+        with open(self.file_path, 'w', encoding='utf-8') as f:
+            json.dump(full_data, f, ensure_ascii=False, indent=4)
+            
+        print(f"[File] 成功更新並儲存檔案: {self.file_path}")
