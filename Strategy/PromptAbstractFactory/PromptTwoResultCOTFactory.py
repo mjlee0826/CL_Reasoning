@@ -1,5 +1,4 @@
 from Strategy.PromptAbstractFactory.PromptAbstractFactory import PromptAbstractFactory
-from Strategy.StrategyType import STRATEGY_TO_LANGUAGE
 
 class PromptTwoResultCOTFactory(PromptAbstractFactory):
     def __init__(self):
