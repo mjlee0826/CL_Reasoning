@@ -3,7 +3,6 @@ import itertools
 import os
 import sys
 import json
-import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from Strategy.RunContext import RunContext
@@ -34,7 +33,7 @@ def parseArgs():
 
     # 支援多個 Model 與 Dataset
     parser.add_argument("-m", "--modelType", choices=MODEL_STR_LIST, required=True, nargs='+', help="Choose your model(s)")
-    parser.add_argumment("--temperature", default=0.0, type=float, help="Model teperature setting")
+    parser.add_argument("--temperature", default=0.0, type=float, help="Model temperature setting")
 
     parser.add_argument("-d", "--datasetType", choices=DATASET_STR_LIST, required=True, nargs='+', help="Choose your dataset(s)")
     parser.add_argument("--nums", help="Data Nums to evaluate (-1 for all)", default=-1, type=int)
@@ -55,7 +54,7 @@ def parseArgs():
     args = parser.parse_args()
     return args
 
-def executeChallengeTask(model_name, dataset_name, lang1, lang2, args, print_lock):
+def executeChallengeTask(model_name, dataset_name, lang1, lang2, args):
     """
     單一 Challenge 實驗的執行函式。負責讀取兩個對應的語言檔案，並讓它們進行辯論。
     """
@@ -67,8 +66,7 @@ def executeChallengeTask(model_name, dataset_name, lang1, lang2, args, print_loc
 
     # 檢查檔案是否存在，若缺少則略過這個組合
     if not os.path.exists(path1) or not os.path.exists(path2):
-        with print_lock:
-            print(f"⚠️ Skip: Missing files for [{model_name} | {dataset_name}] ({lang1} vs {lang2})")
+        print(f"⚠️ Skip: Missing files for [{model_name} | {dataset_name}] ({lang1} vs {lang2})")
         return
 
     # 2. 載入檔案與 Log
@@ -92,8 +90,7 @@ def executeChallengeTask(model_name, dataset_name, lang1, lang2, args, print_loc
     }))
 
     if not model or not dataset:
-        with print_lock:
-            print(f"❌ Error: Failed to build {model_name} or {dataset_name}.")
+        print(f"❌ Error: Failed to build {model_name} or {dataset_name}.")
         return
 
     # 4. 建立 Challenge Strategy
@@ -109,8 +106,7 @@ def executeChallengeTask(model_name, dataset_name, lang1, lang2, args, print_loc
     result = context.runExperiment()
 
     if not result:
-        with print_lock:
-            print(f"⚠️ No results yielded for {model_name} - {dataset_name} ({lang1} vs {lang2})")
+        print(f"⚠️ No results yielded for {model_name} - {dataset_name} ({lang1} vs {lang2})")
         return
 
     # 6. 儲存結果
@@ -121,8 +117,7 @@ def executeChallengeTask(model_name, dataset_name, lang1, lang2, args, print_loc
     with open(out_path, 'w', encoding='utf-8') as f:
         json.dump(result, f, indent=4, ensure_ascii=False)
         
-    with print_lock:
-        print(f"🎉 Success: {model_name} | {dataset_name} | {lang1} vs {lang2} -> {out_file_name}")
+    print(f"🎉 Success: {model_name} | {dataset_name} | {lang1} vs {lang2} -> {out_file_name}")
 
 def main():
     args = parseArgs()
@@ -145,22 +140,19 @@ def main():
     print(f"Total tasks to run: {len(tasks)}")
     print(f"Concurrent workers: {args.workers}\n")
 
-    print_lock = threading.Lock()
-
     # 啟動 ThreadPoolExecutor 進行多執行緒辯論
     with ThreadPoolExecutor(max_workers=args.workers) as executor:
         futures = []
         for model_name, dataset_name, lang1, lang2 in tasks:
             futures.append(
-                executor.submit(executeChallengeTask, model_name, dataset_name, lang1, lang2, args, print_lock)
+                executor.submit(executeChallengeTask, model_name, dataset_name, lang1, lang2, args)
             )
 
         for future in as_completed(futures):
             try:
                 future.result()
             except Exception as e:
-                with print_lock:
-                    print(f"❌ A job generated an exception: {e}")
+                print(f"❌ A job generated an exception: {e}")
 
     print("\n✅ All Challenge experiments finished!")
 

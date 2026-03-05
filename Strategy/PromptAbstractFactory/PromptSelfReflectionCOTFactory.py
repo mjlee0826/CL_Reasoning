@@ -18,3 +18,13 @@ class PromptSelfReflectionCOTFactory(PromptAbstractFactory):
         prompt = f'¿Podría la respuesta que acaba de proporcionar ser incorrecta?\n' \
             f'Analice el proceso de razonamiento de ambas respuestas. Piense paso a paso y exponga su proceso de pensamiento.\n'
         return prompt
+
+    def japanesePrompt(self):
+        prompt = f'先ほど提供した回答が間違っている可能性はありますか？\n' \
+            f'両方の回答の推論プロセスを分析してください。段階的に考え、思考プロセスを出力してください。\n'
+        return prompt
+
+    def russianPrompt(self):
+        prompt = f'Может ли предоставленный вами ответ быть неверным?\n' \
+            f'Проанализируйте процесс рассуждения обоих ответов. Думайте шаг за шагом и выведите свой процесс мышления.\n'
+        return prompt

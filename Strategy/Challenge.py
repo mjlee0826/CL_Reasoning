@@ -179,7 +179,7 @@ class Challenge(Strategy):
                     self.log.logMessage(f'Result: Agents reached consensus!')
                 else:
                     # Case C: Still disagree after threshold. Call the Judge.
-                    judge_lang = getattr(self.dataset.config, "language", "english")
+                    judge_lang = self.lang1
                     resultOutput3 = self.model.getRes(self.getJudgePrompt(judge_lang, question1, result1, result2))
                     myAnswer = self.parseAnswer(resultOutput3)
                     self.log.logMessage(f'Result 3 (Judge): \n{resultOutput3}')
