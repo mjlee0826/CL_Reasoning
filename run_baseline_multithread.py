@@ -25,7 +25,7 @@ import itertools
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 def parseArgs():
-    parser = ArgumentParser(description="IMSR Evaluation Framework (Multithreaded)")
+    parser = ArgumentParser(description="IMSR Evaluation Framework")
     parser.add_argument("--log", action="store_true", help="Enable terminal logging")
 
     # 將 nargs 設定為 '+', 讓這些參數可以接收多個值，變成一個 List
