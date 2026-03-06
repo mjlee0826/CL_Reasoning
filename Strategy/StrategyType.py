@@ -6,7 +6,7 @@ class StrategyType(str, Enum):
     CHALLENGE = "challenge"
     SELFREFLECTION = "selfreflection"
     GETONEOUTPUT = 'getoneresult'
-    REPAIR = 'repair'
+    REPAIRONELANGUAGE = 'repaironelanguage'
     TRANSLATE = 'translate'
 
 class StrategyDisplayNameType(str, Enum):
@@ -14,7 +14,7 @@ class StrategyDisplayNameType(str, Enum):
     SELFREFLECTION = "Self Reflection"
     CHALLENGE = "Challenge"
     GETONEOUTPUT = "Get One Output"
-    REPAIR = "Repair"
+    REPAIRONELANGUAGE = "Repair One Language"
     TRANSLATE = 'Translate'
 
 # Trailing commas turn the assigned value into a Tuple, breaking string comparisons.
@@ -46,10 +46,12 @@ def get_strategy_map():
     from Strategy.OnlyOneLanguage import OnlyOneLanguage
     from Strategy.SelfReflection import SelfReflection
     from Strategy.Challenge import Challenge
+    from Strategy.RepairOnlyOneLanguage import RepairOnlyOneLanguage
 
     return {
         StrategyType.TRANSLATE: Translate,
         StrategyType.ONELANGUAGE: OnlyOneLanguage,
         StrategyType.SELFREFLECTION: SelfReflection,
         StrategyType.CHALLENGE: Challenge,
+        StrategyType.REPAIRONELANGUAGE: RepairOnlyOneLanguage
     }

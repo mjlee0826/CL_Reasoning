@@ -97,6 +97,9 @@ class File:
             value (any): The value to store. Can be float, int, str, dict, etc.
         """
         self.metadata[key] = value
+    
+    def updateRecord(self, id: int, value):
+        self.records_map[id] = value
 
     def save(self):
         """

@@ -34,7 +34,8 @@ class Strategy():
         result: str = ""
         try:
             # Look for JSON structure: {"answer": "value"}
-            json_match = re.findall(r'\{"answer":\s*"([^"]+)"\}', answer)
+            # json_match = re.findall(r'\{"answer":\s*"([^"]+)"\}', answer)
+            json_match = re.findall(r'\{"[^"]+":\s*"([^"]+)"\}', answer)
             if json_match:
                 result = json_match[-1]
                 return result
