@@ -155,8 +155,15 @@ class Challenge(Strategy):
             cur_turn = 0
             resultOutput3 = ""
             myAnswer = ""
-            record1, record2 = [], []
-            answerRecord1, answerRecord2 = [], []
+            record1 = [
+                {"role": "user", "content": question1},
+                {"role": "assistant", "content": result1}
+            ]
+            record2 = [
+                {"role": "user", "content": question2},
+                {"role": "assistant", "content": result2}
+            ]
+            answerRecord1, answerRecord2 = [answer1], [answer2]
 
             # Case A: They already agree. No debate needed.
             if self.dataset.compareTwoAnswer(answer1, answer2):
