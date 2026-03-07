@@ -18,7 +18,7 @@ class Gemini(Model):
             response = self.client.chat.completions.create(
                 model=self.modelName,
                 messages=[{"role": "user", "content": prompt}],
-                max_tokens=8192,
+                max_tokens=4096,
                 temperature=self.temperature,
                 stream=False
             )
@@ -33,7 +33,7 @@ class Gemini(Model):
             response = self.client.chat.completions.create(
                 model=self.modelName,
                 messages=promptList,
-                max_tokens=8192,
+                max_tokens=4096,
                 temperature=self.temperature,
                 stream=False
             )
