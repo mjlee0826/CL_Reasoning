@@ -1,6 +1,9 @@
 class DataSpliter():
-    def __int__(self):
-        pass
+    def __init__(self):
+        self.label = []
 
     def splitData(self):
         pass
+
+    def getLabel(self):
+        return self.label

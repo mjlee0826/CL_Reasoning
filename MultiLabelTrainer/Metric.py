@@ -2,10 +2,6 @@ from sklearn.metrics import accuracy_score, fbeta_score, accuracy_score, precisi
 import torch
 import numpy as np
 
-import numpy as np
-from sklearn.metrics import fbeta_score, accuracy_score, precision_score
-import torch
-
 def multi_label_metrics(predictions, labels, threshold=0.5):
     # 1. 轉成 Sigmoid 機率
     sigmoid = torch.nn.Sigmoid()

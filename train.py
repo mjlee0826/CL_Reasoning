@@ -62,7 +62,7 @@ def main():
     
     # 2. 進行資料切割 (只取答案不一致的資料)
     spliter = OnlyDiffDataSpliter()
-    train_X, train_y, val_X, val_y = spliter.splitData(files, args.split)
+    train_X, train_y, val_X, val_y, _, _, _ = spliter.splitData(files, args.split)
     
     if not train_X:
         print("❌ 錯誤: 篩選後沒有足夠的資料可供訓練！請檢查資料集是否符合條件。")
