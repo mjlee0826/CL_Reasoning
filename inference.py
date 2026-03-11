@@ -107,6 +107,14 @@ def main():
             all_acc = all_c / all_t if all_t > 0 else 0
             print(f"   - 語言 [{l:<8}]: all  準確率 {all_acc:>6.2%} ({all_c:.1f}/{all_t:.1f})")
 
+            upper_bound_c = same_c * (1 - args.split) + t
+            upper_bound_acc = upper_bound_c / all_t if all_t > 0 else 0
+            print(f"   - 語言 [{l:<8}]: upper bound all  準確率 {upper_bound_acc:>6.2%} ({upper_bound_c:.1f}/{all_t:.1f})")
+
+            random_c = same_c * (1 - args.split) + t * 0.5
+            random_acc = random_c / all_t if all_t > 0 else 0
+            print(f"   - 語言 [{l:<8}]: random all  準確率 {random_acc:>6.2%} ({random_c:.1f}/{all_t:.1f})")
+
             # 將這份數據儲存到 summary_report 字典中
             summary_report[d][l] = {
                 "diff_correct": c,
@@ -114,7 +122,9 @@ def main():
                 "diff_accuracy": acc,
                 "all_correct": all_c,
                 "all_total": all_t,
-                "all_accuracy": all_acc
+                "all_accuracy": all_acc,
+                "random": random_acc,
+                "upper_bound": upper_bound_acc
             }
 
         print("-" * 40)
