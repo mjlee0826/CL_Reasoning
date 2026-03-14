@@ -137,12 +137,8 @@ def main():
             print(f"   - 語言 [{l:<8}]: random baseline 準確率 {acc:>6.2%} ({diff_random_c}/{t})")
 
             # 抓取無分歧資料 (All Same)
-            same_c = same_status.get(d, {}).get("correct", 0)
-            same_t = same_status.get(d, {}).get("total", 0)
-
-            # 🎯 轉換為精確的 Validation 整數題數，避免浮點數誤差
-            val_same_t = same_t - int(same_t * args.split)
-            val_same_c = same_c - int(same_c * args.split)
+            val_same_t = same_status.get(d, {}).get("correct", 0) * args.split
+            val_same_c = same_status.get(d, {}).get("total", 0) * args.split
 
             # --- 全局 (All) 統計 ---
             all_c = c + val_same_c
