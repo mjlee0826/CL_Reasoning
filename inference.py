@@ -49,11 +49,23 @@ def main():
         for lang, question_text in x_dict.items():
             
             probs_dict = predictor.predict(question_text)
+            
+            # 🎯 移除 valid_probs_dict 的過濾邏輯，直接從 10 組中選出模型預測最高機率的組合
             best_pair = max(probs_dict, key=probs_dict.get)
+                
             best_pair_idx = predictor.label_names.index(best_pair)
             is_correct = bool(y_list[best_pair_idx] == 1)
             
-            # 🎯 儲存結果，並附上 Dataset 以及 Question ID 資訊
+            # 🎯 精準計算 Random 期望值與 Upper Bound
+            # 算出全部 10 組中，有幾組是正確的 (值為 1)
+            correct_in_all_count = sum(y_list)
+            
+            # 隨機配對 (Random Pair)：從 10 組中隨機挑選 1 組的期望勝率
+            expected_random_correct = correct_in_all_count / 10.0
+            
+            # 甲骨文上限 (Oracle Upper Bound)：10 組裡面只要「至少有一組」是對的，就視為正確 (1)
+            is_upper_bound_correct = 1 if correct_in_all_count > 0 else 0
+            
             final_results.append({
                 "dataset": meta["dataset"],
                 "q_id": meta["q_id"],
@@ -61,11 +73,13 @@ def main():
                 "question": question_text,
                 "best_predicted_pair": best_pair,
                 "is_correct_in_ground_truth": is_correct,
+                "expected_random_correct": expected_random_correct, # 存入單題期望值
+                "is_upper_bound_correct": is_upper_bound_correct,   # 存入單題理論上限
                 "predicted_probabilities": probs_dict,
                 "actual_ground_truth_y": y_list 
             })
 
-    # 4. 🎯 進行詳細的 Performance 成效分析 (Group by Dataset, Language)
+    # 4. 🎯 進行詳細的 Performance 成效分析
     diff_stats = {}
     
     for res in final_results:
@@ -75,18 +89,26 @@ def main():
         if diff_stats.get(d) is None:
             diff_stats[d] = {}
         if diff_stats[d].get(l) is None:
-            diff_stats[d][l] = {"total": 0, "correct": 0}
+            diff_stats[d][l] = {
+                "total": 0, 
+                "correct": 0,
+                "random_correct": 0.0,
+                "upper_bound_correct": 0
+            }
 
         diff_stats[d][l]["total"] += 1
         if res["is_correct_in_ground_truth"]:
             diff_stats[d][l]["correct"] += 1
+            
+        # 累加 Random 與 Upper Bound 的期望答對題數
+        diff_stats[d][l]["random_correct"] += res["expected_random_correct"]
+        diff_stats[d][l]["upper_bound_correct"] += res["is_upper_bound_correct"]
         
-    # 印出整體與分組準確率
-    print("\n" + "="*50)
+    print("\n" + "="*70)
     print("📊 詳細效能分析 (Performance Breakdown)")
-    print("="*50)
+    print("="*70)
     
-    summary_report = {} # 用來存入 JSON 的總結數據
+    summary_report = {} 
 
     for d in diff_stats.keys():
         print(f"🔸 資料集: {d}")
@@ -95,27 +117,38 @@ def main():
         for l in diff_stats[d]:
             c = diff_stats[d][l]["correct"]
             t = diff_stats[d][l]["total"]
+            diff_random_c = diff_stats[d][l]["random_correct"]
+            diff_upper_c = diff_stats[d][l]["upper_bound_correct"]
+            
             acc = c / t if t > 0 else 0
             print(f"   - 語言 [{l:<8}]: diff 準確率 {acc:>6.2%} ({c}/{t})")
 
-            # 🎯 防呆：使用 .get() 避免某個資料集剛好沒有 all-same 的題目而發生 KeyError
+            # 抓取無分歧資料 (All Same)
             same_c = same_status.get(d, {}).get("correct", 0)
             same_t = same_status.get(d, {}).get("total", 0)
 
-            all_c = c + same_c * (1 - args.split)
-            all_t = t + same_t * (1 - args.split)
+            # 🎯 轉換為精確的 Validation 整數題數，避免浮點數誤差
+            val_same_t = same_t - int(same_t * args.split)
+            val_same_c = same_c - int(same_c * args.split)
+
+            # --- 全局 (All) 統計 ---
+            all_c = c + val_same_c
+            all_t = t + val_same_t
             all_acc = all_c / all_t if all_t > 0 else 0
             print(f"   - 語言 [{l:<8}]: all  準確率 {all_acc:>6.2%} ({all_c:.1f}/{all_t:.1f})")
 
-            upper_bound_c = same_c * (1 - args.split) + t
+            # --- 精確計算 Upper Bound ---
+            # all-same 的答對題數 + diff 中理論能答對的題數
+            upper_bound_c = val_same_c + diff_upper_c
             upper_bound_acc = upper_bound_c / all_t if all_t > 0 else 0
-            print(f"   - 語言 [{l:<8}]: upper bound all  準確率 {upper_bound_acc:>6.2%} ({upper_bound_c:.1f}/{all_t:.1f})")
+            print(f"   - 語言 [{l:<8}]: upper bound 準確率 {upper_bound_acc:>6.2%} ({upper_bound_c:.1f}/{all_t:.1f})")
 
-            random_c = same_c * (1 - args.split) + t * 0.5
+            # --- 精確計算 Random Baseline ---
+            # all-same 的答對題數 + diff 中根據 10 組選項分佈算出的隨機期望值
+            random_c = val_same_c + diff_random_c
             random_acc = random_c / all_t if all_t > 0 else 0
-            print(f"   - 語言 [{l:<8}]: random all  準確率 {random_acc:>6.2%} ({random_c:.1f}/{all_t:.1f})")
+            print(f"   - 語言 [{l:<8}]: random baseline 準確率 {random_acc:>6.2%} ({random_c:.1f}/{all_t:.1f})")
 
-            # 將這份數據儲存到 summary_report 字典中
             summary_report[d][l] = {
                 "diff_correct": c,
                 "diff_total": t,
@@ -123,11 +156,11 @@ def main():
                 "all_correct": all_c,
                 "all_total": all_t,
                 "all_accuracy": all_acc,
-                "random": random_acc,
-                "upper_bound": upper_bound_acc
+                "random_accuracy": random_acc,
+                "upper_bound_accuracy": upper_bound_acc
             }
 
-        print("-" * 40)
+        print("-" * 60)
             
     # 5. 結合 Summary 與 Predictions 輸出 JSON 檔案
     output_data = {
