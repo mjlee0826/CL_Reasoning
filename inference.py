@@ -137,8 +137,8 @@ def main():
             print(f"   - 語言 [{l:<8}]: random baseline 準確率 {acc:>6.2%} ({diff_random_c}/{t})")
 
             # 抓取無分歧資料 (All Same)
-            val_same_t = same_status.get(d, {}).get("correct", 0) * (1 - args.split)
-            val_same_c = same_status.get(d, {}).get("total", 0) * (1 - args.split)
+            val_same_c = same_status.get(d, {}).get("correct", 0) * (1 - args.split)
+            val_same_t = same_status.get(d, {}).get("total", 0) * (1 - args.split)
 
             print(f"   - 語言 [{l:<8}]: val same 準確率 {acc:>6.2%} ({val_same_c}/{val_same_t})")
 
