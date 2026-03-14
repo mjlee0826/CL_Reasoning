@@ -31,6 +31,15 @@ def main():
         
     spliter = OnlyDiffDataSpliter()
     _, _, val_X, val_y, _, val_meta, same_status = spliter.splitData(files, args.split)
+
+    count_1, count_0 = 0, 0
+    for y_list in val_y:
+        if y_list == [1] * 10:
+            count_1 += 1
+        if y_list == [0] * 10:
+            count_0 += 1
+    print(count_1)
+    print(count_0)
     
     print(f"📄 成功取得 Validation Set: 共 {len(val_X)} 個問題 (將展開為 {len(val_X)*5} 筆測試)")
 
