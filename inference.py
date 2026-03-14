@@ -140,6 +140,8 @@ def main():
             val_same_t = same_status.get(d, {}).get("correct", 0) * (1 - args.split)
             val_same_c = same_status.get(d, {}).get("total", 0) * (1 - args.split)
 
+            print(f"   - 語言 [{l:<8}]: val same 準確率 {acc:>6.2%} ({val_same_c}/{val_same_t})")
+
             # --- 全局 (All) 統計 ---
             all_c = c + val_same_c
             all_t = t + val_same_t
