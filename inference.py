@@ -123,6 +123,10 @@ def main():
             acc = c / t if t > 0 else 0
             print(f"   - 語言 [{l:<8}]: diff 準確率 {acc:>6.2%} ({c}/{t})")
 
+            print(f"   - 語言 [{l:<8}]: upper bound 準確率 {acc:>6.2%} ({diff_upper_c}/{t})")
+
+            print(f"   - 語言 [{l:<8}]: random baseline 準確率 {acc:>6.2%} ({diff_random_c}/{t})")
+
             # 抓取無分歧資料 (All Same)
             same_c = same_status.get(d, {}).get("correct", 0)
             same_t = same_status.get(d, {}).get("total", 0)
