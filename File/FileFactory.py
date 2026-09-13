@@ -56,3 +56,25 @@ class FileFactory():
         files_list.sort(key=lambda x: x.file_path)
         
         return files_list
+
+    def iterFileInDir(self, dir_path: str, extension: str = "*.json"):
+        """
+        與 getFileInDir 相同，但用 generator 逐一載入 File 物件，一次只佔用一個檔案的記憶體。
+        整個 result/challenge 一次載入約需 4–6 GB RAM，逐檔處理的 Test 應改用這個方法。
+        """
+        if not dir_path or not os.path.isdir(dir_path):
+            print(f"[FileFactory] Warning: Directory '{dir_path}' does not exist or is not a directory.")
+            return
+
+        file_paths = sorted(glob.glob(os.path.join(dir_path, extension)))
+        if not file_paths:
+            print(f"[FileFactory] Warning: No {extension} files found in '{dir_path}'.")
+            return
+
+        for path in file_paths:
+            try:
+                file_obj = File(path)
+            except Exception as e:
+                print(f"[FileFactory] Error loading file {path}: {e}")
+                continue
+            yield file_obj

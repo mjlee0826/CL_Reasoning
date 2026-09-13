@@ -1,6 +1,5 @@
 from File.File import File
 from Log.Log import Log
-from Dataset.DatasetType import get_dataset_map, DatasetType
 from Test.Test import Test
 
 class TestEM(Test):
@@ -26,26 +25,12 @@ class TestEM(Test):
             # Depending on your log implementation, you might want to pass config objects instead
             log.logInfo(file)
             
-            # 2. Dynamically instantiate the correct Dataset Class to use its specific compareTwoAnswer method
-            # We extract the datasetType string from the Config and convert it to the Enum
-            dataset_type_str = file.getDatasetConfig().datasetType
-            dataset_enum = DatasetType(dataset_type_str)
-            DatasetClass = get_dataset_map()[dataset_enum]
-            
-            correct_cnt = 0
-            total_cnt = 0
-
-            # 3. Iterate through the robust O(1) records_map instead of a fragile list
-            for q_id, record in file.records_map.items():
-                total_cnt += 1
-                
-                # Safely get the answers, defaulting to empty strings if missing
-                ans = str(record.get("Answer", ""))
-                my_ans = str(record.get("MyAnswer", ""))
-                
-                # Use the dataset's static method to compare answers (e.g., handles math float equality)
-                if DatasetClass.compareTwoAnswer(ans, my_ans):
-                    correct_cnt += 1
+            # 2. Per-question correctness via the shared Test.getCorrectMap
+            #    (uses the dataset's static compareTwoAnswer, e.g., handles math float equality)
+            # 3. Count correct answers over the O(1) records_map
+            correct_map = self.getCorrectMap(file)
+            correct_cnt = sum(correct_map.values())
+            total_cnt = len(correct_map)
             
             # 4. Calculate performance securely (prevent division by zero)
             accuracy = correct_cnt / total_cnt if total_cnt > 0 else 0.0

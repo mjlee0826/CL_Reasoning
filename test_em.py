@@ -5,10 +5,21 @@ from Log.FileLog import FileLog
 
 from Test.TestContext import TestContext
 from Test.TestEM import TestEM
+from Test.TestPValue import TestPValue
+from Test.TestRecoveryBlind import TestRecoveryBlind
+from Test.TestMissingAnswer import TestMissingAnswer
 from Test.TestType import TEST_STR_LIST, TestType
 from File.FileFactory import FileFactory
 
 import json
+
+# 已接上 test_em.py 的 test mode
+TEST_MAP = {
+    TestType.TESTEM: TestEM,
+    TestType.TESTPVALUE: TestPValue,
+    TestType.TESTRECOVERYBLIND: TestRecoveryBlind,
+    TestType.TESTMISSING: TestMissingAnswer,
+}
 
 def parseArgs():
     parser = ArgumentParser()
@@ -22,6 +33,14 @@ def parseArgs():
     return args
 
 def testExperiment(args):
+    testType = TestType(args.testmode)
+    if testType not in TEST_MAP:
+        print(f"test mode '{args.testmode}' 尚未接上 test_em.py，可用：{[t.value for t in TEST_MAP]}")
+        return
+    if testType == TestType.TESTPVALUE and (not args.testfile or len(args.testfile) != 2):
+        print("testp 需要用 --testfile 指定剛好兩個檔案")
+        return
+
     fileFactory: FileFactory = FileFactory()
     log = FileLog() if args.log else NoLog()
 
@@ -30,11 +49,11 @@ def testExperiment(args):
         for f_temp in args.testfile:
             files.append(fileFactory.getFileByPath(f_temp))
     else:
-        files = fileFactory.getFileInDir(args.testdir)
+        # 逐檔載入：整個資料夾一次讀進記憶體可能超過可用 RAM（result/challenge 約 4–6 GB）
+        files = fileFactory.iterFileInDir(args.testdir)
 
     context: TestContext = TestContext()
-    if args.testmode == TestType.TESTEM:
-        context.setTest(TestEM())
+    context.setTest(TEST_MAP[testType]())
     context.runTest(files, log)
 
 def main():

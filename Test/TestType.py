@@ -6,5 +6,7 @@ class TestType(str, Enum):
     TESTCASE = "testcase"
     TESTPVALUE = "testp"
     TESTTOKEN = "testtoken"
+    TESTRECOVERYBLIND = "testrecoveryblind"
+    TESTMISSING = "testmissing"
 
 TEST_STR_LIST = [t.value for t in TestType]
