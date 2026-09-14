@@ -61,6 +61,16 @@ class Gemini(Model):
         except Exception as e:
             return f"Error in Gemini model: {e}"
     
+    # The OpenAI-compatible endpoint rejects seed (400 'Unknown name "seed"'), also via extra_body.google
+    SUPPORTS_SEED = False
+
+    def _complete(self, messages, temperature, seed):
+        # Retries are handled by Model.generate(); _generate_with_retry stays for getRes / getListRes.
+        # seed is not sent (see SUPPORTS_SEED); on S-axis arms it only identifies the replicate.
+        return self.client.chat.completions.create(
+            model=self.modelName, messages=messages, max_tokens=4096, temperature=temperature, stream=False
+        )
+
     def getTokenLens(self, text: str, max_retries=6):
         # 空字串不打 API，直接回 0
         if not text:

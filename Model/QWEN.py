@@ -82,5 +82,12 @@ class QWEN(Model):
             
         return self._execute_with_retry(api_call)
         
+    def _complete(self, messages, temperature, seed):
+        kwargs = dict(model=self.modelName, extra_body={"enable_thinking": False},
+                      messages=messages, max_tokens=8192, temperature=temperature)
+        if seed is not None:
+            kwargs["seed"] = seed
+        return self.client.chat.completions.create(**kwargs)
+
     def getTokenLens(self, text: str):
         return len(self.tokenizer.encode(text))

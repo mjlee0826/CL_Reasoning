@@ -49,12 +49,12 @@ class File:
             self.languages = strategy_meta["languages"]
 
         # 2. Build Hash Map for Records (Index 1 and onwards)
-        # Using item.get("id") prevents KeyError if a record is malformed or missing an ID.
-        # We only map items that actually have a valid ID.
+        # Legacy strategy files key records by "id"; generation / aggregation files (result/arms,
+        # result/aggregations) use "item_id". We only map items that actually have a valid ID.
         self.records_map = {
-            item.get("id"): item 
-            for item in raw_data[1:] 
-            if item.get("id") is not None
+            item.get("id", item.get("item_id")): item
+            for item in raw_data[1:]
+            if item.get("id", item.get("item_id")) is not None
         }
 
     def getRecordById(self, q_id: int) -> dict:

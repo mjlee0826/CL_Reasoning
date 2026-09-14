@@ -42,5 +42,11 @@ class Deepseek(Model):
         except Exception as e:
             return f"Error in DeepSeek model: {e}"
         
+    def _complete(self, messages, temperature, seed):
+        kwargs = dict(model=self.modelName, messages=messages, max_tokens=8192, temperature=temperature, stream=False)
+        if seed is not None:
+            kwargs["seed"] = seed
+        return self.client.chat.completions.create(**kwargs)
+
     def getTokenLens(self, text: str):
         return len(self.tokenizer.encode(text))

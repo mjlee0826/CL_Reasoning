@@ -3,10 +3,7 @@ from Dataset.Dataset import Dataset
 from Strategy.Strategy import Strategy
 from Strategy.StrategyConfig import StrategyConfig
 from Log.Log import Log
-from Strategy.PromptAbstractFactory.PromptCOTFactory import PromptCOTFactory
-from Strategy.PromptAbstractFactory.PromptShortCOTFactory import PromptShortCOTFactory
-from Strategy.PromptAbstractFactory.PromptDirectFactory import PromptDirectFactory
-from Strategy.PromptAbstractFactory.PromptFormatFactory import PromptFormatFactory
+from Arm.PromptBuilder import PromptBuilder
 
 from tqdm import tqdm
 
@@ -44,21 +41,12 @@ class OnlyOneLanguage(Strategy):
           'cot'       -> full Chain-of-Thought + Format factory (historical default)
           'short_cot' -> brief Chain-of-Thought + Format factory
           'direct'    -> no Chain-of-Thought; a self-contained direct-answer prompt
+
+        The composition lives in Arm.PromptBuilder, the single source shared with the Generate strategy.
         """
         target_lang = self.config.languages[0] if self.config.languages else "english"
         style = getattr(self.config, "promptStyle", "cot") or "cot"
-
-        if style == "direct":
-            # PromptDirectFactory is self-contained: it must NOT be combined with the
-            # PromptFormatFactory, which would re-introduce a mandatory reasoning block.
-            return PromptDirectFactory().getPrompt(target_lang, question)
-
-        if style == "short_cot":
-            reasoning_prompt = PromptShortCOTFactory().getPrompt(target_lang, question)
-        else:
-            reasoning_prompt = PromptCOTFactory().getPrompt(target_lang, question)
-
-        return reasoning_prompt + PromptFormatFactory().getPrompt(target_lang)
+        return PromptBuilder.buildText(target_lang, question, style)
 
     def getRes(self) -> list:
         """

@@ -10,6 +10,8 @@ class StrategyType(str, Enum):
     REPAIRCHALLENGE = 'repairchallenge'
     TRANSLATE = 'translate'
     REWRITE = 'rewrite'
+    GENERATE = 'generate'
+    AGGREGATE = 'aggregate'
 
 class StrategyDisplayNameType(str, Enum):
     ONELANGUAGE = "One Language"
@@ -20,6 +22,8 @@ class StrategyDisplayNameType(str, Enum):
     REPAIRCHALLENGE = "Repair Challenge"
     TRANSLATE = 'Translate'
     REWRITE = 'Rewrite'
+    GENERATE = 'Generate'
+    AGGREGATE = 'Aggregate'
 
 # Trailing commas turn the assigned value into a Tuple, breaking string comparisons.
 class LanguageType(str, Enum):
@@ -53,8 +57,12 @@ def get_strategy_map():
     from Strategy.Challenge import Challenge
     from Strategy.RepairOnlyOneLanguage import RepairOnlyOneLanguage
     from Strategy.RepairChallenge import RepairChallenge
+    from Strategy.Generate import Generate
+    from Strategy.Aggregate import Aggregate
 
     return {
+        StrategyType.GENERATE: Generate,
+        StrategyType.AGGREGATE: Aggregate,
         StrategyType.TRANSLATE: Translate,
         StrategyType.REWRITE: Rewrite,
         StrategyType.ONELANGUAGE: OnlyOneLanguage,

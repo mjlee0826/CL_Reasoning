@@ -35,5 +35,11 @@ class GPT41mini(Model):
         except Exception as e:
             return f"Error in GPT 4.1 mini model: {e}"
         
+    def _complete(self, messages, temperature, seed):
+        kwargs = dict(model=self.modelName, messages=messages, max_completion_tokens=8192, temperature=temperature)
+        if seed is not None:
+            kwargs["seed"] = seed
+        return self.client.chat.completions.create(**kwargs)
+
     def getTokenLens(self, text: str):
         return len(self.enc.encode(text))
