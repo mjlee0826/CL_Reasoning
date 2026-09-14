@@ -5,6 +5,7 @@ from openai import OpenAI
 from Model.Model import Model
 from Model.ModelConfig import ModelConfig
 from google.generativeai import GenerativeModel
+from google.api_core.exceptions import TooManyRequests
 
 class Gemini(Model):
     def __init__(self, config: ModelConfig):
@@ -60,8 +61,19 @@ class Gemini(Model):
         except Exception as e:
             return f"Error in Gemini model: {e}"
     
-    def getTokenLens(self, text: str):
+    def getTokenLens(self, text: str, max_retries=6):
+        # 空字串不打 API，直接回 0
+        if not text:
+            return 0
         gm = GenerativeModel(self.modelName)
-        ret = gm.count_tokens(text)
-        # Gemini 無法取 token ID，因此回傳等長 list
-        return ret.total_tokens
+        for attempt in range(max_retries):
+            try:
+                # Gemini 無法在本地取 token ID，count_tokens 是一次 API 呼叫
+                return gm.count_tokens(text).total_tokens
+            except TooManyRequests as e:
+                # 遇到 429 (Rate Limit) 時觸發；gRPC 回傳的 ResourceExhausted 也是它的子類別
+                if attempt == max_retries - 1:
+                    raise e
+                wait_time = min(2 ** attempt * 5, 180)
+                print(f"[Thread Wait] count_tokens 觸發 429 限制，等待 {wait_time} 秒後進行第 {attempt + 1} 次重試...")
+                time.sleep(wait_time)

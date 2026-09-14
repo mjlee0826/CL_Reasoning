@@ -9,7 +9,7 @@ class GPT41mini(Model):
         super().__init__(config)
 
         self.client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
-        self.enc = tiktoken.get_encoding("cl100k_base")
+        self.enc = tiktoken.get_encoding("o200k_base")  # gpt-4o / gpt-4.1 系列的 tokenizer
     
     def getRes(self, prompt) -> str:
         try:

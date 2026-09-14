@@ -29,7 +29,8 @@ def testExperiment(args):
         for f_temp in args.testfile:
             files.append(fileFactory.getFileByPath(f_temp))
     else:
-        files = fileFactory.getFileInDir(args.testdir, args.extension)
+        # 逐檔載入，整個 result/challenge 一次載入需 4–6 GB RAM
+        files = fileFactory.iterFileInDir(args.testdir, args.extension)
 
     context: TestContext = TestContext()
     context.setTest(TestTokenNums())

@@ -10,7 +10,9 @@ split_half_gap.py — 0A-4：用 split-half 重新估計 excess ~ gap（去除�
     2. H1: 五個語言各自的準確率；每個配對在自己的兩個語言中選出 L_max / L_min      ← 選擇
            gap_H1 = acc(L_max, H1) − acc(L_min, H1)                                ← 自變數
     3. H2: excess_H2 = pair_acc(H2) − acc(L_max, H2)，語言身分沿用 H1，不重選         ← 應變數
-    4. 每次記錄 160 個 (gap_H1, excess_H2)
+           gap_H2 = acc(L_max, H2) − acc(L_min, H2)，同樣沿用 H1 的身分，可為負
+           (excess_H2 = delta_H2 − gap_H2/2；split_half_eiv.py 用 slope(gap_H2 ~ gap_H1) 當重複測量的 λ')
+    4. 每次記錄 160 個 (gap_H1, excess_H2, gap_H2)
     5. 每次各跑三種規格的 excess_H2 ~ gap_H1，再對 reps 次取平均:
            pooled OLS      160 點一條線
            cell FE         cell 內去平均後的共同斜率 (截距 = 各 cell 截距的平均, 同 loo_gap_star.py)
@@ -122,6 +124,7 @@ def run_splits(cell, mono, pairs, dis, reps, seed):
             hi, lo = (i, j) if first else (j, i)
             gap_H1 = mono[hi, h1].mean() - mono[lo, h1].mean()
             excess_H2 = final[h2].mean() - mono[hi, h2].mean()                                    # H2 測量
+            gap_H2 = mono[hi, h2].mean() - mono[lo, h2].mean()                                    # 身分沿用 H1，可為負
 
             s = Test.recoveryStats(mono[hi], mono[lo], final, dis[(l1, l2)], h2)
             if s["n_A"] + s["n_B"] > 0:
@@ -134,7 +137,7 @@ def run_splits(cell, mono, pairs, dis, reps, seed):
             rows.append({
                 "cell": cell, "rep": rep, "pair": f"{l1}_vs_{l2}", "l1": l1, "l2": l2,
                 "L_max": LANGUAGE_STR_LIST[hi], "L_min": LANGUAGE_STR_LIST[lo],
-                "gap_H1": gap_H1, "excess_H2": excess_H2,
+                "gap_H1": gap_H1, "excess_H2": excess_H2, "gap_H2": gap_H2,
             })
     return rows, checks, n_identity
 
@@ -184,6 +187,14 @@ def sufficient_stats(points, cells, n_reps, x_col, y_col):
     return stats
 
 
+def within_cell(stats):
+    """cell 內去平均：回傳 (within_xx, within_xy, x_bar, y_bar)，shape 皆為 (reps, C)；per-cell 斜率 = within_xy / within_xx。"""
+    within_xx = stats["sxx"] - stats["sx"] ** 2 / stats["n"]
+    within_xy = stats["sxy"] - stats["sx"] * stats["sy"] / stats["n"]
+    x_bar, y_bar = stats["sx"] / stats["n"], stats["sy"] / stats["n"]
+    return within_xx, within_xy, x_bar, y_bar
+
+
 def estimate(stats, weights):
     """
     stats  : 每個 (rep, cell) 的充分統計量, (reps, C)
@@ -200,9 +211,7 @@ def estimate(stats, weights):
     out["pooled_ols"] = {"slope": slope, "intercept": (sy - slope * sx) / n}
 
     # cell 內去平均
-    within_xx = stats["sxx"] - stats["sx"] ** 2 / stats["n"]
-    within_xy = stats["sxy"] - stats["sx"] * stats["sy"] / stats["n"]
-    x_bar, y_bar = stats["sx"] / stats["n"], stats["sy"] / stats["n"]
+    within_xx, within_xy, x_bar, y_bar = within_cell(stats)
 
     # cell FE：共同斜率，截距 = 各 cell 截距 (ȳ_c − slope·x̄_c) 的平均
     slope = (within_xy @ W) / (within_xx @ W)
@@ -219,7 +228,7 @@ def summarize(points, full, cells, reps, boot, boot_seed):
     stats_split = sufficient_stats(points, cells, reps, "gap_H1", "excess_H2")
     stats_full = sufficient_stats(full, cells, 1, "gap", "excess")
     for name, stats in (("split-half", stats_split), ("全樣本", stats_full)):
-        if (stats["sxx"] - stats["sx"] ** 2 / stats["n"] <= 0).any():
+        if (within_cell(stats)[0] <= 0).any():
             raise ValueError(f"{name}: 有 cell 的 gap 完全沒有變異，per-cell 斜率無定義")
 
     ones = np.ones((1, len(cells)))

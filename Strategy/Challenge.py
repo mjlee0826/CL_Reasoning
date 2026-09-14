@@ -214,14 +214,21 @@ class Challenge(Strategy):
     
     @staticmethod
     def getTokenLens(model: Model, data):
-        """Calculates total token usage across all debate turns and the judge phase."""
+        """
+        Output-token cost of the challenge pipeline, including both baseline runs.
+        Counts only assistant messages in Record1 / Record2 (index 1 is the baseline output,
+        later ones are debate turns) plus the judge output (Result3).
+        User messages (questions, debate prompts) and the judge prompt are input tokens and are not counted.
+        """
         result = 0
-        
+
         for r in data.get("Record1", []):
-            result += model.getTokenLens(r.get("content", ""))
-        
+            if r.get("role") == "assistant":
+                result += model.getTokenLens(r.get("content", ""))
+
         for r in data.get("Record2", []):
-            result += model.getTokenLens(r.get("content", ""))
+            if r.get("role") == "assistant":
+                result += model.getTokenLens(r.get("content", ""))
                 
         if data.get("Result3"):
             result += model.getTokenLens(data["Result3"])

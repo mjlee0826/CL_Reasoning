@@ -110,8 +110,9 @@ class OnlyOneLanguage(Strategy):
     @staticmethod
     def getTokenLens(model: Model, data):
         """
-        Calculates token usage for the model's output.
-        Note: We no longer calculate translation tokens here since the translation 
+        Output-token cost of a baseline run: only the model's generated Result.
+        The question / prompt (input tokens) is not counted.
+        Note: We no longer calculate translation tokens here since the translation
         is pre-computed and loaded directly by the Dataset.
         """
-        return model.getTokenLens(data.get("Question", "")) + model.getTokenLens(data.get("Result", ""))
+        return model.getTokenLens(data.get("Result", ""))

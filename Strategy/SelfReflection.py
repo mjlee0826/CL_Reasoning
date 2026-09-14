@@ -113,14 +113,10 @@ class SelfReflection(Strategy):
     @staticmethod
     def getTokenLens(model: Model, data):
         """
-        Calculates the total token usage for the reflection interaction.
-        Accounts for the original question, the previous response fed back to the model,
-        and the newly generated reflection result.
+        Output-token cost of the self-reflection pipeline, including its baseline run.
+        Counts only generated text: the baseline output (Response) and the reflected
+        output (Result). The question and the reflection prompt (input tokens) are not counted.
         """
-        # Summing the lengths of the components involved in the conversational prompt
-        # Multipliers can be applied if you are simulating the full chat history cost
-        tokens = model.getTokenLens(data.get("Question", ""))
-        tokens += model.getTokenLens(data.get("Response", "")) # Represents reading it back
-        tokens += model.getTokenLens(data.get("Reflection", ""))
-        tokens += model.getTokenLens(data.get("Result", ""))
+        tokens = model.getTokenLens(data.get("Response", ""))  # Baseline run output
+        tokens += model.getTokenLens(data.get("Result", ""))   # Reflection run output
         return tokens
