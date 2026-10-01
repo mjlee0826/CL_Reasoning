@@ -27,7 +27,7 @@ from File.ResultStore import ResultStore
 from Log.NoLog import NoLog
 from Log.OneAgentLog import OneAgentLog
 
-from run_generate import ACTIVE_DATASETS, armPath
+from run_generate import ACTIVE_DATASETS, armPath, defaultWorkers, interleaveByModel
 
 
 def parseArgs():
@@ -46,7 +46,8 @@ def parseArgs():
 
     parser.add_argument("--armdir", default="result/arms", help="Root directory of the arm files")
     parser.add_argument("--outdir", default="result/aggregations", help="Root directory of the aggregation files")
-    parser.add_argument("-w", "--workers", type=int, default=3, help="Max concurrent threads/workers")
+    parser.add_argument("-w", "--workers", type=int, default=None,
+                        help="Max concurrent threads/workers (default: one per task)")
     return parser.parse_args()
 
 
@@ -75,10 +76,10 @@ def runAggregation(model_name: str, dataset_name: str, aggregator_id: str, arms:
     dataset: Dataset = datasetFactory.buildDataset(DatasetType(dataset_name), DatasetConfig.from_dict({
         "datasetType": dataset_name, "nums": args.nums, "sample": 1, "language": "english",
     }))
-    sources = {("english", False): dataset}
+    sources = {("english", "original"): dataset}
     armDatasets = []
     for arm in arms:
-        key = (arm.language, arm.questionSource == "rewrite")
+        key = (arm.language, arm.questionSource)
         if key not in sources:
             sources[key] = datasetFactory.buildDataset(DatasetType(dataset_name), arm.to_dataset_config(dataset_name, args.nums))
         armDatasets.append(sources[key])
@@ -112,21 +113,22 @@ def main():
     candidate_sets = [[ArmSpec.from_arm_id(arm_id.strip()) for arm_id in group.split(",")] for group in args.candidates]
 
     tasks = []
-    for m, d, aggregator_id, arms in itertools.product(args.model, args.dataset, args.aggregators, candidate_sets):
+    for m, d, aggregator_id, arms in interleaveByModel(args.model, args.dataset, args.aggregators, candidate_sets):
         k = AGGREGATOR_TO_K[AggregatorType(aggregator_id)]
         if len(arms) != k:
             print(f"⏭️ Skip {aggregator_id} for {[arm.arm_id for arm in arms]}: needs {k} candidates")
             continue
         tasks.append((m, d, aggregator_id, arms))
+    workers = args.workers or defaultWorkers(len(tasks))
 
     print("🚀 Preparing aggregation...")
     print(f"Models: {args.model}")
     print(f"Datasets: {args.dataset}")
     print(f"Aggregators: {args.aggregators}")
     print(f"Candidate sets: {[[arm.arm_id for arm in arms] for arms in candidate_sets]}")
-    print(f"Total tasks: {len(tasks)} | Concurrent workers: {args.workers}\n")
+    print(f"Total tasks: {len(tasks)} | Concurrent workers: {workers}\n")
 
-    with ThreadPoolExecutor(max_workers=args.workers) as executor:
+    with ThreadPoolExecutor(max_workers=workers) as executor:
         futures = [executor.submit(runAggregation, m, d, a, arms, args) for m, d, a, arms in tasks]
         for future in as_completed(futures):
             try:

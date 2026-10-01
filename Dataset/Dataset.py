@@ -1,6 +1,6 @@
 from Dataset.DatasetConfig import DatasetConfig
 from Dataset.DatasetType import DATASET_TO_DISPLAYNAME
-from Dataset.path import translatedBaseDir, rewrittenBaseDir
+from Dataset.path import translatedBaseDir, rewrittenBaseDir, rewriteFileName
 
 import json
 import os
@@ -105,7 +105,8 @@ class Dataset():
         and replaces self.data[*]["question"] by id while preserving the ground-truth answer.
         Must be called by subclasses AFTER the original data is fully loaded into self.data.
         """
-        rewrite_file = f"{self.config.datasetType}_english.json"
+        # Version 1 is {datasetType}_english.json; later versions add a _v{n} suffix
+        rewrite_file = rewriteFileName(self.config.datasetType, getattr(self.config, "rewriteVersion", 1))
         rewrite_path = os.path.join(rewrittenBaseDir, rewrite_file)
 
         try:

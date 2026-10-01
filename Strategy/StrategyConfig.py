@@ -17,6 +17,9 @@ class StrategyConfig:
     #   'direct'    -> no Chain-of-Thought, the model outputs the answer directly
     promptStyle: str = 'cot'
 
+    # Rewrite version produced by run_rewrite.py (1 = first paraphrase, n = written after seeing versions 1..n-1)
+    rewriteVersion: int = 1
+
     @classmethod
     def from_args(cls, args):
         """

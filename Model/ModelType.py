@@ -22,7 +22,7 @@ class ModelDisplayNameType(str, Enum):
 class DefaultModelName(str, Enum):
     GPT41MINI = 'gpt-4.1-mini-2025-04-14'
     GPT4OMINI = 'gpt-4o-mini-2024-07-18'
-    DEEPSEEK = 'deepseek-chat'
+    DEEPSEEK = 'deepseek-ai/DeepSeek-V3.2'  # served by GMI Cloud, see Model/Deepseek.py
     GEMINI = 'gemini-2.5-flash-lite'
     GEMMA = 'models/gemma-3-27b-it'
     QWEN = 'qwen3-8b'

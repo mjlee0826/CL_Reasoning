@@ -33,13 +33,25 @@ def parseArgs():
     parser.add_argument("-m", "--model", choices=MODEL_STR_LIST, required=True, nargs="+", help="Choose your model(s)")
     parser.add_argument("-d", "--dataset", choices=ACTIVE_DATASETS, required=True, nargs="+", help="Choose your dataset(s)")
     parser.add_argument("--arms", required=True, nargs="+",
-                        help="arm_ids, e.g. L:en L:ja S:T0.7:seed3 R:short_cot P:expert W:rewrite")
+                        help="arm_ids, e.g. L:en L:ja S:T0.7:seed3 R:short_cot P:expert W:rewrite1 W:rewrite2")
     parser.add_argument("--nums", default=-1, type=int,
                         help="Data Nums to evaluate (-1 for all). Use the legacy value (2000) so item_ids line up with the anchor")
 
     parser.add_argument("--outdir", default="result/arms", help="Root directory of the arm files")
-    parser.add_argument("-w", "--workers", type=int, default=3, help="Max concurrent threads/workers")
+    parser.add_argument("-w", "--workers", type=int, default=None,
+                        help="Max concurrent threads/workers (default: one per task)")
     return parser.parse_args()
+
+
+def defaultWorkers(n_tasks: int) -> int:
+    """Default thread count: one thread per task (at least 1)."""
+    return max(1, n_tasks)
+
+
+def interleaveByModel(models: list, *dims) -> list:
+    """model × dims tasks ordered so that consecutive tasks rotate through the models, which spreads the
+    threads over the providers from the start instead of giving them all to the first model."""
+    return [(combo[-1], *combo[:-1]) for combo in itertools.product(*dims, models)]
 
 
 def armPath(outdir: str, model_name: str, dataset_name: str, arm: ArmSpec) -> str:
@@ -81,15 +93,16 @@ def main():
 
     # Parse every arm_id before launching threads so a typo fails immediately
     arms = [ArmSpec.from_arm_id(arm_id) for arm_id in dict.fromkeys(args.arms)]
-    tasks = list(itertools.product(args.model, args.dataset, arms))
+    tasks = interleaveByModel(args.model, args.dataset, arms)
+    workers = args.workers or defaultWorkers(len(tasks))
 
     print("🚀 Preparing arm generation...")
     print(f"Models: {args.model}")
     print(f"Datasets: {args.dataset}")
     print(f"Arms: {[arm.arm_id for arm in arms]}")
-    print(f"Total tasks: {len(tasks)} | Concurrent workers: {args.workers}\n")
+    print(f"Total tasks: {len(tasks)} | Concurrent workers: {workers}\n")
 
-    with ThreadPoolExecutor(max_workers=args.workers) as executor:
+    with ThreadPoolExecutor(max_workers=workers) as executor:
         futures = [executor.submit(runArm, m, d, arm, args) for m, d, arm in tasks]
         for future in as_completed(futures):
             try:

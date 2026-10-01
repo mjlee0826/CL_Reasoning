@@ -23,6 +23,9 @@ from Strategy.OnlyOneLanguage import OnlyOneLanguage
 from Strategy.Challenge import Challenge
 from Strategy.Generate import Generate
 from Strategy.Aggregate import Aggregate
+from Strategy.Rewrite import Rewrite
+from Dataset.path import rewriteFileName
+from run_generate import defaultWorkers, interleaveByModel
 from Arm.ArmSpec import ArmSpec
 from Arm.PromptBuilder import PromptBuilder
 from Arm.GenerationRecord import GenerationRecord
@@ -124,11 +127,11 @@ def checkPrompts():
 
 def checkArmIds():
     good = ["L:en", "L:zh", "L:ja", "L:ru", "L:es", "S:T0.7:seed3", "S:T1.0:seed0", "S:T1.3:seed12",
-            "R:short_cot", "R:direct", "P:expert", "W:rewrite", "F:en", "F:zh"]
+            "R:short_cot", "R:direct", "P:expert", "W:rewrite1", "W:rewrite2", "F:en", "F:zh"]
     check("2a. arm_id round trip", all(ArmSpec.from_arm_id(a).arm_id == a for a in good))
     check("2b. only L:en is the anchor", [a for a in good if ArmSpec.from_arm_id(a).is_anchor] == ["L:en"])
     rejected = 0
-    for bad in ["R:cot", "S:T0.75:seed1", "S:T0.0:seed1", "L:de", "K:2", "W:original", "S:T0.7", "P:Expert", "L:EN", "F:de"]:
+    for bad in ["R:cot", "S:T0.75:seed1", "S:T0.0:seed1", "L:de", "K:2", "W:original", "S:T0.7", "P:Expert", "L:EN", "F:de", "W:rewrite", "W:rewrite3"]:
         try:
             ArmSpec.from_arm_id(bad)
         except ValueError:
@@ -139,13 +142,18 @@ def checkArmIds():
             ArmSpec(**spec)
         except ValueError:
             rejected += 1
-    check("2c. invalid / non-canonical / multi-factor arms are rejected (13)", rejected == 13)
+    check("2c. invalid / non-canonical / multi-factor arms are rejected (15)", rejected == 15)
 
     derived = ArmSpec.from_arm_id("F:zh")
     check("2d. F arms are derived from L:{lang}",
           derived.is_derived and derived.base_arm_id == "L:zh" and derived.file_stem == "F_zh"
           and derived.language == "chinese" and not ArmSpec.from_arm_id("L:zh").is_derived
           and ArmSpec.from_arm_id("L:zh").base_arm_id is None)
+
+    v1, v2, plain = (ArmSpec.from_arm_id(a).to_dataset_config("mathqa", 10) for a in ("W:rewrite1", "W:rewrite2", "L:en"))
+    check("2f. rewrite versions map to the right dataset config and file name",
+          v1.useRewrite and v1.rewriteVersion == 1 and v2.useRewrite and v2.rewriteVersion == 2 and not plain.useRewrite
+          and rewriteFileName("mathqa", 1) == "mathqa_english.json" and rewriteFileName("mathqa", 2) == "mathqa_english_v2.json")
 
 
 def checkRefinePrompt():
@@ -161,6 +169,26 @@ def checkRefinePrompt():
         raised = True
     check("2e. derived prompt == SelfReflection prompt, and fails loudly without the base output",
           built == expected and raised)
+
+    cot = PromptBuilder.buildText("english", question, "cot")
+    expert = PromptBuilder(ArmSpec.from_arm_id("P:expert")).text(question)
+    skeptic = PromptBuilder(ArmSpec.from_arm_id("P:skeptic")).text(question)
+    raised = False
+    try:
+        PromptBuilder(ArmSpec.from_arm_id("P:novice")).text(question)
+    except ValueError:
+        raised = True
+    check("2g. persona prompts = persona sentence + the unchanged anchor prompt; unknown personas fail",
+          expert.startswith("You are a seasoned expert") and expert.endswith(cot)
+          and skeptic.startswith("You are a careful skeptic") and skeptic.endswith(cot) and raised)
+
+
+def checkRunners():
+    tasks = interleaveByModel(["gpt4omini", "qwen", "gemini"], ["mathqa", "mmlu"], ["S:T1.0:seed1", "R:short_cot"])
+    check(f"10. default workers = one per task and tasks rotate through the models (first: {[t[0] for t in tasks[:3]]})",
+          defaultWorkers(48) == 48 and defaultWorkers(2) == 2 and defaultWorkers(0) == 1 and len(tasks) == 12
+          and [t[0] for t in tasks[:6]] == ["gpt4omini", "qwen", "gemini"] * 2
+          and tasks[0] == ("gpt4omini", "mathqa", "S:T1.0:seed1"))
 
 
 def checkAggregators():
@@ -392,15 +420,41 @@ def checkGenerateAndAggregate(tmp: str):
           out_file.metadata["prompt_hash_unverified_arms"] == ["F:en"])
 
 
+def checkRewrite(tmp: str):
+    """A later rewrite version sees the earlier ones, never stores failed calls, and resumes."""
+    model, dataset = FakeModel(), makeDataset(10)
+    previous = {i: [f"first rewrite {i}"] for i in range(10)}
+    path = os.path.join(tmp, "rewrite", "mathqa_english_v2.json")
+
+    def rewrite():
+        config = StrategyConfig(strategyType="rewrite", languages=["english"], rewriteVersion=2)
+        return Rewrite(config, model, dataset, NoLog(), ResultStore(path, key="id"), previous).getRes()
+
+    model.failOn = {"Question 4:"}
+    failed = rewrite()
+    prompt = model.lastMessages[0]["content"]
+    check("9a. rewrite v2 sees the earlier version and never writes failed calls",
+          failed == [4] and len(ResultStore(path, key="id").records) == 9
+          and "Existing rewrite 1" in prompt and "first rewrite 9" in prompt)
+
+    model.failOn = set()
+    calls = model.calls
+    failed = rewrite()
+    check("9b. rerunning a rewrite only fills the missing items",
+          failed == [] and model.calls - calls == 1 and len(File(path).records_map) == 10)
+
+
 def main():
     checkPrompts()
     checkArmIds()
     checkRefinePrompt()
+    checkRunners()
     checkAggregators()
     checkBalancing()
     checkDebateEquivalence()
     with tempfile.TemporaryDirectory() as tmp:
         checkGenerateAndAggregate(tmp)
+        checkRewrite(tmp)
 
     print(f"\n{'All checks passed' if not failures else f'{len(failures)} check(s) failed'}")
     sys.exit(1 if failures else 0)

@@ -26,7 +26,8 @@ LANG_CODE_TO_LANGUAGE = {
 LANGUAGE_TO_LANG_CODE = {language: code for code, language in LANG_CODE_TO_LANGUAGE.items()}
 
 PROMPT_STYLE_LIST = ["cot", "short_cot", "direct"]
-QUESTION_SOURCE_LIST = ["original", "rewrite"]
+# rewrite1 / rewrite2: two paraphrase versions of every question (Data/rewritten, see run_rewrite.py --version)
+QUESTION_SOURCE_LIST = ["original", "rewrite1", "rewrite2"]
 
 # Agent A: original English question + full CoT + T=0, shared by every axis
 ANCHOR_ARM_ID = "L:en"

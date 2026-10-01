@@ -2,7 +2,6 @@ from argparse import ArgumentParser
 import itertools
 import json
 import os
-import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from Strategy.RunContext import RunContext
@@ -16,9 +15,11 @@ from Dataset.Dataset import Dataset
 from Dataset.DatasetConfig import DatasetConfig
 from Dataset.DatasetFactory import DatasetFactory
 from Dataset.DatasetType import DatasetType
+from Dataset.path import rewriteFileName
 
 from Strategy.StrategyConfig import StrategyConfig
 from Strategy.Rewrite import Rewrite
+from File.ResultStore import ResultStore
 
 from Log.NoLog import NoLog
 from Log.OneAgentLog import OneAgentLog
@@ -28,23 +29,37 @@ ACTIVE_DATASETS = ["mmlu", "mathqa", "truthfulqa", "commonsenseqa"]
 
 
 def parseArgs():
-    parser = ArgumentParser(description="Experiment 1 - English question rewrite (paraphrase) generator")
+    parser = ArgumentParser(description="English question rewrite (paraphrase) generator")
     parser.add_argument("--log", action="store_true", help="Enable terminal logging")
 
-    # A single fixed rewriter model produces one paraphrase file per dataset.
+    # A single fixed rewriter model produces one paraphrase file per dataset and version.
     parser.add_argument("-m", "--model", choices=MODEL_STR_LIST, required=True, help="The fixed rewriter model")
     parser.add_argument("--temperature", default=0.0, type=float, help="Model temperature setting")
 
     parser.add_argument("-d", "--dataset", choices=ACTIVE_DATASETS, required=True, nargs="+", help="Dataset(s) to rewrite")
     parser.add_argument("--nums", help="Data Nums to rewrite (-1 for all; use the SAME value you will evaluate with)",
                         default=-1, type=int)
-    parser.add_argument("--sample", help="Data Sample multiplier", default=1, type=int)
+    parser.add_argument("--version", type=int, default=1,
+                        help="Rewrite version. Version n >= 2 sees versions 1..n-1 and must word the question differently")
 
-    parser.add_argument("--dirpath", help="Directory to save the rewrite files", default="Data/rewritten")
+    parser.add_argument("--dirpath", help="Directory of the rewrite files", default="Data/rewritten")
     parser.add_argument("-w", "--workers", type=int, default=None,
                         help="Max concurrent threads/workers (default: one per task, i.e. full fan-out)")
 
     return parser.parse_args()
+
+
+def loadPrevious(dirpath: str, dataset_name: str, version: int) -> dict:
+    """{id: [rewrite version 1, ..., version - 1]} read from the earlier version files."""
+    previous = {}
+    for v in range(1, version):
+        path = os.path.join(dirpath, rewriteFileName(dataset_name, v))
+        if not os.path.exists(path):
+            raise FileNotFoundError(f"Rewrite version {v} is needed before version {version}: {path}")
+        with open(path, encoding="utf-8") as f:
+            for record in json.load(f)[1:]:
+                previous.setdefault(record["id"], []).append(record["Rewritten"])
+    return previous
 
 
 def runRewrite(model_name, dataset_name, args):
@@ -60,7 +75,7 @@ def runRewrite(model_name, dataset_name, args):
         DatasetConfig.from_dict({
             "datasetType": dataset_name,
             "nums": args.nums,
-            "sample": args.sample,
+            "sample": 1,
             "language": "english",   # rewrite operates on the original English text
         }),
     )
@@ -69,23 +84,39 @@ def runRewrite(model_name, dataset_name, args):
         print(f"Error: Failed to build {model_name} or {dataset_name}.")
         return
 
-    strategy_config = StrategyConfig.from_dict({"strategyType": "rewrite", "languages": ["english"]})
-    strategy = Rewrite(strategy_config, model, dataset, log)
+    # Version n needs every earlier version for every item, otherwise "different from version 1" is undefined
+    previous = loadPrevious(args.dirpath, dataset_name, args.version)
+    if args.version >= 2:
+        incomplete = [d["id"] for d in dataset.getData() if len(previous.get(d["id"], [])) != args.version - 1]
+        if incomplete:
+            raise ValueError(f"{dataset_name}: earlier rewrite versions miss {len(incomplete)} items; complete them first")
+
+    path = os.path.join(args.dirpath, rewriteFileName(dataset_name, args.version))
+    store = ResultStore(path, key="id")
+    if store.metadata:
+        found = (store.metadata.get("Model", {}).get("modelType"), store.metadata.get("Dataset", {}).get("nums"))
+        expected = (model_name, dataset.config.nums)
+        if found != expected:
+            raise ValueError(f"{path} was written by another run: {found} != {expected}")
+
+    strategy_config = StrategyConfig.from_dict({
+        "strategyType": "rewrite",
+        "languages": ["english"],
+        "rewriteVersion": args.version,
+    })
+    strategy = Rewrite(strategy_config, model, dataset, log, store, previous)
 
     context = RunContext()
     context.setStrategy(strategy)
-    result = context.runExperiment()
+    failed = context.runExperiment()
 
-    if not result:
-        print(f"Rewrite for {dataset_name} yielded no results.")
-        return
-
-    os.makedirs(args.dirpath, exist_ok=True)
-    path = os.path.join(args.dirpath, f"{dataset_name}_english.json")
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(result, f, indent=4, ensure_ascii=False)
-
-    print(f"🎉 Success! Rewrite saved to: {path}")
+    # A paraphrase identical to the question or to an earlier version adds no diversity
+    records = store.records
+    same_question = sum(r["Rewritten"].strip() == r["Question"].strip() for r in records.values())
+    same_previous = sum(r["Rewritten"].strip() in [p.strip() for p in previous.get(i, [])] for i, r in records.items())
+    status = "🎉 Complete" if not failed else f"⚠️ {len(failed)} API failures, rerun the same command to retry"
+    print(f"{status}: {dataset_name} v{args.version} -> {path} ({len(records)} records, "
+          f"identical to the question: {same_question}, identical to an earlier version: {same_previous})")
 
 
 def main():
@@ -95,8 +126,8 @@ def main():
     workers = args.workers if args.workers is not None else len(tasks)
     workers = max(1, workers)
 
-    print("🚀 Preparing English rewrite (Experiment 1)...")
-    print(f"Rewriter model: {args.model}")
+    print("🚀 Preparing English rewrite...")
+    print(f"Rewriter model: {args.model} | Version: {args.version}")
     print(f"Datasets: {args.dataset}")
     print(f"Total tasks: {len(tasks)} | Concurrent workers: {workers}\n")
 

@@ -82,7 +82,7 @@ class Model():
                 usage = getattr(response, "usage", None)
                 return LLMResponse(
                     text=response.choices[0].message.content or "",
-                    model_version=getattr(response, "model", "") or "",
+                    model_version=self._versionString(response),
                     usage_in=getattr(usage, "prompt_tokens", None),
                     usage_out=getattr(usage, "completion_tokens", None),
                 )
@@ -106,6 +106,13 @@ class Model():
         Overridden by concrete subclasses.
         """
         raise NotImplementedError(f"{type(self).__name__} does not support generate()")
+
+    def _versionString(self, response) -> str:
+        """
+        model_version_string of a response. Subclasses append the serving provider when the
+        model id alone does not identify who served it (e.g. open weights hosted by a third party).
+        """
+        return getattr(response, "model", "") or ""
 
     def countTokens(self, text: str) -> int:
         """

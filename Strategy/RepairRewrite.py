@@ -17,10 +17,16 @@ class RepairRewrite(Rewrite):
     Repair pass for Experiment 1 output (mirrors Strategy.RepairOnlyOneLanguage).
 
     Rebuilds the Model / Dataset straight from the result file's own metadata, scans for
-    records whose 'Rewritten' field is missing / empty / contains an API 'Error Code',
+    records whose 'Rewritten' field is missing / empty / an API error message,
     re-runs only those, and overwrites the file in place.
+
+    Only for version-1 files written by the old runner. Version >= 2 files need the earlier versions in
+    their prompt and never store failed calls: rerun run_rewrite.py --version n to fill them.
     """
     def __init__(self, config: StrategyConfig, log: Log, file: File):
+        if file.getStrategyConfig().rewriteVersion >= 2:
+            raise ValueError(f"{file.file_path} is a version >= 2 rewrite; rerun run_rewrite.py with that --version instead")
+
         model_config = file.getModelConfig()
         self.model: Model = ModelFactory().buildModel(ModelType(model_config.modelType), model_config)
 
@@ -38,7 +44,8 @@ class RepairRewrite(Rewrite):
         if rewritten is None or str(rewritten).strip() == "":
             return True
 
-        if "Error Code" in str(rewritten):
+        # QWEN returns "Error Code: ...", the other models "Error in <model> model: ..."
+        if "Error Code" in str(rewritten) or str(rewritten).lstrip().startswith("Error"):
             return True
 
         return False

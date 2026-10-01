@@ -3,26 +3,34 @@ from Dataset.Dataset import Dataset
 from Strategy.Strategy import Strategy
 from Strategy.StrategyConfig import StrategyConfig
 from Log.Log import Log
+from File.ResultStore import ResultStore
 from Strategy.PromptAbstractFactory.PromptRewriteFactory import PromptRewriteFactory
+from Strategy.PromptAbstractFactory.PromptRewriteAgainFactory import PromptRewriteAgainFactory
 
 from tqdm import tqdm
 
 
 class Rewrite(Strategy):
     """
-    Experiment 1: paraphrase every question stem with a single fixed "rewriter" model.
+    Paraphrases every English question with a single fixed "rewriter" model (run_rewrite.py).
 
-    Structurally identical to Strategy.Translate, but instead of translating into another
-    language it rewords the English stem while keeping numbers / names / units / answer
-    options verbatim. The output file ([meta, {id, Question, Rewritten}, ...]) is later
-    consumed by Dataset._apply_rewrite() during the Experiment 2-4 evaluation runs.
+    Version 1 rewords the stem while keeping numbers / names / units / answer options verbatim.
+    Version n >= 2 also sees versions 1..n-1 (`previous`) and must use different wording from all of
+    them. The output file ([meta, {id, Question, Rewritten}, ...]) is read by Dataset._apply_rewrite().
+
+    Records go through a ResultStore: a failed API call is not written, so rerunning the same command
+    fills it in, and an error message can never end up as a "rewritten question".
     """
-    def __init__(self, config: StrategyConfig, model: Model, dataset: Dataset, log: Log):
+    def __init__(self, config: StrategyConfig, model: Model, dataset: Dataset, log: Log,
+                 store: ResultStore = None, previous: dict = None):
         super().__init__(config)
 
         self.model: Model = model
         self.dataset: Dataset = dataset
         self.log: Log = log
+        self.store: ResultStore = store
+        # {id: [rewrite version 1, ..., version n-1]}; empty for version 1
+        self.previous: dict = previous or {}
 
         # Prevents IndexError if config.languages is not provided.
         if self.config.languages:
@@ -30,39 +38,47 @@ class Rewrite(Strategy):
         else:
             self.config.displayName += " (english)"
 
-    def getPrompt(self, question: str) -> str:
+    def getPrompt(self, question: str, previous: list[str] = None) -> str:
         """Constructs the rewrite prompt using the Factory pattern."""
         target_lang = self.config.languages[0] if self.config.languages else "english"
+        if previous:
+            return PromptRewriteAgainFactory().getPrompt(target_lang, question, previous)
         return PromptRewriteFactory().getPrompt(target_lang, question)
 
     def getRes(self) -> list:
-        """Executes the rewrite loop over the dataset and tracks progress."""
+        """
+        Rewrites every item missing from the store. Returns the ids whose API call failed (still missing).
+        """
         self.log.logInfo(self, self.model, self.dataset)
 
-        database = self.dataset.getData()
-        result = [{
-            "Model": self.model.config.to_dict(),
-            "Dataset": self.dataset.config.to_dict(),
-            "Strategy": self.config.to_dict()
-        }]
+        if not self.store.metadata:
+            self.store.metadata = {
+                "Model": self.model.config.to_dict(),
+                "Dataset": self.dataset.config.to_dict(),
+                "Strategy": self.config.to_dict(),
+            }
 
-        pbar = tqdm(total=self.dataset.config.dataNums)
-        for data in database:
-            rewritten_question = self.model.getRes(self.getPrompt(data["question"]))
+        todo = [data for data in self.dataset.getData() if not self.store.has(data["id"])]
+        failed = []
+        for data in tqdm(todo, desc=f"Rewrite v{self.config.rewriteVersion}"):
+            prompt = self.getPrompt(data["question"], self.previous.get(data["id"]))
+            response = self.model.generate([{"role": "user", "content": prompt}])
+            self.store.addUsage(response)
 
-            result.append({
-                "id": data.get("id", "N/A"),
-                "Question": data.get("question", ""),
-                "Rewritten": rewritten_question
+            if not response.ok or not response.text.strip():
+                failed.append(data["id"])
+                self.log.logMessage(f'API error on item {data["id"]}: {response.error}')
+                continue
+
+            self.store.add({
+                "id": data["id"],
+                "Question": data["question"],
+                "Rewritten": response.text,
             })
+            self.log.logMessage(f'改寫問題 (Rewritten)：\n{response.text}')
 
-            self.log.logMessage(f'改寫問題 (Rewritten)：\n{rewritten_question}')
-
-            pbar.update()
-
-        pbar.close()
-
-        return result
+        self.store.save()
+        return failed
 
     @staticmethod
     def getTokenLens(model: Model, data):

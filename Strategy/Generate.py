@@ -1,6 +1,6 @@
 from Model.Model import Model
 from Dataset.Dataset import Dataset
-from Dataset.path import translatedBaseDir, rewrittenBaseDir
+from Dataset.path import translatedBaseDir, rewrittenBaseDir, rewriteFileName
 from Strategy.Strategy import Strategy
 from Strategy.StrategyConfig import StrategyConfig
 from Arm.ArmSpec import ArmSpec
@@ -9,6 +9,7 @@ from Arm.GenerationRecord import GenerationRecord
 from File.ResultStore import ResultStore
 from Log.Log import Log
 
+import json
 import os
 from tqdm import tqdm
 
@@ -39,8 +40,8 @@ class Generate(Strategy):
     @staticmethod
     def questionSourcePath(arm: ArmSpec, dataset_type: str) -> str | None:
         """File the arm's question text is loaded from, or None for the original English question."""
-        if arm.questionSource == "rewrite":
-            return os.path.join(rewrittenBaseDir, f"{dataset_type}_english.json")
+        if arm.questionSource != "original":
+            return os.path.join(rewrittenBaseDir, rewriteFileName(dataset_type, arm.rewriteVersion))
         if arm.lang != "en":
             return os.path.join(translatedBaseDir, f"{dataset_type}_{arm.language.capitalize()}.json")
         return None
@@ -53,13 +54,23 @@ class Generate(Strategy):
         dataset_config = self.dataset.config
         if dataset_config.sample != 1:
             raise ValueError("Generate requires sample == 1 (item_id must be unique); use S-axis seeds for repeats")
-        if dataset_config.language != self.arm.language or bool(dataset_config.useRewrite) != (self.arm.questionSource == "rewrite"):
+        uses_rewrite = self.arm.questionSource != "original"
+        if dataset_config.language != self.arm.language or bool(dataset_config.useRewrite) != uses_rewrite \
+                or (uses_rewrite and dataset_config.rewriteVersion != self.arm.rewriteVersion):
             raise ValueError(f"Dataset config does not match arm {self.arm.arm_id}; build it with ArmSpec.to_dataset_config")
 
         # Dataset silently falls back to English when the translation / rewrite file is missing
         path = self.questionSourcePath(self.arm, dataset_config.datasetType)
         if path and not os.path.exists(path):
             raise FileNotFoundError(f"Question source for {self.arm.arm_id} not found: {path}")
+
+        # ... and silently keeps the original question for any id the rewrite file does not cover
+        if uses_rewrite:
+            with open(path, encoding="utf-8") as f:
+                covered = {r["id"] for r in json.load(f)[1:] if str(r.get("Rewritten", "")).strip()}
+            missing = [data["id"] for data in self.dataset.getData() if data["id"] not in covered]
+            if missing:
+                raise ValueError(f"{path} does not cover {len(missing)} items (e.g. {missing[:5]}); finish run_rewrite.py first")
 
         # A resumed file must belong to the same run
         meta = self.store.metadata

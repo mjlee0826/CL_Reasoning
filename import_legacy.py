@@ -3,7 +3,7 @@ Adapter: legacy IMSR results -> generation / aggregation schema (result/arms, re
 
     result/baseline/{m}_{d}_onelanguage_{lang}.json          -> result/arms/{m}/{d}/L_{code}.json
     result/challenge/{m}_{d}_challenge_{l1}_vs_{l2}.json      -> result/aggregations/{m}/{d}/debate__L_{c1}__L_{c2}.json
-    (optional) result/english_cot/{m}_{d}_onelanguage_english.json -> result/arms/{m}/{d}/W_rewrite.json
+    (optional) result/english_cot/{m}_{d}_onelanguage_english.json -> result/arms/{m}/{d}/W_rewrite1.json
 
 seed = null, model_version_string = metadata Model.modelName, tokens recounted with Model.countTokens
 (Gemini counts through the count_tokens API, so its cells take hours). Outputs are resumable per record.
@@ -38,6 +38,15 @@ from run_aggregate import aggregationPath
 
 LEGACY_MODELS = ["deepseek", "gemini", "gpt4omini", "qwen"]
 LEGACY_THRESHOLD = 3
+
+# What a legacy API alias actually served when the legacy results were generated (2026-03).
+# deepseek-chat pointed to DeepSeek-V3.2 from 2025-12-01 until 2026-04-24 (see Model/Deepseek.py).
+LEGACY_VERSION_LABELS = {"deepseek-chat": "DeepSeek-V3.2"}
+
+
+def legacyVersionString(model_meta: dict) -> str:
+    name = model_meta.get("modelName", "")
+    return LEGACY_VERSION_LABELS.get(name, name)
 
 
 def importArm(model, source: File, arm: ArmSpec, out_path: str) -> ResultStore:
@@ -83,7 +92,7 @@ def importArm(model, source: File, arm: ArmSpec, out_path: str) -> ResultStore:
             tokens_in=sum(model.countTokens(m["content"]) for m in messages),
             tokens_out=model.countTokens(raw_text),
             model=model_meta["modelType"],
-            model_version_string=model_meta.get("modelName", ""),
+            model_version_string=legacyVersionString(model_meta),
             temperature=model_meta.get("temperature", 0.0),
             seed=None,
             prompt_hash=PromptBuilder.promptHash(messages),
@@ -150,7 +159,7 @@ def importRefineArm(model, source: File, arm: ArmSpec, baseStore: ResultStore, b
             tokens_in=model.countTokens(prompt),
             tokens_out=model.countTokens(raw_text),
             model=model_meta["modelType"],
-            model_version_string=model_meta.get("modelName", ""),
+            model_version_string=legacyVersionString(model_meta),
             temperature=model_meta.get("temperature", 0.0),
             seed=None,
             prompt_hash=PromptBuilder.promptHash([{"role": "user", "content": prompt}]),
@@ -274,7 +283,7 @@ def importCell(model_name: str, dataset_name: str, args):
     if args.english_cot_dir:
         path = os.path.join(args.english_cot_dir, f"{model_name}_{dataset_name}_onelanguage_english.json")
         if os.path.exists(path):
-            arm = ArmSpec("W", questionSource="rewrite")
+            arm = ArmSpec("W", questionSource="rewrite1")
             store = importArm(model, File(path), arm, armPath(args.armdir, model_name, dataset_name, arm))
             print(f"✅ {path} -> {store.path} (question mismatches: {store.metadata['question_text_mismatches']})")
 
@@ -301,7 +310,7 @@ def parseArgs():
     parser.add_argument("--sr-dir", dest="sr_dir", default=None,
                         help="Also import result/self_reflection as the derived arms F:en / F:zh")
     parser.add_argument("--english-cot-dir", dest="english_cot_dir", default=None,
-                        help="Also import result/english_cot as W:rewrite (rewritten question + CoT + T0)")
+                        help="Also import result/english_cot as W:rewrite1 (rewrite version 1 + CoT + T0)")
     parser.add_argument("--skip-challenge", dest="skip_challenge", action="store_true")
     parser.add_argument("--armdir", default="result/arms")
     parser.add_argument("--aggdir", default="result/aggregations")

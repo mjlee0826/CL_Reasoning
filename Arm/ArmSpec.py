@@ -26,7 +26,7 @@ class ArmSpec:
         S:T{temp}:seed{n}    temperature > 0 with one decimal, integer seed
         R:{promptStyle}      short_cot / direct
         P:{persona}          persona key of PromptPersonaFactory
-        W:{questionSource}   rewrite
+        W:{questionSource}   rewrite1 / rewrite2 (two paraphrase versions of every question)
         F:{lang}             self-reflection on top of L:{lang}
     K-axis arms are not defined yet (the candidate source is still open).
 
@@ -162,6 +162,11 @@ class ArmSpec:
         return LANG_CODE_TO_LANGUAGE[self.lang]
 
     @property
+    def rewriteVersion(self) -> int:
+        """Rewrite version of the question text (1 when the arm uses the original question)."""
+        return int(self.questionSource.removeprefix("rewrite")) if self.questionSource != "original" else 1
+
+    @property
     def file_stem(self) -> str:
         return self.arm_id.replace(":", "_")
 
@@ -172,7 +177,8 @@ class ArmSpec:
             "nums": nums,
             "sample": 1,
             "language": self.language,
-            "useRewrite": self.questionSource == "rewrite",
+            "useRewrite": self.questionSource != "original",
+            "rewriteVersion": self.rewriteVersion,
         })
 
     def to_dict(self) -> dict:

@@ -18,6 +18,9 @@ class DatasetConfig:
     # Only meaningful together with language == 'english' (Experiments 2-4).
     useRewrite: bool = False
 
+    # Which rewrite version to load when useRewrite is True (see Dataset.path.rewriteFileName)
+    rewriteVersion: int = 1
+
     # Use field(init=False) so this attribute is not expected in the __init__ arguments.
     # It will be calculated dynamically after initialization.
     dataNums: int = field(init=False)
