@@ -46,6 +46,10 @@ class Generate(Strategy):
         return None
 
     def checkInputs(self):
+        if self.arm.is_derived:
+            raise ValueError(f"{self.arm.arm_id} is a derived arm: its prompt contains {self.arm.base_arm_id}'s output. "
+                             "Derived arms come from import_legacy.py --sr-dir, not from run_generate.py")
+
         dataset_config = self.dataset.config
         if dataset_config.sample != 1:
             raise ValueError("Generate requires sample == 1 (item_id must be unique); use S-axis seeds for repeats")

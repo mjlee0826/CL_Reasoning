@@ -55,6 +55,8 @@ class Aggregate(Strategy):
         self.aggregator.validateCandidates(self.arms)
         dataset_config = self.dataset.config
         item_ids = set(self.questions)
+        self.armFileByArmId = {arm.arm_id: file for arm, file in zip(self.arms, self.armFiles)}
+        self.unverifiedArms = []
 
         for arm, file, arm_questions in zip(self.arms, self.armFiles, self.armQuestions):
             meta = file.metadata
@@ -68,11 +70,19 @@ class Aggregate(Strategy):
             if missing:
                 raise ValueError(f"{file.file_path} is incomplete ({len(missing)} items missing); finish run_generate.py first")
 
-            # The prompt rebuilt from this arm's question text must be the prompt that was sent
+            # The prompt rebuilt from this arm's question text must be the prompt that was sent.
+            # A derived arm (F:{lang}) also needs its base arm's output, so it can only be checked when
+            # the base arm is one of the candidates; otherwise the arm is listed as unverified.
+            baseFile = self.armFileByArmId.get(arm.base_arm_id) if arm.is_derived else None
+            if arm.is_derived and baseFile is None:
+                self.unverifiedArms.append(arm.arm_id)
+                continue
+
             builder = PromptBuilder(arm)
             for item_id in sorted(item_ids):
                 record = file.getRecordById(item_id)
-                if PromptBuilder.promptHash(builder.messages(arm_questions[item_id])) != record.get("prompt_hash"):
+                base_raw_text = baseFile.getRecordById(item_id).get("raw_text") if baseFile else None
+                if PromptBuilder.promptHash(builder.messages(arm_questions[item_id], base_raw_text)) != record.get("prompt_hash"):
                     raise ValueError(f"prompt_hash mismatch in {file.file_path}, item {item_id}")
 
         for item_id in item_ids:
@@ -146,6 +156,7 @@ class Aggregate(Strategy):
                 "candidate_files": [file.file_path for file in self.armFiles],
                 "n_items": len(self.itemIds),
                 "n_disagreement": len(dis_ids),
+                "prompt_hash_unverified_arms": self.unverifiedArms,
                 "schema_version": SCHEMA_VERSION,
                 "source": "aggregate",
             }

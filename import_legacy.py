@@ -94,6 +94,73 @@ def importArm(model, source: File, arm: ArmSpec, out_path: str) -> ResultStore:
     return store
 
 
+def importRefineArm(model, source: File, arm: ArmSpec, baseStore: ResultStore, baseFile: File, out_path: str) -> ResultStore:
+    """
+    Legacy self_reflection file -> GenerationRecords of the derived arm F:{lang} (base = L:{lang}).
+    The initial generation is the base arm's record (SR stores it again as `Response`), so only the
+    revision becomes a new record. tokens_in counts the reflection prompt, which contains that output.
+    """
+    model_meta, dataset_meta = source.metadata["Model"], source.metadata["Dataset"]
+    records = source.records_map
+    checks = {"question_mismatch": 0, "base_output_mismatch": 0, "prompt_rebuild_mismatch": 0}
+    builder = PromptBuilder(arm)
+    store = ResultStore(out_path)
+
+    pending = []
+    for q_id in sorted(records):
+        record = records[q_id]
+        base = baseStore.records.get(q_id)
+        if base is None:
+            raise ValueError(f"{out_path}: base arm {arm.base_arm_id} has no item {q_id}")
+        checks["question_mismatch"] += record.get("Question") != baseFile.getRecordById(q_id).get("Question")
+        checks["base_output_mismatch"] += record.get("Response") != base["raw_text"]
+        rebuilt = builder.text(record.get("Question", ""), base["raw_text"])
+        checks["prompt_rebuild_mismatch"] += rebuilt != record.get("Reflection")
+        if not store.has(q_id):
+            pending.append(q_id)
+
+    store.metadata = {
+        "Model": model_meta,
+        "Dataset": dataset_meta,
+        "Strategy": {"strategyType": "generate", "displayName": f"Generate ({arm.arm_id})",
+                     "languages": [arm.language], "promptStyle": arm.promptStyle},
+        "Arm": arm.to_dict(),
+        "base_arm_file": baseStore.path,
+        "schema_version": GENERATION_SCHEMA,
+        "source": "legacy_import",
+        "legacy_path": source.file_path,
+        "legacy_checks": checks,
+        "error_string_records": sum(str(r.get("Result", "")).startswith("Error") for r in records.values()),
+    }
+
+    for q_id in tqdm(pending, desc=f"{os.path.basename(out_path)}"):
+        record = records[q_id]
+        # The stored Reflection is what was actually sent; legacy_checks says whether it rebuilds exactly
+        prompt = record.get("Reflection") or ""
+        raw_text, parsed = record.get("Result") or "", record.get("MyAnswer") or ""
+        store.add(GenerationRecord(
+            item_id=q_id,
+            arm_id=arm.arm_id,
+            axis=arm.axis,
+            is_anchor=arm.is_anchor,
+            lang=arm.lang,
+            raw_text=raw_text,
+            parsed_answer=parsed,
+            parse_ok=GenerationRecord.isParseOk(parsed),
+            tokens_in=model.countTokens(prompt),
+            tokens_out=model.countTokens(raw_text),
+            model=model_meta["modelType"],
+            model_version_string=model_meta.get("modelName", ""),
+            temperature=model_meta.get("temperature", 0.0),
+            seed=None,
+            prompt_hash=PromptBuilder.promptHash([{"role": "user", "content": prompt}]),
+            gold=str(record.get("Answer", "")),
+        ).to_dict())
+
+    store.save()
+    return store
+
+
 def importDebate(model, source: File, arms: tuple, armStores: tuple, baselines: tuple, out_path: str, compare) -> dict:
     """Legacy challenge file -> AggregationRecords (aggregator_id = debate). Returns the consistency checks."""
     meta = source.metadata
@@ -193,6 +260,17 @@ def importCell(model_name: str, dataset_name: str, args):
         baselines[language] = source
         print(f"✅ {path} -> {armStores[language].path} (question mismatches: {armStores[language].metadata['question_text_mismatches']})")
 
+    if args.sr_dir:
+        # Self-reflection exists for english / chinese only; its file name matches the baseline file
+        for language, baseStore in armStores.items():
+            path = os.path.join(args.sr_dir, f"{model_name}_{dataset_name}_onelanguage_{language}.json")
+            if not os.path.exists(path):
+                continue
+            arm = ArmSpec("F", lang=LANGUAGE_TO_LANG_CODE[language])
+            store = importRefineArm(model, File(path), arm, baseStore, baselines[language],
+                                    armPath(args.armdir, model_name, dataset_name, arm))
+            print(f"✅ {path} -> {store.path} {store.metadata['legacy_checks']}")
+
     if args.english_cot_dir:
         path = os.path.join(args.english_cot_dir, f"{model_name}_{dataset_name}_onelanguage_english.json")
         if os.path.exists(path):
@@ -220,6 +298,8 @@ def parseArgs():
     parser.add_argument("-d", "--dataset", choices=ACTIVE_DATASETS, nargs="+", default=ACTIVE_DATASETS)
     parser.add_argument("--baseline-dir", dest="baseline_dir", default="result/baseline")
     parser.add_argument("--challenge-dir", dest="challenge_dir", default="result/challenge")
+    parser.add_argument("--sr-dir", dest="sr_dir", default=None,
+                        help="Also import result/self_reflection as the derived arms F:en / F:zh")
     parser.add_argument("--english-cot-dir", dest="english_cot_dir", default=None,
                         help="Also import result/english_cot as W:rewrite (rewritten question + CoT + T0)")
     parser.add_argument("--skip-challenge", dest="skip_challenge", action="store_true")

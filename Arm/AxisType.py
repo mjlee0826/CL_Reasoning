@@ -9,6 +9,9 @@ class AxisType(str, Enum):
     PERSONA = "P"
     REWRITE = "W"
     CANDIDATES = "K"
+    # Not one of the md's five axes: a derived arm whose prompt contains the base arm's output
+    # (self-reflection). F:{lang} is built on top of L:{lang}.
+    REFINE = "F"
 
 AXIS_STR_LIST = [a.value for a in AxisType]
 

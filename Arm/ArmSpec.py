@@ -5,20 +5,21 @@ from Arm.AxisType import (AxisType, LANG_CODE_TO_LANGUAGE, PROMPT_STYLE_LIST, QU
                           ANCHOR_ARM_ID)
 from Dataset.DatasetConfig import DatasetConfig
 
-# The single factor each axis is allowed to change relative to Agent A
+# The single factor each axis is allowed to change relative to its base arm
 AXIS_TO_FACTOR = {
     AxisType.LANGUAGE: "lang",
     AxisType.SAMPLING: "sampling",
     AxisType.REASONING: "promptStyle",
     AxisType.PERSONA: "persona",
     AxisType.REWRITE: "questionSource",
+    AxisType.REFINE: "refine",
 }
 
 @dataclass(frozen=True)
 class ArmSpec:
     """
-    One generation arm = Agent A (the anchor) with exactly one factor changed along its axis.
-    The defaults are Agent A: original English question + full CoT + T=0 (paper_status v7 §3.3).
+    One generation arm = its base arm with exactly one factor changed along its axis.
+    The defaults are Agent A, the anchor: original English question + full CoT + T=0 (paper_status v7 §3.3).
 
     arm_id grammar (canonical form, one factor at a time):
         L:{lang}             lang in en / zh / ja / ru / es ("L:en" is the anchor)
@@ -26,7 +27,11 @@ class ArmSpec:
         R:{promptStyle}      short_cot / direct
         P:{persona}          persona key of PromptPersonaFactory
         W:{questionSource}   rewrite
+        F:{lang}             self-reflection on top of L:{lang}
     K-axis arms are not defined yet (the candidate source is still open).
+
+    An F arm is *derived*: its prompt contains the base arm's output, so it cannot be rebuilt from the
+    question alone (see PromptBuilder.text and Strategy/Aggregate.checkInputs).
     """
     axis: str
     lang: str = "en"
@@ -71,8 +76,16 @@ class ArmSpec:
         if self.persona is not None and not re.fullmatch(r"[a-z][a-z0-9_]*", self.persona):
             raise ValueError(f"Persona key must be lowercase snake_case, got '{self.persona}'")
 
-        factor = AXIS_TO_FACTOR[AxisType(self.axis)]
         changed = self.changedFactors()
+
+        if self.axis == AxisType.REFINE:
+            # The base is L:{lang}, so the language is the base's, not a change; the reflection is the factor
+            if changed - {"lang"}:
+                raise ValueError(f"Axis F may only add the reflection on top of L:{self.lang}, "
+                                 f"but {sorted(changed - {'lang'})} also differ from it")
+            return
+
+        factor = AXIS_TO_FACTOR[AxisType(self.axis)]
         if not changed <= {factor}:
             raise ValueError(f"Axis {self.axis} may only change '{factor}', but {sorted(changed)} differ from the anchor")
         if not changed and self.axis != AxisType.LANGUAGE:
@@ -97,6 +110,8 @@ class ArmSpec:
             return f"R:{self.promptStyle}"
         if self.axis == AxisType.PERSONA:
             return f"P:{self.persona}"
+        if self.axis == AxisType.REFINE:
+            return f"F:{self.lang}"
         return f"W:{self.questionSource}"
 
     @classmethod
@@ -115,6 +130,8 @@ class ArmSpec:
             spec = cls(axis, persona=rest)
         elif axis == AxisType.REWRITE:
             spec = cls(axis, questionSource=rest)
+        elif axis == AxisType.REFINE:
+            spec = cls(axis, lang=rest)
         else:
             spec = cls(axis)  # raises for K / unknown axes
 
@@ -130,6 +147,16 @@ class ArmSpec:
         return self.arm_id == ANCHOR_ARM_ID
 
     @property
+    def is_derived(self) -> bool:
+        """True when the prompt contains another arm's output, so it cannot be rebuilt from the question alone."""
+        return self.axis == AxisType.REFINE
+
+    @property
+    def base_arm_id(self) -> str | None:
+        """arm_id this arm is built on top of; None when the prompt only depends on the question."""
+        return f"L:{self.lang}" if self.is_derived else None
+
+    @property
     def language(self) -> str:
         """LanguageType value (e.g. 'japanese') used by Dataset and prompt factories."""
         return LANG_CODE_TO_LANGUAGE[self.lang]
@@ -139,7 +166,7 @@ class ArmSpec:
         return self.arm_id.replace(":", "_")
 
     def to_dataset_config(self, dataset_type: str, nums: int) -> DatasetConfig:
-        """Question text of this arm: translated (L), rewritten (W) or the original English question."""
+        """Question text of this arm: translated (L / F), rewritten (W) or the original English question."""
         return DatasetConfig.from_dict({
             "datasetType": dataset_type,
             "nums": nums,
@@ -149,7 +176,7 @@ class ArmSpec:
         })
 
     def to_dict(self) -> dict:
-        return {"arm_id": self.arm_id, **asdict(self)}
+        return {"arm_id": self.arm_id, "base_arm_id": self.base_arm_id, **asdict(self)}
 
     @classmethod
     def from_dict(cls, data_dict: dict) -> "ArmSpec":

@@ -25,6 +25,9 @@ from Strategy.Generate import Generate
 from Strategy.Aggregate import Aggregate
 from Arm.ArmSpec import ArmSpec
 from Arm.PromptBuilder import PromptBuilder
+from Arm.GenerationRecord import GenerationRecord
+from Strategy.PromptAbstractFactory.PromptSelfReflectionCOTFactory import PromptSelfReflectionCOTFactory
+from Strategy.PromptAbstractFactory.PromptFormatFactory import PromptFormatFactory
 from Aggregator.Aggregator import AggregationItem, Candidate
 from Aggregator.AggregatorConfig import AggregatorConfig
 from Aggregator.AggregatorFactory import AggregatorFactory
@@ -121,20 +124,43 @@ def checkPrompts():
 
 def checkArmIds():
     good = ["L:en", "L:zh", "L:ja", "L:ru", "L:es", "S:T0.7:seed3", "S:T1.0:seed0", "S:T1.3:seed12",
-            "R:short_cot", "R:direct", "P:expert", "W:rewrite"]
+            "R:short_cot", "R:direct", "P:expert", "W:rewrite", "F:en", "F:zh"]
     check("2a. arm_id round trip", all(ArmSpec.from_arm_id(a).arm_id == a for a in good))
     check("2b. only L:en is the anchor", [a for a in good if ArmSpec.from_arm_id(a).is_anchor] == ["L:en"])
     rejected = 0
-    for bad in ["R:cot", "S:T0.75:seed1", "S:T0.0:seed1", "L:de", "K:2", "W:original", "S:T0.7", "P:Expert", "L:EN"]:
+    for bad in ["R:cot", "S:T0.75:seed1", "S:T0.0:seed1", "L:de", "K:2", "W:original", "S:T0.7", "P:Expert", "L:EN", "F:de"]:
         try:
             ArmSpec.from_arm_id(bad)
         except ValueError:
             rejected += 1
+    for spec in [dict(axis="L", lang="ja", temperature=0.7, seed=1), dict(axis="F", lang="zh", temperature=0.7, seed=1),
+                 dict(axis="F", lang="en", promptStyle="direct")]:
+        try:
+            ArmSpec(**spec)
+        except ValueError:
+            rejected += 1
+    check("2c. invalid / non-canonical / multi-factor arms are rejected (13)", rejected == 13)
+
+    derived = ArmSpec.from_arm_id("F:zh")
+    check("2d. F arms are derived from L:{lang}",
+          derived.is_derived and derived.base_arm_id == "L:zh" and derived.file_stem == "F_zh"
+          and derived.language == "chinese" and not ArmSpec.from_arm_id("L:zh").is_derived
+          and ArmSpec.from_arm_id("L:zh").base_arm_id is None)
+
+
+def checkRefinePrompt():
+    """A derived arm's prompt must match Strategy/SelfReflection.py so legacy SR prompts rebuild exactly."""
+    arm = ArmSpec.from_arm_id("F:zh")
+    question, previous = "問題：選一個字母", "先前輸出 {\"answer\":\"a\"}"
+    expected = PromptSelfReflectionCOTFactory().getPrompt("chinese", question, previous) + PromptFormatFactory().getPrompt("chinese")
+    built = PromptBuilder(arm).text(question, previous)
+    raised = False
     try:
-        ArmSpec("L", lang="ja", temperature=0.7, seed=1)
+        PromptBuilder(arm).text(question)
     except ValueError:
-        rejected += 1
-    check("2c. invalid / non-canonical / multi-factor arms are rejected (10)", rejected == 10)
+        raised = True
+    check("2e. derived prompt == SelfReflection prompt, and fails loudly without the base output",
+          built == expected and raised)
 
 
 def checkAggregators():
@@ -181,6 +207,20 @@ def checkAggregators():
         results[aggregator.config.aggregatorType] = Test.recoveryStats(cA, cB, np.array([f == "a" for f in final]), dis, np.ones(n, dtype=bool))
     check(f"3e. V2 recovery ≈ 0 ({results['v2']['recovery']:+.4f})", abs(results["v2"]["recovery"]) < 0.05)
     check("3f. Blind recovery == recovery_blind", abs(results["blind"]["recovery"] - results["blind"]["recovery_blind"]) < 1e-12)
+
+    # Revise: mirror of Blind, always keeps the derived candidate
+    revise = buildAggregator("revise", model, dataset)
+    D = ArmSpec.from_arm_id("F:en")
+    final = [revise.aggregate(AggregationItem(i, [candidate(A, x), candidate(D, y)], "Q")).final_answer
+             for i, (x, y) in enumerate(zip(answersA, answersB))]
+    stats = Test.recoveryStats(cA, cB, np.array([f == "a" for f in final]), dis, np.ones(n, dtype=bool))
+    ok = abs(stats["recovery"] + results["blind"]["recovery"]) < 1e-12
+    try:
+        revise.validateCandidates([A, B])
+        ok = False
+    except ValueError:
+        pass
+    check(f"3i. Revise recovery == −recovery_blind ({stats['recovery']:+.4f}) and needs a derived candidate", ok)
 
     item = AggregationItem(4, [candidate(A, "d", raw="RAW-ANCHOR"), candidate(B, "e", raw="RAW-OTHER")], "Q", [B.arm_id, A.arm_id])
     record = judge.aggregate(item)
@@ -230,6 +270,30 @@ def checkDebateEquivalence():
         rounds.add(turn)
         judged += bool(judge_output)
     check(f"5. DebateAggregator == Challenge on 300 scripted items (rounds {sorted(rounds)}, judge called {judged})", same == 300)
+
+
+def makeDerivedArmFile(path, base_file, dataset, arm, model):
+    """Writes an F-arm file whose prompts are built from the base arm's outputs (what import_legacy produces)."""
+    store = ResultStore(path)
+    store.metadata = {
+        "Model": model.config.to_dict(),
+        "Dataset": dataset.config.to_dict(),
+        "Strategy": {"strategyType": "generate", "languages": [arm.language], "promptStyle": arm.promptStyle},
+        "Arm": arm.to_dict(), "schema_version": "generation/v1", "source": "test",
+    }
+    questions = {d["id"]: d["question"] for d in dataset.getData()}
+    for item_id, base in sorted(base_file.records_map.items()):
+        prompt = PromptBuilder(arm).text(questions[item_id], base["raw_text"])
+        raw_text = f'revised {item_id}\n{{"answer":"{"abc"[(item_id + 1) % 3]}"}}'
+        store.add(GenerationRecord(
+            item_id=item_id, arm_id=arm.arm_id, axis=arm.axis, is_anchor=arm.is_anchor, lang=arm.lang,
+            raw_text=raw_text, parsed_answer=PARSER(raw_text), parse_ok=True,
+            tokens_in=len(prompt.split()), tokens_out=len(raw_text.split()),
+            model=model.config.modelType, model_version_string="fake-model-v1", temperature=0.0, seed=None,
+            prompt_hash=PromptBuilder.promptHash([{"role": "user", "content": prompt}]),
+            gold=str(dataset.data[item_id]["answer"]),
+        ).to_dict())
+    store.save()
 
 
 def checkGenerateAndAggregate(tmp: str):
@@ -298,10 +362,40 @@ def checkGenerateAndAggregate(tmp: str):
     except ValueError:
         check("7d. prompt_hash mismatch is detected", True)
 
+    # Derived arm (F:en): its prompt contains the base arm's output, like the imported self-reflection arms
+    derived = ArmSpec.from_arm_id("F:en")
+    derived_path = os.path.join(tmp, "arms", "F_en.json")
+    makeDerivedArmFile(derived_path, File(paths["L:en"]), dataset, derived, model)
+
+    try:
+        Generate(StrategyConfig(strategyType="generate", languages=[derived.language]), model, dataset, NoLog(),
+                 derived, ResultStore(os.path.join(tmp, "arms", "F_en_generated.json")))
+        check("8a. run_generate refuses derived arms", False)
+    except ValueError:
+        check("8a. run_generate refuses derived arms", True)
+
+    def aggregateArms(aggregator_id, arms, files, name):
+        out = os.path.join(tmp, "aggregations", f"{name}.json")
+        strategy = Aggregate(StrategyConfig(strategyType="aggregate", languages=["english", "english"]), model, dataset,
+                             NoLog(), buildAggregator(aggregator_id, model, dataset, None), arms, files,
+                             [dataset, dataset], ResultStore(out))
+        return strategy.getRes(), File(out)
+
+    failed, out_file = aggregateArms("revise", [anchor, derived], [File(paths["L:en"]), File(derived_path)], "revise")
+    derived_records = File(derived_path).records_map
+    check("8b. Revise reproduces the derived arm's answers and verifies its prompt_hash",
+          failed == [] and out_file.metadata["prompt_hash_unverified_arms"] == []
+          and all(r["final_answer"] == derived_records[r["item_id"]]["parsed_answer"] for r in out_file.records_map.values()))
+
+    _, out_file = aggregateArms("v2", [derived, sampled], [File(derived_path), File(paths["S:T0.7:seed1"])], "v2_derived")
+    check("8c. a derived arm without its base is reported as unverified",
+          out_file.metadata["prompt_hash_unverified_arms"] == ["F:en"])
+
 
 def main():
     checkPrompts()
     checkArmIds()
+    checkRefinePrompt()
     checkAggregators()
     checkBalancing()
     checkDebateEquivalence()

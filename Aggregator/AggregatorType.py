@@ -1,9 +1,10 @@
 from enum import Enum
 
-# Aggregators of paper_status v7 §3.4 (aggregator_id values)
+# Aggregators of paper_status v7 §3.4 (aggregator_id values), plus REVISE for derived arms
 class AggregatorType(str, Enum):
     V2 = "v2"
     BLIND = "blind"
+    REVISE = "revise"
     JUDGE = "judge"
     DEBATE = "debate"
     VOTE3 = "vote3"
@@ -13,6 +14,7 @@ class AggregatorType(str, Enum):
 class AggregatorDisplayNameType(str, Enum):
     V2 = "Vote@2"
     BLIND = "Blind"
+    REVISE = "Revise"
     JUDGE = "Judge"
     DEBATE = "Debate"
     VOTE3 = "Vote@3"
@@ -27,6 +29,7 @@ AGGREGATOR_TO_DISPLAYNAME = {
 AGGREGATOR_TO_K = {
     AggregatorType.V2: 2,
     AggregatorType.BLIND: 2,
+    AggregatorType.REVISE: 2,
     AggregatorType.JUDGE: 2,
     AggregatorType.DEBATE: 2,
     AggregatorType.VOTE3: 3,
@@ -43,6 +46,7 @@ def get_aggregator_map():
     """
     from Aggregator.VoteAggregator import VoteAggregator
     from Aggregator.BlindAggregator import BlindAggregator
+    from Aggregator.ReviseAggregator import ReviseAggregator
     from Aggregator.JudgeAggregator import JudgeAggregator
     from Aggregator.DebateAggregator import DebateAggregator
 
@@ -51,6 +55,7 @@ def get_aggregator_map():
         AggregatorType.VOTE3: VoteAggregator,
         AggregatorType.VOTE5: VoteAggregator,
         AggregatorType.BLIND: BlindAggregator,
+        AggregatorType.REVISE: ReviseAggregator,
         AggregatorType.JUDGE: JudgeAggregator,
         AggregatorType.JUDGE5: JudgeAggregator,
         AggregatorType.DEBATE: DebateAggregator,

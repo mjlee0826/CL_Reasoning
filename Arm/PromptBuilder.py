@@ -4,6 +4,7 @@ from Strategy.PromptAbstractFactory.PromptShortCOTFactory import PromptShortCOTF
 from Strategy.PromptAbstractFactory.PromptDirectFactory import PromptDirectFactory
 from Strategy.PromptAbstractFactory.PromptFormatFactory import PromptFormatFactory
 from Strategy.PromptAbstractFactory.PromptPersonaFactory import PromptPersonaFactory
+from Strategy.PromptAbstractFactory.PromptSelfReflectionCOTFactory import PromptSelfReflectionCOTFactory
 
 import hashlib
 import json
@@ -35,11 +36,24 @@ class PromptBuilder():
             text = PromptPersonaFactory().getPrompt(language, persona) + text
         return text
 
-    def text(self, question: str) -> str:
+    @staticmethod
+    def buildReflectionText(language: str, question: str, previous_output: str) -> str:
+        """
+        Prompt of a derived (F-axis) arm: the base arm's output is part of the prompt.
+        Same composition as Strategy/SelfReflection.py, so legacy self-reflection prompts rebuild exactly.
+        """
+        return PromptSelfReflectionCOTFactory().getPrompt(language, question, previous_output) \
+            + PromptFormatFactory().getPrompt(language)
+
+    def text(self, question: str, base_raw_text: str = None) -> str:
+        if self.arm.is_derived:
+            if base_raw_text is None:
+                raise ValueError(f"{self.arm.arm_id} is derived; its prompt needs the base arm's output")
+            return self.buildReflectionText(self.arm.language, question, base_raw_text)
         return self.buildText(self.arm.language, question, self.arm.promptStyle, self.arm.persona)
 
-    def messages(self, question: str) -> list[dict]:
-        return [{"role": "user", "content": self.text(question)}]
+    def messages(self, question: str, base_raw_text: str = None) -> list[dict]:
+        return [{"role": "user", "content": self.text(question, base_raw_text)}]
 
     @staticmethod
     def promptHash(messages: list[dict]) -> str:
