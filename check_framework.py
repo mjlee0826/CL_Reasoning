@@ -443,6 +443,37 @@ def checkRewrite(tmp: str):
     check("9b. rerunning a rewrite only fills the missing items",
           failed == [] and model.calls - calls == 1 and len(File(path).records_map) == 10)
 
+    # A rewrite that drops the answer options gets one follow-up turn; if it still drops them, it is not written
+    question = 'There is a Question: \nWhich is red?\nAnd there are multiple choices:\nA: sky\nB: apple\n' \
+               'At the end of your response, provide your answer in this exact JSON format: \n{"answer": "your_letter_choice"}\n'
+    full = 'Which item is red?\nA: sky\nB: apple\n{"answer": "your_letter_choice"}'
+
+    class ScriptedModel(FakeModel):
+        def __init__(self, replies):
+            super().__init__()
+            self.replies = list(replies)
+        def _complete(self, messages, temperature, seed):
+            self.calls += 1
+            self.lastMessages = json.loads(json.dumps(messages))
+            return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content=self.replies.pop(0)))],
+                                   model="fake-model-v1", usage=SimpleNamespace(prompt_tokens=1, completion_tokens=1))
+
+    one_item = makeDataset(1)
+    one_item.data[0]["question"] = question
+    outcomes = []
+    for name, replies in [("repaired", ["Which item is red?", full]), ("rejected", ["Which item is red?", "Which item is red?"])]:
+        store_path = os.path.join(tmp, "rewrite", f"{name}.json")
+        scripted = ScriptedModel(replies)
+        config = StrategyConfig(strategyType="rewrite", languages=["english"], rewriteVersion=2)
+        failed = Rewrite(config, scripted, one_item, NoLog(), ResultStore(store_path, key="id"), {0: ["v1"]}).getRes()
+        store = ResultStore(store_path, key="id")
+        outcomes.append((failed, len(store.records), store.metadata["validation"], scripted.lastMessages[-1]["content"]))
+    (f1, n1, v1, last1), (f2, n2, v2, _) = outcomes
+    check("9c. dropped options trigger one repair turn; a rewrite that still drops them is not written",
+          Rewrite.preservesOptions(question, full) and not Rewrite.preservesOptions(question, "Which item is red?")
+          and f1 == [] and n1 == 1 and v1 == {"repair_turns": 1, "rejected": 0} and "dropped" in last1
+          and f2 == [0] and n2 == 0 and v2 == {"repair_turns": 1, "rejected": 1})
+
 
 def main():
     checkPrompts()
