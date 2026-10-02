@@ -471,8 +471,20 @@ def checkRewrite(tmp: str):
     (f1, n1, v1, last1), (f2, n2, v2, _) = outcomes
     check("9c. dropped options trigger one repair turn; a rewrite that still drops them is not written",
           Rewrite.preservesOptions(question, full) and not Rewrite.preservesOptions(question, "Which item is red?")
-          and f1 == [] and n1 == 1 and v1 == {"repair_turns": 1, "rejected": 0} and "dropped" in last1
-          and f2 == [0] and n2 == 0 and v2 == {"repair_turns": 1, "rejected": 1})
+          and f1 == [] and n1 == 1 and v1 == {"repair_turns": 1, "rejected": 0, "fence_stripped": 0} and "dropped" in last1
+          and f2 == [0] and n2 == 0 and v2 == {"repair_turns": 1, "rejected": 1, "fence_stripped": 0})
+
+    # A fence around the whole output is removed before checking and storing; other fences are kept
+    store_path = os.path.join(tmp, "rewrite", "fenced.json")
+    scripted = ScriptedModel(["```\n" + full + "\n```"])
+    config = StrategyConfig(strategyType="rewrite", languages=["english"], rewriteVersion=2)
+    failed = Rewrite(config, scripted, one_item, NoLog(), ResultStore(store_path, key="id"), {0: ["v1"]}).getRes()
+    store = ResultStore(store_path, key="id")
+    check("9d. a fence wrapping the whole rewrite is removed; fences elsewhere are left alone",
+          failed == [] and store.records[0]["Rewritten"] == full and store.metadata["validation"]["fence_stripped"] == 1
+          and Rewrite.stripOuterFence("```text\nabc\n```") == "abc"
+          and Rewrite.stripOuterFence("intro\n```\nabc\n```") == "intro\n```\nabc\n```"
+          and Rewrite.stripOuterFence("```\na\n```\nb\n```") == "```\na\n```\nb\n```")
 
 
 def main():
