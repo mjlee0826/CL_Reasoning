@@ -56,6 +56,7 @@ class Resolution:
     n_rounds: int | None = None
     presentation_order: list[str] | None = None
     trace: dict | None = None
+    refused_calls: int = 0   # calls the provider blocked; their output counts as empty
 
 
 class Aggregator():
@@ -108,6 +109,8 @@ class Aggregator():
         answers = [c.answer for c in item.candidates]
         resolution = self.noOp(item) if self.isUnanimous(answers) else self.resolve(item)
         off_menu = not any(self.dataset.compareTwoAnswer(resolution.final_answer, answer) for answer in answers)
+        if resolution.refused_calls:
+            resolution.trace = {**(resolution.trace or {}), "refused_calls": resolution.refused_calls}
 
         return AggregationRecord(
             item_id=item.item_id,
@@ -135,6 +138,8 @@ class Aggregator():
             self.onResponse(response)
         if not response.ok:
             raise AggregatorCallError(response.error)
+        # A blocked call returns an empty output (no answer) instead of failing the item forever
+        resolution.refused_calls += response.refused
 
         resolution.tokens_in += sum(self.model.countTokens(m.get("content", "")) for m in messages)
         resolution.tokens_out += self.model.countTokens(response.text)

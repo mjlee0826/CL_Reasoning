@@ -11,7 +11,9 @@ import sys
 import tempfile
 from types import SimpleNamespace
 
+import httpx
 import numpy as np
+import openai
 
 from Model.Model import Model
 from Model.ModelConfig import ModelConfig
@@ -487,6 +489,54 @@ def checkRewrite(tmp: str):
           and Rewrite.stripOuterFence("```\na\n```\nb\n```") == "```\na\n```\nb\n```")
 
 
+class RefusingModel(FakeModel):
+    """Blocks prompts containing a marker: Gemini-style (no message) or DashScope-style (400 data_inspection_failed)."""
+    def __init__(self, blockOn=(), moderateOn=()):
+        super().__init__()
+        self.blockOn, self.moderateOn = set(blockOn), set(moderateOn)
+
+    def _complete(self, messages, temperature, seed):
+        content = messages[-1]["content"]
+        if any(marker in content for marker in self.blockOn):
+            self.calls += 1
+            return SimpleNamespace(choices=[SimpleNamespace(message=None, finish_reason="content_filter")],
+                                   model="fake-model-v1", usage=None)
+        if any(marker in content for marker in self.moderateOn):
+            self.calls += 1
+            raise openai.BadRequestError(
+                "Output data may contain inappropriate content",
+                response=httpx.Response(400, request=httpx.Request("POST", "https://example.invalid")),
+                body={"code": "data_inspection_failed", "type": "data_inspection_failed"})
+        return super()._complete(messages, temperature, seed)
+
+
+def checkRefusals(tmp: str):
+    model = RefusingModel(blockOn={"Question 2:"}, moderateOn={"Question 4:"})
+    blocked = model.generate([{"role": "user", "content": "Question 2: x"}])
+    moderated = model.generate([{"role": "user", "content": "Question 4: x"}])
+    check("11a. safety blocks and moderation errors are refusals (ok, empty text), not API failures",
+          blocked.ok and blocked.refused and blocked.text == "" and moderated.ok and moderated.refused
+          and "data_inspection_failed" in moderated.refusal_reason
+          and not model.generate([{"role": "user", "content": "Question 1: x"}]).refused)
+
+    dataset, anchor = makeDataset(6), ArmSpec.from_arm_id("L:en")
+    path = os.path.join(tmp, "refusals", "L_en.json")
+    failed = Generate(StrategyConfig(strategyType="generate", languages=["english"]), model, dataset, NoLog(), anchor,
+                      ResultStore(path)).getRes()
+    file = File(path)
+    refused = sorted(r["item_id"] for r in file.metadata.get("refusals", []))
+    check("11b. a refused item is written as an output without an answer and listed in metadata",
+          failed == [] and len(file.records_map) == 6 and refused == [2, 4]
+          and file.getRecordById(2)["raw_text"] == "" and not file.getRecordById(2)["parse_ok"]
+          and file.metadata["api_usage"]["refusals"] == 2)
+
+    judge = buildAggregator("judge", RefusingModel(blockOn={"Answer 1"}), dataset)
+    A, B = ArmSpec.from_arm_id("L:en"), ArmSpec.from_arm_id("S:T0.7:seed1")
+    record = judge.aggregate(AggregationItem(0, [candidate(A, "a"), candidate(B, "b")], "Q", [A.arm_id, B.arm_id]))
+    check("11c. a refused judge call gives an empty final answer instead of failing the item",
+          record.final_answer == "" and record.trace.get("refused_calls") == 1)
+
+
 def main():
     checkPrompts()
     checkArmIds()
@@ -498,6 +548,7 @@ def main():
     with tempfile.TemporaryDirectory() as tmp:
         checkGenerateAndAggregate(tmp)
         checkRewrite(tmp)
+        checkRefusals(tmp)
 
     print(f"\n{'All checks passed' if not failures else f'{len(failures)} check(s) failed'}")
     sys.exit(1 if failures else 0)

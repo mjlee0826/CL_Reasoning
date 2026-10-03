@@ -39,6 +39,7 @@ class ResultStore():
         usage = self.metadata.setdefault("api_usage", {"calls": 0, "calls_without_usage": 0,
                                                        "prompt_tokens": 0, "completion_tokens": 0})
         usage["calls"] += 1
+        usage["refusals"] = usage.get("refusals", 0) + bool(getattr(response, "refused", False))
         if response.usage_in is None or response.usage_out is None:
             usage["calls_without_usage"] += 1
             return

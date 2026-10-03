@@ -136,6 +136,13 @@ class Generate(Strategy):
                 pbar.update()
                 continue
 
+            if response.refused:
+                # The provider blocked the content: that is the model's answer, kept as an output without an
+                # answer (scored as wrong), the same way the legacy Gemini anchor recorded such an item
+                self.store.metadata.setdefault("refusals", []).append(
+                    {"item_id": data["id"], "reason": response.refusal_reason})
+                self.log.logMessage(f'Item {data["id"]} refused: {response.refusal_reason}')
+
             record = self.buildRecord(data, messages, response)
             self.store.add(record.to_dict())
 

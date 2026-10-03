@@ -8,6 +8,10 @@ import openai
 # Transient API failures that generate() retries with exponential backoff
 RETRYABLE_ERRORS = (openai.RateLimitError, openai.APIConnectionError, openai.InternalServerError)
 
+# Error codes meaning the provider blocked the content (a refusal, not a failure):
+# DashScope (Qwen) input / output moderation
+REFUSAL_CODES = {"data_inspection_failed"}
+
 class Model():
     """
     Base class for all LLM implementations.
@@ -79,13 +83,7 @@ class Model():
         for attempt in range(max_retries):
             try:
                 response = self._complete(messages, temperature, seed)
-                usage = getattr(response, "usage", None)
-                return LLMResponse(
-                    text=response.choices[0].message.content or "",
-                    model_version=self._versionString(response),
-                    usage_in=getattr(usage, "prompt_tokens", None),
-                    usage_out=getattr(usage, "completion_tokens", None),
-                )
+                return self._toResponse(response)
             except RETRYABLE_ERRORS as e:
                 if attempt == max_retries - 1:
                     return LLMResponse(error=f"{type(e).__name__}: {e}")
@@ -94,10 +92,40 @@ class Model():
                 print(f"[{self.displayName}] {type(e).__name__}，等待 {wait_time} 秒後進行第 {attempt + 1} 次重試...")
                 time.sleep(wait_time)
             except Exception as e:
+                code = self._refusalCode(e)
+                if code:
+                    return LLMResponse(refused=True, refusal_reason=f"{type(e).__name__} [{code}]: {e}")
                 # Non-transient errors (bad request, auth, malformed response) are not retried
                 return LLMResponse(error=f"{type(e).__name__}: {e}")
 
         return LLMResponse(error="max_retries must be >= 1")
+
+    def _toResponse(self, response) -> LLMResponse:
+        """Unpacks a ChatCompletion; a response without a message is a safety block (refusal)."""
+        usage = getattr(response, "usage", None)
+        choices = getattr(response, "choices", None) or []
+        choice = choices[0] if choices else None
+        message = getattr(choice, "message", None)
+        finish_reason = getattr(choice, "finish_reason", None)
+        common = dict(
+            model_version=self._versionString(response),
+            usage_in=getattr(usage, "prompt_tokens", None),
+            usage_out=getattr(usage, "completion_tokens", None),
+        )
+        if message is None:
+            # e.g. Gemini returns no message at all when its safety filter blocks the content
+            return LLMResponse(refused=True, refusal_reason=f"no message (finish_reason={finish_reason})", **common)
+        if finish_reason == "content_filter" and not message.content:
+            return LLMResponse(refused=True, refusal_reason="finish_reason=content_filter", **common)
+        return LLMResponse(text=message.content or "", **common)
+
+    @staticmethod
+    def _refusalCode(error: Exception) -> str | None:
+        """The REFUSAL_CODES entry an API error matches (a provider-side content block), or None."""
+        for code in REFUSAL_CODES:
+            if code in (getattr(error, "code", None), getattr(error, "type", None)) or code in str(error):
+                return code
+        return None
 
     def _complete(self, messages: list, temperature: float, seed: int):
         """
