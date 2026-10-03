@@ -4,6 +4,7 @@ from File.File import File
 from Log.Log import Log
 from Strategy.StrategyType import StrategyType, LANGUAGE_STR_LIST
 from Test.Test import Test
+from Analysis.splitHalf import makeSplits, pickMax, recoveryStats
 
 # 在 H2 上計算、再對 reps 次切分取平均的量（metadata 中加 _H2 字尾）
 H2_KEYS = ("n_A", "n_B", "w_A", "recovery_blind", "recovery", "skill")
@@ -16,7 +17,7 @@ class TestRecoveryBlind(Test):
 
     題目範圍:
         d, c, m                                          全部題目（不涉及選擇）
-        錨點 A = 兩個語言中單語準確率較高者                  在 H1 決定（Test.makeSplits / Test.pickMax）
+        錨點 A = 兩個語言中單語準確率較高者                  在 H1 決定（Analysis.splitHalf 的 makeSplits / pickMax）
         n_A, n_B, w_A, recovery_blind, recovery, skill     在同一個 H2 上計算，再對 reps 次取平均
     recovery 必須和 recovery_blind 用同一批 H2 分歧題：recovery 的分母 c − m 與 recovery_blind 的分子共用這些題目。
     切分與錨點規則和 split_half_gap.py（0A-4）完全相同。
@@ -39,13 +40,13 @@ class TestRecoveryBlind(Test):
         """
         c1, c2, cf, dis = (np.asarray(x, dtype=bool) for x in (c1, c2, cf, dis))
         N = len(c1)
-        full = Test.recoveryStats(c1, c2, cf, dis, np.ones(N, dtype=bool))
+        full = recoveryStats(c1, c2, cf, dis, np.ones(N, dtype=bool))
 
         stats_H2, first_picked = [], []
-        for rep, h1 in enumerate(Test.makeSplits(N, reps, seed)):
-            first = Test.pickMax(int(c1[h1].sum()), int(c2[h1].sum()), seed, rep, key1, key2)  # H1 選錨點
+        for rep, h1 in enumerate(makeSplits(N, reps, seed)):
+            first = pickMax(int(c1[h1].sum()), int(c2[h1].sum()), seed, rep, key1, key2)  # H1 選錨點
             cA, cB = (c1, c2) if first else (c2, c1)
-            stats_H2.append(Test.recoveryStats(cA, cB, cf, dis, ~h1))                          # H2 計算
+            stats_H2.append(recoveryStats(cA, cB, cf, dis, ~h1))                          # H2 計算
             first_picked.append(first)
 
         first_rate = float(np.mean(first_picked))

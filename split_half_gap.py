@@ -22,7 +22,7 @@ split_half_gap.py — 0A-4：用 split-half 重新估計 excess ~ gap（去除�
     全樣本 (不切分) 的三種規格一併列出, 應重現 A-2 的 −0.383 / −0.373 / −0.412。
 
 與 0A-1 (Test/TestRecoveryBlind.py) 的關係:
-    共用 Test.makeSplits / Test.pickMax, 切分與錨點 (= L_max) 完全相同, 所以每一對、每一次都必須滿足
+    共用 Analysis.splitHalf 的 makeSplits / pickMax, 切分與錨點 (= L_max) 完全相同, 所以每一對、每一次都必須滿足
         excess_H2 = d_H2 · (c_H2/2) · (recovery_H2 − recovery_blind_H2)
     本腳本逐點 assert 這條恆等式; 若 challenge 檔已跑過 TestRecoveryBlind, 也核對 metadata 中的
     recovery_blind_H2 / recovery_H2 與這裡重算的 reps 次平均是否一致。
@@ -49,6 +49,7 @@ import pandas as pd
 from File.FileFactory import FileFactory
 from Strategy.StrategyType import LANGUAGE_STR_LIST
 from Test.Test import Test
+from Analysis.splitHalf import makeSplits, pickMax, recoveryStats
 
 BASELINE_DIR = "result/baseline"
 CHALLENGE_DIR = "result/challenge"
@@ -97,7 +98,7 @@ def build_cell(cell, base, chal):
             raise ValueError(f"{cell}: {name} 的題目 id 與其他檔案不一致")
 
     DatasetClass = base[LANGUAGE_STR_LIST[0]][2]
-    # mono 第 i 列 = LANGUAGE_STR_LIST[i]，與 Test.pickMax 使用的 key 相同
+    # mono 第 i 列 = LANGUAGE_STR_LIST[i]，與 pickMax 使用的 key 相同
     mono = np.array([[base[lang][0][q] for q in ids] for lang in LANGUAGE_STR_LIST], dtype=bool)
     pairs, dis = {}, {}
     for (l1, l2), (correct, _) in sorted(chal.items()):
@@ -116,17 +117,17 @@ def run_splits(cell, mono, pairs, dis, reps, seed):
     checks = {pair: {"recovery_blind": [], "recovery": []} for pair in pairs}
     n_identity = 0
 
-    for rep, h1 in enumerate(Test.makeSplits(mono.shape[1], reps, seed)):
+    for rep, h1 in enumerate(makeSplits(mono.shape[1], reps, seed)):
         h2 = ~h1
         for (l1, l2), final in pairs.items():
             i, j = LANGUAGE_STR_LIST.index(l1), LANGUAGE_STR_LIST.index(l2)
-            first = Test.pickMax(int(mono[i, h1].sum()), int(mono[j, h1].sum()), seed, rep, i, j)  # H1 選擇
+            first = pickMax(int(mono[i, h1].sum()), int(mono[j, h1].sum()), seed, rep, i, j)       # H1 選擇
             hi, lo = (i, j) if first else (j, i)
             gap_H1 = mono[hi, h1].mean() - mono[lo, h1].mean()
             excess_H2 = final[h2].mean() - mono[hi, h2].mean()                                    # H2 測量
             gap_H2 = mono[hi, h2].mean() - mono[lo, h2].mean()                                    # 身分沿用 H1，可為負
 
-            s = Test.recoveryStats(mono[hi], mono[lo], final, dis[(l1, l2)], h2)
+            s = recoveryStats(mono[hi], mono[lo], final, dis[(l1, l2)], h2)
             if s["n_A"] + s["n_B"] > 0:
                 identity = s["d"] * s["c"] / 2 * (s["recovery"] - s["recovery_blind"])
                 assert abs(excess_H2 - identity) < 1e-12, (cell, rep, l1, l2, excess_H2, identity)

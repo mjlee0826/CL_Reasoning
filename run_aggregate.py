@@ -1,19 +1,7 @@
 from argparse import ArgumentParser
-import itertools
 import os
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from Strategy.RunContext import RunContext
-
-from Model.Model import Model
-from Model.ModelConfig import ModelConfig
-from Model.ModelFactory import ModelFactory
-from Model.ModelType import MODEL_STR_LIST, ModelType
-
-from Dataset.Dataset import Dataset
-from Dataset.DatasetConfig import DatasetConfig
-from Dataset.DatasetFactory import DatasetFactory
-from Dataset.DatasetType import DatasetType
+from Model.ModelType import MODEL_STR_LIST
 
 from Strategy.StrategyConfig import StrategyConfig
 from Strategy.Aggregate import Aggregate
@@ -27,7 +15,9 @@ from File.ResultStore import ResultStore
 from Log.NoLog import NoLog
 from Log.OneAgentLog import OneAgentLog
 
-from run_generate import ACTIVE_DATASETS, armPath, defaultWorkers, interleaveByModel
+from Runner.paths import ACTIVE_DATASETS, armPath, aggregationPath
+from Runner.tasks import defaultWorkers, interleaveByModel, runTasks
+from Runner.builders import buildModel, buildArmDataset, buildEnglishDataset, runStrategy
 
 
 def parseArgs():
@@ -51,11 +41,6 @@ def parseArgs():
     return parser.parse_args()
 
 
-def aggregationPath(outdir: str, model_name: str, dataset_name: str, aggregator_id: str, arms: list[ArmSpec]) -> str:
-    stems = "__".join(arm.file_stem for arm in arms)
-    return os.path.join(outdir, model_name, dataset_name, f"{aggregator_id}__{stems}.json")
-
-
 def runAggregation(model_name: str, dataset_name: str, aggregator_id: str, arms: list[ArmSpec], args):
     log = OneAgentLog() if args.log else NoLog()
     arm_names = ",".join(arm.arm_id for arm in arms)
@@ -67,21 +52,16 @@ def runAggregation(model_name: str, dataset_name: str, aggregator_id: str, arms:
         return
     armFiles = [File(path) for path in paths]
 
-    model: Model = ModelFactory().buildModel(
-        ModelType(model_name), ModelConfig.from_dict({"modelType": model_name, "temperature": 0.0})
-    )
+    model = buildModel(model_name, 0.0)
 
     # Original English question (judge) + each arm's own question text; arms with the same source share a dataset
-    datasetFactory = DatasetFactory()
-    dataset: Dataset = datasetFactory.buildDataset(DatasetType(dataset_name), DatasetConfig.from_dict({
-        "datasetType": dataset_name, "nums": args.nums, "sample": 1, "language": "english",
-    }))
+    dataset = buildEnglishDataset(dataset_name, args.nums)
     sources = {("english", "original"): dataset}
     armDatasets = []
     for arm in arms:
         key = (arm.language, arm.questionSource)
         if key not in sources:
-            sources[key] = datasetFactory.buildDataset(DatasetType(dataset_name), arm.to_dataset_config(dataset_name, args.nums))
+            sources[key] = buildArmDataset(dataset_name, arm, args.nums)
         armDatasets.append(sources[key])
 
     aggregator = AggregatorFactory().buildAggregator(
@@ -98,11 +78,7 @@ def runAggregation(model_name: str, dataset_name: str, aggregator_id: str, arms:
     })
     strategy = Aggregate(strategy_config, model, dataset, log, aggregator, arms, armFiles, armDatasets, store)
 
-    context = RunContext()
-    context.setStrategy(strategy)
-    failed = context.runExperiment()
-
-    status = "🎉 Complete" if not failed else f"⚠️ {len(failed)} API failures, rerun the same command to retry"
+    status = runStrategy(strategy)
     print(f"{status}: {model_name} | {dataset_name} | {aggregator_id} | {arm_names} -> {path} ({len(store.records)} records)")
 
 
@@ -128,13 +104,7 @@ def main():
     print(f"Candidate sets: {[[arm.arm_id for arm in arms] for arms in candidate_sets]}")
     print(f"Total tasks: {len(tasks)} | Concurrent workers: {workers}\n")
 
-    with ThreadPoolExecutor(max_workers=workers) as executor:
-        futures = [executor.submit(runAggregation, m, d, a, arms, args) for m, d, a, arms in tasks]
-        for future in as_completed(futures):
-            try:
-                future.result()
-            except Exception as e:
-                print(f"❌ A job generated an exception: {e}")
+    runTasks(runAggregation, tasks, workers, args)
 
     print("\n✅ All aggregation tasks finished!")
 

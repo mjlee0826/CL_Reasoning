@@ -1,18 +1,6 @@
 from argparse import ArgumentParser
-import itertools
-import os
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from Strategy.RunContext import RunContext
-
-from Model.Model import Model
-from Model.ModelConfig import ModelConfig
-from Model.ModelFactory import ModelFactory
-from Model.ModelType import MODEL_STR_LIST, ModelType
-
-from Dataset.Dataset import Dataset
-from Dataset.DatasetFactory import DatasetFactory
-from Dataset.DatasetType import DatasetType
+from Model.ModelType import MODEL_STR_LIST
 
 from Strategy.StrategyConfig import StrategyConfig
 from Strategy.Generate import Generate
@@ -22,8 +10,9 @@ from File.ResultStore import ResultStore
 from Log.NoLog import NoLog
 from Log.OneAgentLog import OneAgentLog
 
-# Datasets that have the translation / rewrite pipeline wired (see Dataset/*.py)
-ACTIVE_DATASETS = ["mmlu", "mathqa", "truthfulqa", "commonsenseqa"]
+from Runner.paths import ACTIVE_DATASETS, armPath
+from Runner.tasks import defaultWorkers, interleaveByModel, runTasks
+from Runner.builders import buildModel, buildArmDataset, runStrategy
 
 
 def parseArgs():
@@ -43,29 +32,11 @@ def parseArgs():
     return parser.parse_args()
 
 
-def defaultWorkers(n_tasks: int) -> int:
-    """Default thread count: one thread per task (at least 1)."""
-    return max(1, n_tasks)
-
-
-def interleaveByModel(models: list, *dims) -> list:
-    """model × dims tasks ordered so that consecutive tasks rotate through the models, which spreads the
-    threads over the providers from the start instead of giving them all to the first model."""
-    return [(combo[-1], *combo[:-1]) for combo in itertools.product(*dims, models)]
-
-
-def armPath(outdir: str, model_name: str, dataset_name: str, arm: ArmSpec) -> str:
-    return os.path.join(outdir, model_name, dataset_name, f"{arm.file_stem}.json")
-
-
 def runArm(model_name: str, dataset_name: str, arm: ArmSpec, args):
     log = OneAgentLog() if args.log else NoLog()
 
-    model: Model = ModelFactory().buildModel(
-        ModelType(model_name),
-        ModelConfig.from_dict({"modelType": model_name, "temperature": arm.temperature}),
-    )
-    dataset: Dataset = DatasetFactory().buildDataset(DatasetType(dataset_name), arm.to_dataset_config(dataset_name, args.nums))
+    model = buildModel(model_name, arm.temperature)
+    dataset = buildArmDataset(dataset_name, arm, args.nums)
 
     if not model or not dataset:
         print(f"Error: Failed to build {model_name} or {dataset_name}.")
@@ -80,11 +51,7 @@ def runArm(model_name: str, dataset_name: str, arm: ArmSpec, args):
     })
     strategy = Generate(strategy_config, model, dataset, log, arm, store)
 
-    context = RunContext()
-    context.setStrategy(strategy)
-    failed = context.runExperiment()
-
-    status = "🎉 Complete" if not failed else f"⚠️ {len(failed)} API failures, rerun the same command to retry"
+    status = runStrategy(strategy)
     print(f"{status}: {model_name} | {dataset_name} | {arm.arm_id} -> {path} ({len(store.records)} records)")
 
 
@@ -102,13 +69,7 @@ def main():
     print(f"Arms: {[arm.arm_id for arm in arms]}")
     print(f"Total tasks: {len(tasks)} | Concurrent workers: {workers}\n")
 
-    with ThreadPoolExecutor(max_workers=workers) as executor:
-        futures = [executor.submit(runArm, m, d, arm, args) for m, d, arm in tasks]
-        for future in as_completed(futures):
-            try:
-                future.result()
-            except Exception as e:
-                print(f"❌ A job generated an exception: {e}")
+    runTasks(runArm, tasks, workers, args)
 
     print("\n✅ All generation tasks finished!")
 

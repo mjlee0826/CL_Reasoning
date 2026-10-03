@@ -26,7 +26,7 @@ Step 2  兩組分歧題目的 q 分布比較。全部在 cell 內做，再對 16
        支撐集不同（{0,⅓,⅔,1} vs {0,½,1}）→ 它的 KS 不納入判定（KS_COMPARABLE）。
 
 ④ 的 baseline-only 部分  每個配對 × 每個層的 d / c / m / recovery_blind（公式直接呼叫
-    Test.recoveryStats，與 0A-1 同一份程式），以及用「兩組合併後的層分布」為共同權重的 q-adjusted 值。
+    Analysis.splitHalf.recoveryStats，與 0A-1 同一份程式），以及用「兩組合併後的層分布」為共同權重的 q-adjusted 值。
     分層基底跑 STRATA_BASES = (all5, cross_model)；相異 q 值 ≤ NATURAL_LEVEL_MAX 用自然層，
     否則用 make_strata 的 tie-aware 分位分層（相同 q 值絕不拆開，實際層數可能少於 --strata）。
     ⚠️ recovery 需要辯論的最終答案，這裡不算，留給 0A-5 的 ④。
@@ -65,7 +65,7 @@ from scipy import stats
 
 from split_half_gap import extract_baseline
 from Strategy.StrategyType import LANGUAGE_STR_LIST
-from Test.Test import Test
+from Analysis.splitHalf import recoveryStats
 
 CHALLENGE_DIR = "result/challenge"
 RB_PAIRS_CSV = "recovery_blind_pairs.csv"
@@ -86,7 +86,7 @@ KS_COMPARABLE = ("all5", "loo", "cross_model")
 OVERLAP_DQ, OVERLAP_KS, OVERLAP_P = 0.02, 0.05, 0.05
 MIN_STRATUM = 30                      # |D(P,s)| 的下限，不足的層要記錄
 
-# Test.recoveryStats 中不依賴最終答案的量（recovery / skill 需要 challenge 內容，這裡不算）
+# recoveryStats 中不依賴最終答案的量（recovery / skill 需要 challenge 內容，這裡不算）
 BASELINE_KEYS = ("N", "D", "d", "c", "m", "n_A", "n_B", "w_A", "recovery_blind")
 ADJUSTABLE = ("c", "m", "recovery_blind")     # 條件在 D 上的量，才需要用 D 的層分布標準化
 
@@ -106,7 +106,7 @@ def list_pairs(model, dataset):
 
 
 def build_mono(cell, base_cell):
-    """回傳 (ids, mono)；mono 是 (5, N) 的 bool，列序 = LANGUAGE_STR_LIST（與 Test.pickMax 的 key 相同）。"""
+    """回傳 (ids, mono)；mono 是 (5, N) 的 bool，列序 = LANGUAGE_STR_LIST（與 Analysis.splitHalf.pickMax 的 key 相同）。"""
     if set(base_cell) != set(LANGUAGE_STR_LIST):
         raise ValueError(f"{cell}: baseline 語言不齊 {sorted(base_cell)}")
     ids = sorted(base_cell[LANGUAGE_STR_LIST[0]][0])
@@ -256,8 +256,8 @@ def perm_pvalue(obs, draws, two_sided):
 # ④ 的 baseline-only 部分：逐層的 d / c / m / recovery_blind
 # ----------------------------------------------------------------------------
 def baseline_stats(cA, cB, dis, mask):
-    """沿用 Test.recoveryStats 的公式（與 0A-1 同一份程式），只取不依賴最終答案的量。"""
-    s = Test.recoveryStats(cA, cB, np.zeros(len(cA), dtype=bool), dis, mask)
+    """沿用 recoveryStats 的公式（與 0A-1 同一份程式），只取不依賴最終答案的量。"""
+    s = recoveryStats(cA, cB, np.zeros(len(cA), dtype=bool), dis, mask)
     return {k: s[k] for k in BASELINE_KEYS}
 
 

@@ -27,7 +27,7 @@ from Strategy.Generate import Generate
 from Strategy.Aggregate import Aggregate
 from Strategy.Rewrite import Rewrite
 from Dataset.path import rewriteFileName
-from run_generate import defaultWorkers, interleaveByModel
+from Runner.tasks import defaultWorkers, interleaveByModel
 from Arm.ArmSpec import ArmSpec
 from Arm.PromptBuilder import PromptBuilder
 from Arm.GenerationRecord import GenerationRecord
@@ -39,7 +39,7 @@ from Aggregator.AggregatorFactory import AggregatorFactory
 from File.File import File
 from File.ResultStore import ResultStore
 from Log.NoLog import NoLog
-from Test.Test import Test
+from Analysis.splitHalf import recoveryStats
 
 # Hashes of the prompts produced by OnlyOneLanguage.getPrompt BEFORE it was refactored onto PromptBuilder
 GOLDEN_QUESTION = 'There is a Problem: \nWhat is 2+2?.\nAnd there are 5 choices\na ) 1 , b ) 2 , c ) 3 , d ) 4 , e ) 5\n'
@@ -234,7 +234,7 @@ def checkAggregators():
     for aggregator in (v2, blind):
         final = [aggregator.aggregate(AggregationItem(i, [candidate(A, x), candidate(B, y)], "Q")).final_answer
                  for i, (x, y) in enumerate(zip(answersA, answersB))]
-        results[aggregator.config.aggregatorType] = Test.recoveryStats(cA, cB, np.array([f == "a" for f in final]), dis, np.ones(n, dtype=bool))
+        results[aggregator.config.aggregatorType] = recoveryStats(cA, cB, np.array([f == "a" for f in final]), dis, np.ones(n, dtype=bool))
     check(f"3e. V2 recovery ≈ 0 ({results['v2']['recovery']:+.4f})", abs(results["v2"]["recovery"]) < 0.05)
     check("3f. Blind recovery == recovery_blind", abs(results["blind"]["recovery"] - results["blind"]["recovery_blind"]) < 1e-12)
 
@@ -243,7 +243,7 @@ def checkAggregators():
     D = ArmSpec.from_arm_id("F:en")
     final = [revise.aggregate(AggregationItem(i, [candidate(A, x), candidate(D, y)], "Q")).final_answer
              for i, (x, y) in enumerate(zip(answersA, answersB))]
-    stats = Test.recoveryStats(cA, cB, np.array([f == "a" for f in final]), dis, np.ones(n, dtype=bool))
+    stats = recoveryStats(cA, cB, np.array([f == "a" for f in final]), dis, np.ones(n, dtype=bool))
     ok = abs(stats["recovery"] + results["blind"]["recovery"]) < 1e-12
     try:
         revise.validateCandidates([A, B])

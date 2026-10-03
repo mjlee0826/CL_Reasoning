@@ -2,19 +2,9 @@ from argparse import ArgumentParser
 import itertools
 import json
 import os
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from Strategy.RunContext import RunContext
+from Model.ModelType import MODEL_STR_LIST
 
-from Model.Model import Model
-from Model.ModelConfig import ModelConfig
-from Model.ModelFactory import ModelFactory
-from Model.ModelType import MODEL_STR_LIST, ModelType
-
-from Dataset.Dataset import Dataset
-from Dataset.DatasetConfig import DatasetConfig
-from Dataset.DatasetFactory import DatasetFactory
-from Dataset.DatasetType import DatasetType
 from Dataset.path import rewriteFileName
 
 from Strategy.StrategyConfig import StrategyConfig
@@ -24,8 +14,9 @@ from File.ResultStore import ResultStore
 from Log.NoLog import NoLog
 from Log.OneAgentLog import OneAgentLog
 
-# Datasets that have the rewrite / prompt-variant pipeline wired (see Dataset/*.py).
-ACTIVE_DATASETS = ["mmlu", "mathqa", "truthfulqa", "commonsenseqa"]
+from Runner.paths import ACTIVE_DATASETS
+from Runner.tasks import runTasks
+from Runner.builders import buildModel, buildEnglishDataset, runStrategy
 
 
 def parseArgs():
@@ -65,20 +56,8 @@ def loadPrevious(dirpath: str, dataset_name: str, version: int) -> dict:
 def runRewrite(model_name, dataset_name, args):
     log = OneAgentLog() if args.log else NoLog()
 
-    model: Model = ModelFactory().buildModel(
-        ModelType(model_name),
-        ModelConfig.from_dict({"modelType": model_name, "temperature": args.temperature}),
-    )
-
-    dataset: Dataset = DatasetFactory().buildDataset(
-        DatasetType(dataset_name),
-        DatasetConfig.from_dict({
-            "datasetType": dataset_name,
-            "nums": args.nums,
-            "sample": 1,
-            "language": "english",   # rewrite operates on the original English text
-        }),
-    )
+    model = buildModel(model_name, args.temperature)
+    dataset = buildEnglishDataset(dataset_name, args.nums)   # rewrite operates on the original English text
 
     if not model or not dataset:
         print(f"Error: Failed to build {model_name} or {dataset_name}.")
@@ -106,15 +85,12 @@ def runRewrite(model_name, dataset_name, args):
     })
     strategy = Rewrite(strategy_config, model, dataset, log, store, previous)
 
-    context = RunContext()
-    context.setStrategy(strategy)
-    failed = context.runExperiment()
+    status = runStrategy(strategy)
 
     # A paraphrase identical to the question or to an earlier version adds no diversity
     records = store.records
     same_question = sum(r["Rewritten"].strip() == r["Question"].strip() for r in records.values())
     same_previous = sum(r["Rewritten"].strip() in [p.strip() for p in previous.get(i, [])] for i, r in records.items())
-    status = "🎉 Complete" if not failed else f"⚠️ {len(failed)} API failures, rerun the same command to retry"
     print(f"{status}: {dataset_name} v{args.version} -> {path} ({len(records)} records, "
           f"identical to the question: {same_question}, identical to an earlier version: {same_previous})")
 
@@ -131,13 +107,7 @@ def main():
     print(f"Datasets: {args.dataset}")
     print(f"Total tasks: {len(tasks)} | Concurrent workers: {workers}\n")
 
-    with ThreadPoolExecutor(max_workers=workers) as executor:
-        futures = [executor.submit(runRewrite, m, d, args) for m, d in tasks]
-        for future in as_completed(futures):
-            try:
-                future.result()
-            except Exception as e:
-                print(f"❌ A job generated an exception: {e}")
+    runTasks(runRewrite, tasks, workers, args)
 
     print("\n✅ All rewrite jobs finished!")
 

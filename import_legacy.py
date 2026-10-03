@@ -14,14 +14,12 @@ from argparse import ArgumentParser
 import glob
 import os
 import re
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from tqdm import tqdm
 
 from Model.ModelConfig import ModelConfig
 from Model.ModelFactory import ModelFactory
 from Model.ModelType import ModelType
-from Dataset.DatasetFactory import DatasetFactory
 from Dataset.DatasetType import DatasetType, get_dataset_map
 from Arm.ArmSpec import ArmSpec
 from Arm.AxisType import LANGUAGE_TO_LANG_CODE
@@ -33,8 +31,9 @@ from File.File import File
 from File.ResultStore import ResultStore
 from Strategy.Generate import SCHEMA_VERSION as GENERATION_SCHEMA
 from Strategy.Aggregate import SCHEMA_VERSION as AGGREGATION_SCHEMA
-from run_generate import ACTIVE_DATASETS, armPath
-from run_aggregate import aggregationPath
+from Runner.paths import ACTIVE_DATASETS, armPath, aggregationPath
+from Runner.tasks import runTasks
+from Runner.builders import buildArmDataset
 
 LEGACY_MODELS = ["deepseek", "gemini", "gpt4omini", "qwen"]
 LEGACY_THRESHOLD = 3
@@ -55,7 +54,7 @@ def importArm(model, source: File, arm: ArmSpec, out_path: str) -> ResultStore:
     dataset_type = dataset_meta["datasetType"]
 
     # Question text the current Dataset would produce; a mismatch means the prompt can no longer be rebuilt
-    dataset = DatasetFactory().buildDataset(DatasetType(dataset_type), arm.to_dataset_config(dataset_type, dataset_meta["nums"]))
+    dataset = buildArmDataset(dataset_type, arm, dataset_meta["nums"])
     current = {data["id"]: data["question"] for data in dataset.getData()}
     records = source.records_map
 
@@ -323,13 +322,7 @@ def main():
     tasks = [(m, d) for m in args.model for d in args.dataset]
     print(f"🚀 Importing {len(tasks)} cells with {args.workers} workers")
 
-    with ThreadPoolExecutor(max_workers=args.workers) as executor:
-        futures = [executor.submit(importCell, m, d, args) for m, d in tasks]
-        for future in as_completed(futures):
-            try:
-                future.result()
-            except Exception as e:
-                print(f"❌ A job generated an exception: {type(e).__name__}: {e}")
+    runTasks(importCell, tasks, args.workers, args)
 
     print("\n✅ Legacy import finished!")
 
