@@ -92,6 +92,9 @@ class Aggregate(Strategy):
 
         meta = self.store.metadata
         if meta:
+            if meta.get("prompt_version") != self.aggregator.PROMPT_VERSION:
+                raise ValueError(f"{self.store.path} was written with prompt version {meta.get('prompt_version')!r}, this run uses "
+                                 f"{self.aggregator.PROMPT_VERSION!r}; move the old file to result/archive/ before rerunning")
             found = (meta.get("Aggregator", {}).get("aggregatorType"), meta.get("candidate_arms"),
                      meta.get("Model", {}).get("modelType"), meta.get("Dataset", {}).get("nums"),
                      meta.get("Aggregator", {}).get("seed"))
@@ -152,6 +155,7 @@ class Aggregate(Strategy):
                 "Dataset": self.dataset.config.to_dict(),
                 "Strategy": self.config.to_dict(),
                 "Aggregator": self.aggregator.config.to_dict(),
+                "prompt_version": self.aggregator.PROMPT_VERSION,
                 "candidate_arms": [arm.arm_id for arm in self.arms],
                 "candidate_files": [file.file_path for file in self.armFiles],
                 "n_items": len(self.itemIds),
@@ -179,8 +183,3 @@ class Aggregate(Strategy):
 
         self.store.save()
         return failed
-
-    @staticmethod
-    def getTokenLens(model: Model, data):
-        """Aggregator output tokens are already stored on the record (generation cost lives in the arm files)."""
-        return data.get("tokens_out") or 0

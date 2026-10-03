@@ -135,8 +135,3 @@ class Rewrite(Strategy):
         if any(option not in text for option in options):
             return False
         return "your_letter_choice" not in question or "your_letter_choice" in rewritten
-
-    @staticmethod
-    def getTokenLens(model: Model, data):
-        """Calculate token usage for the rewritten text."""
-        return model.getTokenLens(data.get("Rewritten", ""))

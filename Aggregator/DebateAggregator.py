@@ -6,7 +6,8 @@ from Strategy.PromptAbstractFactory.PromptTwoResultCOTFactory import PromptTwoRe
 
 class DebateAggregator(Aggregator):
     """
-    Debate (IMSR). Same procedure and prompts as Strategy/Challenge.py, so new and legacy debates are comparable:
+    Debate (IMSR). Same procedure and prompts as the legacy Challenge strategy (deleted 2026-10; frozen as a golden digest in
+    check_framework check 5), so new and legacy debates are comparable:
       - each agent's history starts with [its question text, its generation output]
       - up to `threshold` rounds: both agents are shown the opponent's previous output (PromptDebateCOTFactory)
       - if they still disagree, a judge in agent A's language compares the two latest outputs
@@ -43,7 +44,7 @@ class DebateAggregator(Aggregator):
         answerRecord1, answerRecord2 = [answer1], [answer2]
         cur_turn = 0
 
-        # Both debate prompts use the opponent's previous output (Challenge.runChallenge)
+        # Both debate prompts use the opponent's previous output (as the legacy Challenge.runChallenge did)
         while not self.dataset.compareTwoAnswer(answer1, answer2) and cur_turn < self.config.threshold:
             record1.append({"role": "user", "content": self.getDebatePrompt(lang1, result2)})
             record2.append({"role": "user", "content": self.getDebatePrompt(lang2, result1)})

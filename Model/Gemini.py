@@ -63,13 +63,17 @@ class Gemini(Model):
     
     # The OpenAI-compatible endpoint rejects seed (400 'Unknown name "seed"'), also via extra_body.google
     SUPPORTS_SEED = False
+    # Sent by _complete; newer Gemini models override them (Model/Gemini31FlashLite.py)
+    MAX_TOKENS = 4096
+    REASONING_EFFORT = None   # None = no thinking parameter is sent
 
     def _complete(self, messages, temperature, seed):
         # Retries are handled by Model.generate(); _generate_with_retry stays for getRes / getListRes.
         # seed is not sent (see SUPPORTS_SEED); on S-axis arms it only identifies the replicate.
-        return self.client.chat.completions.create(
-            model=self.modelName, messages=messages, max_tokens=4096, temperature=temperature, stream=False
-        )
+        kwargs = dict(model=self.modelName, messages=messages, max_tokens=self.MAX_TOKENS, temperature=temperature, stream=False)
+        if self.REASONING_EFFORT is not None:
+            kwargs["reasoning_effort"] = self.REASONING_EFFORT
+        return self.client.chat.completions.create(**kwargs)
 
     def getTokenLens(self, text: str, max_retries=6):
         # 空字串不打 API，直接回 0

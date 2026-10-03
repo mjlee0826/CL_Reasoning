@@ -12,7 +12,8 @@ import json
 class PromptBuilder():
     """
     Builds the generation prompt of an arm by composing the existing prompt factories.
-    This is the single source of the single-agent prompt: OnlyOneLanguage.getPrompt delegates to buildText.
+    This is the single source of the single-agent prompt; it reproduces the legacy OnlyOneLanguage prompts
+    (golden hashes in check_framework check 1).
     """
     def __init__(self, arm: ArmSpec):
         self.arm = arm
@@ -40,7 +41,8 @@ class PromptBuilder():
     def buildReflectionText(language: str, question: str, previous_output: str) -> str:
         """
         Prompt of a derived (F-axis) arm: the base arm's output is part of the prompt.
-        Same composition as Strategy/SelfReflection.py, so legacy self-reflection prompts rebuild exactly.
+        Same composition as the legacy SelfReflection strategy (golden hashes in check_framework check 2e),
+        so imported self-reflection prompts rebuild exactly.
         """
         return PromptSelfReflectionCOTFactory().getPrompt(language, question, previous_output) \
             + PromptFormatFactory().getPrompt(language)

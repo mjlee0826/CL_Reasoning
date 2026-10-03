@@ -9,6 +9,9 @@ class PromptMultiResultCOTFactory(PromptAbstractFactory):
     manipulation) of a candidate, so the same prompt is used on every axis. The judge is always
     prompted in English; concatenate PromptFormatFactory so it outputs the option itself
     ({"answer": "..."}), which keeps off-menu answers observable.
+
+    No longer used by the Judge, which selects a candidate by number since 2026-10 (PromptJudgeChoiceFactory);
+    kept because the earlier judge files (prompt_version None) were written with it.
     """
     def __init__(self):
         super().__init__()

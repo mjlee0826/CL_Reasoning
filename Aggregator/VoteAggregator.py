@@ -9,7 +9,7 @@ class VoteAggregator(Aggregator):
 
     - Answers are grouped with dataset.compareTwoAnswer.
     - Ties among the top answers are broken with default_rng([seed, item_id]), so reruns are reproducible.
-    - Empty answers count as ordinary votes (same as voting_5language.py); otherwise Vote@2 would
+    - Empty answers count as ordinary votes (same as the legacy voting_5language.py, deleted 2026-10); otherwise Vote@2 would
       "rescue" every item where one side failed to parse and its recovery would no longer be 0.
     """
     def resolve(self, item: AggregationItem) -> Resolution:

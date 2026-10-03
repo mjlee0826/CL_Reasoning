@@ -22,7 +22,8 @@ def parseArgs():
     parser.add_argument("-m", "--model", choices=MODEL_STR_LIST, required=True, nargs="+", help="Choose your model(s)")
     parser.add_argument("-d", "--dataset", choices=ACTIVE_DATASETS, required=True, nargs="+", help="Choose your dataset(s)")
     parser.add_argument("--arms", required=True, nargs="+",
-                        help="arm_ids, e.g. L:en L:ja S:T0.7:seed3 R:short_cot P:expert W:rewrite1 W:rewrite2")
+                        help="arm_ids, e.g. L:en L:ja S:T0.7:seed3 R:short_cot P:expert W:rewrite1 W:rewrite2 F:en "
+                             "(an F arm needs its complete base arm L:{lang} in --outdir; run them in separate commands)")
     parser.add_argument("--nums", default=-1, type=int,
                         help="Data Nums to evaluate (-1 for all). Use the legacy value (2000) so item_ids line up with the anchor")
 
@@ -44,12 +45,15 @@ def runArm(model_name: str, dataset_name: str, arm: ArmSpec, args):
 
     path = armPath(args.outdir, model_name, dataset_name, arm)
     store = ResultStore(path)
+    # A derived arm (F:{lang}) reads its base arm's outputs from the same outdir; generate the base arm first
+    baseStore = ResultStore(armPath(args.outdir, model_name, dataset_name, ArmSpec.from_arm_id(arm.base_arm_id))) \
+        if arm.is_derived else None
     strategy_config = StrategyConfig.from_dict({
         "strategyType": "generate",
         "languages": [arm.language],
         "promptStyle": arm.promptStyle,
     })
-    strategy = Generate(strategy_config, model, dataset, log, arm, store)
+    strategy = Generate(strategy_config, model, dataset, log, arm, store, baseStore)
 
     status = runStrategy(strategy)
     print(f"{status}: {model_name} | {dataset_name} | {arm.arm_id} -> {path} ({len(store.records)} records)")

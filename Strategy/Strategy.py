@@ -1,4 +1,3 @@
-from Model.Model import Model
 from Dataset.Dataset import Dataset
 from Strategy.StrategyConfig import StrategyConfig
 from Strategy.StrategyType import STRATEGY_TO_DISPLAYNAME
@@ -55,8 +54,3 @@ class Strategy():
         Must be overridden by subclasses.
         """
         return []
-    
-    @staticmethod
-    def getTokenLens(model: Model, data):
-        """Calculates token length for logging and cost estimation."""
-        return 0

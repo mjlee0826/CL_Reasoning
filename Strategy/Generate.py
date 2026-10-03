@@ -14,6 +14,9 @@ import os
 from tqdm import tqdm
 
 SCHEMA_VERSION = "generation/v1"
+NO_BASE_OUTPUT_REASON = ("The base arm's output is empty for these items, so no reflection call was made (the legacy "
+                         "self-reflection run skipped them). Recorded as no answer (tokens 0); prompt_hash is the "
+                         "prompt that would have been sent.")
 
 class Generate(Strategy):
     """
@@ -24,14 +27,19 @@ class Generate(Strategy):
       so rerunning the same command fills them in.
     - Parse failures are kept as they are (parse_ok=False) and never re-sampled, so parse-failure rates
       stay comparable across arms.
+    - A derived arm (F:{lang}, self-reflection) puts its base arm's output into the prompt, so it needs the
+      complete base arm file (`baseStore`). Items whose base output is empty get no call and are written as
+      outputs without an answer (listed in metadata no_answer_fill).
     """
-    def __init__(self, config: StrategyConfig, model: Model, dataset: Dataset, log: Log, arm: ArmSpec, store: ResultStore):
+    def __init__(self, config: StrategyConfig, model: Model, dataset: Dataset, log: Log, arm: ArmSpec, store: ResultStore,
+                 baseStore: ResultStore | None = None):
         super().__init__(config)
         self.model: Model = model
         self.dataset: Dataset = dataset
         self.log: Log = log
         self.arm: ArmSpec = arm
         self.store: ResultStore = store
+        self.baseStore: ResultStore | None = baseStore
         self.promptBuilder = PromptBuilder(arm)
 
         self.config.displayName += f" ({arm.arm_id})"
@@ -47,10 +55,6 @@ class Generate(Strategy):
         return None
 
     def checkInputs(self):
-        if self.arm.is_derived:
-            raise ValueError(f"{self.arm.arm_id} is a derived arm: its prompt contains {self.arm.base_arm_id}'s output. "
-                             "Derived arms come from import_legacy.py --sr-dir, not from run_generate.py")
-
         dataset_config = self.dataset.config
         if dataset_config.sample != 1:
             raise ValueError("Generate requires sample == 1 (item_id must be unique); use S-axis seeds for repeats")
@@ -73,13 +77,37 @@ class Generate(Strategy):
                 raise ValueError(f"{path} does not cover {len(missing)} items (e.g. {missing[:5]}); finish run_rewrite.py first")
 
         # A resumed file must belong to the same run
-        meta = self.store.metadata
-        if meta:
-            expected = (self.arm.arm_id, self.model.config.modelType, dataset_config.datasetType, dataset_config.nums)
-            found = (meta.get("Arm", {}).get("arm_id"), meta.get("Model", {}).get("modelType"),
-                     meta.get("Dataset", {}).get("datasetType"), meta.get("Dataset", {}).get("nums"))
-            if expected != found:
-                raise ValueError(f"{self.store.path} holds a different run: {found} != {expected}")
+        if self.store.metadata:
+            self.checkRun(self.store, self.arm.arm_id)
+
+        if self.arm.is_derived:
+            self.checkBase()
+
+    def checkRun(self, store: ResultStore, arm_id: str):
+        """The file at `store` must hold arm_id of this model and dataset."""
+        dataset_config = self.dataset.config
+        meta = store.metadata
+        expected = (arm_id, self.model.config.modelType, dataset_config.datasetType, dataset_config.nums)
+        found = (meta.get("Arm", {}).get("arm_id"), meta.get("Model", {}).get("modelType"),
+                 meta.get("Dataset", {}).get("datasetType"), meta.get("Dataset", {}).get("nums"))
+        if expected != found:
+            raise ValueError(f"{store.path} holds a different run: {found} != {expected}")
+
+    def checkBase(self):
+        """A derived arm's prompt contains its base arm's output, so the base arm file must be complete first."""
+        base_id = self.arm.base_arm_id
+        if self.baseStore is None or not self.baseStore.records:
+            path = self.baseStore.path if self.baseStore else "(none given)"
+            raise FileNotFoundError(f"{self.arm.arm_id} needs the outputs of {base_id}: {path} not found; generate {base_id} first")
+        self.checkRun(self.baseStore, base_id)
+        missing = [data["id"] for data in self.dataset.getData() if not self.baseStore.has(data["id"])]
+        if missing:
+            raise ValueError(f"{self.baseStore.path} misses {len(missing)} items (e.g. {missing[:5]}); finish {base_id} first")
+
+    def messagesFor(self, data: dict) -> list[dict]:
+        """Messages of one item; a derived arm's prompt contains the base arm's output for that item."""
+        base_raw_text = self.baseStore.records[data["id"]]["raw_text"] if self.arm.is_derived else None
+        return self.promptBuilder.messages(data["question"], base_raw_text)
 
     def buildRecord(self, data: dict, messages: list[dict], response) -> GenerationRecord:
         parsed = self.parseAnswer(response.text)
@@ -117,6 +145,8 @@ class Generate(Strategy):
                 "schema_version": SCHEMA_VERSION,
                 "source": "generate",
             }
+            if self.arm.is_derived:
+                self.store.metadata["base_arm_file"] = self.baseStore.path
         # False when the provider cannot take a seed (Gemini): the record's seed is then only a replicate id
         self.store.metadata["seed_sent_to_provider"] = self.arm.seed is not None and self.model.SUPPORTS_SEED
 
@@ -126,7 +156,12 @@ class Generate(Strategy):
         failed = []
         pbar = tqdm(total=len(todo), desc=f"Generating {self.arm.arm_id}")
         for data in todo:
-            messages = self.promptBuilder.messages(data["question"])
+            messages = self.messagesFor(data)
+            if self.arm.is_derived and not self.baseStore.records[data["id"]]["raw_text"]:
+                self.addNoAnswer(data, messages)
+                pbar.update()
+                continue
+
             response = self.model.generate(messages, temperature=self.arm.temperature, seed=self.arm.seed)
             self.store.addUsage(response)
 
@@ -154,7 +189,27 @@ class Generate(Strategy):
         self.store.save()
         return failed
 
-    @staticmethod
-    def getTokenLens(model: Model, data):
-        """Output tokens are already stored on the record."""
-        return data.get("tokens_out") or 0
+    def addNoAnswer(self, data: dict, messages: list[dict]):
+        """Derived arm, empty base output: no call; written as an output without an answer (scored as wrong)."""
+        base = self.baseStore.records[data["id"]]
+        fill = self.store.metadata.setdefault("no_answer_fill", {"ids": [], "reason": NO_BASE_OUTPUT_REASON})
+        fill["ids"] = sorted(set(fill["ids"]) | {data["id"]})
+        self.store.add(GenerationRecord(
+            item_id=data["id"],
+            arm_id=self.arm.arm_id,
+            axis=self.arm.axis,
+            is_anchor=self.arm.is_anchor,
+            lang=self.arm.lang,
+            raw_text="",
+            parsed_answer="",
+            parse_ok=False,
+            tokens_in=0,
+            tokens_out=0,
+            model=self.model.config.modelType,
+            model_version_string=base["model_version_string"],
+            temperature=self.arm.temperature,
+            seed=self.arm.seed,
+            prompt_hash=PromptBuilder.promptHash(messages),
+            gold=str(data.get("answer", "")),
+        ).to_dict())
+        self.log.logMessage(f'Item {data["id"]}: empty {self.arm.base_arm_id} output, recorded as no answer')

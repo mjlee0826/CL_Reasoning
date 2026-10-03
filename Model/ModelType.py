@@ -8,6 +8,8 @@ class ModelType(str, Enum):
     GEMINI = 'gemini'
     GEMMA = 'gemma'
     QWEN = 'qwen'
+    DEEPSEEK41FLASH = 'deepseek4.1flash'
+    GEMINI31FLASHLITE = 'gemini3.1flashlite'
 
 # Define the user-facing display names for each model
 class ModelDisplayNameType(str, Enum):
@@ -17,6 +19,8 @@ class ModelDisplayNameType(str, Enum):
     GEMINI = 'Gemini'
     GEMMA = 'Gemma'
     QWEN = 'QWEN'
+    DEEPSEEK41FLASH = 'DeepSeek V4.1 Flash'
+    GEMINI31FLASHLITE = 'Gemini 3.1 Flash-Lite'
     
 # Define the default API model IDs required by the respective LLM providers
 class DefaultModelName(str, Enum):
@@ -26,6 +30,8 @@ class DefaultModelName(str, Enum):
     GEMINI = 'gemini-2.5-flash-lite'
     GEMMA = 'models/gemma-3-27b-it'
     QWEN = 'qwen3-8b'
+    DEEPSEEK41FLASH = 'deepseek-flash'  # DeepSeek's official alias, = DeepSeek-V4.1-Flash (see Model/DeepseekFlash.py)
+    GEMINI31FLASHLITE = 'gemini-3.1-flash-lite'
 
 # Mapping dictionary: ModelType -> ModelDisplayNameType
 # Dynamically matches members by their variable names (e.g., DEEPSEEK -> DEEPSEEK)
@@ -56,6 +62,8 @@ def get_model_map():
     from Model.Gemini import Gemini
     from Model.QWEN import QWEN
     from Model.Gemma import Gemma
+    from Model.DeepseekFlash import DeepseekFlash
+    from Model.Gemini31FlashLite import Gemini31FlashLite
     
     # Return the mapping dictionary
     return {
@@ -64,5 +72,7 @@ def get_model_map():
         ModelType.DEEPSEEK: Deepseek,
         ModelType.GEMINI: Gemini,
         ModelType.GEMMA: Gemma,
-        ModelType.QWEN: QWEN
+        ModelType.QWEN: QWEN,
+        ModelType.DEEPSEEK41FLASH: DeepseekFlash,
+        ModelType.GEMINI31FLASHLITE: Gemini31FlashLite,
     }

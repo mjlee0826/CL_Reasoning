@@ -68,6 +68,10 @@ class Aggregator():
       2. otherwise the concrete resolve() decides the final answer
       3. off_menu = the final answer matches none of the candidates' answers
     """
+    # Version of the aggregator's prompts. Aggregate stores it in the file metadata and refuses to resume a file
+    # written with another version (None = the prompts the aggregator was first run with).
+    PROMPT_VERSION: str | None = None
+
     def __init__(self, config: AggregatorConfig, model: Model, dataset: Dataset,
                  answerParser: Callable[[str], str] | None = None):
         self.config: AggregatorConfig = config

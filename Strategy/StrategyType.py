@@ -44,30 +44,3 @@ LANGUAGE_STR_LIST = [s.value for s in LanguageType]
 STRATEGY_TO_DISPLAYNAME = {
     member: StrategyDisplayNameType[member.name] for member in StrategyType
 }
-
-def get_strategy_map():
-    """
-    Returns a mapping of StrategyTypes to their respective concrete classes.
-    Uses lazy importing to prevent circular dependency issues during initialization.
-    """
-    from Strategy.Translate import Translate
-    from Strategy.Rewrite import Rewrite
-    from Strategy.OnlyOneLanguage import OnlyOneLanguage
-    from Strategy.SelfReflection import SelfReflection
-    from Strategy.Challenge import Challenge
-    from Strategy.RepairOnlyOneLanguage import RepairOnlyOneLanguage
-    from Strategy.RepairChallenge import RepairChallenge
-    from Strategy.Generate import Generate
-    from Strategy.Aggregate import Aggregate
-
-    return {
-        StrategyType.GENERATE: Generate,
-        StrategyType.AGGREGATE: Aggregate,
-        StrategyType.TRANSLATE: Translate,
-        StrategyType.REWRITE: Rewrite,
-        StrategyType.ONELANGUAGE: OnlyOneLanguage,
-        StrategyType.SELFREFLECTION: SelfReflection,
-        StrategyType.CHALLENGE: Challenge,
-        StrategyType.REPAIRONELANGUAGE: RepairOnlyOneLanguage,
-        StrategyType.REPAIRCHALLENGE: RepairChallenge
-    }

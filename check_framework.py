@@ -17,12 +17,12 @@ import openai
 
 from Model.Model import Model
 from Model.ModelConfig import ModelConfig
+from Model.ModelType import ModelType
+from Model.ModelFactory import ModelFactory
 from Dataset.Dataset import Dataset
 from Dataset.DatasetConfig import DatasetConfig
 from Strategy.Strategy import Strategy
 from Strategy.StrategyConfig import StrategyConfig
-from Strategy.OnlyOneLanguage import OnlyOneLanguage
-from Strategy.Challenge import Challenge
 from Strategy.Generate import Generate
 from Strategy.Aggregate import Aggregate
 from Strategy.Rewrite import Rewrite
@@ -36,12 +36,19 @@ from Strategy.PromptAbstractFactory.PromptFormatFactory import PromptFormatFacto
 from Aggregator.Aggregator import AggregationItem, Candidate
 from Aggregator.AggregatorConfig import AggregatorConfig
 from Aggregator.AggregatorFactory import AggregatorFactory
+from Aggregator.JudgeAggregator import JudgeAggregator
 from File.File import File
 from File.ResultStore import ResultStore
 from Log.NoLog import NoLog
 from Analysis.splitHalf import recoveryStats
+from Strategy.StrategyType import StrategyType
+from Test.TestTokenNums import TOKEN_COUNTERS
+from Analysis.experimentPlan import ARMS_TO_PAIR
+from Analysis.alignment import CellData, alignPair
+from Analysis.metrics import computeRow, subsetMask
+from Analysis.itemExport import pathRows, aggregationRows
 
-# Hashes of the prompts produced by OnlyOneLanguage.getPrompt BEFORE it was refactored onto PromptBuilder
+# Hashes of the prompts produced by the legacy OnlyOneLanguage.getPrompt (deleted 2026-10) BEFORE it was refactored onto PromptBuilder
 GOLDEN_QUESTION = 'There is a Problem: \nWhat is 2+2?.\nAnd there are 5 choices\na ) 1 , b ) 2 , c ) 3 , d ) 4 , e ) 5\n'
 GOLDEN_PROMPT_HASHES = {
     "cot|english": "160f1ba2026c97bb", "cot|chinese": "a4ea73cd7c234d14", "cot|japanese": "2df8509d86f0c774",
@@ -51,6 +58,13 @@ GOLDEN_PROMPT_HASHES = {
     "direct|english": "8d3f8621bccd6f51", "direct|chinese": "8ad765b552510cda", "direct|japanese": "7b56d270722222bb",
     "direct|russian": "333cff9f9829cf8c", "direct|spanish": "10568bf1989bc3d6",
 }
+# Hashes of the legacy SelfReflection.getPrompt prompts (Strategy/SelfReflection.py, deleted 2026-10) for GOLDEN_QUESTION
+GOLDEN_REFLECTION_PREVIOUS = 'Step 1: 2+2=4.\n{"answer":"d"}'
+GOLDEN_REFLECTION_HASHES = {"english": "39cc5dde24fa3346", "chinese": "c69b28888f158191", "japanese": "db7ea6cde0169086",
+                            "russian": "f1a45ecd8ad135dd", "spanish": "314bc8189b6dcbb9"}
+# Digest of the legacy Challenge strategy (Strategy/Challenge.py, deleted 2026-10) on the 300 scripted items of check 5:
+# per item [Record1[2:], Record2[2:], AnswerRecord1, AnswerRecord2, judge output, rounds, final answer]
+GOLDEN_DEBATE_DIGEST = "48a38e8f2d4b9d3b"
 RECORD_FIELDS = {"item_id", "arm_id", "axis", "is_anchor", "lang", "raw_text", "parsed_answer", "parse_ok", "tokens_in",
                  "tokens_out", "model", "model_version_string", "temperature", "seed", "prompt_hash", "gold"}
 
@@ -64,7 +78,10 @@ def check(name: str, condition: bool):
 
 
 class FakeModel(Model):
-    """Replies depend only on (messages, temperature, seed); markers in the last message inject failures."""
+    """
+    Replies depend only on (messages, temperature, seed); markers in the last message inject failures.
+    A judge prompt (it asks for {"choice": ...}) gets a candidate number instead of an option.
+    """
     def __init__(self):
         super().__init__(ModelConfig(modelType="gpt4omini"))
         self.calls = 0
@@ -76,6 +93,8 @@ class FakeModel(Model):
         h = int(hashlib.sha256(key.encode("utf-8")).hexdigest(), 16)
         if any(marker in messages[-1]["content"] for marker in self.noJsonOn):
             return f"no json {h % 997}"
+        if '{"choice":' in messages[-1]["content"]:
+            return f'reasoning {h % 997}\n{{"choice":"{1 + h % 2}"}}'
         return f'reasoning {h % 997}\n{{"answer":"{"abc"[h % 3]}"}}'
 
     def _complete(self, messages, temperature, seed):
@@ -95,6 +114,16 @@ class FakeModel(Model):
 
     def getTokenLens(self, text):
         return len(text.split())
+
+
+class FixedReplyModel(FakeModel):
+    """Always replies with the same text."""
+    def __init__(self, text: str):
+        super().__init__()
+        self.text = text
+
+    def reply(self, messages, temperature, seed):
+        return self.text
 
 
 def makeDataset(n: int) -> Dataset:
@@ -120,11 +149,8 @@ def checkPrompts():
     for key, expected in GOLDEN_PROMPT_HASHES.items():
         style, lang = key.split("|")
         built = PromptBuilder.buildText(lang, GOLDEN_QUESTION, style)
-        old = OnlyOneLanguage(StrategyConfig(strategyType="onelanguage", languages=[lang], promptStyle=style),
-                              None, None, None).getPrompt(GOLDEN_QUESTION)
         ok &= PromptBuilder.promptHash([{"role": "user", "content": built}]) == expected
-        ok &= PromptBuilder.promptHash([{"role": "user", "content": old}]) == expected
-    check("1. PromptBuilder and OnlyOneLanguage reproduce the pre-refactor prompts (3 styles × 5 languages)", ok)
+    check("1. PromptBuilder reproduces the legacy OnlyOneLanguage prompts (3 styles × 5 languages)", ok)
 
 
 def checkArmIds():
@@ -159,7 +185,7 @@ def checkArmIds():
 
 
 def checkRefinePrompt():
-    """A derived arm's prompt must match Strategy/SelfReflection.py so legacy SR prompts rebuild exactly."""
+    """A derived arm's prompt must match the legacy SelfReflection prompts so imported SR prompts rebuild exactly."""
     arm = ArmSpec.from_arm_id("F:zh")
     question, previous = "問題：選一個字母", "先前輸出 {\"answer\":\"a\"}"
     expected = PromptSelfReflectionCOTFactory().getPrompt("chinese", question, previous) + PromptFormatFactory().getPrompt("chinese")
@@ -169,8 +195,10 @@ def checkRefinePrompt():
         PromptBuilder(arm).text(question)
     except ValueError:
         raised = True
-    check("2e. derived prompt == SelfReflection prompt, and fails loudly without the base output",
-          built == expected and raised)
+    golden = all(PromptBuilder.promptHash([{"role": "user", "content": PromptBuilder.buildReflectionText(
+        lang, GOLDEN_QUESTION, GOLDEN_REFLECTION_PREVIOUS)}]) == expected_hash for lang, expected_hash in GOLDEN_REFLECTION_HASHES.items())
+    check("2e. derived prompt == legacy SelfReflection prompt (5 languages), and fails loudly without the base output",
+          built == expected and raised and golden)
 
     cot = PromptBuilder.buildText("english", question, "cot")
     expert = PromptBuilder(ArmSpec.from_arm_id("P:expert")).text(question)
@@ -258,7 +286,22 @@ def checkAggregators():
     check("3g. Judge shows candidates in presentation_order with neutral labels",
           "Answer 1\n```\nRAW-OTHER" in prompt and "Answer 2\n```\nRAW-ANCHOR" in prompt and "english" not in prompt.lower().split("```")[0]
           and record.presentation_order == [B.arm_id, A.arm_id])
-    check("3h. off_menu when the judge picks neither candidate", record.off_menu and record.final_answer in "abc" and record.tokens_in > 0)
+    check("3h. the judge prompt asks for a candidate number, not an option",
+          '{"choice":"answer number"}' in prompt and '{"answer"' not in prompt and "an integer from 1 to 2" in prompt)
+
+    # The choice refers to the presentation order: order [B, A] -> choice 1 = B's answer, choice 2 = A's
+    outcomes = {}
+    for name, reply in [("1", 'r\n{"choice":"1"}'), ("2", 'r\n{"choice": "Answer 2"}'), ("letter", 'r\n{"answer":"d"}'),
+                        ("range", 'r\n{"choice":"3"}'), ("last", '{"choice":"2"} then\n{"choice":"1"}')]:
+        outcomes[name] = buildAggregator("judge", FixedReplyModel(reply), dataset).aggregate(item)
+    check("3j. the final answer is the chosen candidate's answer (in presentation order); a missing / out-of-range "
+          "choice gives no answer and is the only off-menu case",
+          outcomes["1"].final_answer == "e" and outcomes["1"].trace["chosen_arm"] == B.arm_id and not outcomes["1"].off_menu
+          and outcomes["2"].final_answer == "d" and outcomes["2"].trace["choice"] == 2
+          and outcomes["letter"].final_answer == "" and outcomes["letter"].off_menu and outcomes["letter"].trace["choice"] is None
+          and outcomes["range"].final_answer == "" and outcomes["range"].off_menu
+          and outcomes["last"].final_answer == "e"
+          and JudgeAggregator.parseChoice('{"choice":"2"}', 5) == 2 and JudgeAggregator.parseChoice('{"choice":"0"}', 5) is None)
 
 
 def checkBalancing():
@@ -276,30 +319,21 @@ def checkBalancing():
 def checkDebateEquivalence():
     model, dataset = FakeModel(), makeDataset(10)
     debate = buildAggregator("debate", model, dataset)
-    challenge = Challenge.__new__(Challenge)
-    challenge.config = StrategyConfig(strategyType="challenge")
-    challenge.model, challenge.dataset, challenge.threshold = model, dataset, 3
-    challenge.lang1, challenge.lang2 = "english", "japanese"
     arms = (ArmSpec.from_arm_id("L:en"), ArmSpec.from_arm_id("L:ja"))
 
-    same, rounds, judged = 0, set(), 0
+    rows, rounds, judged = [], set(), 0
     for i in range(300):
         q1, q2 = f"Q{i} en", f"Q{i} ja"
         r1, r2 = f'init1 {i} {{"answer":"a"}}', f'init2 {i} {{"answer":"b"}}'
-        rec1, rec2, res1, res2, ans1, ans2, ar1, ar2, turn = challenge.runChallenge(q1, q2, r1, r2, "a", "b")
-        judge_output, final = "", ans1
-        if not dataset.compareTwoAnswer(ans1, ans2):
-            judge_output = model.getRes(challenge.getJudgePrompt("english", q1, res1, res2))
-            final = challenge.parseAnswer(judge_output)
-
         record = debate.aggregate(AggregationItem(i, [candidate(arms[0], "a", r1, q1), candidate(arms[1], "b", r2, q2)], "Q"))
         trace = record.trace
-        same += (trace["Record1"] == rec1[2:] and trace["Record2"] == rec2[2:] and trace["AnswerRecord1"] == ar1
-                 and trace["AnswerRecord2"] == ar2 and trace["Result3"] == judge_output
-                 and record.n_rounds == turn and record.final_answer == final)
-        rounds.add(turn)
-        judged += bool(judge_output)
-    check(f"5. DebateAggregator == Challenge on 300 scripted items (rounds {sorted(rounds)}, judge called {judged})", same == 300)
+        rows.append([trace["Record1"], trace["Record2"], trace["AnswerRecord1"], trace["AnswerRecord2"], trace["Result3"],
+                     record.n_rounds, record.final_answer])
+        rounds.add(record.n_rounds)
+        judged += bool(trace["Result3"])
+    digest = hashlib.sha256(json.dumps(rows, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()[:16]
+    check(f"5. DebateAggregator == legacy Challenge on 300 scripted items (rounds {sorted(rounds)}, judge called {judged})",
+          digest == GOLDEN_DEBATE_DIGEST)
 
 
 def makeDerivedArmFile(path, base_file, dataset, arm, model):
@@ -384,6 +418,22 @@ def checkGenerateAndAggregate(tmp: str):
     aggregate("judge")
     check("7c. resumed aggregation makes no new calls", model.calls == calls)
 
+    # A judge file written with the earlier prompt (no prompt_version) must not be resumed
+    old_path = os.path.join(tmp, "aggregations", "judge_old_prompt.json")
+    old = ResultStore(os.path.join(tmp, "aggregations", "judge.json"))
+    old.metadata.pop("prompt_version")
+    old.path = old_path
+    old.save()
+    try:
+        Aggregate(StrategyConfig(strategyType="aggregate", languages=["english", "english"]), model, dataset, NoLog(),
+                  buildAggregator("judge", model, dataset, None), [anchor, sampled], arm_files, [dataset, dataset],
+                  ResultStore(old_path))
+        raised = False
+    except ValueError:
+        raised = True
+    check("7e. judge files record their prompt_version; a file written with another version is not resumed",
+          judge_file.metadata["prompt_version"] == "choice-v1" and raised)
+
     tampered = File(paths["S:T0.7:seed1"])
     tampered.records_map[0]["prompt_hash"] = "0" * 16
     try:
@@ -397,12 +447,38 @@ def checkGenerateAndAggregate(tmp: str):
     derived_path = os.path.join(tmp, "arms", "F_en.json")
     makeDerivedArmFile(derived_path, File(paths["L:en"]), dataset, derived, model)
 
+    def generateDerived(name, baseStore):
+        return Generate(StrategyConfig(strategyType="generate", languages=[derived.language]), model, dataset, NoLog(),
+                        derived, ResultStore(os.path.join(tmp, "arms", name)), baseStore)
+
+    refused = []
+    for baseStore, error in ((None, FileNotFoundError), (ResultStore(os.path.join(tmp, "arms", "missing.json")), FileNotFoundError)):
+        try:
+            generateDerived("F_refused.json", baseStore)
+            refused.append(False)
+        except error:
+            refused.append(True)
+    partial = ResultStore(paths["L:en"])
+    partial.records.pop(29)
     try:
-        Generate(StrategyConfig(strategyType="generate", languages=[derived.language]), model, dataset, NoLog(),
-                 derived, ResultStore(os.path.join(tmp, "arms", "F_en_generated.json")))
-        check("8a. run_generate refuses derived arms", False)
+        generateDerived("F_refused.json", partial)
+        refused.append(False)
     except ValueError:
-        check("8a. run_generate refuses derived arms", True)
+        refused.append(True)
+
+    base = ResultStore(paths["L:en"])
+    base.records[4] = {**base.records[4], "raw_text": ""}   # in memory only: an item whose base output is empty
+    calls = model.calls
+    failed = generateDerived("F_generated.json", base).getRes()
+    generated = File(os.path.join(tmp, "arms", "F_generated.json"))
+    questions = {data["id"]: data["question"] for data in dataset.getData()}
+    prompts_ok = all(record["prompt_hash"] == PromptBuilder.promptHash(PromptBuilder(derived).messages(questions[i], base.records[i]["raw_text"]))
+                     for i, record in generated.records_map.items())
+    empty = generated.getRecordById(4)
+    check("8a. Generate builds an F arm from its complete base arm; an empty base output is a no-answer record without a call",
+          all(refused) and failed == [] and len(generated.records_map) == 30 and model.calls - calls == 29 and prompts_ok
+          and not empty["parse_ok"] and empty["tokens_out"] == 0 and generated.metadata["no_answer_fill"]["ids"] == [4]
+          and generated.metadata["base_arm_file"] == paths["L:en"])
 
     def aggregateArms(aggregator_id, arms, files, name):
         out = os.path.join(tmp, "aggregations", f"{name}.json")
@@ -537,6 +613,125 @@ def checkRefusals(tmp: str):
           record.final_answer == "" and record.trace.get("refused_calls") == 1)
 
 
+def writeResultFile(path: str, metadata: dict, records: list[dict]):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump([metadata, *records], f)
+
+
+def checkAnalysis(tmp: str):
+    """Analysis package on synthetic files: alignment, the blind row, the both_answered subset, unplanned files."""
+    armdir, aggdir = os.path.join(tmp, "analysis", "arms"), os.path.join(tmp, "analysis", "aggregations")
+    rng = np.random.default_rng(2)
+    n = 400
+    answers = {arm_id: [str(rng.choice(["a", "a", "b", "c", ""])) for _ in range(n)] for arm_id in ("L:en", "L:zh")}
+    for arm_id, arm_answers in answers.items():
+        writeResultFile(os.path.join(armdir, "m", "mathqa", f"{ArmSpec.from_arm_id(arm_id).file_stem}.json"), {},
+                        [{"item_id": i, "parsed_answer": a, "parse_ok": a != "", "gold": "a", "tokens_out": 10} for i, a in enumerate(arm_answers)])
+    finals = [x if x == y else str(rng.choice([x, y, "c", ""])) for x, y in zip(answers["L:en"], answers["L:zh"])]
+    judge = [{"item_id": i, "final_answer": f, "off_menu": f not in (x, y), "tokens_out": 0 if x == y else 5}
+             for i, (f, x, y) in enumerate(zip(finals, answers["L:en"], answers["L:zh"]))]
+    cellDir = os.path.join(aggdir, "m", "mathqa")
+    writeResultFile(os.path.join(cellDir, "judge__L_en__L_zh.json"), {"candidate_arms": ["L:en", "L:zh"]}, judge)
+    writeResultFile(os.path.join(cellDir, "vote3__L_en__L_zh__L_ja.json"), {}, [])
+
+    cell = CellData(armdir, aggdir, "m", "mathqa")
+    pair = ARMS_TO_PAIR[frozenset(["L:en", "L:zh"])]
+    arrays = alignPair(cell, pair, cell.aggregationFiles[(pair, "judge")])
+    cA, cB = np.array([a == "a" for a in answers["L:en"]]), np.array([a == "a" for a in answers["L:zh"]])
+    dis = np.array([x != y for x, y in zip(answers["L:en"], answers["L:zh"])])
+    expected = recoveryStats(cA, cB, np.array([f == "a" for f in finals]), dis, np.ones(n, dtype=bool))
+    judgeRow = computeRow(arrays, pair, "judge")
+    blindRow = computeRow(arrays, pair, "blind")
+    check("12a. analysis rows: judge recovery matches recoveryStats; Blind row = stronger side, recovery_H2 = recovery_blind_H2",
+          judgeRow["recovery"] == expected["recovery"] and judgeRow["tok_out_agg"] == 5 * dis.mean()
+          and blindRow["acc_final"] == max(cA.mean(), cB.mean()) and blindRow["tok_out_agg"] == 0
+          and abs(blindRow["recovery_H2"] - blindRow["recovery_blind_H2"]) < 1e-12)
+
+    both = subsetMask(arrays, "both_answered")
+    bothRow = computeRow(arrays.subset(both), pair, "judge")
+    noAnswer = np.mean([f == "" for f, d, b in zip(finals, dis, both) if d and b])
+    check(f"12b. both_answered keeps {bothRow['n']}/{n} items, counts the judge's no-answers as wrong ({bothRow['agg_no_answer']:.3f})",
+          bothRow["n"] == sum(x != "" and y != "" for x, y in zip(answers["L:en"], answers["L:zh"]))
+          and bothRow["parse_fail_a"] == 0 and bothRow["agg_no_answer"] == noAnswer)
+
+    paths = pathRows(cell)
+    aggregations = aggregationRows(cell, pair, "judge", cell.aggregationFiles[(pair, "judge")])
+    en = [r for r in paths if r["path"] == "EN"]
+    check(f"12d. per-item export: {len(paths)} path rows, {len(aggregations)} judge rows, same correctness as the cell arrays",
+          len(paths) == 2 * n and {r["path"] for r in paths} == {"EN", "ZH"}
+          and [r["correct"] for r in en] == list(arrays.correct_a) and [r["answered"] for r in en] == list(arrays.answered_a)
+          and [r["correct"] for r in aggregations] == list(arrays.final_correct)
+          and [r["dis"] for r in aggregations] == list(arrays.dis)
+          and [r["answered"] for r in aggregations] == list(arrays.final_answered))
+
+    agree = int(np.flatnonzero(~dis)[0])
+    judge[agree]["final_answer"] = "c" if answers["L:en"][agree] != "c" else "b"
+    writeResultFile(os.path.join(cellDir, "judge__L_en__L_zh.json"), {"candidate_arms": ["L:en", "L:zh"]}, judge)
+    try:
+        alignPair(cell, pair, cell.aggregationFiles[(pair, "judge")])
+        raised = False
+    except ValueError:
+        raised = True
+    check("12c. unplanned aggregation files are reported; a changed answer on an agreement item fails loudly",
+          cell.unusedFiles == [os.path.join(cellDir, "vote3__L_en__L_zh__L_ja.json")] and raised)
+
+
+class RecordingClient:
+    """Stands in for an OpenAI client: records the request kwargs and returns a fixed response."""
+    def __init__(self, model_id: str):
+        self.kwargs = None
+        self.chat = SimpleNamespace(completions=SimpleNamespace(create=self.create))
+        self.model_id = model_id
+
+    def create(self, **kwargs):
+        self.kwargs = kwargs
+        return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content='{"answer":"a"}'), finish_reason="stop")],
+                               model=self.model_id, usage=SimpleNamespace(prompt_tokens=1, completion_tokens=1))
+
+
+def checkModelRequests():
+    """The request each model sends (no API call: the client is replaced)."""
+    for key in ("GEMINI_API_KEY", "DEEPSEEK_API_KEY"):
+        os.environ.setdefault(key, "offline-check")
+    sent = {}
+    for model_type in (ModelType.GEMINI, ModelType.GEMINI31FLASHLITE, ModelType.DEEPSEEK41FLASH):
+        model = ModelFactory().buildModel(model_type, ModelConfig(modelType=model_type.value))
+        model.client = RecordingClient(model.modelName)
+        response = model.generate([{"role": "user", "content": "q"}], temperature=0.0, seed=1)
+        sent[model_type] = (model, model.client.kwargs, response)
+
+    gemini, kwargs25, _ = sent[ModelType.GEMINI]
+    lite, kwargs31, _ = sent[ModelType.GEMINI31FLASHLITE]
+    flash, kwargsDs, responseDs = sent[ModelType.DEEPSEEK41FLASH]
+    check("14. new models: Gemini 3.1 Flash-Lite = minimal thinking, 8192 tokens, no seed; DeepSeek V4.1 Flash = thinking "
+          "disabled, 8192 tokens, seed; Gemini 2.5 request unchanged",
+          kwargs31["model"] == "gemini-3.1-flash-lite" and kwargs31["reasoning_effort"] == "minimal"
+          and kwargs31["max_tokens"] == 8192 and "seed" not in kwargs31 and not lite.SUPPORTS_SEED
+          and kwargsDs["model"] == "deepseek-flash" and kwargsDs["extra_body"] == {"thinking": {"type": "disabled"}}
+          and kwargsDs["max_tokens"] == 8192 and kwargsDs["seed"] == 1 and kwargsDs["temperature"] == 0.0
+          and responseDs.model_version == "deepseek-flash@DeepSeek-V4.1-Flash"
+          and kwargs25 == dict(model="gemini-2.5-flash-lite", messages=[{"role": "user", "content": "q"}], max_tokens=4096,
+                               temperature=0.0, stream=False))
+
+
+def checkTokenCounts():
+    """TestTokenNums keeps the legacy strategies' output-token definitions (FakeModel counts words)."""
+    model = FakeModel()
+    cases = {
+        "onelanguage": ({"Question": "q q", "Result": "a b c"}, 3),
+        "challenge": ({"Record1": [{"role": "user", "content": "x x"}, {"role": "assistant", "content": "a b"}],
+                       "Record2": [{"role": "assistant", "content": "c"}], "Result3": "d e f"}, 6),
+        "selfreflection": ({"Response": "a b", "Reflection": "p p p p", "Result": "c d e"}, 5),
+        "translate": ({"Translated": "a b"}, 2),
+        "rewrite": ({"Rewritten": "a b c d"}, 4),
+        "generate": ({"raw_text": "x y", "tokens_out": 7}, 7),
+        "aggregate": ({"tokens_out": 0}, 0),
+    }
+    check("13. TestTokenNums counts only generated text, per legacy strategy definition",
+          all(TOKEN_COUNTERS[StrategyType(name)](model, record) == expected for name, (record, expected) in cases.items()))
+
+
 def main():
     checkPrompts()
     checkArmIds()
@@ -545,10 +740,13 @@ def main():
     checkAggregators()
     checkBalancing()
     checkDebateEquivalence()
+    checkTokenCounts()
+    checkModelRequests()
     with tempfile.TemporaryDirectory() as tmp:
         checkGenerateAndAggregate(tmp)
         checkRewrite(tmp)
         checkRefusals(tmp)
+        checkAnalysis(tmp)
 
     print(f"\n{'All checks passed' if not failures else f'{len(failures)} check(s) failed'}")
     sys.exit(1 if failures else 0)
