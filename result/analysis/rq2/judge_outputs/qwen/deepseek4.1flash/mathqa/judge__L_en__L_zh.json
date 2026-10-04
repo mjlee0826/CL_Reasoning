@@ -1,0 +1,2143 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/deepseek4.1flash/mathqa/L_en.json",
+            "result/arms/deepseek4.1flash/mathqa/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 129,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "deepseek4.1flash",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/deepseek4.1flash/mathqa/judge__L_en__L_zh.json",
+        "reference_sha256": "50da6ff8f36fad65bd36aa3602b50dbb5279de92fb00dc5d7ae3d1737669ec57",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 74,
+        "api_usage": {
+            "calls": 74,
+            "calls_without_usage": 0,
+            "prompt_tokens": 123012,
+            "completion_tokens": 9342,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 74
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:16:47+00:00",
+            "last": "2026-10-04T10:23:02+00:00"
+        }
+    },
+    {
+        "item_id": 20,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1490,
+        "tokens_out": 136,
+        "trace": {
+            "judge_output": "Reasoning process\nThe key difference lies in interpreting \"price to the retailer.\" If it refers to the cost price, then the selling price is $440 (cost + 10% profit), and after a 5% discount, the new selling price becomes $418, leading to a profit of $18 per item. To maintain the same total profit of $4000, the retailer needs to sell $4000 / $18 ≈ 222.22 items, which rounds up to 223. This matches choice d) 223.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:16:47+00:00",
+            "usage_in": 1502,
+            "usage_out": 136
+        }
+    },
+    {
+        "item_id": 21,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1531,
+        "tokens_out": 182,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the total age of 15 students is 210 and then calculates the age of the 15th student as -4, which is impossible. It then speculates about possible typos in the question without clearly identifying the correct logical path. Answer 2 correctly identifies that the sum of the ages of the first two groups exceeds the total sum of all 15 students, leading to an impossible negative age for the 15th student. However, it then makes a speculative assumption that the average age of the first group was meant to be different (12 instead of 14), which is not supported by the given information. Neither answer provides a definitive solution based on the provided data, but Answer 2's reasoning is more logically structured and closer to identifying the contradiction in the question.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:16:56+00:00",
+            "usage_in": 1543,
+            "usage_out": 182
+        }
+    },
+    {
+        "item_id": 45,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 765,
+        "tokens_out": 97,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly calculates the expression as a - n + k = 6 - (-5) + (-13) = -2, which is not among the choices. However, the correct interpretation of the question should be a - k + n, which results in 6 - (-13) + (-5) = 14, matching choice d. Answer 2 correctly identifies this and selects d.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:17:00+00:00",
+            "usage_in": 777,
+            "usage_out": 97
+        }
+    },
+    {
+        "item_id": 66,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 580,
+        "tokens_out": 124,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly combines the terms on the left side of the equation. It states that \"6x + 3x = 9x\" and leaves \"-27\" on the left, which is correct, but then it incorrectly handles the right side by stating \"4 + 9 = 13\" without accounting for the \"-x\" term. This leads to an incorrect setup of the equation. Answer 2 correctly combines all terms on both sides and solves the equation step-by-step, arriving at the correct solution of x = 4.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:17:10+00:00",
+            "usage_in": 592,
+            "usage_out": 124
+        }
+    },
+    {
+        "item_id": 146,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 2695,
+        "tokens_out": 195,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 assumes that the time to meet after the train passes the first person is 100 minutes, and then subtracts the 10 minutes between the two crossings to get 90 minutes. However, this reasoning incorrectly assumes that the meeting occurs after the train has passed the second person, which is not explicitly stated in the question. Additionally, the calculation of the distance D and the relative speed between the two men is flawed as it does not properly account for the direction of movement and the time gap.\n\nAnswer 2 correctly identifies that the time for the two men to meet is 100 minutes from the moment the train passes the first man, and this conclusion is based on a proper derivation of the relationship between their speeds and the distance they cover. It also correctly notes that none of the provided answer choices match this result, making \"e) none of these\" the correct choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:17:14+00:00",
+            "usage_in": 2707,
+            "usage_out": 195
+        }
+    },
+    {
+        "item_id": 174,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 924,
+        "tokens_out": 191,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the upper bound of the range might have been 30 instead of 38, which is not supported by the question. The correct prime numbers between 0 and 38 are clearly listed as 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, and 37, which sum to 197. Dividing this by 3 gives approximately 65.666..., which is not among the choices. Answer 2 correctly identifies the sum of the primes and the result of dividing by 3 but mistakenly concludes that the closest answer is 61, which is not accurate. Neither answer fully aligns with the provided choices, but Answer 2 is closer to the actual calculation.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:17:25+00:00",
+            "usage_in": 936,
+            "usage_out": 191
+        }
+    },
+    {
+        "item_id": 202,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 639,
+        "tokens_out": 105,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 assumes that the correct answer is 85 based on it being the median of the choices, but this reasoning is flawed because the question does not provide any specific data or context about the two sets of numbers. Without knowing the actual values or quantities in each set, it is impossible to determine which average would be closer to which set. Therefore, Answer 2 is more accurate as it correctly identifies the lack of necessary information to make a valid choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:17:29+00:00",
+            "usage_in": 651,
+            "usage_out": 105
+        }
+    },
+    {
+        "item_id": 242,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1015,
+        "tokens_out": 127,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that if there are 10 white tiles, they can be placed in such a way that every row has at least one black tile. However, it fails to consider that placing 10 white tiles in different rows (as required by the constraint) would mean each row has exactly 1 white tile and 9 black tiles, which satisfies the condition of having at least one black tile per row. This results in 90 black tiles and 10 white tiles, leading to a difference of 80, not 60.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:17:33+00:00",
+            "usage_in": 1027,
+            "usage_out": 127
+        }
+    },
+    {
+        "item_id": 283,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 3735,
+        "tokens_out": 98,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the total work done by Jane and Ashley, considering their individual rates and the extra days Jane worked. The timeline is accurately calculated as 2 days together, 8 days with Ashley alone, and 4 days with Jane alone, totaling 14 days. Answer 2 contains multiple incorrect assumptions and misinterpretations of the problem, leading to flawed calculations and an answer not supported by the given data.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:17:36+00:00",
+            "usage_in": 3747,
+            "usage_out": 98
+        }
+    },
+    {
+        "item_id": 289,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1746,
+        "tokens_out": 180,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly counts the two-digit numbers with digit sum 7 as 6 numbers, but it should be 7 numbers (25, 34, 43, 52, 61, 70, 79, 88). Answer 2 correctly identifies this and counts 8 numbers for digit sum 7. Answer 2 also correctly counts 3 numbers for digit sum 7 in the three-digit range. However, Answer 2 incorrectly states that there are no numbers with digit sum 14 in the three-digit range, which is correct. The total of 11 + 5 = 16 is accurate. Answer 1's count of 9 + 5 = 14 is incorrect due to miscalculating the two-digit numbers. \n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:17:43+00:00",
+            "usage_in": 1758,
+            "usage_out": 180
+        }
+    },
+    {
+        "item_id": 293,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 866,
+        "tokens_out": 147,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that following standard order of operations, the result is -12, which is not listed among the choices. However, it speculates that the intended answer might be 72 if the expression were misinterpreted as (60 - 12) × 3 ÷ 2, which is not the given expression. This speculative reasoning introduces an assumption not supported by the original question.\n\nAnswer 2 correctly calculates the result as -12 and notes that this value is not among the options, concluding that there may be an error in the question or choices. This approach adheres strictly to the given expression and does not introduce unsupported assumptions.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:17:50+00:00",
+            "usage_in": 878,
+            "usage_out": 147
+        }
+    },
+    {
+        "item_id": 339,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 606,
+        "tokens_out": 148,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 assumes the prizes are distinct and calculates permutations (10 × 9 × 8 = 720), which is correct if the order of distribution matters. However, the question does not specify that the prizes are distinct or that the order of distribution matters, so this approach may be overcounting. Answer 2 correctly interprets the problem as a combination (C(10,3) = 120), which is appropriate if the prizes are identical or the order does not matter. Since the question does not clarify whether the prizes are distinct, both answers have valid reasoning, but Answer 2 provides the most standard interpretation for such problems.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:17:55+00:00",
+            "usage_in": 618,
+            "usage_out": 148
+        }
+    },
+    {
+        "item_id": 379,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 849,
+        "tokens_out": 177,
+        "trace": {
+            "judge_output": "Reasoning process  \nAnswer 1 correctly calculates the total number of outcomes as $2^4 = 16$ and identifies the number of favorable outcomes as $\\binom{4}{2} = 6$, leading to a probability of $6/16 = 3/8$. It notes that this value is not among the options and speculates that the intended answer might be $1/16$, which corresponds to a specific sequence (e.g., HH TT), but this is not the correct interpretation of the question.  \n\nAnswer 2 also calculates the correct probability of $3/8$, but it incorrectly states that $3/8$ is \"missing\" from the options and then concludes with an incorrect choice of $1/4$, which is not the correct probability for exactly two heads and two tails.  \n\nFinal Choice  \n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:18:06+00:00",
+            "usage_in": 861,
+            "usage_out": 177
+        }
+    },
+    {
+        "item_id": 383,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 2397,
+        "tokens_out": 133,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the question is asking for a fraction of work done in one day and then tries to match it with the given choices, which are all less than 1. However, the question clearly asks for the time taken to complete the work when working together, which should be a value greater than 1. Answer 2 correctly identifies that the correct answer is 20/9 days, but since this is not among the options, it concludes that the closest option is 10/11, which is an incorrect assumption as none of the options match the actual calculation.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:18:14+00:00",
+            "usage_in": 2409,
+            "usage_out": 133
+        }
+    },
+    {
+        "item_id": 407,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1199,
+        "tokens_out": 160,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes the question is about the sum of the dice being a prime number, which leads to an answer not in the choices. It also incorrectly concludes that the difference being a prime number results in 4/9, but this is not the most straightforward interpretation of the question. Answer 2 correctly identifies that the question likely refers to both dice showing a prime number, and if the intended interpretation excludes 2 as a prime (which is incorrect), it arrives at 1/9. However, the correct interpretation should include all primes (2, 3, 5), making the probability 1/4, which is not among the choices. Neither answer fully aligns with the correct mathematical interpretation of the question.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:18:20+00:00",
+            "usage_in": 1211,
+            "usage_out": 160
+        }
+    },
+    {
+        "item_id": 428,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 8931,
+        "tokens_out": 89,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the probability of burning out in the second period is 5/6, which leads to an answer of 5/18. However, this value is not among the given choices. Answer 2 correctly interprets the odds and calculates the probability of burning out in the second period as 4/9, which matches one of the provided choices.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:18:27+00:00",
+            "usage_in": 8943,
+            "usage_out": 89
+        }
+    },
+    {
+        "item_id": 432,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 890,
+        "tokens_out": 109,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the true discount is calculated as $F \\times 12\\%$, which is not the correct formula for true discount. The correct formula involves the present worth and the relationship between true discount, amount, rate, and time. Answer 2 correctly applies the formula for true discount and arrives at an amount of Rs. 1512, which is not listed in the options, thus selecting \"none of these\" as the correct answer.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:18:30+00:00",
+            "usage_in": 902,
+            "usage_out": 109
+        }
+    },
+    {
+        "item_id": 451,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1653,
+        "tokens_out": 168,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that the factors of 25 are 1, 5, and 25, totaling 3. It then acknowledges that 3 is not among the choices and explores possible errors or misinterpretations in the question or answer options. It concludes that the intended answer might be c) 4 if the number was 125, which is a plausible error. Answer 2 also recognizes that the correct count is 3 but fails to clearly justify why c) 4 would be the best choice in the context of the given options. It also introduces confusion by suggesting b) 5 as an option without proper reasoning. Answer 1 provides a more coherent and logical explanation for choosing c) 4 based on potential misinterpretation.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:18:38+00:00",
+            "usage_in": 1665,
+            "usage_out": 168
+        }
+    },
+    {
+        "item_id": 456,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 735,
+        "tokens_out": 59,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that unordered pairs are the only valid pairs, but the question does not specify that order does not matter. Answer 2 correctly considers ordered pairs, which is the standard interpretation when counting number pairs unless stated otherwise.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:18:42+00:00",
+            "usage_in": 747,
+            "usage_out": 59
+        }
+    },
+    {
+        "item_id": 482,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "none",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 664,
+        "tokens_out": 79,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies the numbers, calculates the sum and average accurately, and notes that the result (7) is not among the provided choices. Answer 2 incorrectly suggests selecting \"a\" as a possible choice, which is not justified since none of the options match the correct answer. Therefore, Answer 1 is more accurate.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:18:48+00:00",
+            "usage_in": 676,
+            "usage_out": 79
+        }
+    },
+    {
+        "item_id": 520,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 2109,
+        "tokens_out": 129,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 assumes a simple rectangular packing of 2×2 circles per layer, resulting in 4 tubes per layer and 8 per box. However, this does not account for hexagonal packing which can fit more tubes in the same space. Answer 2 correctly identifies that with hexagonal packing, 6 tubes can be placed per layer in the 11×10 base, and with 2 layers (due to height), 12 tubes can fit per box. This leads to 36 tubes for 3 boxes, making Answer 2 more accurate.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:18:55+00:00",
+            "usage_in": 2121,
+            "usage_out": 129
+        }
+    },
+    {
+        "item_id": 552,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 3415,
+        "tokens_out": 121,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly interprets the question as \"4 added to half of one-third of one-fifth of a number\" and sets up the equation $\\frac{x}{30} + 4 = \\frac{x}{15}$, which leads to the correct solution $x = 120$. Answer 2 misinterprets the question by adding unnecessary complexity and making incorrect assumptions about the structure of the equation, leading to an invalid result that is not in the given choices. The correct interpretation is provided in Answer 1.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:19:01+00:00",
+            "usage_in": 3427,
+            "usage_out": 121
+        }
+    },
+    {
+        "item_id": 561,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 753,
+        "tokens_out": 178,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the marked price is based on the wrong cost price, which was raised by 25%. However, the question states that the marked price is 20% more than the cost price, and the vendor wrongly raised the cost price by 25% before calculating the marked price. This means the marked price is calculated using the wrong cost price, not the original one. Therefore, the correct approach is to set up the equation with the wrong cost price as the base for the marked price, not the original cost price. Answer 2 correctly interprets this and calculates the original cost price based on the given marked price of Rs. 30, assuming the marked price is 20% more than the original cost price, leading to the correct answer of Rs. 25.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:19:04+00:00",
+            "usage_in": 765,
+            "usage_out": 178
+        }
+    },
+    {
+        "item_id": 575,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 873,
+        "tokens_out": 143,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 assumes a typo where the right-hand side of the equation is 1.625, which leads to a result matching option b. However, this assumption is not supported by any logical or mathematical reasoning and is speculative. Answer 2 correctly identifies that the result of the given equation (x = 80500) is not among the choices, and then explores possible typos in the question, including the possibility that the right-hand side was meant to be 0.625, which would lead to x = 2.5, matching option c. This approach is more systematic and grounded in logical deduction.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:19:08+00:00",
+            "usage_in": 885,
+            "usage_out": 143
+        }
+    },
+    {
+        "item_id": 582,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 866,
+        "tokens_out": 136,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the speed ratio between B and C as 11:10 and determines that B can give C a start of approximately 90.91 meters. However, it incorrectly concludes that the closest option is 90.09 meters, which is not the case since 90.91 is closer to 90.09 than to any other option. Answer 2 correctly identifies the speed ratios and computes the start distance as approximately 90.91 meters, which matches the closest option of 90.09 meters due to rounding differences.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:19:10+00:00",
+            "usage_in": 878,
+            "usage_out": 136
+        }
+    },
+    {
+        "item_id": 591,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1266,
+        "tokens_out": 143,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 assumes that the values are in exponential form (e.g., x = 10^0.48), which leads to a calculation of z ≈ 8.32, matching option b) 8.2. This interpretation aligns with the structure of the question and the provided answer choices.\n\nAnswer 2 assumes that the equation is x^z = y², but this leads to a value of z ≈ 2.001, which does not match any of the given options closely. The reasoning also incorrectly interprets the problem as involving multiplication rather than exponentiation, leading to an inaccurate result.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:19:14+00:00",
+            "usage_in": 1278,
+            "usage_out": 143
+        }
+    },
+    {
+        "item_id": 604,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 2442,
+        "tokens_out": 105,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly calculates the time for the first round as 7.5 minutes, but this is wrong. The correct calculation shows that each interval covers half a circle, and the first full round is completed after two intervals (0.5 + 1 = 1.5 minutes). Answer 2 correctly identifies that each round consists of four intervals and that the time for each subsequent round increases by a factor of 16 compared to the previous one.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:19:18+00:00",
+            "usage_in": 2454,
+            "usage_out": 105
+        }
+    },
+    {
+        "item_id": 635,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 676,
+        "tokens_out": 116,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the capacity of the can is $5x + 6$, but this is not correct. The capacity of the can should be equal to the initial mixture plus the added milk, which is $5x + 6$. However, the second answer correctly identifies that the capacity of the can is $V = 5x$ and uses the new ratio to find $x = 6$, leading to a capacity of $30$ liters. Therefore, Answer 2 is correct.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:19:22+00:00",
+            "usage_in": 688,
+            "usage_out": 116
+        }
+    },
+    {
+        "item_id": 647,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 584,
+        "tokens_out": 116,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the rows determine the length of the garden, while Answer 2 correctly identifies that the columns (which define the length) are the relevant factor. Answer 1 calculates based on rows (10 rows with 9 gaps), but the question asks for the length of the garden, which is determined by the columns (15 trees with 14 gaps). Answer 2 correctly calculates the length as 14 × 2 + 1 + 1 = 30 meters.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:19:25+00:00",
+            "usage_in": 596,
+            "usage_out": 116
+        }
+    },
+    {
+        "item_id": 664,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 646,
+        "tokens_out": 134,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the total amount of money is $480 and that the total value must be a multiple of 16, but then concludes that the total number of dollars is 48, which contradicts the given total of $480. Answer 2 correctly sets up the equation $1x + $5x + $10x = $480, solves for x = 30, and calculates the total number of notes as 90, which matches the question's phrasing asking for \"the total number of dollar that he has.\" \n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:19:29+00:00",
+            "usage_in": 658,
+            "usage_out": 134
+        }
+    },
+    {
+        "item_id": 700,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 644,
+        "tokens_out": 81,
+        "trace": {
+            "judge_output": "Reasoning process  \nAnswer 1 incorrectly assumes that the rate is in percentage form and applies the formula directly, but it fails to convert the rate from decimal to percentage. Answer 2 correctly calculates the rate in decimal form and identifies that the resulting rate (50%) is not listed among the options, making \"e) none of these\" the correct choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:19:34+00:00",
+            "usage_in": 656,
+            "usage_out": 81
+        }
+    },
+    {
+        "item_id": 728,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 635,
+        "tokens_out": 90,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly calculates the increase as a fraction of the original share. It states the increase is 1/6, but it fails to express this increase relative to the original share, which is required by the question. Answer 2 correctly calculates the increase in share and expresses it as a fraction of the original share, resulting in 1/2, which matches choice (a).\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:19:38+00:00",
+            "usage_in": 647,
+            "usage_out": 90
+        }
+    },
+    {
+        "item_id": 761,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 2245,
+        "tokens_out": 130,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the closest answer is e) 2580, but this does not align with the exact calculation of the area. Answer 2 correctly calculates the dimensions and confirms that none of the given choices match the exact area of 2627.25 m². However, it then incorrectly concludes that d) 1200 m² is the best choice based on a different set of assumptions (a mismatched perimeter). Neither answer provides a correct match to the given data, but Answer 2 at least acknowledges the discrepancy more clearly.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:19:42+00:00",
+            "usage_in": 2257,
+            "usage_out": 130
+        }
+    },
+    {
+        "item_id": 770,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 633,
+        "tokens_out": 76,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the average annual percentage increase is simply the total percentage increase divided by the number of years. This approach is only valid for simple interest, not compound growth. The correct method involves using the formula for compound growth, as shown in Answer 2, which calculates the actual average annual growth rate.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:19:48+00:00",
+            "usage_in": 645,
+            "usage_out": 76
+        }
+    },
+    {
+        "item_id": 801,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1994,
+        "tokens_out": 114,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the maximum number of hot dogs by prioritizing the cheapest per-unit cost (250-pack), then using the remaining money for the next best value (20-pack). It also checks alternative combinations to confirm that 2120 is the maximum. Answer 2 appears to have a mistake in its final conclusion, stating that 2120 matches choice c, but the correct answer based on the options provided is d. Therefore, Answer 1 is more accurate.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:19:52+00:00",
+            "usage_in": 2006,
+            "usage_out": 114
+        }
+    },
+    {
+        "item_id": 802,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1479,
+        "tokens_out": 74,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly calculates the time difference and arrives at 13:20, which is not one of the options. Answer 2 correctly sets up the equation using the given conditions and solves for $ T = 5 $ hours, leading to the correct time of 14:00.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:19:56+00:00",
+            "usage_in": 1491,
+            "usage_out": 74
+        }
+    },
+    {
+        "item_id": 807,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1622,
+        "tokens_out": 155,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the rate is increased by 4 percentage points, leading to a calculation of 972 which is not among the choices. It also explores other interpretations but fails to clearly justify why choice d is correct. Answer 2 correctly applies the simple interest formula and calculates the new amount as 972, but then incorrectly concludes that the intended answer is a (672) based on an assumption that the interest rate becomes 4%, which contradicts the original problem's statement of increasing the interest rate by 4%. The most accurate reasoning is in Answer 1, which identifies that the closest possible answer among the choices is d, even though it doesn't exactly match.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:20:03+00:00",
+            "usage_in": 1634,
+            "usage_out": 155
+        }
+    },
+    {
+        "item_id": 932,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 2105,
+        "tokens_out": 202,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the value of $ |H \\cap T| $ using the inclusion-exclusion principle and then subtracts the triple overlap to find the number of people who read only Hindu and Times. However, it concludes that the answer is 7, which is not among the given choices, and then incorrectly assumes that the answer must be 22 (the total $ |H \\cap T| $) instead of the correct interpretation of \"only Hindu and Times.\" This misinterpretation leads to an incorrect conclusion.\n\nAnswer 2 re-evaluates the problem by considering possible misinterpretations of the data and explores alternative scenarios. It identifies a contradiction in the given data when assuming no one reads none of the newspapers and notes that the values do not align with the given options unless additional assumptions are made. It then concludes that the most plausible answer based on the options provided is 21, despite the inconsistency in the data.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:20:10+00:00",
+            "usage_in": 2117,
+            "usage_out": 202
+        }
+    },
+    {
+        "item_id": 999,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1105,
+        "tokens_out": 102,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that $x$ can have up to 3 distinct prime factors, including 2 and 3, as long as it introduces one new prime factor. This allows $6x^2$ to have exactly 3 distinct prime factors. Answer 2 incorrectly assumes that $x$ can only contribute one new prime factor and concludes that $x$ can only have 1 distinct prime factor, which is not the case.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:20:15+00:00",
+            "usage_in": 1117,
+            "usage_out": 102
+        }
+    },
+    {
+        "item_id": 1009,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1030,
+        "tokens_out": 114,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that 80 is not among the choices and concludes that the closest option might be 90, which is not logically supported. Answer 2 correctly identifies that the correct answer is 80, which is not listed in the options, and then reasonably suggests that if a choice must be made, the most plausible is b) 70, as it is the largest value less than 80. However, this reasoning still relies on an assumption about the intended answer.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:20:18+00:00",
+            "usage_in": 1042,
+            "usage_out": 114
+        }
+    },
+    {
+        "item_id": 1021,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1585,
+        "tokens_out": 152,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the probability is 1, which is not among the choices. However, it's mathematically correct that $ n(n+1)(n+2) $ is always divisible by 6, but since this isn't an option, Answer 1 concludes with a guess. Answer 2 correctly identifies that the product is always divisible by 6 and confirms that the answer should be 1, which is not in the choices. However, it misinterprets the question as asking for divisibility by 8 instead of 6 and concludes with a guess based on that assumption. Neither answer is fully correct, but Answer 2 provides a more detailed reasoning process.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:20:22+00:00",
+            "usage_in": 1597,
+            "usage_out": 152
+        }
+    },
+    {
+        "item_id": 1047,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1266,
+        "tokens_out": 100,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the total time is the sum of one fast and one slow song, which is not stated in the question. It also incorrectly concludes that y = -6/7 for the case of 6 minutes, which is not valid. Answer 2 correctly sets up the equation with variables for minutes of fast and slow songs and checks all options systematically to find the correct answer where both f and s are positive integers.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:20:25+00:00",
+            "usage_in": 1278,
+            "usage_out": 100
+        }
+    },
+    {
+        "item_id": 1049,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 777,
+        "tokens_out": 90,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly interprets the question as asking for the ratio of total surface areas, but the question specifically asks for the ratio of the surface area of one small cube to that of the large cube. Answer 2 correctly calculates the surface area of one small cube and compares it directly to the surface area of the large cube, resulting in the correct ratio of 1:49.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:20:27+00:00",
+            "usage_in": 789,
+            "usage_out": 90
+        }
+    },
+    {
+        "item_id": 1061,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 671,
+        "tokens_out": 99,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the total points after 7 games and determines that 64 points are needed to exceed 500. It then correctly identifies that the smallest choice greater than or equal to 64 is 67. Answer 2 incorrectly assumes that reaching exactly 500 is sufficient, which contradicts the question's requirement of \"above 500.\" Therefore, Answer 1 is correct.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:20:36+00:00",
+            "usage_in": 683,
+            "usage_out": 99
+        }
+    },
+    {
+        "item_id": 1067,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 565,
+        "tokens_out": 71,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly defines the range of positive integers as the count of positive integers, which is not the correct definition of \"range.\" The range is the difference between the largest and smallest values in the set. Answer 2 correctly calculates the range as 7 - 1 = 6.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:20:39+00:00",
+            "usage_in": 577,
+            "usage_out": 71
+        }
+    },
+    {
+        "item_id": 1085,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 5621,
+        "tokens_out": 98,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly concludes that the correct answer is c) 3, despite the mathematical solution clearly showing that x + y = 6/5, which is not among the options. Answer 2 correctly identifies that there is no valid solution matching the given choices and acknowledges the inconsistency, but it still makes an arbitrary choice of d) 5 without justification. Neither answer provides a logically sound conclusion based on the given equations.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:20:42+00:00",
+            "usage_in": 5633,
+            "usage_out": 98
+        }
+    },
+    {
+        "item_id": 1172,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 533,
+        "tokens_out": 71,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2 incorrectly counts the number of valid seat combinations. It only lists 3 combinations, but fails to account for the fact that each combination can be arranged in 2 different ways (since the students are distinct). Therefore, the correct total is 3 × 2 = 6.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:20:50+00:00",
+            "usage_in": 545,
+            "usage_out": 71
+        }
+    },
+    {
+        "item_id": 1180,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 2131,
+        "tokens_out": 137,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 assumes that the worst case is when each school sends 39 students, leading to 52 schools. It then calculates that 52 schools divided by 5 per row requires 11 rows. However, this does not consider the possibility of schools with fewer than 39 students, which could require more rows due to inefficient packing. Answer 2 correctly identifies that the worst-case scenario involves 59 schools with 34 students each, requiring 12 rows. This accounts for the actual distribution of students and ensures all schools can be seated in the same row regardless of their size.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:20:59+00:00",
+            "usage_in": 2143,
+            "usage_out": 137
+        }
+    },
+    {
+        "item_id": 1189,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 660,
+        "tokens_out": 129,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly calculates $12519 \\times 9999 = 12519 \\times (10000 - 1) = 125190000 - 12519 = 125177481$, which matches option a. The second answer incorrectly claims the result is 125177481, which matches option a, but then states it matches choice (d), which is incorrect. Therefore, the first answer is correct.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:21:11+00:00",
+            "usage_in": 672,
+            "usage_out": 129
+        }
+    },
+    {
+        "item_id": 1191,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 918,
+        "tokens_out": 210,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that (875233 / 899) × 899 simplifies to 875233, but this value is not among the choices. It then explores alternative interpretations of the question, including the possibility that the original number was meant to be split differently, such as 875 × 233. However, this also does not match any choice. Answer 1 then speculates that the intended calculation might have been (875 × 899) + 233, which results in 786858, matching option c. This reasoning is plausible and logically consistent.\n\nAnswer 2 suggests that the correct answer is 875233, which is not among the choices, and then incorrectly assumes that the closest match to an approximate calculation is option a. This approach lacks clarity and fails to provide a solid logical path to the given choices.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:21:15+00:00",
+            "usage_in": 930,
+            "usage_out": 210
+        }
+    },
+    {
+        "item_id": 1241,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 990,
+        "tokens_out": 163,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that the speed of the man in still water should be 15 km/h using the standard formula, which is (upstream + downstream) / 2. However, it concludes that there is no correct answer among the choices and selects \"a) 11\" as the closest, which is not logically sound.\n\nAnswer 2 also calculates the correct speed of the man in still water as 15 km/h but acknowledges that this is not among the options. It then speculates that the intended answer might be 25, possibly due to a mistake in question setup or calculation. This reasoning is speculative but more consistent with the given choices than Answer 1's arbitrary choice of \"a) 11\".\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:21:18+00:00",
+            "usage_in": 1002,
+            "usage_out": 163
+        }
+    },
+    {
+        "item_id": 1319,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 671,
+        "tokens_out": 120,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly calculates the percentage of day 3 price relative to day 1 sale price. It states that the result is 82.944%, which is correct, but then incorrectly concludes it is closest to option a) 82.5%. The actual calculation shows that 82.944% is closer to option d) 86.4% when compared to day 1 sale price. Answer 2 correctly performs the calculation and identifies the correct percentage as 86.4%.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:21:21+00:00",
+            "usage_in": 683,
+            "usage_out": 120
+        }
+    },
+    {
+        "item_id": 1329,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1526,
+        "tokens_out": 162,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the inradius as approximately 2.11, which is closest to choice b) 2.6. However, Answer 2 points out that the given triangle sides (8, 15, 21) do not form a right triangle, and the inradius calculation does not match any of the choices exactly. It also notes that if the side were 17 instead of 21, the inradius would be 3, which matches choice c). Given that there is no exact match for the actual triangle, but the closest value is 2.11, which is closer to 2.6 than to 3, Answer 1 is more accurate based on the provided information.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:21:24+00:00",
+            "usage_in": 1538,
+            "usage_out": 162
+        }
+    },
+    {
+        "item_id": 1380,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 664,
+        "tokens_out": 105,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question states that three unbiased coins are tossed, which means there are only 3 coins, not 4. Therefore, getting \"3 heads and 1 tail\" is impossible with only 3 coins, as it would require 4 coins. Answer 2 incorrectly assumes the question refers to 4 coins, which contradicts the given information. Answer 1 correctly identifies this issue and provides a plausible answer based on a possible misinterpretation of the question.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:21:28+00:00",
+            "usage_in": 676,
+            "usage_out": 105
+        }
+    },
+    {
+        "item_id": 1398,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 678,
+        "tokens_out": 111,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes the total distance is 7x km, while the problem states the train covers x km and another 2x km, which sums to 3x km. The mention of \"entire 7x km\" appears to be a mistake in the question. Answer 2 correctly identifies this inconsistency and calculates the average speed based on the actual distances provided (x + 2x = 3x), leading to the correct answer of 24 kmph.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:21:30+00:00",
+            "usage_in": 690,
+            "usage_out": 111
+        }
+    },
+    {
+        "item_id": 1415,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 782,
+        "tokens_out": 104,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2 is incorrect because the question clearly states that the customer purchased both apples and bananas, and the prices for both are given. The mention of \"bananas\" in the question, not \"guava,\" indicates a possible typo or misstatement in Answer 2. The correct interpretation is that the customer bought apples and bananas, with banana prices being $0.50 each. This allows for a solvable equation as shown in Answer 1.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:21:32+00:00",
+            "usage_in": 794,
+            "usage_out": 104
+        }
+    },
+    {
+        "item_id": 1420,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1394,
+        "tokens_out": 113,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly states that the valid residues are 0, 4, 6, and 7, but fails to consider that n ≡ 2 mod 8 also results in a product divisible by 8. Answer 2 correctly identifies that n ≡ 0, 2, 4, 6, and 7 mod 8 result in products divisible by 8, giving 5 out of 8 possible residues, leading to a probability of 5/8.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:21:34+00:00",
+            "usage_in": 1406,
+            "usage_out": 113
+        }
+    },
+    {
+        "item_id": 1422,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 755,
+        "tokens_out": 120,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2 incorrectly calculates the yearly savings. The savings per month are 0.2x, so yearly savings should be 12 * 0.2x = 2.4x. Setting 2.4x = 38400 gives x = 16000, not x = 192000. Therefore, the monthly spending on clothes and transport is 0.2 * 16000 = 3200, which matches choice c.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:21:43+00:00",
+            "usage_in": 767,
+            "usage_out": 120
+        }
+    },
+    {
+        "item_id": 1425,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 661,
+        "tokens_out": 94,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2 incorrectly interprets the ratio. The given condition is 4P = 6Q = 10R, which means the capitals are in the ratio 1/4 : 1/6 : 1/10, not 4:6:10. Answer 1 correctly calculates the ratio as 15:10:6 and determines R's share accurately.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:21:44+00:00",
+            "usage_in": 673,
+            "usage_out": 94
+        }
+    },
+    {
+        "item_id": 1432,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 575,
+        "tokens_out": 143,
+        "trace": {
+            "judge_output": "Reasoning process  \nAnswer 1 correctly states that x is a positive number, so x² can get arbitrarily close to 0 but will never actually be 0. Therefore, x² - 15 can get arbitrarily close to -15 but will never actually reach it. Among the given choices, -14 is the smallest value greater than -15, making it the correct answer.\n\nAnswer 2 incorrectly claims that the smallest possible value of x² - 15 is -15, which is not possible because x cannot be zero. The value can only approach -15 but will never equal it. Hence, Answer 2 is incorrect.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:21:54+00:00",
+            "usage_in": 587,
+            "usage_out": 143
+        }
+    },
+    {
+        "item_id": 1473,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 782,
+        "tokens_out": 152,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the total age of the family 10 years ago is calculated by subtracting 6 × 10 from the current total, which includes the youngest member's current age. This leads to an incorrect interpretation of the problem. Answer 2 correctly calculates the total age of the other 5 members at the time of the youngest member's birth by subtracting 5 × 10 from their current total age (excluding the youngest member), and then divides by 5 to find the average age at that time. The result of 19.2 is not directly listed in the choices, but answer 2 correctly identifies 19 as the closest option.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:21:57+00:00",
+            "usage_in": 794,
+            "usage_out": 152
+        }
+    },
+    {
+        "item_id": 1561,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1604,
+        "tokens_out": 138,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2 incorrectly derives the inequality $n^2 - 17n + 36 \\leq 0$ and concludes that $4 \\leq n \\leq 13$, which is not valid. The correct approach is to directly solve the equation with minimal values of $a$ and $d$, as done in Answer 1. Answer 1 correctly calculates the maximum possible value of $n$ as 14 by testing the sum of angles for $n=14$ and $n=15$, and confirms that $n=14$ is the largest feasible value.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:22:01+00:00",
+            "usage_in": 1616,
+            "usage_out": 138
+        }
+    },
+    {
+        "item_id": 1601,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1182,
+        "tokens_out": 159,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the probability as 1/36, which is not among the choices. It then explores possible errors in the question or answer options and concludes that if the question intended there to be 3 social studies teachers instead of 2, the probability would be 1/12, which matches option b. This is a plausible assumption based on the given choices.\n\nAnswer 2 also calculates the correct probability as 1/36 but states that it does not match any option and incorrectly suggests that 1/24 might be the intended answer. This reasoning is flawed because there is no logical basis for selecting 1/24 as an answer when the actual calculation is 1/36.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:22:03+00:00",
+            "usage_in": 1194,
+            "usage_out": 159
+        }
+    },
+    {
+        "item_id": 1615,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 10617,
+        "tokens_out": 138,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes the question is asking for b's daily work rate, which is 0.075, and selects the closest option e (0.0775) without acknowledging that the question explicitly asks how many days both together can do the work, which is already given as 10 days. Answer 2 correctly identifies the contradiction in the question and evaluates the possible intended meaning, concluding that the closest answer to b's daily work rate is 0.0875 (option d). The reasoning in Answer 2 is more aligned with the likely intent of the question despite the ambiguity.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:22:18+00:00",
+            "usage_in": 10629,
+            "usage_out": 138
+        }
+    },
+    {
+        "item_id": 1652,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 2249,
+        "tokens_out": 127,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the question is asking for a number to subtract from 427398 to make it divisible by 15, and then concludes that none of the choices match the correct value (3). However, it fails to consider that the question might be asking which of the given options, when subtracted from 427398, results in a number divisible by 15. Answer 2 correctly analyzes the problem by checking the modular arithmetic properties of the given options and determines that option e) is the correct choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:22:20+00:00",
+            "usage_in": 2261,
+            "usage_out": 127
+        }
+    },
+    {
+        "item_id": 1703,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 564,
+        "tokens_out": 91,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the length of the garden corresponds to the number of rows, while the question specifies that there are 14 columns, which determine the length. Answer 2 correctly identifies that the length is determined by the 14 columns, which have 13 gaps between trees, and adds the 1 metre on each side. Therefore, Answer 2 is correct.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:22:30+00:00",
+            "usage_in": 576,
+            "usage_out": 91
+        }
+    },
+    {
+        "item_id": 1715,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1468,
+        "tokens_out": 111,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the question might have a typo and changes the increase from 1 year to 0.5 years, which is not supported by the original question. Answer 2 correctly identifies that the average age of the new students is 26, which is not among the choices, but it then explores possible misinterpretations and concludes that the most reasonable answer based on the given options is b) 21, even though it does not strictly match the mathematical result.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:22:32+00:00",
+            "usage_in": 1480,
+            "usage_out": 111
+        }
+    },
+    {
+        "item_id": 1742,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 4289,
+        "tokens_out": 87,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the triangular faces form a single large face, but in reality, they are separate and do not merge into one. Additionally, it undercounts the rectangular faces. Answer 2 correctly identifies that the front and back triangular faces merge into two large faces, and the rectangular faces also merge into four larger faces, resulting in a total of six faces.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:22:34+00:00",
+            "usage_in": 4301,
+            "usage_out": 87
+        }
+    },
+    {
+        "item_id": 1752,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1704,
+        "tokens_out": 151,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for a number that is divisible by 6 or 15 but not divisible by 12. Both answers d) 90 and e) 54 satisfy this condition. However, the key lies in the interpretation of \"exactly divisible by 6 or 15.\" In mathematical terms, \"or\" is inclusive unless specified otherwise. Therefore, both 90 and 54 are valid answers. But since the question presents it as a single-choice format, the correct answer should be the one that aligns with standard multiple-choice conventions, which often imply exclusivity in such contexts. Thus, the most appropriate choice is e) 54.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:22:38+00:00",
+            "usage_in": 1716,
+            "usage_out": 151
+        }
+    },
+    {
+        "item_id": 1840,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 713,
+        "tokens_out": 133,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the total number of poles is distributed evenly along each side, and it subtracts 4 poles for the corners, which is not necessary since the problem does not specify that the poles are placed at the corners. Answer 2 correctly calculates the perimeter based on the total number of poles and intervals, then computes the area in square meters. However, it fails to convert the area to square centimeters as required by the answer choices. The correct approach is to calculate the area in square meters and recognize that none of the provided options match this value when converted to square centimeters.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:22:40+00:00",
+            "usage_in": 725,
+            "usage_out": 133
+        }
+    },
+    {
+        "item_id": 1910,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 976,
+        "tokens_out": 91,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the present value of the debt is equal to the future value of the payments, but it should be the other way around. The correct approach is to discount the debt amount to its present value and then solve for the annual payment. Answer 2 correctly identifies this and applies the proper formula by discounting the debt to its present value before solving for the annual payment.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:22:42+00:00",
+            "usage_in": 988,
+            "usage_out": 91
+        }
+    },
+    {
+        "item_id": 1923,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 7182,
+        "tokens_out": 208,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 assumes that the restriction is on 3 and 4 being adjacent, which is not what the question states. The question says \"3 and 24 cannot be adjacent digits\", which should be interpreted as 3 and the pair 2 and 4 (i.e., 2 and 4 adjacent) cannot be adjacent. This is a different constraint than just 3 and 4 being adjacent. Answer 2 correctly identifies this ambiguity but ultimately arrives at an answer of 48 through a detailed analysis of valid placements for 3 when 2 and 4 are considered as a block. However, the correct interpretation of the question leads to the conclusion that the restriction is on 3 being adjacent to either 2 or 4, not specifically to the pair 24. Therefore, the correct approach is to calculate the total permutations and subtract those where 3 is adjacent to 2 or 4, which results in 72 valid permutations.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:22:56+00:00",
+            "usage_in": 7194,
+            "usage_out": 208
+        }
+    },
+    {
+        "item_id": 1927,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 594,
+        "tokens_out": 94,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2 is incorrect because the smallest number formed with the digits 3, 4, 7, 0, 3 should be 30347, not 30437. The correct difference is 74330 - 30347 = 43983, which matches choice c. Therefore, Answer 1 is correct.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:22:58+00:00",
+            "usage_in": 606,
+            "usage_out": 94
+        }
+    },
+    {
+        "item_id": 1941,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 3745,
+        "tokens_out": 107,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 assumes the interest is compounded monthly for 4 months, which results in approximately 1171.52, close to option a) 1171.98. However, Answer 2 provides a more precise calculation by using the exact formula for compound interest with monthly compounding and confirms that the correct value is closer to 1173.98, which matches option c). Therefore, Answer 2 is more accurate.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:23:02+00:00",
+            "usage_in": 3757,
+            "usage_out": 107
+        }
+    }
+]

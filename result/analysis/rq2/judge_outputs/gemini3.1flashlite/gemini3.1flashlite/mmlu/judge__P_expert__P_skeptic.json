@@ -1,0 +1,1695 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/mmlu/P_expert.json",
+            "result/arms/gemini3.1flashlite/mmlu/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 58,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/gemini3.1flashlite/mmlu/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "0f6a3cd50ceff6bba6b9fa5a622bbfc71cdc299ff88b8e4c833bb54eff60dfe2",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 58,
+        "api_usage": {
+            "calls": 58,
+            "calls_without_usage": 0,
+            "prompt_tokens": 49146,
+            "completion_tokens": 12020,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 58
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:18:16+00:00",
+            "last": "2026-10-04T10:21:47+00:00"
+        }
+    },
+    {
+        "item_id": 5,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1836,
+        "tokens_out": 611,
+        "trace": {
+            "judge_output": "Reasoning process\nStatement 1 is correct: Any element $x$ of order 15 generates a cyclic subgroup $\\langle x \\rangle$ of order 15, which contains exactly $\\phi(15) = 8$ elements of order 15. Thus, if a group has an element of order 15, it must have at least 8.\n\nStatement 2: We need to determine if the number of elements of order 15 must be a multiple of 8 or if it can be any value greater than 8. Let $G = \\mathbb{Z}_3 \\times \\mathbb{Z}_5 \\times \\mathbb{Z}_5 \\cong \\mathbb{Z}_{15} \\times \\mathbb{Z}_5$. An element $(a, b) \\in \\mathbb{Z}_{15} \\times \\mathbb{Z}_5$ has order 15 if $\\text{lcm}(|a|, |b|) = 15$. This happens if $|a|=15$ (8 choices) and $|b| \\in \\{1, 5\\}$ (5 choices). Total elements of order 15 = $8 \\times 5 = 40$. This is a multiple of 8.\nHowever, consider $G = \\mathbb{Z}_3 \\times \\mathbb{Z}_5 \\times \\mathbb{Z}_3 \\cong \\mathbb{Z}_3 \\times \\mathbb{Z}_3 \\times \\mathbb{Z}_5$. An element $(a, b, c)$ has order 15 if $\\text{lcm}(|a|, |b|, |c|) = 15$. This requires $|c|=5$ (4 choices) and $\\text{lcm}(|a|, |b|) \\in \\{1, 3\\}$. The number of pairs $(a, b) \\in \\mathbb{Z}_3 \\times \\mathbb{Z}_3$ such that $\\text{lcm}(|a|, |b|) \\in \\{1, 3\\}$ is $3^2 = 9$. Thus, there are $9 \\times 4 = 36$ elements of order 15. Since 36 is not a multiple of 8, the number of elements of order 15 is not restricted to multiples of 8. Specifically, 36 is greater than 8 but not at least 16? No, 36 is greater than 16. Let's check for a value between 8 and 16. If we have a group with 12 elements of order 15, Statement 2 is false. The reasoning in Answer 2 correctly identifies that intersections of cyclic subgroups of order 15 can result in counts like 12 or 14. Therefore, Statement 2 is False.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:18:16+00:00",
+            "usage_in": 1837,
+            "usage_out": 611
+        }
+    },
+    {
+        "item_id": 27,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 1153,
+        "tokens_out": 321,
+        "trace": {
+            "judge_output": "Reasoning process\nThe Eisenstein criterion requires a prime $p$ such that $p$ divides all coefficients except the leading coefficient $a_n$, and $p^2$ does not divide the constant term $a_0$.\nFor $f(x) = 8x^3 + 6x^2 - 9x + 24$:\n- The coefficients are $a_3=8, a_2=6, a_1=-9, a_0=24$.\n- Testing $p=3$:\n  - $p$ must divide $a_2=6$ (Yes: $3|6$), $a_1=-9$ (Yes: $3|-9$), and $a_0=24$ (Yes: $3|24$).\n  - $p$ must not divide $a_3=8$ (Yes: $3 \\nmid 8$).\n  - $p^2$ must not divide $a_0=24$ ($3^2=9$, and $9 \\nmid 24$ is true).\nAnswer 1 correctly identifies that $p=3$ satisfies all conditions of the Eisenstein criterion. Answer 2 incorrectly claims that $p=3$ fails the constant term condition, despite correctly noting that $9$ does not divide $24$ (which is exactly what the criterion requires: $p^2$ must *not* divide $a_0$).\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:18:24+00:00",
+            "usage_in": 1154,
+            "usage_out": 321
+        }
+    },
+    {
+        "item_id": 134,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 592,
+        "tokens_out": 168,
+        "trace": {
+            "judge_output": "Reasoning process\nA complete bilateral cleft palate involves a failure of fusion between the primary palate (derived from the frontonasal process/median nasal processes) and the secondary palate (derived from the lateral palatine processes of the maxillary processes), as well as a failure of the lateral palatine processes to fuse with each other and the nasal septum. Answer 1 focuses only on the palatine processes, which explains the secondary palate but ignores the primary palate component inherent in a \"complete\" cleft. Answer 2 correctly identifies that the defect involves the failure of fusion between the palatine processes and the frontonasal process (which forms the primary palate), which is the defining characteristic of a complete cleft palate extending through the primary palate. Therefore, Answer 2 provides a more comprehensive embryological explanation.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:18:28+00:00",
+            "usage_in": 593,
+            "usage_out": 168
+        }
+    },
+    {
+        "item_id": 393,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 735,
+        "tokens_out": 158,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the normative theory most similar to corporate profit maximization. In business ethics, profit maximization is often defended through the lens of \"shareholder primacy,\" which posits that the firm's primary duty is to satisfy the preferences of its owners (shareholders) for financial return. Preference utilitarianism is the branch of utilitarianism that defines utility as the satisfaction of individual preferences, which aligns directly with the economic model of the firm as an instrument to satisfy shareholder preferences. While hedonistic utilitarianism focuses on pleasure/pain, profit maximization is not inherently about pleasure but about the fulfillment of specific economic goals (preferences). Therefore, Answer 2 provides a more accurate academic classification of the relationship between profit maximization and utilitarian frameworks.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:18:53+00:00",
+            "usage_in": 736,
+            "usage_out": 158
+        }
+    },
+    {
+        "item_id": 514,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 822,
+        "tokens_out": 329,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks which feature suggests a sound is a pleural friction rub rather than crackles. \n1. Crackles are typically inspiratory and are often associated with secretions that may shift or clear with coughing. \n2. A pleural friction rub is a grating sound caused by inflamed pleura; it is typically heard in both inspiration and expiration and is not affected by coughing. \n3. Answer 1 suggests \"A\" (more prominent in expiration), but friction rubs are typically heard in both phases, and crackles can also be expiratory. \n4. Answer 2 suggests \"C\" (no pain), but this is factually incorrect because pleural friction rubs are almost always associated with pleuritic chest pain. \n5. Re-evaluating the options: None of the options are perfect clinical descriptors. However, in many medical board review contexts, the distinction is that crackles are often affected by coughing (clearing), whereas a pleural friction rub is not. Option B (\"Alters with coughing\") is a classic differentiator: crackles often change or disappear with a cough, while a pleural friction rub does not. Since neither answer chose B, I must evaluate which reasoning is more sound. Answer 1 correctly identifies that crackles are often inspiratory and that a rub is not cleared by coughing. While Answer 1's selection of \"A\" is weak, Answer 2's selection of \"C\" is medically incorrect (rubs are painful). Therefore, Answer 1 is more logically consistent with the clinical differentiation process.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:19:01+00:00",
+            "usage_in": 823,
+            "usage_out": 329
+        }
+    },
+    {
+        "item_id": 905,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 785,
+        "tokens_out": 211,
+        "trace": {
+            "judge_output": "Reasoning process\nT1 relaxation (longitudinal) is driven by magnetic field fluctuations at the Larmor frequency ($\\omega_0$). T2 relaxation (transverse) is driven by fluctuations at the Larmor frequency AND by very low-frequency (near-zero) fluctuations. Because T2 is sensitive to these additional low-frequency motions that cause dephasing without requiring energy exchange, T2 is always less than or equal to T1. Answer 2 correctly identifies that T2's sensitivity to very low-frequency motions (which T1 lacks) is the reason T2 is shorter than T1. Answer 1 incorrectly suggests that T1's sensitivity to the Larmor frequency is the primary reason it is longer than T2; while T1 is indeed sensitive to the Larmor frequency, the *difference* between T1 and T2 is specifically explained by the additional low-frequency sensitivity of T2. Therefore, Answer 2 provides the more accurate explanation for the comparison.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:19:12+00:00",
+            "usage_in": 786,
+            "usage_out": 211
+        }
+    },
+    {
+        "item_id": 1011,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 1382,
+        "tokens_out": 331,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The definition provided is: $e^M = e$ and $(aw)^M = aw^Ma$ where $|a|=1$.\n2. Let's test the definition with a string of length 1: $a^M = (a \\cdot e)^M = a \\cdot e^M \\cdot a = a \\cdot e \\cdot a = aa$.\n3. Answer 1 incorrectly assumes the definition is the standard string reversal ($w^R$), where $(aw)^R = w^Ra$. However, the definition given is $(aw)^M = aw^Ma$.\n4. Because $a^M = aa$, Choice A ($a^M = a$) is false.\n5. Let $x=a, y=b$. $(ab)^M = a(b^M)a = a(bb)a = abba$.\n6. $y^M x^M = b^M a^M = (bb)(aa) = bbaa$. Since $abba \\neq bbaa$, Choice C is false.\n7. Let $x=b, a=a$. $(ab)^M = abba$. $(ba)^M = b(a^M)b = b(aa)b = baab$. Since $abba \\neq baab$, Choice B is false.\n8. Answer 2 correctly identifies that the definition leads to $a^M = aa$ and correctly tests the choices, leading to the conclusion that none of the provided options are true.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:19:25+00:00",
+            "usage_in": 1383,
+            "usage_out": 331
+        }
+    },
+    {
+        "item_id": 1105,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 689,
+        "tokens_out": 172,
+        "trace": {
+            "judge_output": "Reasoning process\nThe term \"complete space\" is strictly defined only for metric spaces (or uniform spaces). In general topology, a \"compact space\" is a topological space, and the property of completeness is not defined for arbitrary topological spaces. Therefore, the statement \"Every compact space is complete\" is technically false because it is a category error; a general compact space (like a non-metrizable compact Hausdorff space) does not possess a metric, and thus cannot be \"complete\" in the standard sense. Answer 1 assumes the context of metric spaces to force A to be true, but Answer 2 correctly identifies that the statements are not universally true or well-defined in the general topological context provided by the question. Since both statements are false in the general sense, C is the most accurate choice.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:19:38+00:00",
+            "usage_in": 690,
+            "usage_out": 172
+        }
+    },
+    {
+        "item_id": 1214,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 704,
+        "tokens_out": 212,
+        "trace": {
+            "judge_output": "Reasoning process\nThe relationship between pOH and pKb for a weak base is given by the Henderson-Hasselbalch-like equation for bases: pOH = pKb + log([BH+]/[B]). For a very weak base, the dissociation is minimal, meaning [BH+] << [B]. Consequently, the ratio [BH+]/[B] is much less than 1, making log([BH+]/[B]) a negative value. Therefore, pOH = pKb - (a positive value). This implies that pOH < pKb, or equivalently, pKb > pOH. Answer 1 correctly identifies this relationship. Answer 2 incorrectly suggests that pOH is higher than pKb by using an incorrect derivation (pOH = 0.5 * (pKb - log[Base])), which is a formula for the pH of a weak base solution, not the pOH, and even then, the logic regarding the magnitude of the values is flawed.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:19:55+00:00",
+            "usage_in": 705,
+            "usage_out": 212
+        }
+    },
+    {
+        "item_id": 1493,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 955,
+        "tokens_out": 170,
+        "trace": {
+            "judge_output": "Reasoning process\nThe timing attack described by Brumley and Boneh specifically exploits the conditional \"extra reduction\" step in Montgomery multiplication and the bit-dependent nature of the sliding window exponentiation. Karatsuba multiplication is a method for fast polynomial/integer multiplication and does not introduce the specific secret-dependent timing variations that the attack exploits. Therefore, turning off RS and MR is necessary to eliminate the timing channel, while turning off RS and KM would leave the MR-based timing leakage intact. Answer 1 correctly identifies that the first option (RS and KM) is insufficient (False) and the second option (RS and MR) is sufficient (True), leading to choice D. Answer 2 incorrectly claims that both combinations are effective, failing to recognize that KM does not contribute to the timing vulnerability.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:03+00:00",
+            "usage_in": 956,
+            "usage_out": 170
+        }
+    },
+    {
+        "item_id": 1497,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 587,
+        "tokens_out": 130,
+        "trace": {
+            "judge_output": "Reasoning process\nThe EXE paper (\"EXE: Automatically Generating Inputs of Death\" by Cadar et al., CCS 2006) explicitly addresses solver timeouts in Section 4.3. It states: \"If STP times out, EXE assumes that the query is satisfiable and continues execution.\" This is done because assuming satisfiability is a conservative approach that ensures the engine does not prematurely prune paths that might contain bugs, even if it risks exploring infeasible paths. Answer 1 correctly identifies this behavior, while Answer 2 incorrectly claims that EXE assumes unsatisfiability and terminates the path.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:13+00:00",
+            "usage_in": 588,
+            "usage_out": 130
+        }
+    },
+    {
+        "item_id": 1503,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 987,
+        "tokens_out": 314,
+        "trace": {
+            "judge_output": "Reasoning process\nThe OKWS architecture is specifically designed to allow unprivileged service processes to handle client requests. The privileged `okd` process performs the initial binding to privileged ports (80/443) and accepts connections. It then passes these file descriptors to unprivileged workers. \n\nRegarding statement 1: Without FD passing, the worker processes cannot receive the established socket from `okd`. Since the workers are the ones intended to handle the application logic and communication with the client, they would be unable to interact with the client connection. Thus, statement 1 is True.\n\nRegarding statement 2: The question asks if it would be impossible for `okd` to run as a non-root user. `okd` is the process that binds to the privileged port. If `okd` is not root, it cannot bind to port 80/443. FD passing is a mechanism for privilege separation (passing the socket to a worker), but it does not solve the fundamental requirement that the process binding to the port must have root privileges (or specific capabilities). Therefore, the inability to pass FDs does not change the fact that `okd` (the listener) must be root to bind to privileged ports. The second statement is False because the constraint on `okd` running as root is due to port binding, not the FD passing mechanism. Answer 1 correctly identifies that FD passing is for privilege separation, not for enabling non-root binding.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:20+00:00",
+            "usage_in": 988,
+            "usage_out": 314
+        }
+    },
+    {
+        "item_id": 1600,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 587,
+        "tokens_out": 127,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2 is more accurate because it identifies evaporation as the primary and inevitable process occurring under standard ambient conditions. While Answer 1 correctly notes that both processes are physically possible under specific conditions (like high humidity or temperature gradients), in a standard context, a saucer of water placed on a table will undergo evaporation until it is gone. Suggesting \"Both\" implies that condensation is a standard, expected part of the process for a saucer of water on a table, which is misleading for a general scientific question. Answer 2 correctly focuses on the dominant, observable phenomenon.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:23+00:00",
+            "usage_in": 588,
+            "usage_out": 127
+        }
+    },
+    {
+        "item_id": 1821,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1331,
+        "tokens_out": 287,
+        "trace": {
+            "judge_output": "Reasoning process\nThe statements are evaluated as follows:\ni) False: GARCH(1,1) is more parsimonious than ARCH(q) because it captures long-memory effects with fewer parameters.\nii) True: ARCH(q) models are more prone to violating non-negativity constraints as the number of parameters increases.\niii) False: The statement claims the ARCH(q) model allows for an infinite number of lags. This is incorrect; by definition, ARCH(q) is restricted to $q$ lags. It is the GARCH(1,1) model that is equivalent to an ARCH($\\infty$) process.\niv) True: In the context of standard financial econometrics textbooks (e.g., Brooks), GARCH(1,1) is widely cited as being sufficient to capture the volatility dynamics for most financial time series, making it the \"workhorse\" model.\n\nAnswer 1 incorrectly identifies statement (iii) as true for the ARCH(q) model, whereas it is a property of the GARCH(1,1) model. Answer 2 correctly identifies (i) as false, (ii) as true, (iii) as false, and (iv) as true. Therefore, the set of true statements is (ii) and (iv), which corresponds to option A.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:25+00:00",
+            "usage_in": 1332,
+            "usage_out": 287
+        }
+    },
+    {
+        "item_id": 1822,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1320,
+        "tokens_out": 348,
+        "trace": {
+            "judge_output": "Reasoning process\nA triangular (recursive) system is defined by a structural matrix that is triangular and a diagonal covariance matrix of error terms. \n1. Statement (i) is true: OLS is consistent and efficient because the recursive structure ensures that the regressors are uncorrelated with the error term of the equation.\n2. Statement (ii) is true: Endogenous variables from earlier equations appear as regressors in later equations. These regressors are correlated with the error terms of the equations in which they were originally determined (the \"other\" equations).\n3. Statement (iii) is false: 2SLS is not required for recursive systems because OLS is already consistent. Applying 2SLS would be inefficient compared to OLS.\n4. Statement (iv) is false: The fundamental assumption of a recursive system is that the independent variables (exogenous or previously determined endogenous variables) are uncorrelated with the error term of the equation in which they appear. If they were correlated, the system would not be recursive, and OLS would be inconsistent.\n\nAnswer 1 correctly identifies (i) and (ii) as true and (iii) and (iv) as false. Although Answer 1 notes that none of the provided options perfectly match \"i and ii only,\" it correctly identifies the properties of the system. Answer 2 incorrectly suggests (iii) might be true and concludes with choice C, which includes (iii). Since (i) and (ii) are the only true statements, and Answer 1 provides the most accurate assessment of the statements despite the flawed multiple-choice options provided in the prompt, Answer 1 is the superior reasoning.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:27+00:00",
+            "usage_in": 1321,
+            "usage_out": 348
+        }
+    },
+    {
+        "item_id": 1836,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 997,
+        "tokens_out": 196,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for a disadvantage of the \"General-to-Specific\" (GETS) approach relative to the \"Specific-to-General\" approach. The Specific-to-General approach is widely criticized for the risk of omitted variable bias (Option A) because it starts with a small model. The GETS approach is specifically designed to mitigate this by starting with a General Unrestricted Model (GUM). However, a significant critique of the GETS approach is that if the initial GUM is mis-specified (e.g., it fails to capture the true data-generating process or is based on incorrect assumptions), the entire subsequent reduction process is compromised. Answer 2 correctly identifies that Option D is the inherent vulnerability of the top-down (GETS) methodology, whereas Answer 1 incorrectly attributes the risk of the Specific-to-General approach (Option A) to the GETS approach.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:29+00:00",
+            "usage_in": 998,
+            "usage_out": 196
+        }
+    },
+    {
+        "item_id": 2475,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1380,
+        "tokens_out": 252,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The question asks for an \"immediate (one-step) consequence\" of the given premises.\n2. The premises are:\n   (1) U ⊃ W\n   (2) W ⊃ (X ≡ ~Y)\n   (3) (X ≡ ~Y) ⊃ Z\n   (4) ~Z\n3. An immediate consequence is derived by applying a single rule of inference to the given premises.\n4. Applying Modus Tollens to (3) and (4) yields ~(X ≡ ~Y). This is a single step.\n5. Applying Modus Tollens to (2) and ~(X ≡ ~Y) would yield ~W. However, ~(X ≡ ~Y) is not a given premise; it is a derived conclusion. Therefore, deriving ~W requires two steps: first deriving ~(X ≡ ~Y) from (3) and (4), then deriving ~W from (2) and that result.\n6. Answer 2 correctly identifies that D is a direct, one-step consequence of the given premises, whereas C requires an intermediate step.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:30+00:00",
+            "usage_in": 1381,
+            "usage_out": 252
+        }
+    },
+    {
+        "item_id": 2583,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 592,
+        "tokens_out": 141,
+        "trace": {
+            "judge_output": "Reasoning process\nAccording to historical data from UNESCO and Our World in Data, the global adult literacy rate in 1950 is estimated to have been approximately 42% to 45%. Comparing the provided options: 36% (A) is closer to the 42-45% range than 56% (B), which is an overestimation for that time period (the 50% threshold was not crossed until the 1970s). Answer 2 correctly identifies that 56% is too high for 1950 and selects the option that is historically more accurate.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:33+00:00",
+            "usage_in": 593,
+            "usage_out": 141
+        }
+    },
+    {
+        "item_id": 2685,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1030,
+        "tokens_out": 207,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth provided answers correctly identify that all four options (A, B, C, and D) are scientifically inaccurate based on standard biological definitions. \n- Option A is incorrect because unsaturated fats are generally heart-healthy.\n- Option B is incorrect because receptors are primarily proteins.\n- Option C is incorrect because phospholipids are amphipathic, not water-soluble (they form membranes).\n- Option D is incorrect because steroids lack glycerol and fatty acids.\n\nSince the question is flawed, both answers struggle to find a \"correct\" choice. However, Answer 1 acknowledges the flaw and selects A based on the common association between lipids and heart disease discussions, whereas Answer 2 selects C, which is equally incorrect. Answer 1's reasoning is slightly more consistent in its admission that the question is flawed while attempting to navigate the provided constraints. Since both are technically wrong, Answer 1 is selected as the more coherent attempt to address a broken question.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:35+00:00",
+            "usage_in": 1031,
+            "usage_out": 207
+        }
+    },
+    {
+        "item_id": 2988,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 789,
+        "tokens_out": 180,
+        "trace": {
+            "judge_output": "Reasoning process\nThe acidity of oxoacids is primarily determined by the number of non-protonated oxygen atoms attached to the central atom. These oxygen atoms are highly electronegative and exert an inductive effect that withdraws electron density from the O-H bond, increasing the polarity of the bond and facilitating the release of the proton. Additionally, they stabilize the resulting conjugate base through resonance and charge delocalization. Answer 1 correctly identifies the mechanism (electron-withdrawing effect) that explains *why* the additional oxygen atoms make the acid stronger. Answer 2 correctly identifies that the number of oxygen atoms is the structural difference, but it incorrectly dismisses the mechanism of O-H bond weakening, which is a standard chemical explanation for increased acidity in this context. Answer 1 provides a more complete and scientifically accurate explanation of the underlying chemical principles.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:37+00:00",
+            "usage_in": 790,
+            "usage_out": 180
+        }
+    },
+    {
+        "item_id": 2995,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 1191,
+        "tokens_out": 232,
+        "trace": {
+            "judge_output": "Reasoning process\nTo determine if a reaction is spontaneous under standard conditions, the condition is $\\Delta G^\\circ < 0$. The relationship between $\\Delta G^\\circ$ and the equilibrium constant is $\\Delta G^\\circ = -RT \\ln(K_{eq})$. \n- If $\\Delta G^\\circ < 0$, then $\\ln(K_{eq}) > 0$, which means $K_{eq} > 1$. \n- $K_{eq} > 1$ implies that at equilibrium, the concentration of products is greater than the concentration of reactants. \n- Answer 1 correctly identifies that Choice A ($K_{eq} > 1$) is the only option that mathematically corresponds to a spontaneous reaction ($\\Delta G^\\circ < 0$). \n- Answer 2 incorrectly suggests that Choice C is the intended answer; however, a positive $\\Delta S^\\circ$ is not a sufficient condition for spontaneity, as it ignores the enthalpy component ($\\Delta H^\\circ$). Therefore, Answer 1 provides a more rigorous thermodynamic justification for selecting Choice A.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:38+00:00",
+            "usage_in": 1192,
+            "usage_out": 232
+        }
+    },
+    {
+        "item_id": 3285,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1192,
+        "tokens_out": 255,
+        "trace": {
+            "judge_output": "Reasoning process\nThe Duke of Saint-Simon is a complex historical figure. While he was a member of the high nobility, his memoirs are characterized by a deep-seated resentment toward Louis XIV's policies. He specifically lamented the \"domestication\" of the nobility—the process by which the King stripped the aristocracy of their traditional, independent political power and reduced them to mere courtiers dependent on royal favor. \n\nAnswer 1 (Choice B) correctly identifies that the Duke's bias is rooted in his status as a nobleman who felt the \"sting\" of the King's suppression of the nobility's political influence. Answer 2 (Choice D) attempts to nuance this by suggesting the Duke \"supported\" the King's preservation of social status while lamenting the loss of power. However, the Duke's writing is famously critical and often hostile toward the King's methods of control, which he viewed as a degradation of the nobility's rightful role in the state. Choice B is the standard historical interpretation of Saint-Simon's bias in the context of AP European History curricula, which emphasize his resentment toward the King's centralization of power and the resulting subjugation of the aristocracy.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:40+00:00",
+            "usage_in": 1193,
+            "usage_out": 255
+        }
+    },
+    {
+        "item_id": 3447,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 650,
+        "tokens_out": 180,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the main factor preventing subsistence economies from advancing. Subsistence economies are defined by production for self-consumption. The transition to an advanced economy requires market integration. Answer 1 correctly identifies that transportation infrastructure is the critical physical constraint that prevents subsistence farmers from accessing markets. Without the ability to move goods to a market, there is no incentive to produce a surplus, which is the prerequisite for economic advancement. Answer 2 argues for currency, but subsistence economies often function through barter or local exchange; the lack of currency is not the primary barrier to the *initial* transition toward surplus production, whereas the lack of physical access to markets (infrastructure) is a more fundamental structural barrier to economic development in underdeveloped regions. Therefore, Answer 1 provides a more robust economic explanation for the transition from subsistence to market-oriented production.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:41+00:00",
+            "usage_in": 651,
+            "usage_out": 180
+        }
+    },
+    {
+        "item_id": 3648,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 749,
+        "tokens_out": 132,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that under the Articles of Confederation, states retained the power to coin money, whereas Article I, Section 10 of the U.S. Constitution explicitly prohibits states from coining money. This makes A a power held by states under the Articles that was removed by the Constitution. Answer 2 incorrectly suggests that D is a power granted to states under the Articles; the Articles of Confederation did not have a president, and there was no mechanism for states to \"appeal to the president\" to adjudicate disputes. Therefore, Answer 1 provides the historically accurate reasoning.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:43+00:00",
+            "usage_in": 750,
+            "usage_out": 132
+        }
+    },
+    {
+        "item_id": 5466,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 957,
+        "tokens_out": 211,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The question states that the director asks for data on \"all donations given during the month of November\" and that there were 100 checks received. This implies that the 100 checks constitute the entire population of donations for that month.\n2. When the entire population is known, descriptive statistics (like the mean) are exact parameters, not estimates. Therefore, confidence intervals (which are used to estimate population parameters from samples) are inappropriate and unnecessary.\n3. Answer 1 correctly identifies that the data represents the population and that Statement A is a direct, factual description of that population.\n4. Answer 2 incorrectly assumes the 100 checks are a sample of a larger, unknown population. If the 100 checks are \"all donations,\" there is no \"population mean\" to estimate; the mean is already known to be $155. Thus, Answer 2's reliance on inferential statistics is misplaced.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:44+00:00",
+            "usage_in": 958,
+            "usage_out": 211
+        }
+    },
+    {
+        "item_id": 6097,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 606,
+        "tokens_out": 155,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question refers to a specific finding in psychological research regarding the reduction of the reaction time gap between younger and older adults. Studies, most notably those by researchers like Verghese et al. or studies focusing on the cognitive benefits of mind-body exercises, have highlighted that Tai chi is particularly effective in improving the specific cognitive-motor integration required to narrow this gap. While aerobic exercise (Answer 2) is beneficial for general cardiovascular and cognitive health, the specific research finding often tested in this context points to the unique benefits of Tai chi (Answer 1) for reaction time and postural control in older populations. Therefore, Answer 1 provides a more accurate reflection of the specific gerontological literature regarding this phenomenon.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:46+00:00",
+            "usage_in": 607,
+            "usage_out": 155
+        }
+    },
+    {
+        "item_id": 6330,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 584,
+        "tokens_out": 176,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the original discovery of women's capacity for multiple orgasms in the scientific community. While Alfred Kinsey (Answer 1) documented the prevalence of female orgasm in his 1953 report, his work was based on self-reported survey data. Masters and Johnson (Answer 2) are widely credited in the scientific and medical community for the first empirical, laboratory-based physiological study (\"Human Sexual Response,\" 1966) that demonstrated the physiological capacity for multiple orgasms in women. Because the question refers to the \"scientific community\" and the \"capacity\" (which implies the physiological mechanism), Masters and Johnson's work is the standard scientific reference for this discovery. Answer 2 provides a more accurate historical context regarding the physiological nature of the discovery.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:48+00:00",
+            "usage_in": 585,
+            "usage_out": 176
+        }
+    },
+    {
+        "item_id": 6470,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 696,
+        "tokens_out": 159,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the \"purpose\" of universal jurisdiction. In international law, universal jurisdiction is a jurisdictional principle that allows states to claim jurisdiction over certain crimes regardless of where they were committed or the nationality of the parties involved. Option C describes the *mechanism* or the *definition* of universal jurisdiction (providing jurisdiction to all states for particular crimes), whereas Option B describes the *policy objective* or *purpose* (deterrence). Legal literature generally defines the purpose of universal jurisdiction as ensuring that perpetrators of the most serious international crimes do not escape justice, which serves as a deterrent. Answer 1 incorrectly identifies the definition as the purpose, while Answer 2 correctly identifies the deterrent effect as the underlying purpose of the principle.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:50+00:00",
+            "usage_in": 697,
+            "usage_out": 159
+        }
+    },
+    {
+        "item_id": 6568,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 771,
+        "tokens_out": 194,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the parties in the Original Position (POP) are motivated by a specific moral concern for the \"disabled.\" Rawls explicitly states that the parties are mutually disinterested and do not know their own specific circumstances, including whether they have a disability. Therefore, they do not choose to \"protect the disabled\" as a specific group; rather, they choose principles that maximize the position of the least advantaged, whoever they may be. Answer 2 correctly identifies that the parties are not motivated by altruism (ruling out C) and correctly identifies that the framework is fundamentally egalitarian. While \"power\" is not a primary good in Rawls's list, the choice of \"equality\" (specifically the equal distribution of primary goods unless an inequality benefits the least advantaged) is the most consistent with the Difference Principle and the egalitarian nature of Rawls's theory compared to the other options provided.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:51+00:00",
+            "usage_in": 772,
+            "usage_out": 194
+        }
+    },
+    {
+        "item_id": 6693,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 617,
+        "tokens_out": 133,
+        "trace": {
+            "judge_output": "Reasoning process\nThe term \"hasty conclusion\" is widely recognized in logic and critical thinking textbooks as a synonym for \"hasty generalization.\" While \"jumping to a conclusion\" is a colloquial idiom, \"hasty generalization\" is the formal name for the logical fallacy (also known as the fallacy of insufficient statistics or converse accident). Answer 2 correctly identifies the technical classification of the term within the context of logical fallacies, whereas Answer 1 relies on a broader idiomatic interpretation. In academic contexts, \"hasty generalization\" is the standard term for the fallacy of reaching a conclusion based on insufficient evidence.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:53+00:00",
+            "usage_in": 618,
+            "usage_out": 133
+        }
+    },
+    {
+        "item_id": 6696,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 865,
+        "tokens_out": 211,
+        "trace": {
+            "judge_output": "Reasoning process\nThe term *argumentum ad crumenam* is a well-known informal fallacy (the appeal to wealth). Both provided answers correctly identify that none of the options (A, B, C, D) are standard or accurate definitions for this fallacy. Answer 1 suggests \"C\" (False sign) without a clear logical justification, while Answer 2 suggests \"D\" (Hasty Conclusion) based on the reasoning that it involves drawing a conclusion from irrelevant evidence. In many logic textbooks, *ad crumenam* is classified as a fallacy of relevance. While \"Hasty Conclusion\" is also not a standard definition, it is a broader category that encompasses the error of drawing a conclusion from insufficient or irrelevant premises (like wealth), making it a slightly more logical choice than \"False sign\" in the context of multiple-choice tests that lack the correct option. Therefore, Answer 2 provides a more coherent, albeit forced, justification for selecting an option from a flawed list.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:55+00:00",
+            "usage_in": 866,
+            "usage_out": 211
+        }
+    },
+    {
+        "item_id": 6699,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 1118,
+        "tokens_out": 222,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question describes a classic \"argument from ignorance\" (ad ignorantiam), where the lack of evidence for an effect is used to claim that no effect exists. Both provided answers correctly identify that none of the options (A, B, C, or D) accurately describe this fallacy. Answer 1 suggests \"D\" (Argument from authority) as a potential miscategorization, while Answer 2 suggests \"B\" (Solid slope, likely a typo for Slippery Slope) as a potential miscategorization. Neither choice is logically sound. However, Answer 1 provides a more coherent critique of the options and correctly identifies that the question is likely flawed or from a defective test bank. Answer 2's reasoning is slightly more speculative regarding the \"solid slope\" typo. Between the two, Answer 1's assessment that the question is defective is more accurate, and its selection of D is a common fallback in poorly constructed multiple-choice logic tests where the \"authority\" of the speaker is used to dismiss the need for evidence.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:57+00:00",
+            "usage_in": 1119,
+            "usage_out": 222
+        }
+    },
+    {
+        "item_id": 6838,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 703,
+        "tokens_out": 162,
+        "trace": {
+            "judge_output": "Reasoning process\nIn machine learning, an \"example\" (or instance) is defined as a complete vector consisting of all attributes plus the class label. If an attribute combination is (a1, a2, a3, a4), an example is defined as (a1, a2, a3, a4, class). Since there are 3 × 2 × 2 × 2 = 24 possible attribute combinations and each can be associated with any of the 3 possible class values, the total number of unique examples is 24 × 3 = 72. Answer 1 correctly identifies that the class is part of the example definition, whereas Answer 2 incorrectly assumes the class is separate from the example.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:20:59+00:00",
+            "usage_in": 704,
+            "usage_out": 162
+        }
+    },
+    {
+        "item_id": 6851,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 678,
+        "tokens_out": 147,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that the magnitude of a regression coefficient is scale-dependent. In linear regression, a coefficient value of 100 for a feature measured in millimeters is equivalent to a coefficient of 0.1 for the same feature measured in meters. Without information regarding feature scaling (standardization) or the units of the variables, the raw magnitude of a coefficient cannot be used to determine the \"importance\" or \"strength\" of a feature. Answer 2 incorrectly assumes that a high magnitude automatically implies a strong effect, ignoring the fundamental role of feature scaling in interpreting regression coefficients. Therefore, Answer 1 provides a more rigorous and statistically accurate assessment.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:00+00:00",
+            "usage_in": 679,
+            "usage_out": 147
+        }
+    },
+    {
+        "item_id": 6856,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 907,
+        "tokens_out": 237,
+        "trace": {
+            "judge_output": "Reasoning process\n1. Statement 1 is clearly True: AlexNet uses 11x11 kernels in the first layer, while VGGNet uses 3x3 kernels.\n2. Statement 2 concerns the timeline of data-dependent weight initialization versus Batch Normalization (BN). BN was introduced in early 2015. Data-dependent initialization techniques, such as those proposed by Krähenbühl et al. (2015) or Mishkin and Matas (2015), were developed in the same timeframe or later. Crucially, the concept of \"data-dependent initialization\" as a distinct, widely recognized category of techniques to replace or augment standard random initialization (like Xavier or He initialization) gained prominence specifically as a response to the challenges of training deep networks that BN also addressed. There is no significant body of literature establishing \"data-dependent weight initialization\" as a standard, widely recognized procedure introduced *before* the 2015 Batch Normalization paper. Answer 2 correctly identifies that these methods are generally considered concurrent or later developments, making the statement False.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:02+00:00",
+            "usage_in": 908,
+            "usage_out": 237
+        }
+    },
+    {
+        "item_id": 6860,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 921,
+        "tokens_out": 255,
+        "trace": {
+            "judge_output": "Reasoning process\nStatement 1 is clearly True in both answers, as the weight update rule $D_{t+1}(i) = D_t(i) \\exp(\\alpha_t y_i h_t(x_i))$ implies that for misclassified examples ($y_i \\neq h_t(x_i)$), the weight is multiplied by $\\exp(\\alpha_t)$, which is constant for a given iteration $t$.\n\nRegarding Statement 2: In AdaBoost, as the algorithm progresses, the distribution $D_t$ shifts to place more weight on examples that are difficult to classify. Because the weak learners are forced to focus on these increasingly difficult examples, the weighted error $\\epsilon_t$ of the $t$-th weak learner typically increases over time, often trending toward 0.5 (the error rate of a random guesser). This is a well-documented characteristic of the AdaBoost algorithm, as the \"easy\" examples are quickly learned and the remaining examples become progressively harder to classify correctly. Therefore, Statement 2 is considered True in the context of standard machine learning literature regarding AdaBoost's behavior. Answer 2 correctly identifies this property.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:09+00:00",
+            "usage_in": 922,
+            "usage_out": 255
+        }
+    },
+    {
+        "item_id": 6861,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 654,
+        "tokens_out": 162,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that MLEs are consistent and asymptotically efficient, making them generally desirable estimators. While MLEs can be biased in finite samples, this is a well-known property rather than a fundamental flaw that makes them \"undesirable\" in a general sense. Answer 2 suggests that \"high variance\" is a defining drawback of MLEs; however, MLEs are asymptotically efficient, meaning they achieve the minimum possible variance among consistent estimators as the sample size grows. While MLEs can overfit in small samples, labeling them as having \"high variance\" as a general characteristic is statistically imprecise compared to the properties of consistency and efficiency. Therefore, Answer 1 provides a more accurate assessment of the theoretical properties of MLEs.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:11+00:00",
+            "usage_in": 655,
+            "usage_out": 162
+        }
+    },
+    {
+        "item_id": 6864,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 881,
+        "tokens_out": 223,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks which methods result in a model that differs from a standard linear regression (OLS) model applied to the final subset of features. \n1. In Best-subset selection, the algorithm typically evaluates models using OLS for each subset. Therefore, the final model selected is already an OLS model.\n2. In Forward stepwise selection, at each step, a variable is added based on the best fit, and the model is refitted using OLS. Thus, the final model is an OLS model.\n3. In Forward stagewise selection, the coefficients are updated in small increments (similar to gradient descent) and do not necessarily reach the OLS solution for the chosen subset of features. \nAnswer 1 correctly identifies that only Forward stagewise selection inherently produces a model different from an OLS model on the same subset. Answer 2 incorrectly claims that Best-subset and Forward stepwise selection produce models that differ from OLS, which contradicts the standard definition of these algorithms where OLS is the underlying fitting mechanism.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:14+00:00",
+            "usage_in": 882,
+            "usage_out": 223
+        }
+    },
+    {
+        "item_id": 7051,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 581,
+        "tokens_out": 146,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question refers to the concept of \"field of experience\" or \"common ground,\" which is essential for encoding and decoding messages effectively. Answer 1 correctly identifies that \"The realm of understanding\" (a synonym for field of experience) is the element that ensures the source and receiver share a common frame of reference. Answer 2 incorrectly identifies \"Feedback\" as the element that recognizes the need for mutual understanding; while feedback is a component of the communication process that helps verify understanding, it is not the element that *recognizes* the prerequisite of shared understanding itself. Therefore, Answer 1 provides a more accurate conceptual alignment with the definition provided in the prompt.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:16+00:00",
+            "usage_in": 582,
+            "usage_out": 146
+        }
+    },
+    {
+        "item_id": 7310,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 795,
+        "tokens_out": 195,
+        "trace": {
+            "judge_output": "Reasoning process\nAngelman syndrome is caused by the loss of expression of the maternally inherited *UBE3A* gene on chromosome 15q11-q13. \n- Maternal UPD 15 means an individual inherits two copies of the maternal chromosome 15 and no paternal copy. Since the paternal copy is normally silenced in this region, having two maternal copies results in an overexpression of genes that should be silenced (like *SNRPN*), leading to Prader-Willi syndrome. Thus, Answer 1 is incorrect.\n- Paternal UPD 15 means an individual inherits two copies of the paternal chromosome 15 and no maternal copy. Since the maternal *UBE3A* gene is required for normal development in the brain and the paternal copy is silenced, the absence of the maternal chromosome leads to Angelman syndrome. Thus, Answer 2 correctly identifies the mechanism.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:17+00:00",
+            "usage_in": 796,
+            "usage_out": 195
+        }
+    },
+    {
+        "item_id": 7391,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 702,
+        "tokens_out": 175,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks which material's resistance is LEAST affected by temperature. Copper is a metal with a positive temperature coefficient of resistance (TCR). Carbon, Germanium, and Silicon are semiconductors (or materials with semiconducting properties) that exhibit a negative temperature coefficient of resistance. In semiconductors, the number of charge carriers increases exponentially with temperature, leading to a very large decrease in resistance. While metals like copper do change with temperature, their TCR is generally much smaller in magnitude than the drastic changes observed in semiconductors. Answer 2 correctly identifies that semiconductors (Germanium, Silicon, and Carbon) have high sensitivity to temperature due to the thermal excitation of charge carriers, whereas the resistance change in a metal like copper is more stable and predictable by comparison. Therefore, Copper is the least affected among the choices provided.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:19+00:00",
+            "usage_in": 703,
+            "usage_out": 175
+        }
+    },
+    {
+        "item_id": 8195,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 604,
+        "tokens_out": 147,
+        "trace": {
+            "judge_output": "Reasoning process\nIn \"War and Massacre,\" Thomas Nagel explicitly frames his discussion around the conflict between \"utilitarian\" and \"absolutist\" moral considerations. While these terms are related to broader philosophical categories like consequentialism and deontology, Nagel does not use the specific terminology \"dignity-based\" or \"forward-looking/backward-looking\" as the primary labels for the two kinds of moral considerations he discusses in this specific essay. Answer 2 incorrectly assumes that because these terms are related to the concepts, they are all used by Nagel to define his categories, which is not the case. Answer 1 correctly identifies the specific terminology Nagel employs in the text.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:20+00:00",
+            "usage_in": 605,
+            "usage_out": 147
+        }
+    },
+    {
+        "item_id": 8516,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 664,
+        "tokens_out": 133,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly interprets hiding a grandparent's teeth as \"elder abuse.\" In the context provided (\"because he loves a good steak\"), the action is clearly framed as a playful, albeit mischievous, prank rather than a malicious act of harm. Answer 2 correctly identifies that Scenario 1 is a lighthearted family interaction and that Scenario 2, by phrasing the action as \"pushed the small children\" (implying an act of aggression rather than pushing them on a swing), describes a morally wrong action. Therefore, Answer 2 provides a more accurate assessment of ordinary moral standards.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:22+00:00",
+            "usage_in": 665,
+            "usage_out": 133
+        }
+    },
+    {
+        "item_id": 9719,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 588,
+        "tokens_out": 160,
+        "trace": {
+            "judge_output": "Reasoning process\nIn *The View from Nowhere*, Nagel argues that skepticism is not a result of \"arbitrarily\" stringent standards (which implies they are baseless or random), but rather that it arises from the \"consistent application\" of our ordinary standards of justification. He contends that when we take our ordinary criteria for knowledge and apply them universally and objectively—without the context-dependent constraints of everyday life—we inevitably arrive at skeptical conclusions. Answer 2 correctly identifies that Nagel views skepticism as a natural, consistent extension of our ordinary standards, whereas Answer 1 incorrectly characterizes these standards as \"arbitrarily stringent,\" which misses Nagel's point that the standards themselves are the ones we normally use, just applied in a detached, philosophical context.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:23+00:00",
+            "usage_in": 589,
+            "usage_out": 160
+        }
+    },
+    {
+        "item_id": 10642,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 1300,
+        "tokens_out": 268,
+        "trace": {
+            "judge_output": "Reasoning process\nThe Contract Clause (Article I, Section 10) prohibits states from passing laws that substantially impair the obligation of contracts. When a state law retroactively alters the remedies available to a party under a contract, courts apply a balancing test. If the law substantially impairs the contract, it must be reasonable and necessary to serve a significant and legitimate public purpose. \n\nIn this scenario, the statute fundamentally changes the seller's remedy from a self-help forfeiture (which allows for immediate repossession and retention of payments) to a formal judicial foreclosure (which is time-consuming, costly, and requires a 60-day grace period). This is a substantial impairment of the seller's vested contractual rights. While states have police power, the retroactive application of such a significant change to the core enforcement mechanism of existing contracts is generally held to be an unconstitutional impairment of the obligation of contracts. Answer 1 correctly identifies that the retroactive application is the primary constitutional issue and that such a change constitutes an impairment. Answer 2 incorrectly characterizes the change as merely \"procedural\" and suggests it is constitutional because it provides \"more\" due process, ignoring the fact that the Contract Clause specifically protects the bargained-for remedies of the parties from retroactive state interference.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:25+00:00",
+            "usage_in": 1301,
+            "usage_out": 268
+        }
+    },
+    {
+        "item_id": 12452,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 871,
+        "tokens_out": 255,
+        "trace": {
+            "judge_output": "Reasoning process\nGoal-Setting Theory (Locke & Latham) identifies specific, difficult goals as the primary drivers of performance. Regarding the options:\n- Option A is a standard definition of the functions of goals.\n- Option B is the central pillar of the theory.\n- Option D is widely accepted in the theory as a mechanism to enhance goal commitment, which is a necessary condition for the theory to work.\n- Option C is the most problematic. While feedback is a critical moderator, the theory does not state that \"frequent\" feedback is the key to maximizing attainment. In fact, excessive or poorly timed feedback can be detrimental. However, comparing Answer 1 and Answer 2, Answer 1 correctly identifies that Locke and Latham's empirical research specifically found that participation (Option D) does not inherently lead to higher performance than assigned goals (as long as the goals are accepted). Therefore, claiming participation is \"also good\" (implying it is a fundamental requirement for performance) is often cited in academic literature as a common misconception or a point where the theory is more nuanced than the statement suggests. Answer 1 provides a more accurate reflection of the specific empirical findings regarding participation versus assigned goals.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:27+00:00",
+            "usage_in": 872,
+            "usage_out": 255
+        }
+    },
+    {
+        "item_id": 12462,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 688,
+        "tokens_out": 287,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the construct that is not pertinent to developmental models of intelligence. \n- Investment theory (Cattell) is explicitly a developmental theory explaining the transition from fluid to crystallized intelligence.\n- Primary mental abilities (Thurstone) are frequently used in developmental research to map the growth of specific cognitive domains.\n- The \"positive manifold\" is a foundational empirical observation in psychometrics (the fact that all cognitive tests correlate positively). While it is a structural observation, it is the very phenomenon that developmental models (like the differentiation-dedifferentiation hypothesis) seek to explain or account for as individuals age.\n- \"G theory\" (General Intelligence) is a structural model of the organization of intelligence. While it is used in developmental models (like CHC theory), it is fundamentally a static structural construct. \n- Comparing the two answers: Answer 1 correctly identifies that G theory is a structural/psychometric model rather than a developmental one. Answer 2 incorrectly identifies the positive manifold as the outlier; however, the positive manifold is a central phenomenon in developmental intelligence research (e.g., the \"differentiation hypothesis\" specifically tests whether the positive manifold weakens or strengthens with age). Therefore, G theory is the most distinct from a \"developmental model\" as it describes the static hierarchy of intelligence rather than the process of change.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:29+00:00",
+            "usage_in": 689,
+            "usage_out": 287
+        }
+    },
+    {
+        "item_id": 13056,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 632,
+        "tokens_out": 151,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question refers to a specific comparison often found in public relations textbooks (such as \"Strategic Planning for Public Relations\" by Ronald D. Smith). In these academic comparisons, the models by Hendrix, Kendall, Merston, and Parkinson & Ekachai are analyzed for their structural components. These models are consistently identified as sharing the common elements of \"Objectives\" and \"Implementation\" (or action). While \"Strategy\" is a broad term often used in these models, \"Objectives\" is the specific, distinct component cited in the literature as a shared requirement for these particular frameworks to function effectively. Answer 2 correctly identifies the specific terminology used in the academic context of these PR planning models.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:31+00:00",
+            "usage_in": 633,
+            "usage_out": 151
+        }
+    },
+    {
+        "item_id": 13058,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 885,
+        "tokens_out": 336,
+        "trace": {
+            "judge_output": "Reasoning process\nW. Timothy Coombs' Situational Crisis Communication Theory (SCCT) categorizes strategies into Deny, Diminish, and Rebuild (with Bolster often included as a secondary or supplemental category). The options provided in the question appear to be derived from William Benoit’s Image Restoration Theory rather than Coombs' SCCT. Benoit’s categories include \"Denial\" (which encompasses \"Simple Denial\" and \"Shift the Blame\"), \"Evading Responsibility\" (which includes \"Provocation,\" \"Defeasibility,\" \"Accident,\" and \"Good Intentions\"), \"Reducing Offensiveness\" (which includes \"Bolstering,\" \"Minimization/Downplaying,\" \"Differentiation,\" \"Transcendence,\" \"Attack Accuser,\" and \"Compensation\"), and \"Mortification.\" \n\n\"Nonexistence\" is a specific strategy within Benoit's \"Denial\" category (often involving clarification or intimidation). \"Ingratiation\" is a form of bolstering. \"Downplaying\" (Minimization) is a form of reducing offensiveness. \"Distancing\" is a concept often discussed in crisis management literature but is not a formal category in Coombs' SCCT. However, comparing the two provided answers, Answer 1 correctly identifies that \"nonexistence\" is not a standard category in Coombs' SCCT framework, whereas Answer 2 incorrectly claims \"nonexistence\" is a recognized strategy under Coombs' \"Deny\" posture. Answer 1 provides a more accurate assessment of the discrepancy between the terminology used in the question and Coombs' actual framework.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:33+00:00",
+            "usage_in": 886,
+            "usage_out": 336
+        }
+    },
+    {
+        "item_id": 13066,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 599,
+        "tokens_out": 125,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question is derived from standard strategic management curricula, specifically referencing Anthony Henry's textbook \"Understanding Strategic Management\" (2006). In this text, Henry explicitly defines strategy in the context of achieving competitive advantage. While Betteke Steyn (2003) is a significant figure in strategic communication, her work focuses on the contribution of communication to organizational strategy rather than the foundational definition of strategy as a tool for competitive advantage in the general management sense. Answer 2 correctly identifies the primary source associated with this specific definition in academic literature.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:34+00:00",
+            "usage_in": 600,
+            "usage_out": 125
+        }
+    },
+    {
+        "item_id": 13075,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 577,
+        "tokens_out": 169,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the most significant Internet-related challenge in public relations. Answer 1 focuses on the strategic application of social media, which is a core function of PR. Answer 2 focuses on the general need to keep up with technology. In the context of PR textbooks and professional standards, the primary challenge is not just the existence of new technology (D), but the specific, complex task of managing client reputation and communication within the unique, often volatile, and interactive social media environments (A). Representing clients effectively in these new spaces is the defining challenge of modern PR, whereas \"staying abreast of technology\" is a broader requirement for many industries, not just PR. Therefore, Answer 1 provides a more discipline-specific and accurate assessment of the primary challenge.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:36+00:00",
+            "usage_in": 578,
+            "usage_out": 169
+        }
+    },
+    {
+        "item_id": 13164,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 843,
+        "tokens_out": 172,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for a potential problem arising from the \"institutionalization of academe-policy interaction.\" Answer 1 identifies the \"IR-ification\" of security studies (Option C) as the problem. However, \"IR-ification\" refers to the disciplinary location of security studies within universities, not the interaction between academe and policy. Answer 2 identifies the \"institutional blurring\" between universities, think tanks, and policy (Option D) as the problem. This \"blurring\" is a classic critique in the literature regarding the institutionalization of academe-policy interaction, as it suggests that the independence of academic inquiry is compromised when the boundaries between research and policy-making become indistinguishable. Therefore, Answer 2 correctly identifies the problem associated with the *interaction* between these spheres.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:37+00:00",
+            "usage_in": 844,
+            "usage_out": 172
+        }
+    },
+    {
+        "item_id": 13173,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 948,
+        "tokens_out": 194,
+        "trace": {
+            "judge_output": "Reasoning process\n- Option A is a standard definition of offensive realism.\n- Option D is a core tenet of offensive realism (Mearsheimer).\n- Option C is generally accepted in IR theory as both schools are branches of structural realism that view the anarchic system as inherently competitive and power-centric.\n- Option B is the most inaccurate statement. Defensive realism (Waltz) emphasizes self-help, balancing, and the maintenance of the status quo. While defensive realists acknowledge that cooperation is possible under certain conditions, they do not view it as the primary \"way\" to achieve security; rather, they view security as being achieved through structural balancing and the avoidance of over-expansion. Calling cooperation the \"way\" to achieve security is a fundamental mischaracterization of defensive realism, which remains rooted in the self-help nature of anarchy. Answer 2 correctly identifies this flaw in option B.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:39+00:00",
+            "usage_in": 949,
+            "usage_out": 194
+        }
+    },
+    {
+        "item_id": 13178,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 980,
+        "tokens_out": 177,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks how biological differences affect the roles that men and women must perform for the state. Option A directly addresses the prompt by explaining a functionalist/essentialist perspective on how biological differences (specifically physical strength and reproductive capacity) are used to justify the division of labor within the state (men as protectors/security, women as caregivers). Option D, while sociologically valid in many academic contexts, essentially denies the premise of the question by arguing that gender roles are social constructs rather than biological ones. Answer 2 correctly identifies that Option A provides the most direct explanation of the relationship between biological differences and state-assigned roles as requested by the prompt, whereas Answer 1 chooses the option that rejects the premise of the question entirely. Therefore, Answer 2 provides a more accurate analysis of the question's intent.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:41+00:00",
+            "usage_in": 981,
+            "usage_out": 177
+        }
+    },
+    {
+        "item_id": 13410,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 777,
+        "tokens_out": 215,
+        "trace": {
+            "judge_output": "Reasoning process\nThe growth of income inequality in the 1980s is widely attributed by economists to \"skill-biased technological change\" and the shift in labor demand toward high-skilled, professional, and technical roles. As the economy moved away from manufacturing toward services and technology, the demand for highly educated workers outpaced the supply, driving up their wages, while the decline of unions and the stagnation of low-skilled wages widened the gap. Answer 1 correctly identifies this structural shift (skill-biased technological change) as the primary driver. Answer 2 incorrectly attributes the inequality primarily to unemployment and welfare dependency; while unemployment was a factor, it does not explain the structural widening of the income distribution as accurately as the labor market dynamics described in Answer 1. Furthermore, Answer 1 correctly identifies that tax rates for the wealthy were cut, not increased, refuting option A, whereas Answer 2's reasoning regarding the bifurcation of the workforce is less precise than the economic consensus regarding the professional labor market.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:43+00:00",
+            "usage_in": 778,
+            "usage_out": 215
+        }
+    },
+    {
+        "item_id": 13638,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 534,
+        "tokens_out": 131,
+        "trace": {
+            "judge_output": "Reasoning process\nIn international relations, \"direct diplomacy\" is defined by the absence of intermediaries or third-party negotiators. Answer 1 correctly identifies that the core principle is bilateral engagement between the principals, excluding intermediaries. Answer 2 incorrectly equates direct diplomacy solely with \"face-to-face meetings\" (summits). While summits are a form of direct diplomacy, they are not the definition of the term; direct diplomacy can also occur through direct communication channels (like hotlines or direct correspondence) without a third party. Therefore, Answer 1 provides a more accurate and comprehensive definition of the term.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:44+00:00",
+            "usage_in": 535,
+            "usage_out": 131
+        }
+    },
+    {
+        "item_id": 13722,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 673,
+        "tokens_out": 137,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks what polyomaviruses \"predominantly\" cause. Polyomaviruses (such as BK and JC) are ubiquitous, and in the vast majority of the human population, they establish persistent, asymptomatic infections. Answer 1 correctly identifies that the predominant state of infection is asymptomatic (\"No disease at all\"). Answer 2 focuses on clinical manifestations in immunocompromised hosts, which, while significant, represent a minority of cases compared to the asymptomatic state in the general population. Therefore, Answer 1 provides a more accurate interpretation of the term \"predominantly\" in the context of the general population.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:46+00:00",
+            "usage_in": 674,
+            "usage_out": 137
+        }
+    },
+    {
+        "item_id": 13892,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 854,
+        "tokens_out": 136,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that none of the listed battles are the Conquest of Mecca, but it fails to provide a logical connection between the options and the event, ultimately guessing arbitrarily. Answer 2 correctly identifies that while none of the options are the Conquest of Mecca itself, the Battle of the Trench (Khandaq) was a critical strategic turning point that broke the Meccan coalition's power, directly leading to the Treaty of Hudaybiyyah, which was the immediate diplomatic precursor to the Conquest of Mecca. Therefore, Answer 2 provides a more historically sound justification for selecting one of the provided options.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:21:47+00:00",
+            "usage_in": 855,
+            "usage_out": 136
+        }
+    }
+]
