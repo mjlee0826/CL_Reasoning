@@ -43,6 +43,8 @@ Test/                舊格式結果檔的評分（TestEM、TestRecoveryBlind、
 scripts/analysis_0A/ paper_status 0A 系列分析（split-half、EIV、難度分層 ...）
 scripts/analysis_rq1/ RQ1：少量標註預測「聚合或用單一 path」
 scripts/analysis_rq2/ RQ2：交叉實驗（候選固定、只換 Judge 模型）的呼叫與分析
+scripts/analysis_rq1k/ RQ1-K：K 條 path 的多數決 vs 同一份菜單內最強的單一 path（離線）
+scripts/analysis_rq1kj/ RQ1-KJ：K 條 path 的 Judge 版本 vs 同一份菜單內最強的單一 path（呼叫 API）
 scripts/legacy_eval/ 舊格式結果的評分與彙整（test_em、test_tokens、test_em_legacy ...）
 scripts/router/      XLM-R router（原論文的 per-query 語言對路由）
 
@@ -57,6 +59,9 @@ result/analysis/items/    run_analysis 的逐題匯出（paths.csv.gz、aggregat
 result/analysis/0A/       0A 系列的 CSV
 result/analysis/rq1/      RQ1 的判定標準與輸出
 result/analysis/rq2/      RQ2 的判定標準、交叉 Judge 的原始輸出（judge_outputs/，付費取得、不可重產）與分析輸出
+result/analysis/rq1k/     RQ1-K 的判定標準與輸出
+result/analysis/rq1kj/    RQ1-KJ 的判定標準、開跑前檢查、K 條 path Judge 的原始輸出（judge_outputs/，付費取得、不可重產）與分析輸出
+result/analysis/rq1k/     RQ1-K 的判定標準與輸出
 result/analysis/legacy/   舊 summary 表
 result/archive/           退出新框架的結果（gemini-2.5-flash-lite/{arms,aggregations}/gemini/...）
 result/baseline/ challenge/ self_reflection/ english_*/ tempature*/ voting/ oldresult/   舊格式結果（唯讀）
@@ -178,6 +183,44 @@ python scripts/analysis_rq2/cross_judge.py               # 分析 -> result/anal
   流程核對一致率 < 95% 的模型，`full` 會用交叉流程重跑它的整條對角線。
 - 分析程式先核對：沿用舊檔的對角線必須和 `aggregation_cells.csv` 完全相同；交叉檔必須完整、順序與主網格相同。不符就停。
 - DeepSeek 在尖峰時段（週一至五 UTC 01–04、06–10）價格加倍，程式會提醒；可用 `-j deepseek4.1flash` 另外排在離峰。
+
+**⑧ RQ1-K：多條 path 的多數決 vs 單一最強 path**（離線，只讀 `result/arms`）
+
+```bash
+python scripts/analysis_rq1k/menu_vote.py      # -> result/analysis/rq1k/
+```
+
+- 規格與判定標準在 `result/analysis/rq1k/rq1k_criteria.md`（已確認，不得修改）；「確認」欄空著時拒跑，輸出記錄它的 sha256。
+- 菜單（M3L / M3S / M3P / M3W / M5L / M12 / M8EN / M14）定義在 `Analysis/menuVote.py`；多數決平手取優先順序最高的 path
+  （L:en 第一，其餘依 path 短代號的字母序：EN、ES、JA、P1、P2、R、RU、S1、S2、SR-EN、SR-ZH、W1、W2、ZH；不是依 arm_id）。切分與 RQ1 相同（`makeSplits(n, 200, seed=0)`），S_in / S_all 在 H1 上選、在 H2 上評。
+- 每次切分核對 Excess_in = headroom × (recovery − recovery_blind)（誤差 ≤ 1e-9），不符就停。
+- 輸出：`rq1k_items.csv.gz`、`rq1k_blocks.csv`、`rq1k_compare.csv`（判定三的逐區塊值）、`report.md`、`excess_m12_blocks.png`、`excess_menus.png`。
+
+**⑨ RQ1-KJ：K 條 path 的 Judge 版本 vs 單一最強 path**（需要 `result/arms`、主網格 Judge 檔、`result/analysis/rq1k/rq1k_blocks.csv`、
+`result/analysis/rq2/judge_outputs/`；呼叫 API）
+
+```bash
+python scripts/analysis_rq1kj/run_menu_judge.py reproduce   # §6.1 離線重現 RQ1-K 的 A_V、S_in、Excess_V（1e-9）
+python scripts/analysis_rq1kj/run_menu_judge.py template    # §6.2 K = 2 的 prompt 重算 tokens = 主網格 tokens_in（Gemini 走免費的 count_tokens）
+python scripts/analysis_rq1kj/run_menu_judge.py check       # §6.3 四個模型重跑 mmlu × EN+S1 自己裁決自己（523 次呼叫）
+python scripts/analysis_rq1kj/run_menu_judge.py pilot       # §6.4 每個模型 M12 100 題 × 2 次，估全量成本（800 次呼叫）
+python scripts/analysis_rq1kj/run_menu_judge.py full        # 全量（共 22,632 次，試跑的 400 次沿用）；-m 可只跑某些模型
+python scripts/analysis_rq1kj/menu_judge.py                 # 分析 -> result/analysis/rq1kj/
+```
+
+- 規格與判定標準在 `result/analysis/rq1kj/rq1kj_criteria.md`（已確認，不得修改）；「確認」欄空著時兩支程式都拒跑，輸出記錄它的 sha256。
+- 每一步都要上一步的結果檔（`reproduce.json` → `template_check.json` → `precheck.json` → `pilot.json`）存在、
+  寫於同一份判定標準之下且通過；沒通過就停下來回報，不跑下一步。`pilot` 通過後要使用者確認才跑 `full`。
+- 自己裁決自己；prompt `choice-k-v1`（主網格 choice-v1 的同一個函式，候選數換成 K；`Aggregator/MenuJudgeAggregator.py`）；
+  只裁決菜單內每條 path 都有答案且答案不完全一致的題目；候選順序是「每 K 題一組、每組不同的隨機基準順序」的循環旋轉
+  （`Strategy/MenuJudge.groupedOrders`，seed 0）。菜單：M12（主要）、M3L、M3S、M3P。
+- 原始輸出在 `judge_outputs/{model}/{dataset}/{menu}.json`，也是續跑的快取；每筆記錄供應商回傳的版本、呼叫時間、API token 與 prompt 的 sha256。
+  `precheck/` 是 §6.3 的重跑，`pilot_rep2/` 是試跑的第二次（只用來算一致率）。
+- 分析程式先核對：每個 Judge 檔都完整、prompt 為 choice-k-v1、順序等於 `groupedOrders`；每次切分核對
+  Excess = headroom × (recovery − recovery_blind)（Judge 與多數決各一，誤差 ≤ 1e-9）。不符就停。
+- 輸出：`rq1kj_blocks.csv`、`rq1kj_compare.csv`（判定三的逐區塊值）、`judge_outputs/items.csv.gz`、`models.csv`、`report.md`、
+  `excess_menus.png`、`excess_j_m12_blocks.png`。
+- DeepSeek 在尖峰時段（週一至五 UTC 01–04、06–10）價格加倍，程式會提醒；可用 `-m deepseek4.1flash` 另外排在離峰。
 
 ---
 

@@ -53,7 +53,13 @@ from Analysis.experimentPlan import PATHS
 from Analysis import probe as rq1
 from Analysis import crossJudge as rq2
 from Analysis import crossJudgeStats as rq2stats
+from Analysis import blockStats
+from Analysis import menuVote as rq1k
 from Strategy.CrossJudge import CrossJudge
+from Strategy.MenuJudge import MenuJudge, ORDER_GROUPED
+from Aggregator.MenuJudgeAggregator import MenuJudgeAggregator
+from Analysis import menuJudge as rq1kj
+from Analysis import menuJudgeStats as rq1kjstats
 
 # Hashes of the prompts produced by the legacy OnlyOneLanguage.getPrompt (deleted 2026-10) BEFORE it was refactored onto PromptBuilder
 GOLDEN_QUESTION = 'There is a Problem: \nWhat is 2+2?.\nAnd there are 5 choices\na ) 1 , b ) 2 , c ) 3 , d ) 4 , e ) 5\n'
@@ -958,9 +964,9 @@ def checkCrossJudgeStats():
 
     R = rq2stats.blockMeans(cells())
     judge_fx, candidate_fx = rq2stats.blockEffects(R, "judge"), rq2stats.blockEffects(R, "candidate")
-    js, cs = rq2stats.summarize(judge_fx["delta"]), rq2stats.summarize(candidate_fx["delta"])
+    js, cs = blockStats.summarize(judge_fx["delta"]), blockStats.summarize(candidate_fx["delta"])
     res = rq2stats.residuals(rq2stats.blockMeans(cells(0.08)))
-    diag = rq2stats.summarize(rq2stats.diagonalResiduals(res)["residual"])
+    diag = blockStats.summarize(rq2stats.diagonalResiduals(res)["residual"])
     undetermined = {"mean": 0.06, "ci_low": -0.01, "ci_high": 0.13}
     check(f"16f. judge-only data: judge effect {js['mean']:.3f} exists, candidate effect {cs['mean']:.3f} absent → (a); "
           f"a diagonal bump of 0.08 gives residual {diag['mean']:.3f} (0.75δ); undetermined → (e)",
@@ -979,6 +985,278 @@ def checkCrossJudgeStats():
     check("16g. McNemar uses the two generators that are neither judge (b = 20, c = 0); Δacc = strong judges − self, in pp",
           len(tests) == 4 and (tests["b"] == 20).all() and (tests["c"] == 0).all() and (tests["n_R"] == 20).all()
           and np.allclose(impact["delta_pp"], 10.0))
+
+
+def syntheticPathBlock(n: int = 80, agree: bool = False) -> "rq1k.PathBlock":
+    """14 paths on n items (gold "a"); ZH has no answer on item 0. agree = every path copies EN."""
+    rng = np.random.default_rng(3)
+    answers = {code: ["a" if rng.random() < 0.7 else str(rng.choice(["b", "c"])) for _ in range(n)] for code in PATHS}
+    if agree:
+        answers = {code: list(answers["EN"]) for code in PATHS}
+    answers["ZH"][0] = ""
+    return rq1k.PathBlock(model="m", dataset="d", item_ids=np.arange(n), gold=["a"] * n, answers=answers,
+                          answered={c: np.array([a != "" for a in v]) for c, v in answers.items()},
+                          correct={c: np.array([a == "a" for a in v]) for c, v in answers.items()},
+                          tokens={c: np.full(n, 10.0) for c in answers}, compare=lambda x, y: x == y)
+
+
+def checkMenuVote():
+    """RQ1-K (Analysis/menuVote.py): vote and tie rule, subsets, the per-split identity, regrets and the four states."""
+    eq = lambda x, y: x == y
+    first = rq1k.vote(["a", "b", "b", "a"], [True] * 4, eq)
+    rng_a = rq1k.vote(["a", "b", "c"], [True] * 3, eq, np.random.default_rng([0, 7]))
+    rng_b = rq1k.vote(["a", "b", "c"], [True] * 3, eq, np.random.default_rng([0, 7]))
+    check("17a. majority vote: a tie goes to the answer of the highest-priority path; missing answers do not vote; "
+          "priority = EN, then codes alphabetically; random ties are reproducible",
+          first == ("a", True) and rq1k.vote(["a", "b", "b", "c"], [True] * 4, eq) == ("b", False)
+          and rq1k.vote(["", "b", "c"], [False, True, True], eq) == ("b", True) and rq1k.vote(["", ""], [False, False], eq) == ("", False)
+          and rq1k.ordered(["ZH", "EN", "S1", "ES", "SR-EN", "R", "RU"]) == ["EN", "ES", "R", "RU", "S1", "SR-EN", "ZH"]
+          and rng_a == rng_b and rng_a[1])
+
+    block, splits = syntheticPathBlock(), makeSplits(80, 20, 0)
+    rows = {menu: rq1k.evaluateMenu(block, menu, splits)["row"] for menu in rq1k.MENUS}
+    h2 = ~splits[0]
+    single = rq1k.evaluateMenu(block, "M3S", splits[:1])["row"]
+    finals, _ = rq1k.menuFinals(block, "M3S")
+    manual = np.mean([f == "a" for f, keep in zip(finals, h2) if keep]) - np.mean(block.correct[single["S_in_top"].split()[0]][h2])
+    check(f"17b. per split, Excess_in = headroom × (recovery − recovery_blind) on every menu (max error "
+          f"{max(r['identity_max_error'] for r in rows.values()):.1e}); subsets drop item 0 only for menus with ZH; "
+          "M12's S_in is S_all; Excess_in = A − S_in on H2",
+          all(r["identity_max_error"] < 1e-12 for r in rows.values())
+          and rows["M3L"]["keep_in"] == 79 / 80 and rows["M3S"]["keep_in"] == 1.0 and rows["M3S"]["keep_all"] == 79 / 80
+          and rows["M12"]["S_in_top"] == rows["M12"]["S_all_top"] and abs(single["excess_in"] - 100 * manual) < 1e-9)
+
+    same = rq1k.evaluateMenu(syntheticPathBlock(agree=True), "M5L", splits)["row"]
+    check("17c. when every path agrees: d = 0, Excess_in = 0 and recovery is undefined in every split",
+          same["d"] == 0 and same["excess_in"] == 0 and same["undefined_splits"] == 20 and same["identity_max_error"] == 0)
+
+    r = rq1k.regrets(np.array([1.0, -2.0, 0.5, -0.5]))
+    states = [blockStats.fourState({"mean": m, "ci_low": lo, "ci_high": hi}, 0.5)
+              for m, lo, hi in ((0.6, 0.1, 1.1), (-0.6, -1.1, -0.1), (0.1, -0.3, 0.4), (0.3, -0.2, 0.8), (0.45, 0.1, 0.8))]
+    check("17d. regrets: always aggregate 0.625, always single 0.375, space 0.375; four states",
+          (r["regret_aggregate"], r["regret_single"], r["space"]) == (0.625, 0.375, 0.375)
+          and states == [blockStats.FORWARD, blockStats.REVERSE, blockStats.EQUIVALENT, blockStats.UNDETERMINED, blockStats.UNDETERMINED])
+
+    finals = {menu: rq1k.evaluateMenu(block, menu, splits)["agg_correct"] for menu in rq1k.COMPARE_MENUS}
+    keep = rq1k.allAnswered(block, rq1k.COMPARE_PATHS)
+    expected = 100 * np.mean([finals["M3S"][~h & keep].mean() - finals["M3L"][~h & keep].mean() for h in splits])
+    check("17e. M3S − M3L uses the items where all five paths answered, on H2, averaged over splits",
+          abs(rq1k.compareMenus(block, splits, finals) - expected) < 1e-12 and keep.sum() == 79)
+
+
+def checkMenuJudge(tmp: str):
+    """RQ1-KJ MenuJudge on the arm / judge files of check 6–7 plus a third arm (generator = judge = gpt4omini; L:en item 5 has no answer)."""
+    dataset = makeDataset(30)
+    base = [ArmSpec.from_arm_id("L:en"), ArmSpec.from_arm_id("S:T0.7:seed1")]
+    third = ArmSpec.from_arm_id("S:T0.7:seed2")
+    Generate(StrategyConfig(strategyType="generate", languages=["english"]), FakeModel(), dataset, NoLog(), third,
+             ResultStore(os.path.join(tmp, "arms", f"{third.file_stem}.json"))).getRes()
+    arms3 = base + [third]
+    files = {arm.arm_id: File(os.path.join(tmp, "arms", f"{arm.file_stem}.json")) for arm in arms3}
+
+    def strategy(model, name, arms, menu="T3", ref=None, onlyItems=None, aggregator=None):
+        return MenuJudge(StrategyConfig(strategyType="aggregate", languages=["english"] * len(arms)), model, dataset, NoLog(),
+                         aggregator or MenuJudgeAggregator(len(arms), model, dataset), arms, [files[a.arm_id] for a in arms],
+                         [dataset] * len(arms), ResultStore(os.path.join(tmp, "menu", f"{name}.json")),
+                         menu=menu, referencePath=ref, onlyItems=onlyItems)
+
+    ids = sorted(files["L:en"].records_map)
+    recs = lambda i: [files[a.arm_id].getRecordById(i) for a in arms3]
+    dis = [i for i in ids if len({r["parsed_answer"] for r in recs(i)}) > 1]
+    judged = [i for i in dis if all(r["parse_ok"] for r in recs(i))]
+    arm_ids = [a.arm_id for a in arms3]
+
+    # 18a. §3.3 order on its own
+    balanced, groups_ok, varied = True, True, True
+    for n, k in ((37, 3), (100, 12), (5, 12), (24, 12), (1, 3)):
+        names = [f"p{j}" for j in range(k)]
+        orders = MenuJudge.groupedOrders(names, list(range(n)), 0)
+        counts = {(name, pos): 0 for name in names for pos in range(k)}
+        for order in orders.values():
+            for pos, name in enumerate(order):
+                counts[(name, pos)] += 1
+        for name in names:
+            per_position = [counts[(name, pos)] for pos in range(k)]
+            balanced &= max(per_position) - min(per_position) <= 1
+        shuffled = np.random.default_rng(0).permutation(n)   # the first draw of the same rng
+        bases = [orders[int(shuffled[g * k])] for g in range((n + k - 1) // k)]   # rotation 0 of each group = B_g
+        for i, index in enumerate(shuffled):
+            group_base, r = bases[i // k], i % k
+            groups_ok &= orders[int(index)] == group_base[r:] + group_base[:r]
+        if n >= 2 * k:
+            varied &= len({tuple(b) for b in bases}) > 1
+    same_seed = MenuJudge.groupedOrders(names, list(range(50)), 0) == MenuJudge.groupedOrders(names, list(reversed(range(50))), 0)
+    check("18a. §3.3 grouped orders: every arm in every position equally often (±1); the items of a group share one base order "
+          "(rotated by i mod K); groups differ; reproducible and independent of the input order of the item_ids",
+          balanced and groups_ok and varied and same_seed
+          and MenuJudge.groupedOrders(names, list(range(50)), 0) != MenuJudge.groupedOrders(names, list(range(50)), 1))
+
+    # 18b. K = 3 run
+    model = RecordingModel("gpt4omini")
+    failed = strategy(model, "k3", arms3).getRes()
+    out = File(os.path.join(tmp, "menu", "k3.json"))
+    meta = out.metadata
+    sent = dict(zip(judged, model.sent))
+    expected_orders = MenuJudge.groupedOrders(arm_ids, judged, 0)
+    calls = len(model.sent)
+    strategy(model, "k3", arms3).getRes()
+    check(f"18b. MenuJudge (K = 3) judges only the {len(judged)}/{len(dis)} disagreements where every path answered, in the §3.3 "
+          "orders; the prompt says 3 answers; each record keeps its call and the sha256 of the messages sent; a rerun makes no call",
+          failed == [] and sorted(out.records_map) == judged and len(judged) < len(dis) and len(model.sent) == calls == len(judged)
+          and all(out.records_map[i]["presentation_order"] == expected_orders[i] for i in judged)
+          and all("There are 3 answers" in m[0]["content"] and "an integer from 1 to 3" in m[0]["content"] for m in model.sent)
+          and all(out.records_map[i]["trace"]["prompt_sha256"] == PromptBuilder.promptSha256(sent[i]) for i in judged)
+          and all(out.records_map[i]["call"]["model_version"] == "fake-model-v1" for i in judged)
+          and (meta["prompt_version"], meta["menu"], meta["order_scheme"], meta["Aggregator"]["k"], meta["n_judged_items"],
+               meta["model_versions"]) == ("choice-k-v1", "T3", ORDER_GROUPED, 3, len(judged), {"fake-model-v1": len(judged)}))
+
+    # 18c. K = 2 with the recorded main-grid orders sends exactly the main-grid (choice-v1) prompt
+    main = RecordingModel("gpt4omini")
+    reference = os.path.join(tmp, "menu", "main_grid.json")
+    Aggregate(StrategyConfig(strategyType="aggregate", languages=["english", "english"]), main, dataset, NoLog(),
+              buildAggregator("judge", main, dataset, None), base, [files[a.arm_id] for a in base], [dataset, dataset],
+              ResultStore(reference)).getRes()
+    ref = File(reference)
+    dis2 = [i for i in ids if files["L:en"].getRecordById(i)["parsed_answer"] != files["S:T0.7:seed1"].getRecordById(i)["parsed_answer"]]
+    judged2 = [i for i in dis2 if files["L:en"].getRecordById(i)["parse_ok"] and files["S:T0.7:seed1"].getRecordById(i)["parse_ok"]]
+    check2 = RecordingModel("gpt4omini")
+    strategy(check2, "check_k2", base, menu="EN+S1", ref=reference).getRes()
+    out2 = File(os.path.join(tmp, "menu", "check_k2.json"))
+    main_sent = dict(zip(dis2, main.sent))
+    check("18c. K = 2 with the recorded orders: the prompt sent equals the main-grid choice-v1 prompt item by item; "
+          "the orders are the recorded ones; the file says order_scheme recorded_main_grid",
+          sorted(out2.records_map) == judged2 and len(check2.sent) == len(judged2)
+          and all(m == main_sent[i] for i, m in zip(judged2, check2.sent))
+          and all(out2.records_map[i]["presentation_order"] == ref.records_map[i]["presentation_order"] for i in judged2)
+          and out2.metadata["order_scheme"] == "recorded_main_grid" and out2.metadata["reference_file"] == reference)
+
+    # 18d. refusals
+    raised = []
+    no_order = ResultStore(reference)
+    no_order.records[judged2[0]]["presentation_order"] = None
+    no_order.path = os.path.join(tmp, "menu", "reference_without_order.json")
+    no_order.save()
+    other_version = ResultStore(reference)
+    other_version.metadata["prompt_version"] = None
+    other_version.path = os.path.join(tmp, "menu", "reference_other_version.json")
+    other_version.save()
+    for name, kwargs, reason in (("missing_order", {"ref": no_order.path, "arms": base, "menu": "EN+S1"}, "no recorded presentation order"),
+                                 ("other_version", {"ref": other_version.path, "arms": base, "menu": "EN+S1"}, "does not match the run"),
+                                 ("k3", {"arms": arms3, "menu": "OTHER"}, "holds menu"),
+                                 ("plain_judge", {"arms": base, "aggregator": buildAggregator("judge", main, dataset, None)}, "K-way Judge")):
+        arms = kwargs.pop("arms")
+        try:
+            strategy(RecordingModel("gpt4omini"), name, arms, **kwargs).getRes()
+            raised.append(False)
+        except ValueError as e:
+            raised.append(reason in str(e))
+    check("18d. MenuJudge stops on a missing recorded order or a reference of another prompt version, refuses to resume a file "
+          "of another menu, and only runs the K-way Judge", all(raised))
+
+    # 18e. pilot subset, full resume, second run in its own file
+    pilot = RecordingModel("gpt4omini")
+    sample = set(judged[:3])
+    strategy(pilot, "pilot", arms3, onlyItems=sample).getRes()
+    after_pilot = len(File(os.path.join(tmp, "menu", "pilot.json")).records_map)
+    strategy(pilot, "pilot", arms3).getRes()
+    full_calls = len(pilot.sent)
+    strategy(pilot, "rep2", arms3, onlyItems=sample).getRes()
+    rep2 = File(os.path.join(tmp, "menu", "rep2.json"))
+    check("18e. the pilot writes its sample first and the full run resumes the same file without repeating a call; "
+          "the second pilot run goes to its own file with the same orders",
+          after_pilot == 3 and full_calls == len(judged) and len(pilot.sent) == full_calls + 3 and sorted(rep2.records_map) == sorted(sample)
+          and all(rep2.records_map[i]["presentation_order"] == expected_orders[i] for i in sample))
+
+    # 18f. K = 12 parsing and scoring
+    m12 = [ArmSpec.from_arm_id(PATHS[code]) for code in rq1kj.MENUS["M12"]]
+    item = AggregationItem(item_id=0, candidates=[candidate(arm, f"x{j}") for j, arm in enumerate(m12)], question="Q",
+                           presentation_order=[arm.arm_id for arm in reversed(m12)])
+
+    class RefusingModel(FakeModel):
+        def _complete(self, messages, temperature, seed):
+            return SimpleNamespace(choices=[SimpleNamespace(message=None, finish_reason="content_filter")], model="fake-model-v1",
+                                   usage=SimpleNamespace(prompt_tokens=1, completion_tokens=0))
+
+    results = {}
+    for name, model in (("12", FixedReplyModel('reasoning\n{"choice":"12"}')), ("13", FixedReplyModel('reasoning\n{"choice":"13"}')),
+                        ("none", FixedReplyModel("no choice at all")), ("refused", RefusingModel())):
+        record = MenuJudgeAggregator(12, model, makeDataset(1), answerParser=PARSER).aggregate(item).to_dict()
+        results[name] = (record["final_answer"], record["off_menu"], rq2.classifyRecord(record))
+    check("18f. K = 12: choice 12 picks the 12th candidate shown; 13, no choice and a refused call give no answer (agg_no_answer) "
+          "and are told apart",
+          results["12"][0] == "x0" and not results["12"][1]
+          and results["13"][:2] == ("", True) and results["13"][2]["out_of_range"]
+          and results["none"][:2] == ("", True) and results["none"][2]["no_choice"]
+          and results["refused"][:2] == ("", True) and results["refused"][2]["refused"])
+
+
+def syntheticJudgeRecords(block, menu: str, pick) -> dict:
+    """Judge records for the judged items of a synthetic block; pick(k, codes in display order) -> choice 1..K or None."""
+    codes, arms = rq1kj.codesOf(menu), rq1kj.armIdsOf(menu)
+    judged_mask = rq1k.allAnswered(block, codes) & ~rq1kjstats.agreeMask(block, codes)
+    judged = [int(i) for i in block.item_ids[judged_mask]]
+    orders = MenuJudge.groupedOrders(arms, judged, 0)
+    records = {}
+    for i in judged:
+        order = orders[i]
+        choice = pick(i, [rq1kj.ARM_TO_CODE[a] for a in order])
+        final = block.answers[rq1kj.ARM_TO_CODE[order[choice - 1]]][i] if choice else ""
+        records[i] = {"item_id": i, "final_answer": final, "off_menu": not choice, "presentation_order": order,
+                      "tokens_in": 100, "tokens_out": 5, "call": {"usage_in": 101, "usage_out": 6},
+                      "trace": {"judge_output": f'{{"choice":"{choice}"}}' if choice else "none", "choice": choice,
+                                "chosen_arm": order[choice - 1] if choice else None, "prompt_sha256": "0" * 64}}
+    return records
+
+
+def checkMenuJudgeStats():
+    """RQ1-KJ statistics (Analysis/menuJudgeStats.py) on the synthetic 14-path block of check 17."""
+    block, splits = syntheticPathBlock(), makeSplits(80, 20, 0)
+    rng = np.random.default_rng(9)
+    random_pick = lambda i, codes: None if rng.random() < 0.05 else int(rng.integers(1, len(codes) + 1))
+    perfect_pick = lambda i, codes: next((p for p, c in enumerate(codes, start=1) if block.correct[c][i]), 1)
+
+    rows, ok_vote = {}, True
+    judges = {}
+    for menu in rq1kj.MENU_NAMES:
+        judge = rq1kjstats.judgeArrays(block, rq1kj.codesOf(menu), syntheticJudgeRecords(block, menu, random_pick), menu)
+        judges[menu] = judge
+        rows[menu] = rq1kjstats.evaluateBlockMenu(block, menu, splits, judge)["row"]
+        vote = rq1k.evaluateMenu(block, menu, splits)["row"]
+        ok_vote &= all(abs(rows[menu][ours] - vote[theirs]) < 1e-12 for ours, theirs in (("A_V", "A_in"), ("S_in", "S_in"), ("excess_V", "excess_in")))
+    h2 = ~splits[0]
+    single = rq1kjstats.evaluateBlockMenu(block, "M3S", splits[:1], judges["M3S"])["row"]
+    s_in = single["S_in_top"].split()[0]
+    sub = rq1k.allAnswered(block, rq1kj.codesOf("M3S"))
+    manual = np.mean(judges["M3S"].correct[h2 & sub]) - np.mean(block.correct[s_in][h2 & sub])
+    check(f"18g. per split, Excess_J and Excess_V = headroom × (recovery − recovery_blind) on every menu (max error "
+          f"{max(max(r['identity_max_error_J'], r['identity_max_error_V']) for r in rows.values()):.1e}); A_V, S_in, Excess_V equal "
+          "RQ1-K's evaluateMenu; Excess_J = A_J − S_in on H2; agreement items keep the common answer",
+          all(r["identity_max_error_J"] < 1e-12 and r["identity_max_error_V"] < 1e-12 for r in rows.values()) and ok_vote
+          and abs(single["excess_J"] - 100 * manual) < 1e-9
+          and all(judges["M12"].final[k] == block.answers["EN"][k] for k in range(80)
+                  if rq1k.allAnswered(block, rq1kj.codesOf("M12"))[k] and not judges["M12"].judged[k]))
+
+    perfect = rq1kjstats.judgeArrays(block, rq1kj.codesOf("M12"), syntheticJudgeRecords(block, "M12", perfect_pick), "M12")
+    perfect_row = rq1kjstats.evaluateBlockMenu(block, "M12", splits, perfect)["row"]
+    records = syntheticJudgeRecords(block, "M3L", random_pick)
+    records.pop(next(iter(records)))
+    try:
+        rq1kjstats.judgeArrays(block, rq1kj.codesOf("M3L"), records, "M3L")
+        raised = False
+    except ValueError:
+        raised = True
+    result = rq1kjstats.evaluateBlockMenu(block, "M12", splits, judges["M12"])
+    comparison = rq1kjstats.itemComparison(block, result)
+    positions = rq1kjstats.positionStats(result)
+    keep = rq1k.allAnswered(block, rq1kj.COMPARE_PATHS)
+    expected = 100 * np.mean([judges["M3S"].correct[~h & keep].mean() - judges["M3L"].correct[~h & keep].mean() for h in splits])
+    check("18h. a judge that always picks a right candidate has recovery_J = 1; a missing record fails loudly; M3S − M3L uses the "
+          "five-path subset; the three gold-position classes and the four cells cover every judged item; positions are balanced",
+          abs(perfect_row["recovery_J"] - 1) < 1e-12 and raised
+          and abs(rq1kjstats.compareJudge(block, splits, judges["M3S"], judges["M3L"]) - expected) < 1e-12
+          and comparison["n_plurality"] + comparison["n_minority"] + comparison["n_absent"] == comparison["n_judged"]
+          == comparison["both_right"] + comparison["both_wrong"] + comparison["vote_right_judge_wrong"] + comparison["vote_wrong_judge_right"]
+          and positions["position_spread"] <= 1 and rows["M12"]["n_agg_no_answer"] == rows["M12"]["n_no_choice"] > 0)
 
 
 def checkTokenCounts():
@@ -1016,7 +1294,10 @@ def main():
         checkAnalysis(tmp)
         checkCrossJudge(tmp)
         checkCrossAnalysis(tmp)
+        checkMenuJudge(tmp)
     checkCrossJudgeStats()
+    checkMenuVote()
+    checkMenuJudgeStats()
 
     print(f"\n{'All checks passed' if not failures else f'{len(failures)} check(s) failed'}")
     sys.exit(1 if failures else 0)

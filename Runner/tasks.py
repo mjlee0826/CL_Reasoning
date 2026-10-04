@@ -1,5 +1,9 @@
 import itertools
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timezone
+
+# DeepSeek official API peak hours (UTC, Mon–Fri): double price
+DEEPSEEK_PEAK_HOURS = set(range(1, 4)) | set(range(6, 10))
 
 
 def defaultWorkers(n_tasks: int) -> int:
@@ -22,3 +26,11 @@ def runTasks(fn, tasks: list[tuple], workers: int, *shared):
                 future.result()
             except Exception as e:
                 print(f"❌ A job generated an exception: {type(e).__name__}: {e}")
+
+
+def warnDeepseekPeak(models: list[str]):
+    """Prints a reminder when deepseek4.1flash is about to be called during its peak (double-price) hours."""
+    now = datetime.now(timezone.utc)
+    if "deepseek4.1flash" in models and now.weekday() < 5 and now.hour in DEEPSEEK_PEAK_HOURS:
+        print(f"⚠️ {now:%H:%M} UTC is DeepSeek's peak period (Mon–Fri UTC 01–04, 06–10, double price); "
+              f"consider running deepseek4.1flash off-peak\n")

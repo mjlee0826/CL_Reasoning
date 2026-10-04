@@ -58,7 +58,12 @@ class PromptBuilder():
         return [{"role": "user", "content": self.text(question, base_raw_text)}]
 
     @staticmethod
+    def promptSha256(messages: list[dict]) -> str:
+        """Full sha256 of the messages actually sent (canonical JSON)."""
+        canonical = json.dumps(messages, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+    @staticmethod
     def promptHash(messages: list[dict]) -> str:
         """sha256 of the full messages actually sent (canonical JSON), first 16 hex chars."""
-        canonical = json.dumps(messages, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
-        return hashlib.sha256(canonical.encode("utf-8")).hexdigest()[:16]
+        return PromptBuilder.promptSha256(messages)[:16]

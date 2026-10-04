@@ -1,4 +1,3 @@
-import json
 import os
 from collections import Counter
 
@@ -8,6 +7,7 @@ import pandas as pd
 from Arm.ArmSpec import ArmSpec
 from Arm.GenerationRecord import GenerationRecord
 from Aggregator.JudgeAggregator import JudgeAggregator
+from Analysis import preregistration
 from Analysis.alignment import CellData, PairArrays, alignPair, loadRecords
 from Analysis.experimentPlan import PATHS, Pair
 from Analysis.metrics import VALUE_COLUMNS, subsetMask, computeRow
@@ -106,13 +106,7 @@ def diagonalRerunCalls(pools: dict, model: str) -> int:
 
 def loadStepFile(path: str, step: str, criteria_sha256: str) -> dict:
     """precheck.json / pilot.json；檔案不存在或寫於另一份判定標準下就停。"""
-    if not os.path.exists(path):
-        raise SystemExit(f"❌ {path} not found: run the `{step}` step of scripts/analysis_rq2/run_cross_judge.py first")
-    with open(path, encoding="utf-8") as f:
-        data = json.load(f)
-    if data.get("criteria_sha256") != criteria_sha256:
-        raise SystemExit(f"❌ {path} was written under another criteria file (sha256 {data.get('criteria_sha256')})")
-    return data
+    return preregistration.loadStepFile(path, step, criteria_sha256, "scripts/analysis_rq2/run_cross_judge.py")
 
 
 # ------------------------------------------------------------------

@@ -34,7 +34,8 @@ from Analysis.preregistration import sha256, confirmationLine
 from Analysis.crossJudge import (MODELS, DATASETS, PAIRS, CHECK_DATASET, CHECK_PAIR, AGREEMENT_MIN,
                                  PILOT_MAX_RATE, PILOT_MAX_COST, PRICES, JUDGE_SETTINGS, OUT_DIR, CRITERIA_FILE, JUDGE_DIR,
                                  PRECHECK_DIR, PRECHECK_FILE, PILOT_FILE, SOURCE_MAIN, loadStepFile, mainGridPath, buildCells)
-from Analysis.crossJudgeStats import (THRESHOLD, SAME_GROUP, OUTCOMES, UNDETERMINED, blockMeans, matrix, summarize, blockEffects,
+from Analysis.blockStats import summarize
+from Analysis.crossJudgeStats import (THRESHOLD, SAME_GROUP, OUTCOMES, UNDETERMINED, blockMeans, matrix, blockEffects,
                                       effectState, outcome, residuals, diagonalResiduals, sameGroupResiduals,
                                       selfPreference, mcnemar, practicalImpact)
 
@@ -297,7 +298,7 @@ def main():
                       {"配對": p.label, **ciRow("候選效果", summarize(blockEffects(Rp, "candidate")["delta"]))}]
     L += ["### 裁判效果與候選效果，分配對（16 個區塊，排除對角線；只報告）", "", pd.DataFrame(pair_rows).to_markdown(index=False), ""]
 
-    shown_tests = tests.assign(p_value=tests["p_value"].map(lambda p: f"{p:.4f}"))
+    shown_tests = tests.assign(p_value=tests["p_value"].map(lambda p: f"{p:.1e}"))
     shown_tests["strong_judge"] = shown_tests["strong_judge"].map(MODEL_LABELS)
     shown_tests["weak_judge"] = shown_tests["weak_judge"].map(MODEL_LABELS)
     shown_impact = impact.assign(generator=impact["generator"].map(MODEL_LABELS)).round({"acc_strong_judges": 4, "acc_self": 4, "delta_pp": 2})
@@ -305,7 +306,7 @@ def main():
           "### 7.1 逐題配對（McNemar，精確二項檢定）", "",
           "題目 = 兩個 Judge 都不是 generator 的那兩個 generator 的 n_R 題（剛好一條 path 答對），跨資料集與配對合併；"
           "b = 強 Judge 挑對、弱 Judge 挑錯；c = 相反；無效選擇算挑錯。", "",
-          shown_tests.to_markdown(index=False), "",
+          shown_tests.to_markdown(index=False, disable_numparse=True), "",
           "### 7.2 實際影響：弱 generator 的候選改由強 Judge 裁決（acc_final，both_answered，百分點）", "",
           shown_impact.to_markdown(index=False), "",
           f"8 個區塊：平均 {impact_sum['mean']:+.2f}pp，95% 區間 [{impact_sum['ci_low']:+.2f}, {impact_sum['ci_high']:+.2f}]，"

@@ -20,7 +20,7 @@ run_cross_judge.py — RQ2 交叉實驗的 Judge 呼叫（result/analysis/rq2/rq
     python scripts/analysis_rq2/run_cross_judge.py full -j deepseek4.1flash    # 只跑某些 Judge（例如 DeepSeek 排在離峰）
 """
 from argparse import ArgumentParser
-from datetime import datetime, timezone
+from datetime import datetime
 from pathlib import Path
 import json
 import os
@@ -40,7 +40,7 @@ from Log.OneAgentLog import OneAgentLog
 from Strategy.CrossJudge import CrossJudge
 from Strategy.StrategyConfig import StrategyConfig
 from Runner.paths import armPath
-from Runner.tasks import defaultWorkers, interleaveByModel, runTasks
+from Runner.tasks import defaultWorkers, interleaveByModel, runTasks, warnDeepseekPeak
 from Runner.builders import buildModel, buildCandidateDatasets, runStrategy
 from Analysis.alignment import loadRecords
 from Analysis.preregistration import sha256, confirmationLine
@@ -50,8 +50,6 @@ from Analysis.crossJudge import (MODELS, DATASETS, PAIRS, PAIR_BY_LABEL, NUMS, C
 
 # 與主網格的 run_aggregate.py 預設值相同（metadata 會核對 seed）
 AGGREGATOR_SEED, DEBATE_THRESHOLD = 0, 3
-# DeepSeek 官方 API 的尖峰時段（UTC，週一至週五），價格加倍
-DEEPSEEK_PEAK_HOURS = set(range(1, 4)) | set(range(6, 10))
 
 
 def parseArgs():
@@ -90,13 +88,6 @@ def runAll(tasks: list[tuple], args):
     workers = args.workers or defaultWorkers(len(tasks))
     print(f"Total tasks: {len(tasks)} | Concurrent workers: {workers}\n")
     runTasks(runCell, tasks, workers, args)
-
-
-def warnDeepseekPeak(judges: list[str]):
-    now = datetime.now(timezone.utc)
-    if "deepseek4.1flash" in judges and now.weekday() < 5 and now.hour in DEEPSEEK_PEAK_HOURS:
-        print(f"⚠️ {now:%H:%M} UTC is DeepSeek's peak period (Mon–Fri UTC 01–04, 06–10, double price); "
-              f"consider running -j deepseek4.1flash off-peak\n")
 
 
 def writeJson(path: str, data: dict):

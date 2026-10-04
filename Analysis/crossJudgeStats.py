@@ -9,7 +9,6 @@ from Analysis.crossJudge import MODELS, STRONG, WEAK, DATASETS
 #   R(g, j, d) = 該格 recovery（recovery_H2）對配對的平均
 # ------------------------------------------------------------------
 THRESHOLD = 0.05
-LEVEL = 0.95
 # §7.4 同組但非自己的組合：(Judge, generator)
 SAME_GROUP = [("deepseek4.1flash", "gemini3.1flashlite"), ("gemini3.1flashlite", "deepseek4.1flash"),
               ("gpt4omini", "qwen"), ("qwen", "gpt4omini")]
@@ -40,17 +39,6 @@ def matrix(cells: pd.DataFrame, value: str = "recovery_H2", dataset: str | None 
         used = used[used["pair"] == pair]
     table = used.pivot_table(index="generator", columns="judge", values=value, aggfunc="mean")
     return table.reindex(index=MODELS, columns=MODELS)
-
-
-def summarize(values, level: float = LEVEL) -> dict:
-    """跨區塊：平均、SE = sd/√B、95% t 區間（自由度 B − 1）、幾個區塊為正。"""
-    values = np.asarray(values, dtype=float)
-    n = len(values)
-    mean = float(values.mean())
-    se = float(values.std(ddof=1) / np.sqrt(n)) if n > 1 else float("nan")
-    half = float(stats.t.ppf(0.5 + level / 2, n - 1) * se) if n > 1 else float("nan")
-    return {"n_blocks": n, "mean": mean, "se": se, "ci_low": mean - half, "ci_high": mean + half,
-            "n_positive": int((values > 0).sum())}
 
 
 def blockEffects(R: pd.Series, kind: str, exclude_diagonal: bool = True) -> pd.DataFrame:

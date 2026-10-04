@@ -1,14 +1,14 @@
-from datetime import datetime, timezone
 import hashlib
 
 from Strategy.Aggregate import Aggregate
+from Strategy.CallRecording import CallRecording
 from Aggregator.JudgeAggregator import JudgeAggregator
 from File.File import File
 
 ITEM_FILTER = "both_answered_disagreement"
 
 
-class CrossJudge(Aggregate):
+class CrossJudge(CallRecording, Aggregate):
     """
     RQ2 cross-judge (result/analysis/rq2/rq2_criteria.md): the Judge model `model` decides the candidates that
     another model, `generator`, produced. Prompt, candidate texts and decoding are the main grid's; only the
@@ -20,14 +20,13 @@ class CrossJudge(Aggregate):
         they must cover every disagreement item and equal Aggregate.balancedOrders, otherwise the run stops
       - only disagreement items where both candidates have a parsed answer get a record (no agreement no-ops);
         `onlyItems` narrows that further (the pilot sample), and the full run later resumes the same file
-      - every record also stores its call's provider model version, UTC time and API usage ("call")
+      - every record also stores its call's provider model version, UTC time and API usage ("call", CallRecording)
     """
     def __init__(self, *args, generator: str, referencePath: str, onlyItems: set | None = None, **kwargs):
         # Set before Aggregate.__init__, whose checkInputs already needs them
         self.generator = generator
         self.referencePath = referencePath
         self.onlyItems = onlyItems
-        self.lastCall = None
         super().__init__(*args, **kwargs)
 
     # ------------------------------------------------------------------
@@ -96,18 +95,3 @@ class CrossJudge(Aggregate):
             "n_judged_items": len(self.judgedIds(dis_ids)),
             "source": "cross_judge",
         }
-
-    def onResponse(self, response):
-        super().onResponse(response)
-        now = datetime.now(timezone.utc).isoformat(timespec="seconds")
-        self.lastCall = {"model_version": response.model_version, "called_at": now,
-                         "usage_in": response.usage_in, "usage_out": response.usage_out}
-        versions = self.store.metadata.setdefault("model_versions", {})
-        versions[response.model_version] = versions.get(response.model_version, 0) + 1
-        self.store.metadata.setdefault("calls_utc", {"first": now})["last"] = now
-
-    def aggregateItem(self, item_id, presentation_order) -> dict:
-        self.lastCall = None
-        record = super().aggregateItem(item_id, presentation_order)
-        record["call"] = self.lastCall
-        return record
