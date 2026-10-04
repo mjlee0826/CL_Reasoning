@@ -1,0 +1,183 @@
+[
+    {
+        "Model": {
+            "modelType": "deepseek4.1flash",
+            "temperature": 0.0,
+            "modelName": "deepseek-flash",
+            "displayName": "DeepSeek V4.1 Flash"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/commonsenseqa/L_en.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 370,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "deepseek4.1flash",
+        "reference_file": "result/aggregations/gemini3.1flashlite/commonsenseqa/judge__L_en__L_zh.json",
+        "reference_sha256": "209f18de610704a39f4cd25aa7ca8ec34c3aa2bfb0188f13db6c658bdc8c366f",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 369,
+        "api_usage": {
+            "calls": 4,
+            "calls_without_usage": 0,
+            "prompt_tokens": 2094,
+            "completion_tokens": 676,
+            "refusals": 0
+        },
+        "model_versions": {
+            "deepseek-flash@DeepSeek-V4.1-Flash": 4
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:53+00:00",
+            "last": "2026-10-04T10:08:59+00:00"
+        }
+    },
+    {
+        "item_id": 481,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 525,
+        "tokens_out": 148,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 argues that humor is the broad mechanism that makes people happy in surprising situations, treating joke as a mere vehicle and laughter as a reaction. However, the question asks what makes people happy when it is surprising and unexpected, and a joke is specifically structured around an unexpected twist or punchline. Answer 1 overemphasizes the abstract quality of humor while underplaying the concrete, surprise-driven nature of a joke. Answer 2 correctly identifies that a joke relies on surprise and unexpectedness to elicit happiness, while humor is the general quality and laughter is the reaction. Therefore, Answer 2’s reasoning is more precise and better aligned with the wording of the question.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:53+00:00",
+            "usage_in": 529,
+            "usage_out": 148
+        }
+    },
+    {
+        "item_id": 732,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 489,
+        "tokens_out": 148,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly interprets the question as asking where dirt should be placed for plant growth, rather than where dirt could be stored inside a home. It dismisses indoor locations like a corner or closet without justification and selects \"garden,\" which is typically outside a home, contradicting the premise of storing dirt in one's home. Answer 2 correctly identifies the question as asking for an indoor storage location within a home. It properly evaluates each option: fingernails are not a storage location, a garden is outside, a computer would be damaged, and a closet is a plausible indoor storage space. Therefore, Answer 2's reasoning is more accurate and directly addresses the question.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:55+00:00",
+            "usage_in": 493,
+            "usage_out": 148
+        }
+    },
+    {
+        "item_id": 1310,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 593,
+        "tokens_out": 182,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 reasons that a dictionary is used for checking words and spellings, and that writing a novel would involve extensive dictionary use, making D a plausible choice. This is a reasonable literal interpretation, though the phrasing “worked on his what?” could also fit other writing projects. Answer 2 claims the question is a classic logic trap and that A is most logical because a dictionary is used to determine word definitions, but this misreads the question: “determine word's definition” is not something one “works on” as a project in the same way as a novel. Answer 2 also introduces an irrelevant discussion of option C and then contradicts itself by rejecting the trap interpretation and choosing A. The stronger reasoning is in Answer 1, because “worked on his novel” is a natural phrase and explains wearing out a dictionary through extensive writing.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:57+00:00",
+            "usage_in": 597,
+            "usage_out": 182
+        }
+    },
+    {
+        "item_id": 1845,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 471,
+        "tokens_out": 198,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 argues that the most direct result of doing housework all day is a clean house, but this ignores the phrasing “likely to happen” and the fact that the question asks about the effect on the person doing the housework. A clean house is a possible outcome, but it is not the most immediate or likely personal consequence. Answer 2 correctly identifies that prolonged housework is physically demanding and that the most common direct consequence is tiredness or getting tired. However, between “tiredness” and “get tired,” the question asks what is likely to happen, which fits the verb phrase “get tired” more naturally than the noun “tiredness.” Still, Answer 2’s reasoning is stronger overall because it focuses on the physical effect on the person, which is more directly responsive to the question than Answer 1’s focus on the house. Therefore, Answer 2 is the better choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:59+00:00",
+            "usage_in": 475,
+            "usage_out": 198
+        }
+    }
+]

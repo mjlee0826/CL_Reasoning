@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/commonsenseqa/P_expert.json",
+            "result/arms/gpt4omini/commonsenseqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 189,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gpt4omini",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/gpt4omini/commonsenseqa/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "6acf70c7492d37e65b5add07cc797d57b147f6c482f393f7439183cb62c9d85e",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 189,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1193,
+            "completion_tokens": 161,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:10+00:00",
+            "last": "2026-10-04T10:08:15+00:00"
+        }
+    },
+    {
+        "item_id": 982,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 602,
+        "tokens_out": 87,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that a \"transistor\" radio is the best choice for reaching base, but it fails to consider that \"submarine\" refers to a type of vessel that would use specialized communication equipment to reach a base. Answer 2 correctly identifies that a \"submarine\" would use radio communication to reach base, making it the most contextually accurate choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:10+00:00",
+            "usage_in": 614,
+            "usage_out": 87
+        }
+    },
+    {
+        "item_id": 1405,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 567,
+        "tokens_out": 74,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the water cooler is a place to put an empty glass, rather than a source of water. The question asks where to put the glass, not where to get water. Answer 2 correctly identifies that the table is a common and logical place to put an empty glass when thirsty.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:15+00:00",
+            "usage_in": 579,
+            "usage_out": 74
+        }
+    }
+]

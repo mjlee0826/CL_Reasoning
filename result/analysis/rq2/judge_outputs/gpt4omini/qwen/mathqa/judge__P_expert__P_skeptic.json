@@ -1,0 +1,211 @@
+[
+    {
+        "Model": {
+            "modelType": "gpt4omini",
+            "temperature": 0.0,
+            "modelName": "gpt-4o-mini-2024-07-18",
+            "displayName": "GPT4o mini"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/mathqa/P_expert.json",
+            "result/arms/qwen/mathqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 251,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "gpt4omini",
+        "reference_file": "result/aggregations/qwen/mathqa/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "a0f39c1ae871146db1e1514e750bda94737500d47ab111fae09c90c0e368c904",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 239,
+        "api_usage": {
+            "calls": 5,
+            "calls_without_usage": 0,
+            "prompt_tokens": 4475,
+            "completion_tokens": 695,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gpt-4o-mini-2024-07-18": 5
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:47+00:00",
+            "last": "2026-10-04T10:08:00+00:00"
+        }
+    },
+    {
+        "item_id": 445,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 951,
+        "tokens_out": 91,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer contains a miscalculation in the final steps, leading to an incorrect value for the sprockets produced by machine A. The second answer correctly follows the algebraic steps to solve for \\( x \\) and arrives at the correct conclusion that machine A produces 5 sprockets per hour. Therefore, the second answer is the most accurate and aligns with the problem's requirements.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:47+00:00",
+            "usage_in": 958,
+            "usage_out": 91
+        }
+    },
+    {
+        "item_id": 520,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 947,
+        "tokens_out": 130,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer calculates the volume of the cylinder and the box correctly but concludes that 28 tubes can fit into 3 boxes without considering the packing efficiency. The second answer provides a more detailed calculation of the volume of the cylinder and the box, arriving at approximately 11 tubes per box, which totals 33 tubes for 3 boxes. However, it also suggests that the maximum number of tubes could be higher due to packing efficiency, ultimately concluding that 36 tubes can fit. This conclusion is more reasonable given the potential for better packing arrangements. Therefore, the second answer is more accurate.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:50+00:00",
+            "usage_in": 954,
+            "usage_out": 130
+        }
+    },
+    {
+        "item_id": 1012,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1274,
+        "tokens_out": 135,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers attempt to calculate the time displayed on clock #4 after 6 actual hours, but they arrive at different conclusions. Answer 1 correctly calculates the time displayed on each clock step by step, ultimately arriving at 5:34 for clock #4. Answer 2, however, miscalculates the time displayed on clock #4, leading to an incorrect conclusion of 6:24. The calculations in Answer 1 are consistent with the problem's requirements, while Answer 2 contains errors in the conversion of time and the relationships between the clocks. Therefore, Answer 1 is the more accurate response.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:53+00:00",
+            "usage_in": 1281,
+            "usage_out": 135
+        }
+    },
+    {
+        "item_id": 1066,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 710,
+        "tokens_out": 174,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers correctly calculate the circumference of the wheel as \\(40\\pi\\) cm and the total distance covered in 500 revolutions as \\(20000\\pi\\) cm, which converts to \\(200\\pi\\) meters. However, both answers arrive at a distance of approximately 628 meters, which does not match any of the provided choices. Answer 1 incorrectly suggests that the closest option is b) 704 m, which is not justified by the calculations. Answer 2 correctly identifies that none of the choices match the calculated distance, but it incorrectly selects e) as the answer without a valid justification. Since both answers ultimately arrive at the same conclusion regarding the distance but differ in their interpretation of the choices, Answer 2 is more accurate in acknowledging that none of the choices are correct.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:56+00:00",
+            "usage_in": 717,
+            "usage_out": 174
+        }
+    },
+    {
+        "item_id": 1432,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 558,
+        "tokens_out": 165,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly identifies that the minimum value of \\( x^2 \\) for positive \\( x \\) approaches 0, leading to a minimum value of \\( x^2 - 15 \\) that is slightly greater than -15. However, it does not provide a specific value for \\( x \\) to calculate the minimum. The second answer incorrectly assumes that the minimum occurs at \\( x = 1 \\), which is not the true minimum for positive \\( x \\). The correct approach is to recognize that as \\( x \\) approaches 0, \\( x^2 \\) approaches 0, making \\( x^2 - 15 \\) approach -15. Therefore, the first answer is more accurate in its reasoning about the minimum value.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:08:00+00:00",
+            "usage_in": 565,
+            "usage_out": 165
+        }
+    }
+]

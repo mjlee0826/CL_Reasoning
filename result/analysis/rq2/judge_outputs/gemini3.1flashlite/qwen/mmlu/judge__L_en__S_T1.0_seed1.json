@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/mmlu/L_en.json",
+            "result/arms/qwen/mmlu/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 194,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/qwen/mmlu/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "687941311029e862035311f4213a71507be1dec11fba24101bd8957436f2a2bb",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 194,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 543,
+            "completion_tokens": 234,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:01+00:00",
+            "last": "2026-10-04T10:09:01+00:00"
+        }
+    },
+    {
+        "item_id": 13411,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 542,
+        "tokens_out": 234,
+        "trace": {
+            "judge_output": "Reasoning process\nThe term \"normalization of deviance\" (a concept notably popularized by Diane Vaughan) refers to the process where a deviant act or rule-breaking behavior becomes accepted as the \"new normal\" within a group or organization. When an act is normalized, it is no longer perceived as a violation of norms; rather, it is integrated into routine practice. Answer 1 incorrectly claims that the act is \"recognized as breaking an important norm,\" which contradicts the definition of normalization (where the perception of it being a \"break\" disappears). Answer 2 correctly identifies that the act is no longer seen as a significant deviation, though its specific selection of choice B is also problematic because B describes a \"temporary aberration,\" whereas normalization implies the opposite—that the behavior becomes permanent and routine. However, Answer 1 is logically contradictory because it defines normalization as the act being recognized as a norm-breaker, which is the exact opposite of what normalization entails. Between the two, Answer 2 provides a more accurate conceptual understanding of the process, even if the provided multiple-choice options are poorly constructed for the sociological definition.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:09:01+00:00",
+            "usage_in": 543,
+            "usage_out": 234
+        }
+    }
+]

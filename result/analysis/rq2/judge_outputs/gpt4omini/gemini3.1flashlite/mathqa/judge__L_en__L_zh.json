@@ -1,0 +1,211 @@
+[
+    {
+        "Model": {
+            "modelType": "gpt4omini",
+            "temperature": 0.0,
+            "modelName": "gpt-4o-mini-2024-07-18",
+            "displayName": "GPT4o mini"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/mathqa/L_en.json",
+            "result/arms/gemini3.1flashlite/mathqa/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 94,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "gpt4omini",
+        "reference_file": "result/aggregations/gemini3.1flashlite/mathqa/judge__L_en__L_zh.json",
+        "reference_sha256": "a9abdba207020715ca473e84d7d030a42891a9336555e494f8a556005d9b9437",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 83,
+        "api_usage": {
+            "calls": 5,
+            "calls_without_usage": 0,
+            "prompt_tokens": 7258,
+            "completion_tokens": 826,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gpt-4o-mini-2024-07-18": 5
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:47+00:00",
+            "last": "2026-10-04T10:08:00+00:00"
+        }
+    },
+    {
+        "item_id": 247,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 2016,
+        "tokens_out": 209,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers provide a detailed breakdown of the problem, but they arrive at different conclusions regarding the proportion of heart surgeons after the doubling of GP doctors. Answer 1 correctly calculates the number of heart surgeons and the new total number of doctors, leading to a proportion of \\( \\frac{5}{92} \\), which is not among the provided options. However, it also suggests that there might be a typo in the question or options. Answer 2 also arrives at \\( \\frac{5}{92} \\) but then attempts to fit the result into the provided options, ultimately suggesting \\( \\frac{1}{25} \\) as a possible answer. This approach is less rigorous as it does not adhere to the calculations but rather tries to match the answer to the options. Given that both answers have the same calculation for heart surgeons and total doctors, but Answer 1 maintains the integrity of the calculation without trying to fit it into the options, it is the more reliable choice.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:47+00:00",
+            "usage_in": 2023,
+            "usage_out": 209
+        }
+    },
+    {
+        "item_id": 482,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1577,
+        "tokens_out": 198,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers correctly identify the numbers between 1 and 13 that are divisible by 2: 2, 4, 6, 8, 10, and 12. They also correctly calculate the sum of these numbers as 42 and the average as 7. However, both answers note that 7 is not among the provided choices. Answer 1 suggests that the question may have a typo or error in the options and selects 21 (b) based on its relationship to 7. Answer 2 also acknowledges the discrepancy and selects 15 (a) based on a different interpretation of the problem. However, the reasoning in Answer 2 is less consistent, as it introduces unnecessary complexity by considering sums beyond the specified range. Given that Answer 1 maintains a clearer focus on the original problem and logically deduces a choice based on the closest relationship to the average, it is the more accurate response.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:50+00:00",
+            "usage_in": 1584,
+            "usage_out": 198
+        }
+    },
+    {
+        "item_id": 762,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1345,
+        "tokens_out": 127,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 proposes that the value of x is 6630 based on a pattern of differences, but the reasoning lacks a clear and consistent mathematical basis for the jumps in the sequence. The calculations do not convincingly establish a pattern that leads to 6630. In contrast, Answer 2 correctly identifies the differences between terms and establishes a consistent multiplicative pattern for the differences, leading to the conclusion that x is 1070. This conclusion is supported by verifying that the subsequent terms align with the established differences. Therefore, Answer 2 is more accurate and logically sound.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:53+00:00",
+            "usage_in": 1352,
+            "usage_out": 127
+        }
+    },
+    {
+        "item_id": 773,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1506,
+        "tokens_out": 167,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers correctly identify that the total length of fabric is 1000 centimeters and that it can be cut into 5 strips of 200 centimeters each. They also correctly calculate that 4 cuts are needed to create these strips. However, both answers arrive at a total cutting time of 20 minutes, which is not among the provided options. Answer 1 concludes that there is no correct answer and selects 'a' arbitrarily, while Answer 2 also recognizes the discrepancy but chooses 'd' as the closest option, suggesting a potential error in the question. Given that Answer 2 acknowledges the possibility of a calculation error and attempts to align with the provided options, it demonstrates a more logical approach to the problem. Therefore, Answer 2 is the more reasonable choice.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:56+00:00",
+            "usage_in": 1513,
+            "usage_out": 167
+        }
+    },
+    {
+        "item_id": 1349,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 779,
+        "tokens_out": 125,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly identifies the maximum integer difference between x and y as 6, using the smallest integer for x (4) and the largest integer for y (10). The second answer, while exploring the possibility of non-integer values for x and y, ultimately concludes that the maximum integer difference is 7, which is incorrect given the constraints of the problem. The maximum integer difference must be calculated using the integer values that satisfy the inequalities, which leads to the conclusion that the correct answer is 6. Therefore, the first answer is the most accurate.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:08:00+00:00",
+            "usage_in": 786,
+            "usage_out": 125
+        }
+    }
+]

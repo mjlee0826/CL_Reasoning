@@ -1,0 +1,211 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/mathqa/P_expert.json",
+            "result/arms/gpt4omini/mathqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 230,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gpt4omini",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/gpt4omini/mathqa/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "0188f0ed06eadcaa1968c4708244ad2dfc5c3abee08faf3239a650472e17b068",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 215,
+        "api_usage": {
+            "calls": 5,
+            "calls_without_usage": 0,
+            "prompt_tokens": 7097,
+            "completion_tokens": 654,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 5
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:25+00:00",
+            "last": "2026-10-04T10:08:41+00:00"
+        }
+    },
+    {
+        "item_id": 616,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 933,
+        "tokens_out": 93,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the height of the water when the tank is on its side is equal to the radius of the tank. This is not correct because the volume of water in a horizontal cylinder is not simply the area of a rectangle with height equal to the radius. The actual calculation involves determining the area of a circular segment, which is more complex and does not equate to the radius directly.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:25+00:00",
+            "usage_in": 945,
+            "usage_out": 93
+        }
+    },
+    {
+        "item_id": 654,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 2353,
+        "tokens_out": 231,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly concludes that Kaz eats all the red and yellow candies, leading to a contradiction where the remaining candies do not match the required total. Answer 2 correctly calculates the amount of red candies remaining after eating $ y = \\frac{x}{40} $, resulting in $ \\frac{19x}{40} $, which is $ 47.5\\% $ of the original number of red candies. However, this does not match any of the given choices. Re-evaluating the question shows that the correct percentage of red candies remaining relative to the original total (not just the original red candies) should be calculated. The correct calculation leads to $ \\frac{19x}{40} $ out of $ 5x $ total candies, which is $ \\frac{19}{200} \\times 100 = 9.5\\% $, which still doesn't match the options. Given the available choices, the closest logical conclusion based on the calculations is option e) 33.3%.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:30+00:00",
+            "usage_in": 2365,
+            "usage_out": 231
+        }
+    },
+    {
+        "item_id": 1155,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 894,
+        "tokens_out": 68,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly calculates the work rate of one woman. The correct calculation leads to W = 1/600, not 1/60. This results in one woman taking 600 days to complete the work alone, which corresponds to option b.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:32+00:00",
+            "usage_in": 906,
+            "usage_out": 68
+        }
+    },
+    {
+        "item_id": 1314,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1978,
+        "tokens_out": 147,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly concludes that the total number of integers is 50, which is not one of the provided choices. Answer 2 correctly derives the equation and finds that there are 5 possible values for $ a $, each allowing 10 values for $ b $, resulting in 50 valid numbers. However, since 50 is not among the options, it's possible that the question intends for only specific values of $ b $ to be considered, or there might be an error in the problem setup. Given that 60 is the closest option and the reasoning in Answer 2 is more thorough, Answer 2 is more likely correct.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:37+00:00",
+            "usage_in": 1990,
+            "usage_out": 147
+        }
+    },
+    {
+        "item_id": 1661,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 879,
+        "tokens_out": 115,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2 incorrectly calculates the sister's work rate. The correct equation is (1/16 + x) * 2.5 = 1/2, which solves to x = 1/20, not 1/10. Using this, the combined rate is (1/16 + 1/20) = 9/80, leading to a time of 80/9 ≈ 8.89 days, which matches Answer 1.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:41+00:00",
+            "usage_in": 891,
+            "usage_out": 115
+        }
+    }
+]

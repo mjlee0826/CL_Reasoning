@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "gpt4omini",
+            "temperature": 0.0,
+            "modelName": "gpt-4o-mini-2024-07-18",
+            "displayName": "GPT4o mini"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/deepseek4.1flash/mathqa/L_en.json",
+            "result/arms/deepseek4.1flash/mathqa/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 90,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "deepseek4.1flash",
+        "judge": "gpt4omini",
+        "reference_file": "result/aggregations/deepseek4.1flash/mathqa/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "5fa3b6cd34731c772cb02777ce649978324fbf0c220afc9457cc9fea267c9b43",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 46,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1364,
+            "completion_tokens": 284,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gpt-4o-mini-2024-07-18": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:47+00:00",
+            "last": "2026-10-04T10:07:50+00:00"
+        }
+    },
+    {
+        "item_id": 202,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 667,
+        "tokens_out": 156,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers discuss the concept of averages and how they relate to the number of elements in each set. Answer 1 correctly identifies that the average will be closer to the set with more numbers, particularly if that set has higher values. It suggests that the average could be around 90-95, which aligns with the idea of a weighted average. Answer 2, while also discussing the concept of averages, focuses on the midpoint of the given options and suggests 85 as a balanced average. However, it does not adequately address the influence of the number of elements in each set on the average. Given that Answer 1 provides a more accurate interpretation of the problem's principle regarding weighted averages, it is the stronger choice.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:47+00:00",
+            "usage_in": 674,
+            "usage_out": 156
+        }
+    },
+    {
+        "item_id": 1349,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 683,
+        "tokens_out": 128,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly identifies that to maximize the difference y - x, we should choose the largest possible y and the smallest possible x within the given constraints. It also correctly calculates that the maximum difference can be just under 8, but it mistakenly concludes that the greatest possible positive integer difference is 7, which is not achievable as integers. The second answer correctly identifies the smallest integer x can be is 4 and the largest integer y can be is 10, leading to a difference of 6, which is valid and achievable. Therefore, the second answer is more accurate.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:50+00:00",
+            "usage_in": 690,
+            "usage_out": 128
+        }
+    }
+]

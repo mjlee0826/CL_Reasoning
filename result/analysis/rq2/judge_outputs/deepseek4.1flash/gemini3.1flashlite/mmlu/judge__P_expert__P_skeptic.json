@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "deepseek4.1flash",
+            "temperature": 0.0,
+            "modelName": "deepseek-flash",
+            "displayName": "DeepSeek V4.1 Flash"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/mmlu/P_expert.json",
+            "result/arms/gemini3.1flashlite/mmlu/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 58,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "deepseek4.1flash",
+        "reference_file": "result/aggregations/gemini3.1flashlite/mmlu/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "0f6a3cd50ceff6bba6b9fa5a622bbfc71cdc299ff88b8e4c833bb54eff60dfe2",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 58,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 852,
+            "completion_tokens": 204,
+            "refusals": 0
+        },
+        "model_versions": {
+            "deepseek-flash@DeepSeek-V4.1-Flash": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:58+00:00",
+            "last": "2026-10-04T10:09:58+00:00"
+        }
+    },
+    {
+        "item_id": 6696,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 848,
+        "tokens_out": 204,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies *ad crumenam* as the appeal to wealth and notes that none of the listed options (False analogy, Hasty Generalization, False sign, Hasty Conclusion) are standard names for this fallacy. However, it then arbitrarily selects “C” without a valid justification, admitting the choice is based on poor-quality or erroneous association. That makes its final answer unsupported and essentially random.\n\nAnswer 2 also correctly defines *ad crumenam* as the appeal to wealth and acknowledges that none of the options directly match. It then argues that “Hasty Conclusion” is the closest functional description because the fallacy involves drawing a conclusion based on irrelevant financial status. While this is not a standard classification either, it at least provides a coherent rationale for choosing among the given options rather than picking one arbitrarily. The reasoning in Answer 2, though imperfect, is more consistent and defensible than Answer 1’s unsupported selection.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:58+00:00",
+            "usage_in": 852,
+            "usage_out": 204
+        }
+    }
+]

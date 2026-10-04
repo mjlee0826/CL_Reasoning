@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "deepseek4.1flash",
+            "temperature": 0.0,
+            "modelName": "deepseek-flash",
+            "displayName": "DeepSeek V4.1 Flash"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/mmlu/L_en.json",
+            "result/arms/gemini3.1flashlite/mmlu/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 60,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "deepseek4.1flash",
+        "reference_file": "result/aggregations/gemini3.1flashlite/mmlu/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "e3ed39e79403eb65358ad613096000bf8acceb867bf4b4ce621d89a74e47069c",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 60,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 588,
+            "completion_tokens": 182,
+            "refusals": 0
+        },
+        "model_versions": {
+            "deepseek-flash@DeepSeek-V4.1-Flash": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:59+00:00",
+            "last": "2026-10-04T10:09:59+00:00"
+        }
+    },
+    {
+        "item_id": 8195,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 584,
+        "tokens_out": 182,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies Nagel’s central distinction in “War and Massacre” as being between consequentialist/utilitarian considerations and absolutist constraints. It accurately notes that Nagel frames the conflict in terms of outcome-based reasoning versus restrictions on how individuals may be treated. Answer 2 is incorrect because it overstates the equivalence of the options: while “forward-looking and backward-looking” and “consequentialist and dignity-based” can loosely map onto aspects of the debate, Nagel’s own explicit terminology is best captured by “utilitarian and absolutist.” The question asks for the two kinds of moral considerations Nagel discusses, and the most precise and standard answer is C, not D. Answer 2’s reasoning that all options are valid descriptors is too broad and not supported by Nagel’s specific framing.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:59+00:00",
+            "usage_in": 588,
+            "usage_out": 182
+        }
+    }
+]

@@ -1,0 +1,155 @@
+[
+    {
+        "Model": {
+            "modelType": "gpt4omini",
+            "temperature": 0.0,
+            "modelName": "gpt-4o-mini-2024-07-18",
+            "displayName": "GPT4o mini"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/deepseek4.1flash/commonsenseqa/P_expert.json",
+            "result/arms/deepseek4.1flash/commonsenseqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 186,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "deepseek4.1flash",
+        "judge": "gpt4omini",
+        "reference_file": "result/aggregations/deepseek4.1flash/commonsenseqa/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "a47e45e9a7afc5d04bb4be9125cdc320749b284cf94fe443dab1758066545df8",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 184,
+        "api_usage": {
+            "calls": 3,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1727,
+            "completion_tokens": 359,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gpt-4o-mini-2024-07-18": 3
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:45+00:00",
+            "last": "2026-10-04T10:07:50+00:00"
+        }
+    },
+    {
+        "item_id": 23,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 598,
+        "tokens_out": 132,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 suggests that the setup described fits a small boat, emphasizing the use of a hand throttle and foot pedals for steering. However, while this configuration is plausible for some boats, it is less common than the use of a hand throttle and foot pedals in aircraft. Answer 2 correctly identifies that the described control setup is characteristic of early aircraft, where a hand throttle is used for engine power and foot pedals control the rudder for steering. Given the context of \"small what,\" an airplane aligns more closely with the described controls than a boat does. Therefore, Answer 2 is more accurate.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:45+00:00",
+            "usage_in": 605,
+            "usage_out": 132
+        }
+    },
+    {
+        "item_id": 199,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 486,
+        "tokens_out": 97,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 suggests that the weather should \"be happy,\" which personifies the weather but does not directly relate to the typical desires associated with good weather for a trip. Answer 2 correctly identifies that \"look beautiful\" is a more natural and relevant desire for weather during a trip to paradise, as it aligns with the expectation of pleasant weather. Therefore, Answer 2 provides a more logical and fitting response to the question.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:48+00:00",
+            "usage_in": 493,
+            "usage_out": 97
+        }
+    },
+    {
+        "item_id": 271,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 622,
+        "tokens_out": 130,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers provide valid points regarding where to buy honey directly from an apiary. Answer 1 correctly identifies the farmer's market as a practical location for purchasing honey, as it is a common venue for local beekeepers to sell their products. Answer 2 emphasizes the beehive as the source of honey, which is technically accurate but does not reflect typical consumer behavior, as one would not usually buy honey directly from a beehive. The farmer's market is a more realistic and accessible option for consumers looking to buy honey. Therefore, Answer 1 is the more appropriate choice.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:50+00:00",
+            "usage_in": 629,
+            "usage_out": 130
+        }
+    }
+]

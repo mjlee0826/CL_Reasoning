@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "gpt4omini",
+            "temperature": 0.0,
+            "modelName": "gpt-4o-mini-2024-07-18",
+            "displayName": "GPT4o mini"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/mathqa/L_en.json",
+            "result/arms/gemini3.1flashlite/mathqa/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 73,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "gpt4omini",
+        "reference_file": "result/aggregations/gemini3.1flashlite/mathqa/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "017a48be56f8fd7f71b0a2f708149daea0fc42c2af898a2cf6dea6a66eb840e6",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 68,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 3174,
+            "completion_tokens": 264,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gpt-4o-mini-2024-07-18": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:47+00:00",
+            "last": "2026-10-04T10:07:51+00:00"
+        }
+    },
+    {
+        "item_id": 320,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 2316,
+        "tokens_out": 153,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers arrive at the same conclusion regarding the initial composition of the solution and the need to adjust the concentration of lemonade syrup. However, Answer 1 contains a significant error in its calculations, particularly in the interpretation of the amount of solution to be removed and replaced. It incorrectly concludes that the amount to be removed is 3.75, which is not among the provided options. Answer 2, on the other hand, correctly follows the steps to derive the amount of solution to be removed and checks the options against the calculations. It arrives at a consistent conclusion that aligns with the choices given, specifically focusing on the correct interpretation of the concentration change. Therefore, Answer 2 is more accurate and reliable.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:47+00:00",
+            "usage_in": 2323,
+            "usage_out": 153
+        }
+    },
+    {
+        "item_id": 1649,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 844,
+        "tokens_out": 111,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers correctly identify that it is impossible to sum three odd numbers to reach an even number like 30. However, Answer 1 suggests a neutral response by selecting option 'a', which does not relate to the problem's context. Answer 2, on the other hand, acknowledges the riddle's nature and suggests option 'b', which is the target sum itself, making it a more relevant choice. Therefore, Answer 2 is the more appropriate response given the context of the question.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:51+00:00",
+            "usage_in": 851,
+            "usage_out": 111
+        }
+    }
+]

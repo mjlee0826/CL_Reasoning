@@ -1,0 +1,379 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/commonsenseqa/L_en.json",
+            "result/arms/gpt4omini/commonsenseqa/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 463,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gpt4omini",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/gpt4omini/commonsenseqa/judge__L_en__L_zh.json",
+        "reference_sha256": "cff13626a5ae096992938ed428db213fb789cc18b9a0d310326274c144ba8cd0",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 463,
+        "api_usage": {
+            "calls": 11,
+            "calls_without_usage": 0,
+            "prompt_tokens": 6067,
+            "completion_tokens": 1100,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 11
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:25+00:00",
+            "last": "2026-10-04T10:08:54+00:00"
+        }
+    },
+    {
+        "item_id": 216,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 568,
+        "tokens_out": 97,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that a movie (D) is a common quiet activity for friends. Answer 2 incorrectly assumes that going to a friend's house (B) is the best choice for a quiet evening, but the question specifically asks what they \"go see,\" which implies an activity or event rather than a location where they stay. Therefore, Answer 1 is more accurate based on the phrasing of the question.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:25+00:00",
+            "usage_in": 580,
+            "usage_out": 97
+        }
+    },
+    {
+        "item_id": 703,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 662,
+        "tokens_out": 125,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that \"town\" (E) is the best fit, but the question specifies that Lilly is in a \"sparsely populated area,\" which aligns more with \"Jewish community\" (D), as it implies a specific demographic rather than a general geographic term. Answer 2 correctly identifies that \"Jewish community\" (D) is a more precise match for a location with a significant Jewish population, which would support the existence of a kosher deli, while also being less densely populated than major cities like New York or Jerusalem.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:28+00:00",
+            "usage_in": 674,
+            "usage_out": 125
+        }
+    },
+    {
+        "item_id": 784,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 550,
+        "tokens_out": 84,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly states that the Gettysburg Address is the biggest speech in the capital, but it was delivered in Gettysburg, not the capital. Answer 2 correctly identifies that the State of the Union is delivered in the capital (Washington, D.C.) and is considered a major speech. Therefore, Answer 2 is more accurate.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:32+00:00",
+            "usage_in": 562,
+            "usage_out": 84
+        }
+    },
+    {
+        "item_id": 788,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 564,
+        "tokens_out": 91,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies \"isolation\" as the most likely feeling, but the question specifically mentions being abandoned by everyone after a marriage ends, which is more directly associated with grief due to the loss of a relationship and support system. While isolation may be a secondary effect, the primary emotional response is grief. Answer 2 correctly identifies grief as the most appropriate response to abandonment after a marriage.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:34+00:00",
+            "usage_in": 576,
+            "usage_out": 91
+        }
+    },
+    {
+        "item_id": 855,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 532,
+        "tokens_out": 86,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that panic is the most direct reaction to the rumors, while Answer 2 correctly identifies that mass hysteria is a broader and more intense consequence of such rumors. Panic is a component of mass hysteria, but the question asks for what the rumors could lead to, which implies a more comprehensive outcome. Therefore, Answer 2 provides a more accurate interpretation.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:37+00:00",
+            "usage_in": 544,
+            "usage_out": 86
+        }
+    },
+    {
+        "item_id": 1030,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 506,
+        "tokens_out": 97,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks where a freon coin would not be needed. Freon is a refrigerant used in cooling systems, so it is needed in refrigerators (A). The answer stating that the refrigerator is the most logical choice where a freon coin would not be needed is incorrect. The correct reasoning is that a freon coin would not be needed in a television (C), as it is not related to refrigeration.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:40+00:00",
+            "usage_in": 518,
+            "usage_out": 97
+        }
+    },
+    {
+        "item_id": 1082,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 558,
+        "tokens_out": 147,
+        "trace": {
+            "judge_output": "Reasoning process  \nBoth answers consider the context of creating a romantic atmosphere. Answer 1 argues that a \"dimly lit room\" is more suitable because it provides a general setting with soft lighting, while Answer 2 emphasizes the bedroom as the most intimate and private space for romance. However, the question specifically asks \"where\" to light a candle, which implies a physical location rather than a lighting condition. A \"bedroom\" (C) is a specific place where one would typically light a candle for romance, whereas \"dimly lit room\" (A) describes a lighting condition, not a location. Therefore, Answer 2 is more accurate in addressing the question's phrasing.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:44+00:00",
+            "usage_in": 570,
+            "usage_out": 147
+        }
+    },
+    {
+        "item_id": 1144,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 516,
+        "tokens_out": 90,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the question is asking about the location of the gallery, but the question specifically asks where \"most were where for the one particular gallery,\" which implies the gallery itself is the subject, not its location. Answer 2 correctly identifies that \"art museum\" (B) is the most relevant option as it directly refers to a place where galleries and features are displayed.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:47+00:00",
+            "usage_in": 528,
+            "usage_out": 90
+        }
+    },
+    {
+        "item_id": 1341,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 453,
+        "tokens_out": 78,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that a bulletin board is used to secure floor coverings, which is not a typical or practical use for such a surface. Answer 2 correctly identifies that a carpet (A) is the most logical choice for securing floor covering with a tack, as tacks are commonly used to fix carpets to floors.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:49+00:00",
+            "usage_in": 465,
+            "usage_out": 78
+        }
+    },
+    {
+        "item_id": 1768,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 511,
+        "tokens_out": 104,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that butter is typically stored in a refrigerator, which aligns with the common practice of keeping dairy products refrigerated. However, it fails to consider that \"small pats\" of butter are commonly found at restaurants, where they are served on bread or as part of a meal. Answer 2 correctly emphasizes the context of \"small pats\" and associates them with restaurants, which is a more direct and specific answer to the question.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:51+00:00",
+            "usage_in": 523,
+            "usage_out": 104
+        }
+    },
+    {
+        "item_id": 1841,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 515,
+        "tokens_out": 101,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that feeling cold (E) is the most direct and immediate consequence of getting wet. Answer 2 incorrectly suggests that catching a cold (C) is a direct result of getting wet, as colds are caused by viruses, not simply by being wet. While being wet can weaken the immune system and make one more susceptible to illness, it does not directly cause a cold. Therefore, Answer 1 is more accurate.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:54+00:00",
+            "usage_in": 527,
+            "usage_out": 101
+        }
+    }
+]

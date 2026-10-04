@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "deepseek4.1flash",
+            "temperature": 0.0,
+            "modelName": "deepseek-flash",
+            "displayName": "DeepSeek V4.1 Flash"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/mathqa/L_en.json",
+            "result/arms/gemini3.1flashlite/mathqa/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 73,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "deepseek4.1flash",
+        "reference_file": "result/aggregations/gemini3.1flashlite/mathqa/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "017a48be56f8fd7f71b0a2f708149daea0fc42c2af898a2cf6dea6a66eb840e6",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 68,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1552,
+            "completion_tokens": 676,
+            "refusals": 0
+        },
+        "model_versions": {
+            "deepseek-flash@DeepSeek-V4.1-Flash": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:05+00:00",
+            "last": "2026-10-04T10:09:05+00:00"
+        }
+    },
+    {
+        "item_id": 144,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 1548,
+        "tokens_out": 676,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly computes the unit prices and finds that 9 packs of 250 plus 1 pack of 20 gives 2,270 hot dogs for $209.60, which is within the $211 budget. However, it then incorrectly assumes that because 2,270 is not among the choices, the largest listed option (2,180) must be the answer, without verifying whether 2,180 is actually achievable or whether a smaller listed option might be the true maximum under some constraint. In fact, 2,270 exceeds all choices, so the problem likely expects the greatest number among the choices that can actually be bought, not the theoretical maximum. Answer 1 does not properly test the choices.\n\nAnswer 2 also computes the unit prices correctly and finds the same 2,270 maximum, but then notices the choices are smaller and attempts to check specific combinations. It tests 2,108 and 2,124, but its arithmetic for 2,124 is flawed: it claims 5×20 + 3×8 = 124 hot dogs, but 5×20=100 and 3×8=24, totaling 124, which is correct, but then it says cost = 183.60 + 15.25 + 4.65 = 203.50, which is under budget, so 2,124 is achievable. However, it does not check whether 2,180 is achievable, which is larger. In fact, 2,180 can be achieved: 8×250=2000, remaining $27.40; 9×20=180 costs $27.45, which is $0.05 over budget, so not possible. But 8×20=160 costs $24.40, total 2,160; plus one 8-pack costs $1.55, total 2,168 for $209.55; plus another 8-pack would be $211.10, over budget. So 2,168 is possible, but 2,180 is not with 8×250. Try 7×250=1750, remaining $50.35; 16×20=320 costs $48.80, total 2,070; plus 8-pack $1.55, total 2,078; not enough. Actually, to get 2,180: need 2,180 total. 8×250=2000, need 180 more. 9×20=180 costs $27.45, total $211.05, over by $0.05. So 2,180 is not possible. 2,124 is possible as shown. 2,108 is possible. 2,100 is possible. 1,108 is possible. The greatest achievable among choices is 2,124. Answer 2 correctly identifies 2,124 as achievable and selects d, but its reasoning is incomplete because it does not rule out 2,180. However, since 2,180 is actually not achievable, Answer 2's final choice is correct, while Answer 1's choice of 2,180 is wrong because 2,180 cannot be bought. Therefore Answer 2 is the more correct one.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:05+00:00",
+            "usage_in": 1552,
+            "usage_out": 676
+        }
+    }
+]

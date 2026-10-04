@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "gpt4omini",
+            "temperature": 0.0,
+            "modelName": "gpt-4o-mini-2024-07-18",
+            "displayName": "GPT4o mini"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/commonsenseqa/L_en.json",
+            "result/arms/qwen/commonsenseqa/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 173,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "gpt4omini",
+        "reference_file": "result/aggregations/qwen/commonsenseqa/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "7587ca5bd9259c91bb044ae6d7d1d006e0dfed7cf6aae5a9c0576a089d6eba46",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 173,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1051,
+            "completion_tokens": 282,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gpt-4o-mini-2024-07-18": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:47+00:00",
+            "last": "2026-10-04T10:07:50+00:00"
+        }
+    },
+    {
+        "item_id": 487,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 451,
+        "tokens_out": 139,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers present valid interpretations of the consequences of a surprise attack. Answer 1 suggests that a surprise attack ends \"defence,\" which is a reasonable outcome as it disrupts the enemy's defensive posture. However, Answer 2 posits that a successful surprise attack could lead to \"surrender,\" which is also a plausible outcome, especially if the attack is overwhelming. Ultimately, while both answers are logical, the notion of surrender (Answer 2) signifies a more definitive end to hostilities compared to merely ending a defensive stance (Answer 1). Therefore, Answer 2 is more aligned with the idea of concluding a conflict.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:47+00:00",
+            "usage_in": 458,
+            "usage_out": 139
+        }
+    },
+    {
+        "item_id": 1929,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 586,
+        "tokens_out": 143,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 suggests that the box is most likely located in the trash, which is a reasonable assumption for a discarded cardboard box. However, it overlooks the possibility that the box could still be in use or in a location where it is not discarded yet. Answer 2 correctly identifies that the box was used for transporting shoes and considers the context of a man sleeping in it, leading to the conclusion that a back alley is a plausible location. The presence of a person sleeping in the box indicates a need for a more secluded area, which aligns with the characteristics of a back alley. Therefore, Answer 2 provides a more accurate and contextually relevant reasoning.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:50+00:00",
+            "usage_in": 593,
+            "usage_out": 143
+        }
+    }
+]

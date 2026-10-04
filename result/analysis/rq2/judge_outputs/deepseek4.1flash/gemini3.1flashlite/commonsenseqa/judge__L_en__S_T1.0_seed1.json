@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "deepseek4.1flash",
+            "temperature": 0.0,
+            "modelName": "deepseek-flash",
+            "displayName": "DeepSeek V4.1 Flash"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/commonsenseqa/L_en.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 92,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "deepseek4.1flash",
+        "reference_file": "result/aggregations/gemini3.1flashlite/commonsenseqa/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "066c7dc9e6f5d1053bca85048e2f3176ad074abf0639db42619005a4a8723596",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 92,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 555,
+            "completion_tokens": 211,
+            "refusals": 0
+        },
+        "model_versions": {
+            "deepseek-flash@DeepSeek-V4.1-Flash": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:00+00:00",
+            "last": "2026-10-04T10:09:00+00:00"
+        }
+    },
+    {
+        "item_id": 1835,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 551,
+        "tokens_out": 211,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 argues that “turmoil” is the most comprehensive term for post-war instability and rebuilding difficulty. This is plausible, but it underweights the specific phrase “despite a desire to move forward,” which suggests lingering antagonism rather than general chaos. Answer 2 correctly notes that “hostility” better fits the persistent negative sentiment that makes peace tentative, but it incorrectly treats “hostility” and “turmoil” as nearly interchangeable and then chooses “hostility” without fully justifying why it is stronger than “turmoil.” The key issue is that the blank follows “there was a lot of what?” after mentioning rebuilding difficulty. “Turmoil” directly captures widespread disruption and instability during rebuilding, while “hostility” is more about attitudes between groups. Since the sentence already mentions “desire to move forward,” the missing noun is more likely the chaotic condition itself, not the emotional hostility. Therefore, Answer 1’s choice of “turmoil” is better supported.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:00+00:00",
+            "usage_in": 555,
+            "usage_out": 211
+        }
+    }
+]

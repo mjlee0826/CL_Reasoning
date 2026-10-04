@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "deepseek4.1flash",
+            "temperature": 0.0,
+            "modelName": "deepseek-flash",
+            "displayName": "DeepSeek V4.1 Flash"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/mathqa/L_en.json",
+            "result/arms/gpt4omini/mathqa/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 295,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gpt4omini",
+        "judge": "deepseek4.1flash",
+        "reference_file": "result/aggregations/gpt4omini/mathqa/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "f4b6757e2aa52d656a828d742d785a93a490bf816f2dfee23c1cf97b218da567",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 294,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 2104,
+            "completion_tokens": 420,
+            "refusals": 0
+        },
+        "model_versions": {
+            "deepseek-flash@DeepSeek-V4.1-Flash": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:49+00:00",
+            "last": "2026-10-04T10:08:51+00:00"
+        }
+    },
+    {
+        "item_id": 1155,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 928,
+        "tokens_out": 187,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 is correct. It correctly sets the total work as 100 man-days. Since 10 men work for 4 days, they contribute 40 man-days. The remaining 60 man-days must be done by 15 women in 4 days, so each woman does 60 / (15 × 4) = 1 man-day per day. Thus one woman alone takes 100 days. Answer 2 makes an arithmetic error: solving 4 × (1/10 + 15/w) = 1 gives 1/10 + 15/w = 1/4, so 15/w = 1/4 − 1/10 = 3/20, hence w = 15 × 20 / 3 = 100, not 225. Therefore Answer 2’s final value is wrong.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:49+00:00",
+            "usage_in": 932,
+            "usage_out": 187
+        }
+    },
+    {
+        "item_id": 1234,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 1168,
+        "tokens_out": 233,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 makes a critical error: it treats the Rs. 30 as both the original selling price and the sale price after discount, then concludes the gain percent is still 40% and arbitrarily changes it to 10% without valid calculation. It also incorrectly computes marked price from Rs. 30 as if Rs. 30 were the discounted price, which contradicts the problem statement. The final 10% is unsupported.\n\nAnswer 2 correctly identifies that Rs. 30 is the original selling price with a 40% gain, so cost price = 30 / 1.4 ≈ 21.43. The marked price is Rs. 30 (since the problem says discount is on marked price, and the original selling price before discount is the marked price in this context). During sale, a 10% discount on Rs. 30 gives sale price = 27. Gain = 27 - 21.43 = 5.57, and gain% = (5.57 / 21.43) × 100 ≈ 26%. This matches choice e.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:51+00:00",
+            "usage_in": 1172,
+            "usage_out": 233
+        }
+    }
+]

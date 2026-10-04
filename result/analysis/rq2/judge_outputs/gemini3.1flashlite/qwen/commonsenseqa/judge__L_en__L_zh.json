@@ -1,0 +1,407 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/commonsenseqa/L_en.json",
+            "result/arms/qwen/commonsenseqa/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 572,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/qwen/commonsenseqa/judge__L_en__L_zh.json",
+        "reference_sha256": "80ac113c75197bb8f08063d0e113798d93b1fb394345596d707a6e62cd880e4d",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 572,
+        "api_usage": {
+            "calls": 12,
+            "calls_without_usage": 0,
+            "prompt_tokens": 5766,
+            "completion_tokens": 1606,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 12
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:46+00:00",
+            "last": "2026-10-04T10:09:02+00:00"
+        }
+    },
+    {
+        "item_id": 275,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 495,
+        "tokens_out": 170,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that a prison is a place where one would go to drink a beer; in reality, prisons are strictly controlled environments where alcohol is prohibited. Answer 2 correctly identifies that the context implies Jimmy is looking for a place to drink where he won't violate his wife's probation or trigger her alcoholism. While the logic in Answer 2 regarding a \"homeless shelter\" is a bit of a stretch, it correctly identifies that the other options (home, neighbor's house) involve the presence of alcohol, which would be problematic for an alcoholic on probation. Between the two, Answer 2 provides a more logical assessment of the social constraints presented in the prompt, whereas Answer 1 suggests going to prison to drink, which is factually nonsensical.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:46+00:00",
+            "usage_in": 496,
+            "usage_out": 170
+        }
+    },
+    {
+        "item_id": 316,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 460,
+        "tokens_out": 150,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 suggests \"indigestion\" as the most direct reaction, but indigestion is a broad term often associated with overeating or mild discomfort, whereas eating raw chicken is a high-risk activity specifically associated with foodborne pathogens like Salmonella. Answer 2 correctly identifies that eating raw chicken is a classic cause of food poisoning, for which \"throwing up\" (vomiting) is a primary and acute symptom. While both are possible, \"throwing up\" is a more specific and severe clinical manifestation of the food poisoning caused by raw chicken compared to the general term \"indigestion.\" Therefore, Answer 2 provides a more medically accurate reasoning for the consequences of consuming raw poultry.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:55+00:00",
+            "usage_in": 461,
+            "usage_out": 150
+        }
+    },
+    {
+        "item_id": 450,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 429,
+        "tokens_out": 125,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 suggests a \"bushel basket\" is the correct choice. While a bushel basket can hold potatoes, it is primarily a unit of measure or a storage container used at farms or markets, not a standard, everyday item used by a consumer to carry groceries home. Answer 2 identifies \"grocery bag\" as the correct choice. A grocery bag is the standard, universal tool used by consumers to transport purchased food items, including potatoes, from a store to their home. Therefore, Answer 2 provides a more logical and practical answer to the question.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:25+00:00",
+            "usage_in": 430,
+            "usage_out": 125
+        }
+    },
+    {
+        "item_id": 708,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 618,
+        "tokens_out": 93,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that the context of \"seeking lunch\" implies hunting for food. Using a cannon to hunt an animal (such as an ungulate) is a classic example of \"overkill.\" Answer 2 incorrectly assumes that \"seeking lunch\" implies a violent act against people, which contradicts the context of the sentence. Therefore, Answer 1 provides a more logical interpretation of the scenario.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:27+00:00",
+            "usage_in": 619,
+            "usage_out": 93
+        }
+    },
+    {
+        "item_id": 806,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 399,
+        "tokens_out": 113,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 interprets the question as \"What should you do before running after a ball,\" which is a logical safety precaution, though the phrasing \"after ball\" is grammatically ambiguous. Answer 2 suggests \"skip\" (C) as the action to perform after a ball, which lacks a clear logical connection to the context of chasing a ball. Between the two, Answer 1 provides a more coherent behavioral rationale for interacting with a ball, whereas Answer 2's reasoning is arbitrary.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:38+00:00",
+            "usage_in": 400,
+            "usage_out": 113
+        }
+    },
+    {
+        "item_id": 1281,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 436,
+        "tokens_out": 260,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks what being able to forgive makes one \"be.\" Grammatically, the sentence \"Being able to forgive is a way to be [adjective/adverbial phrase]\" requires a completion that fits the structure. \nAnswer 1 suggests \"give hug,\" which is grammatically incorrect (to be give hug). \nAnswer 2 suggests \"happiness,\" which is also grammatically incorrect (to be happiness). \nHowever, looking at the options provided in the prompt (A-E), option D (\"nice to\") is the only one that fits the grammatical structure \"to be nice to [someone].\" Since neither Answer 1 nor Answer 2 selected the most logical choice (D), I must evaluate which reasoning is less flawed. Answer 1 relies on a weak cultural association with physical contact, while Answer 2 relies on a vague psychological association. Both are poor, but Answer 2's reasoning regarding the emotional outcome of forgiveness is more conceptually sound than Answer 1's assumption that forgiveness is defined by the act of hugging. Therefore, Answer 2 is slightly more reasonable in its attempt to link forgiveness to a positive state, even though both fail to identify the grammatically correct option D.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:44+00:00",
+            "usage_in": 437,
+            "usage_out": 260
+        }
+    },
+    {
+        "item_id": 1576,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 501,
+        "tokens_out": 120,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question specifically asks where investment bankers hang out \"in the suburbs.\" Answer 1 identifies Wall Street as a financial center, but Wall Street is a physical location in a city (New York), not a suburb. Answer 2 correctly identifies that the question implies a social or recreational setting typical of suburban life. Country clubs are culturally associated with the social circles of high-income professionals, including investment bankers, when they are outside of the city. Therefore, Answer 2 provides a more logical interpretation of the specific constraints of the question.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:47+00:00",
+            "usage_in": 502,
+            "usage_out": 120
+        }
+    },
+    {
+        "item_id": 1650,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 453,
+        "tokens_out": 114,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that \"shiny\" is a common descriptor for the high-quality, glossy paper used in magazines to make advertisements stand out. This is a specific physical characteristic associated with print media. Answer 2 argues for \"store\" based on general visibility, but \"shiny\" is not a defining characteristic of advertisements in a store, whereas it is a standard industry term for magazine print quality. Therefore, Answer 1 provides a more logical connection between the adjective \"shiny\" and the medium.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:49+00:00",
+            "usage_in": 454,
+            "usage_out": 114
+        }
+    },
+    {
+        "item_id": 1690,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 486,
+        "tokens_out": 83,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly claims that a hospital is not directly related to treating illness, which is factually wrong. Answer 2 correctly identifies that both a hospital and a doctor's office provide medical help, but logically concludes that a hospital is a primary and comprehensive place for treating illnesses. Answer 2 provides a more accurate assessment of the options provided.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:53+00:00",
+            "usage_in": 487,
+            "usage_out": 83
+        }
+    },
+    {
+        "item_id": 1692,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 494,
+        "tokens_out": 116,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for a place specialized in \"colorful arrangements\" that also happens to have a \"toy balloon or two.\" A flower shop is defined by its specialization in colorful arrangements (flowers). While a birthday party involves balloons, it is an event rather than a \"place\" that specializes in arrangements. Answer 1 correctly identifies the semantic link between \"colorful arrangements\" and a flower shop, whereas Answer 2 incorrectly identifies a birthday party as a place and misinterprets the primary specialization described in the prompt.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:57+00:00",
+            "usage_in": 495,
+            "usage_out": 116
+        }
+    },
+    {
+        "item_id": 1765,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 514,
+        "tokens_out": 156,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks what Boris wanted to avoid by lying about the dress. The phrase \"That dress did make her but look far\" is likely a typo for \"look fat.\" In social contexts, when someone lies about how a piece of clothing looks on another person, the primary motivation is to avoid hurting the other person's feelings. Answer 1 correctly identifies this social dynamic. Answer 2 suggests \"being found out,\" but lying is the act itself, not the motivation for the lie; one lies *to* avoid a negative outcome (like hurt feelings), not to avoid the act of being caught in the lie itself. Therefore, Answer 1 provides a more logical psychological motivation for the behavior described.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:59+00:00",
+            "usage_in": 515,
+            "usage_out": 156
+        }
+    },
+    {
+        "item_id": 1814,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 469,
+        "tokens_out": 106,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 suggests a sandbox, which is primarily a functional area for waste elimination and is generally not considered a place for a cat to rest or retreat to due to its association with litter. Answer 2 correctly identifies that a grumpy cat, which typically seeks solitude and comfort to avoid interaction, would prefer a warm bed. A warm bed provides the necessary comfort and security for a cat that is feeling irritable or antisocial, making it a more logical choice than a sandbox.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:09:02+00:00",
+            "usage_in": 470,
+            "usage_out": 106
+        }
+    }
+]

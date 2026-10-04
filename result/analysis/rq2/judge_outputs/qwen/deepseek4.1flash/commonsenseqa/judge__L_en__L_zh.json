@@ -1,0 +1,323 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/deepseek4.1flash/commonsenseqa/L_en.json",
+            "result/arms/deepseek4.1flash/commonsenseqa/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 417,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "deepseek4.1flash",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/deepseek4.1flash/commonsenseqa/judge__L_en__L_zh.json",
+        "reference_sha256": "98c4d738129b9e5a8924c6487422e440aaae7d7a2eb747128025c8611b98880e",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 415,
+        "api_usage": {
+            "calls": 9,
+            "calls_without_usage": 0,
+            "prompt_tokens": 4928,
+            "completion_tokens": 846,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 9
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:25+00:00",
+            "last": "2026-10-04T10:08:45+00:00"
+        }
+    },
+    {
+        "item_id": 189,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 454,
+        "tokens_out": 81,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly interprets the question as asking for a description of the person's state (mortal), rather than what they will become (dead). The question is about a future state, not a current condition. Answer 2 correctly identifies that someone lacking immortality will one day be dead, making \"dead\" the most accurate choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:25+00:00",
+            "usage_in": 466,
+            "usage_out": 81
+        }
+    },
+    {
+        "item_id": 248,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 581,
+        "tokens_out": 90,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that \"passing sentence\" refers to the type of punishment (incarceration), but the phrase \"condemned the man to\" typically refers to the ultimate consequence of the sentence, which in legal contexts often implies a death sentence. Answer 2 correctly identifies that \"death\" is the most fitting consequence of a guilty verdict when the sentence is being delivered.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:27+00:00",
+            "usage_in": 593,
+            "usage_out": 90
+        }
+    },
+    {
+        "item_id": 357,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 965,
+        "tokens_out": 152,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that \"puzzle box\" can be a single piece, but it is not definitively clear if it is made out of only one piece. Answer 2 argues that \"puzzle\" (option A) could refer to a single piece, which is a plausible interpretation in riddle logic. However, option A refers to the entire puzzle, not a single piece. The question asks for something \"made out of only one piece,\" which more clearly aligns with \"puxxle\" (option E), as it implies a singular, unbroken entity. Thus, Answer 2's reasoning is flawed in its assumption about \"puzzle\" being a single piece.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:32+00:00",
+            "usage_in": 977,
+            "usage_out": 152
+        }
+    },
+    {
+        "item_id": 802,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 398,
+        "tokens_out": 76,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question refers to \"black and white keys,\" which are not typical keys used for locking or unlocking. Instead, they are the keys of a piano. Answer 2 incorrectly assumes the question is about physical keys attached to an object, while Answer 1 correctly identifies the black and white keys as part of a piano.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:34+00:00",
+            "usage_in": 410,
+            "usage_out": 76
+        }
+    },
+    {
+        "item_id": 890,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 479,
+        "tokens_out": 82,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies \"start to fall\" as the direct reason, while the actual cause is the wet ground. The question asks why you shouldn't walk barefoot after rain, and the primary reason is the condition (wet ground) that leads to the risk. Answer 2 correctly identifies \"wet ground\" as the direct cause.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:37+00:00",
+            "usage_in": 491,
+            "usage_out": 82
+        }
+    },
+    {
+        "item_id": 1070,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 553,
+        "tokens_out": 90,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that \"lose money\" is the correct grammatical form, but the sentence structure \"had been\" requires a past participle or adjective. \"Lose money\" is a base verb and does not fit grammatically. Answer 2 correctly identifies that \"lost\" is the appropriate past participle to follow \"had been,\" making it the grammatically correct choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:40+00:00",
+            "usage_in": 565,
+            "usage_out": 90
+        }
+    },
+    {
+        "item_id": 1386,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 478,
+        "tokens_out": 117,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks what James felt he lacked, which motivated him to socialize more. While both \"meet people\" (D) and \"friendship\" (E) are related to socializing, the key lies in the phrasing \"felt he lacked.\" This suggests a deficiency or absence of something, not an action. \"Friendship\" is a state or relationship that one might feel they lack, making it a more fitting answer for the emotional need described. \"Meet people\" is an action rather than a lack.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:42+00:00",
+            "usage_in": 490,
+            "usage_out": 117
+        }
+    },
+    {
+        "item_id": 1462,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 469,
+        "tokens_out": 82,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that \"change direction\" is more directly related to gaining new perspectives than \"travel abroad.\" While both could be argued, \"travel abroad\" is a well-established and commonly accepted method for gaining new perspectives due to exposure to different cultures and experiences. Answer 2 correctly identifies the most logical choice based on the question's intent.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:44+00:00",
+            "usage_in": 481,
+            "usage_out": 82
+        }
+    },
+    {
+        "item_id": 1829,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 443,
+        "tokens_out": 76,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks what happens when you get a blackout from amnesia. Answer 1 incorrectly assumes that a blackout is associated with alcohol consumption, which is not relevant to the question about amnesia. Answer 2 correctly identifies that a blackout from amnesia would result in amnesia itself, making it the most accurate choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:45+00:00",
+            "usage_in": 455,
+            "usage_out": 76
+        }
+    }
+]

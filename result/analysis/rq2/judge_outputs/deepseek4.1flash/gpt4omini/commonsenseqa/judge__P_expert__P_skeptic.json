@@ -1,0 +1,211 @@
+[
+    {
+        "Model": {
+            "modelType": "deepseek4.1flash",
+            "temperature": 0.0,
+            "modelName": "deepseek-flash",
+            "displayName": "DeepSeek V4.1 Flash"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/commonsenseqa/P_expert.json",
+            "result/arms/gpt4omini/commonsenseqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 189,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gpt4omini",
+        "judge": "deepseek4.1flash",
+        "reference_file": "result/aggregations/gpt4omini/commonsenseqa/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "6acf70c7492d37e65b5add07cc797d57b147f6c482f393f7439183cb62c9d85e",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 189,
+        "api_usage": {
+            "calls": 5,
+            "calls_without_usage": 0,
+            "prompt_tokens": 3066,
+            "completion_tokens": 742,
+            "refusals": 0
+        },
+        "model_versions": {
+            "deepseek-flash@DeepSeek-V4.1-Flash": 5
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:59+00:00",
+            "last": "2026-10-04T10:09:06+00:00"
+        }
+    },
+    {
+        "item_id": 969,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 518,
+        "tokens_out": 127,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 argues for \"good karma\" by emphasizing a broader spiritual or moral consequence, but the question asks about a hidden force activated in one's life, which is more directly about personal liberation than external reciprocity. Its reasoning also acknowledges that \"new freedom\" resonates but then dismisses it without sufficient justification. Answer 2 correctly identifies forgiveness as leading to release from resentment and emotional burden, which aligns closely with the idea of a hidden force being activated—specifically, new freedom. Its reasoning is more focused and directly tied to the transformative personal effect described in the question.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:59+00:00",
+            "usage_in": 522,
+            "usage_out": 127
+        }
+    },
+    {
+        "item_id": 1216,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 565,
+        "tokens_out": 118,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly treats “helm” as more traditionally linked to sailing vessels and ignores the phrase “powered leisure vessel.” A sailing vessel may be leisure, but it is not primarily powered in the sense implied by the question. Answer 2 correctly identifies that a motorboat is a powered leisure vessel and that “helm” applies to it, while also correctly dismissing South Tyrol as not a vessel and tugboat/brig as not fitting “leisure” as well. Therefore, Answer 2 is the better choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:01+00:00",
+            "usage_in": 569,
+            "usage_out": 118
+        }
+    },
+    {
+        "item_id": 1223,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 646,
+        "tokens_out": 187,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly treats \"older houses\" as a broader and better category than the Victorian house options, but the question asks where you would find the nearest attic, not which category is broadest. It also dismisses \"own home\" too quickly, even though the nearest attic would most directly be in one’s own home if it has an attic. Answer 2 also overlooks \"own home\" and arbitrarily prefers \"victorian style house\" over \"victorian house\" based on breadth, which is not the key criterion. Both answers fail to recognize that the most direct and personal location for the nearest attic is one’s own home, making D the best choice. Since neither answer selects D, both are flawed, but Answer 2 at least chooses a specific house type rather than a vague broader category, making it slightly less incorrect than Answer 1.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:03+00:00",
+            "usage_in": 650,
+            "usage_out": 187
+        }
+    },
+    {
+        "item_id": 1489,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 667,
+        "tokens_out": 136,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly treats “cross street” as more deliberate and therefore better than “keep walking,” but the question only asks what the person would do if they wanted no trouble. Both C and D avoid confrontation, but “keep walking” is the most direct and common minimal-effort response to avoid involvement. Answer 2 correctly identifies that “keep walking” aligns most directly with wanting no trouble, while also acknowledging that “cross street” is similar but less direct. Answer 1’s reasoning overstates the distinction between C and D and chooses D without sufficient basis. Therefore, Answer 2 is more correct.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:04+00:00",
+            "usage_in": 671,
+            "usage_out": 136
+        }
+    },
+    {
+        "item_id": 1917,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 650,
+        "tokens_out": 174,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly treats “foreigner” as the best general term for a non-citizen, but “foreigner” often implies someone from another country and does not necessarily cover all legal non-citizen statuses. Its reasoning also dismisses “alien” too quickly as merely less common, even though the question likely targets the formal/legal term for a non-citizen. Answer 2 correctly notes that “alien” is the legal term specifically describing a person who is not a citizen or national of a given country, which fits the wording of the question better than “foreigner.” The main weakness in Answer 2 is that it says “foreigner” and “alien” are both fitting, but its final selection of “alien” is more precise for the question’s phrasing.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:06+00:00",
+            "usage_in": 654,
+            "usage_out": 174
+        }
+    }
+]

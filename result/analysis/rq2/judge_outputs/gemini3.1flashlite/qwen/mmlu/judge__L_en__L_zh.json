@@ -1,0 +1,351 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/mmlu/L_en.json",
+            "result/arms/qwen/mmlu/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 449,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/qwen/mmlu/judge__L_en__L_zh.json",
+        "reference_sha256": "5097b63c6024c91c0c39fd207d30071edc0d4fb5d13b256ed752afc472dbbe43",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 449,
+        "api_usage": {
+            "calls": 10,
+            "calls_without_usage": 0,
+            "prompt_tokens": 5951,
+            "completion_tokens": 2000,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 10
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:32+00:00",
+            "last": "2026-10-04T10:10:01+00:00"
+        }
+    },
+    {
+        "item_id": 107,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 479,
+        "tokens_out": 107,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that osteoblasts are involved in bone formation and are unrelated to immune defense. While it notes that hair in the nose, mucous membranes, and saliva all play roles, it correctly identifies that mucous membranes are a primary, broad-spectrum defense mechanism. Answer 2 incorrectly claims that osteoblasts are a defense mechanism against bacteria, which is biologically inaccurate. Therefore, Answer 1 provides a more accurate assessment of the biological functions of the listed options.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:09:32+00:00",
+            "usage_in": 480,
+            "usage_out": 107
+        }
+    },
+    {
+        "item_id": 491,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 522,
+        "tokens_out": 133,
+        "trace": {
+            "judge_output": "Reasoning process\nIn clinical practice, closed-end pouches are specifically designed for patients with a colostomy who have formed or semi-formed stool, as they are discarded after one use and do not have a drainage outlet. Answer 1 incorrectly claims they are used in the immediate post-operative period (where drainable pouches are typically preferred to monitor output). Answer 2 correctly identifies that closed pouches are associated with colostomies, although its reasoning is slightly generalized, it identifies the correct clinical application compared to the other options. Therefore, Answer 2 is more accurate regarding the standard indication for a closed pouch.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:09:35+00:00",
+            "usage_in": 523,
+            "usage_out": 133
+        }
+    },
+    {
+        "item_id": 499,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 617,
+        "tokens_out": 187,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that ammonia is a byproduct of high-intensity exercise (due to AMP deamination). It correctly identifies that phosphocreatine depletion begins immediately. Regarding option B, while the \"5-second\" claim is specific, it is a common physiological observation that significant lactate accumulation has a slight lag compared to immediate PCr breakdown. Regarding option D, it is a well-documented physiological phenomenon that as repeated sprints continue, the rate of lactate accumulation decreases because the total power output drops and the glycolytic rate is inhibited by the accumulation of hydrogen ions and the depletion of glycogen. Therefore, statement D is actually true, making B the false statement. Answer 2 incorrectly claims ammonia is not associated with high-intensity exercise and incorrectly claims the rate of lactate accumulation increases with repeated sprints, which contradicts established exercise physiology. Answer 1 provides the correct analysis.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:09:37+00:00",
+            "usage_in": 618,
+            "usage_out": 187
+        }
+    },
+    {
+        "item_id": 997,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 712,
+        "tokens_out": 343,
+        "trace": {
+            "judge_output": "Reasoning process\nThe set of all common divisors of two integers $x$ and $y$ is exactly the set of all divisors of their greatest common divisor $g = \\gcd(x, y)$. \n1. A divisor $c$ of an integer $g$ must satisfy $c \\neq 0$. Thus, any set containing 0 is incorrect, which eliminates B and D.\n2. For a set to be the set of *all* common divisors, it must contain all divisors of $g$. If $g=6$, the divisors are $\\{\\pm 1, \\pm 2, \\pm 3, \\pm 6\\}$. \n3. Option A is $\\{-6, -2, -1, 1, 2, 6\\}$. This set is missing $\\pm 3$, which are divisors of 6. If $g=6$, the set of all common divisors must include $\\pm 3$. If $g=2$, the set would be $\\{\\pm 1, \\pm 2\\}$, which is a subset of A but not the *entire* set of divisors for $g=2$. \n4. Option C is $\\{-6, -3, -2, -1, 1, 2, 3, 6\\}$. This is exactly the set of all divisors of 6 (or -6). Therefore, C represents the set of all common divisors for any pair of integers whose GCD is 6. Answer 2 correctly identifies that 0 cannot be a divisor and that C represents a complete set of divisors for a specific GCD.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:09:40+00:00",
+            "usage_in": 713,
+            "usage_out": 343
+        }
+    },
+    {
+        "item_id": 1837,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 820,
+        "tokens_out": 264,
+        "trace": {
+            "judge_output": "Reasoning process\nStatement (i) is true by definition of MLE. Statement (iii) is true; OLS and ML yield identical slope/intercept estimates for linear models, but ML uses $n$ as the divisor for variance while OLS uses $n-k$. Statement (iv) is true; GARCH models lack closed-form analytical solutions and require numerical optimization. Statement (ii) is the point of contention. While GARCH models are typically estimated via MLE, they can technically be estimated using other methods (e.g., Generalized Method of Moments or Quasi-Maximum Likelihood). However, in the context of standard econometrics textbooks (like Brooks), the statement \"GARCH models can only be estimated by ML and not by OLS\" is often presented as a standard fact because OLS is inappropriate for the conditional heteroskedasticity inherent in GARCH. Answer 1 identifies (ii) as true, while Answer 2 identifies (ii) as false. Given that OLS is fundamentally incapable of estimating the conditional variance parameters of a GARCH process, (ii) is generally considered true in the context of introductory econometrics examinations. Therefore, (i), (ii), (iii), and (iv) are all considered true.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:09:44+00:00",
+            "usage_in": 821,
+            "usage_out": 264
+        }
+    },
+    {
+        "item_id": 2475,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 613,
+        "tokens_out": 279,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for an \"immediate (one-step) consequence\" of the given premises. \n1. The premises are: (1) $U \\supset W$, (2) $W \\supset (X \\equiv \\sim Y)$, (3) $(X \\equiv \\sim Y) \\supset Z$, and (4) $\\sim Z$.\n2. An immediate consequence is derived by applying a single rule of inference to one or more premises.\n3. Applying Modus Tollens to premise (3) $(X \\equiv \\sim Y) \\supset Z$ and premise (4) $\\sim Z$ yields $\\sim(X \\equiv \\sim Y)$. This is a direct, one-step derivation.\n4. Answer 1 correctly identifies this step.\n5. Answer 2 claims $\\sim W$ is an immediate consequence. While $\\sim W$ is a valid consequence of the set of premises, it requires multiple steps: first deriving $\\sim(X \\equiv \\sim Y)$ from (3) and (4), then deriving $\\sim W$ from (2) and the newly derived $\\sim(X \\equiv \\sim Y)$ using Modus Tollens. Therefore, $\\sim W$ is not an \"immediate\" (one-step) consequence.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:09:48+00:00",
+            "usage_in": 614,
+            "usage_out": 279
+        }
+    },
+    {
+        "item_id": 2583,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 416,
+        "tokens_out": 118,
+        "trace": {
+            "judge_output": "Reasoning process\nAccording to historical data from UNESCO and various demographic studies (such as those compiled by Our World in Data), the global literacy rate for the population aged 15 and older in 1950 was approximately 42% to 46%. Among the provided choices, 36% (Answer 2) is closer to the historical consensus than 56% (Answer 1), which is significantly higher than the actual data for that year. Therefore, Answer 2 provides a more accurate historical estimation.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:09:52+00:00",
+            "usage_in": 417,
+            "usage_out": 118
+        }
+    },
+    {
+        "item_id": 4891,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 516,
+        "tokens_out": 155,
+        "trace": {
+            "judge_output": "Reasoning process\nThe case *Larry P. v. Riles* (1979) was a landmark class-action lawsuit in California concerning the disproportionate placement of African American children in classes for the \"educable mentally retarded\" based on culturally biased IQ tests. The court ruled that the use of these tests for such placements was discriminatory. Answer 1 correctly identifies that the case focused on the prohibition of racially discriminatory testing practices. Answer 2 incorrectly attributes the establishment of FAPE (Free Appropriate Public Education) to this case; FAPE is the cornerstone of the Education for All Handicapped Children Act (now IDEA), not *Larry P. v. Riles*. Therefore, Answer 1 is correct.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:09:55+00:00",
+            "usage_in": 517,
+            "usage_out": 155
+        }
+    },
+    {
+        "item_id": 9748,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 485,
+        "tokens_out": 162,
+        "trace": {
+            "judge_output": "Reasoning process\nJoseph Butler, in his *Fifteen Sermons Preached at the Rolls Chapel*, specifically in Sermon I, discusses the nature of human nature and conscience. Butler argues that there is a natural principle of reflection or conscience that approves or disapproves of our own actions. He posits that it is a psychological impossibility for a person to perform an action while simultaneously disapproving of it, as the internal authority of conscience would prevent such a contradiction. Answer 1 incorrectly interprets Butler's views on imitation, which is not the central focus of this specific impossibility. Answer 2 correctly identifies that Butler views the internal approval of one's own actions as a necessary condition for those actions, making it impossible to act against one's own moral approval.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:09:57+00:00",
+            "usage_in": 486,
+            "usage_out": 162
+        }
+    },
+    {
+        "item_id": 10373,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 761,
+        "tokens_out": 252,
+        "trace": {
+            "judge_output": "Reasoning process\nThe key legal issue is whether Jackson's offer was a \"firm offer\" under UCC § 2-205. A firm offer must be in a signed writing by a merchant which gives assurance that it will be held open. Although the offer did not state an expiration date, UCC § 2-205 provides that such a term of assurance in a form supplied by the offeree must be separately signed, but more importantly, the period of irrevocability cannot exceed three months. Jackson's letter was a signed writing by a merchant promising not to revoke. Therefore, it was a firm offer and was irrevocable for a reasonable time (not to exceed three months). Because the offer was irrevocable, the attempted revocation on day 4 was ineffective. Consequently, the offer remained open when Sands mailed the acceptance on day 7. Under the \"mailbox rule\" (which applies to UCC contracts), an acceptance is effective upon dispatch. Therefore, a contract was formed on day 7 when Sands mailed the acceptance. Answer 1 correctly identifies that the offer was irrevocable and that the contract was formed upon the mailing of the acceptance. Answer 2 incorrectly assumes the offer was revocable.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:10:01+00:00",
+            "usage_in": 762,
+            "usage_out": 252
+        }
+    }
+]

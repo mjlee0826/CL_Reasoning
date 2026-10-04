@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/mathqa/L_en.json",
+            "result/arms/gpt4omini/mathqa/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 295,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gpt4omini",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/gpt4omini/mathqa/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "f4b6757e2aa52d656a828d742d785a93a490bf816f2dfee23c1cf97b218da567",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 294,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 3458,
+            "completion_tokens": 874,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:46+00:00",
+            "last": "2026-10-04T10:07:56+00:00"
+        }
+    },
+    {
+        "item_id": 1511,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 1557,
+        "tokens_out": 532,
+        "trace": {
+            "judge_output": "Reasoning process\nTo find the number of positive divisors of $240 = 2^4 \\times 3^1 \\times 5^1$ that are multiples of 4, we look for divisors of the form $2^a \\times 3^b \\times 5^c$ where $a \\in \\{2, 3, 4\\}$, $b \\in \\{0, 1\\}$, and $c \\in \\{0, 1\\}$.\nThe number of such divisors is $3 \\times 2 \\times 2 = 12$.\nThese 12 divisors are:\n- $a=2$: $2^2 \\times 3^0 \\times 5^0 = 4$, $2^2 \\times 3^1 \\times 5^0 = 12$, $2^2 \\times 3^0 \\times 5^1 = 20$, $2^2 \\times 3^1 \\times 5^1 = 60$\n- $a=3$: $2^3 \\times 3^0 \\times 5^0 = 8$, $2^3 \\times 3^1 \\times 5^0 = 24$, $2^3 \\times 3^0 \\times 5^1 = 40$, $2^3 \\times 3^1 \\times 5^1 = 120$\n- $a=4$: $2^4 \\times 3^0 \\times 5^0 = 16$, $2^4 \\times 3^1 \\times 5^0 = 48$, $2^4 \\times 3^0 \\times 5^1 = 80$, $2^4 \\times 3^1 \\times 5^1 = 240$\nThe question asks for the number of these divisors *not including 240*.\nSince 240 is one of the 12 divisors identified, we must subtract it: $12 - 1 = 11$.\nAnswer 1 correctly identifies the set of divisors and performs the subtraction. Answer 2 incorrectly claims that 240 is not a divisor of 60 (which is true) but fails to recognize that 240 is a divisor of 240 and must be excluded from the count of divisors of 240.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:46+00:00",
+            "usage_in": 1558,
+            "usage_out": 532
+        }
+    },
+    {
+        "item_id": 1538,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 1899,
+        "tokens_out": 342,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly interprets the problem statement \"together, cows and chickens have a total of 100 feet and heads\". This implies (4C + 1C) + (2H + 1H) = 100, which simplifies to 5C + 3H = 100. Using the constraint C + H = 6S, it derives the equation 2C + 18S = 100, or C + 9S = 50. Testing the options, if S=4, C=14 and H=10. Checking the conditions: C+H = 14+10 = 24, which is 6*4 (correct). C > H (14 > 10) and C > S (14 > 4) are both satisfied. The total feet and heads for cows and chickens is 5(14) + 3(10) = 70 + 30 = 100 (correct).\n\nAnswer 2 is incorrect because it assumes sheep are included in the \"100 feet and heads\" count, whereas the problem specifically states \"together, cows and chickens have a total of 100 feet and heads\". Furthermore, Answer 2's calculation for S=5 leads to 4C + 2H + 20 = 100 (assuming sheep feet are included), which contradicts the problem's phrasing. Answer 1 follows the logic of the constraints provided in the text much more accurately.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:56+00:00",
+            "usage_in": 1900,
+            "usage_out": 342
+        }
+    }
+]

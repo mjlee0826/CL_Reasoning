@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/deepseek4.1flash/commonsenseqa/P_expert.json",
+            "result/arms/deepseek4.1flash/commonsenseqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 186,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "deepseek4.1flash",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/deepseek4.1flash/commonsenseqa/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "a47e45e9a7afc5d04bb4be9125cdc320749b284cf94fe443dab1758066545df8",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 184,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 659,
+            "completion_tokens": 175,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:46+00:00",
+            "last": "2026-10-04T10:07:46+00:00"
+        }
+    },
+    {
+        "item_id": 1316,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 658,
+        "tokens_out": 175,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for a reason why California was chosen for Disneyland. Both provided answers struggle because the options provided (A-E) are largely irrelevant to the historical reasons for the location (which were based on climate, land availability, and proximity to population centers). Answer 1 identifies \"desert\" as a geographic feature of California, though it correctly notes that Anaheim is not a desert. Answer 2 identifies \"sea\" as a geographic feature, but Disneyland is inland. Both answers acknowledge the poor quality of the options. However, Answer 1 provides a more logical critique of why the options are flawed while attempting to find the most plausible geographic association. Since neither answer is factually correct regarding the actual historical decision, Answer 1 is slightly more grounded in its reasoning regarding the geographic associations of the state.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:46+00:00",
+            "usage_in": 659,
+            "usage_out": 175
+        }
+    }
+]

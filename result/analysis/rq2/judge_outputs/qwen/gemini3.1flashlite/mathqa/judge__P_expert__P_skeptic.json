@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/mathqa/P_expert.json",
+            "result/arms/gemini3.1flashlite/mathqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 75,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/gemini3.1flashlite/mathqa/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "c3490828e81f4ad315811664d1869c2fafdaee62d93a94ada5c534491e8346ef",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 73,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 2014,
+            "completion_tokens": 175,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:27+00:00",
+            "last": "2026-10-04T10:08:27+00:00"
+        }
+    },
+    {
+        "item_id": 662,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 2002,
+        "tokens_out": 175,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the equation might have been miswritten as $2^x = 3^y = 4^z$ and then concludes with an answer based on a non-matching sum. However, the original problem clearly states $2x = 3y = 4z$, which is a linear equation, not an exponential one. Answer 2 correctly identifies that the least common multiple of 2, 3, and 4 is 12, leading to values $x = 6n$, $y = 4n$, $z = 3n$, and a sum of $13n$. Since none of the choices match this pattern, it's likely there was a typo in the question or choices, but Answer 2 correctly identifies the reasoning process.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:27+00:00",
+            "usage_in": 2014,
+            "usage_out": 175
+        }
+    }
+]

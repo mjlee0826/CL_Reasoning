@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "gpt4omini",
+            "temperature": 0.0,
+            "modelName": "gpt-4o-mini-2024-07-18",
+            "displayName": "GPT4o mini"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/mathqa/L_en.json",
+            "result/arms/qwen/mathqa/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 258,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "gpt4omini",
+        "reference_file": "result/aggregations/qwen/mathqa/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "9bc7e971d1f2b8f174a722e78ef752db91d6b27409c84b8435c56720961ebc63",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 255,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 682,
+            "completion_tokens": 173,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gpt-4o-mini-2024-07-18": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:47+00:00",
+            "last": "2026-10-04T10:07:47+00:00"
+        }
+    },
+    {
+        "item_id": 1150,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 675,
+        "tokens_out": 173,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly calculates the probability of at least one defective bulb by finding the complement of the probability that both bulbs are non-defective. It accurately computes the probability of selecting two non-defective bulbs as \\( \\frac{21}{25} \\times \\frac{20}{24} = \\frac{7}{19} \\) and then correctly subtracts this from 1 to find the probability of at least one defective bulb, resulting in \\( 1 - \\frac{7}{19} = \\frac{12}{19} \\). The second answer incorrectly calculates the probability of selecting two non-defective bulbs, leading to an incorrect conclusion that the probability of at least one defective bulb is \\( \\frac{3}{10} \\). Therefore, the first answer is the correct one.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:47+00:00",
+            "usage_in": 682,
+            "usage_out": 173
+        }
+    }
+]

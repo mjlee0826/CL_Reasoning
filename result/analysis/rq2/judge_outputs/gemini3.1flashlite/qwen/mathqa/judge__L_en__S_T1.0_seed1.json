@@ -1,0 +1,183 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/mathqa/L_en.json",
+            "result/arms/qwen/mathqa/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 258,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/qwen/mathqa/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "9bc7e971d1f2b8f174a722e78ef752db91d6b27409c84b8435c56720961ebc63",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 255,
+        "api_usage": {
+            "calls": 4,
+            "calls_without_usage": 0,
+            "prompt_tokens": 3714,
+            "completion_tokens": 1281,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 4
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:47+00:00",
+            "last": "2026-10-04T10:08:32+00:00"
+        }
+    },
+    {
+        "item_id": 143,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 953,
+        "tokens_out": 387,
+        "trace": {
+            "judge_output": "Reasoning process\nTo determine the number of subsets where a specific number $k$ is the largest element, we must include $k$ in the subset and ensure no elements greater than $k$ are included. \n\n1. For 4 to be the largest number: The subset must contain 4, must not contain 5, and can contain any combination of {1, 2, 3}. The number of such subsets is $2^3 = 8$. (These are: {4}, {1,4}, {2,4}, {3,4}, {1,2,4}, {1,3,4}, {2,3,4}, {1,2,3,4}).\n2. For 5 to be the largest number: The subset must contain 5, and can contain any combination of {1, 2, 3, 4}. The number of such subsets is $2^4 = 16$.\n\nThe total number of subsets is $2^5 = 32$. The events \"4 is the largest\" and \"5 is the largest\" are mutually exclusive because a subset cannot have two different largest numbers. Therefore, the total number of favorable subsets is $8 + 16 = 24$. The probability is $24/32 = 3/4$. \n\nAnswer 1 incorrectly subtracts 1 from the counts (treating the empty set as a possibility for \"largest number,\" which is impossible) and incorrectly calculates the subsets for 4 as the largest. Answer 2 correctly identifies that for a subset to have $k$ as the largest element, $k$ must be present, elements $>k$ must be absent, and elements $<k$ can be present or absent (forming $2^{k-1}$ subsets).\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:47+00:00",
+            "usage_in": 954,
+            "usage_out": 387
+        }
+    },
+    {
+        "item_id": 187,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 1244,
+        "tokens_out": 375,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth provided answers correctly identify that the total distance is the sum of the hypotenuses of 6 identical right triangles, each with a vertical leg of 3 feet and a horizontal leg (circumference) of 3 feet. The length of one such segment is $\\sqrt{3^2 + 3^2} = \\sqrt{18} = 3\\sqrt{2} \\approx 4.2426$ feet. The total distance is $6 \\times 3\\sqrt{2} = 18\\sqrt{2} \\approx 25.456$ feet. \n\nNeither answer arrives at a value present in the choices (a-e). Answer 1 concludes that the answer is not among the choices but arbitrarily selects \"e\" (18 feet). Answer 2 also concludes the calculation does not match the choices but arbitrarily selects \"c\" (13 feet). Since both are mathematically correct in their derivation but fail to find a match, and both make an arbitrary final selection, Answer 1 is slightly more logically consistent in its derivation of the total distance, though both are ultimately guessing the final choice. However, looking at the problem again, if the question intended for the total horizontal distance to be 3 feet (the circumference) and the total vertical distance to be 18 feet, the hypotenuse would be $\\sqrt{18^2 + 3^2} = \\sqrt{324 + 9} = \\sqrt{333} \\approx 18.25$. If the question implies a simpler path or a typo in the problem statement, neither answer is correct. Given the constraints, Answer 1 is selected as the reasoning process is slightly more direct.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:57+00:00",
+            "usage_in": 1245,
+            "usage_out": 375
+        }
+    },
+    {
+        "item_id": 909,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 778,
+        "tokens_out": 214,
+        "trace": {
+            "judge_output": "Reasoning process\nThe equation set up in both answers is $0.12x + 0.09(18000 - x) = 1950$. \nExpanding this: $0.12x + 1620 - 0.09x = 1950$.\nCombining like terms: $0.03x + 1620 = 1950$.\nSubtracting 1620 from both sides: $0.03x = 330$.\nDividing by 0.03: $x = 330 / 0.03 = 33000 / 3 = 11000$.\nAnswer 1 incorrectly identifies the result of the calculation as $12000$ (choice c), whereas Answer 2 correctly solves the equation to arrive at $11000$ (choice b).\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:25+00:00",
+            "usage_in": 779,
+            "usage_out": 214
+        }
+    },
+    {
+        "item_id": 1150,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 735,
+        "tokens_out": 305,
+        "trace": {
+            "judge_output": "Reasoning process\nIn Answer 1, the calculation for the probability of choosing two non-defective bulbs is (21/25) * (20/24). Simplifying this: (21/25) * (5/6) = (7/5) * (1/2) = 7/10. Subtracting this from 1 gives 1 - 7/10 = 3/10. Answer 1 correctly identifies the logic but makes an arithmetic error in the final step (1 - 7/19 is not 12/19 if the probability of non-defective is 7/10). \n\nIn Answer 2, the calculation for the probability of choosing two non-defective bulbs is $\\binom{21}{2} / \\binom{25}{2} = (210) / (300) = 7/10$. The probability of at least one defective bulb is 1 - 7/10 = 3/10. This calculation is correct. Answer 1's arithmetic (21/25 * 20/24) actually equals 7/10, but the author incorrectly concluded it was 7/19 and then performed the subtraction 1 - 7/19 = 12/19. Answer 2 is mathematically sound.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:32+00:00",
+            "usage_in": 736,
+            "usage_out": 305
+        }
+    }
+]

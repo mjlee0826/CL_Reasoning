@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/mmlu/P_expert.json",
+            "result/arms/qwen/mmlu/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 181,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/qwen/mmlu/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "9aac634868c80ac9b7f4fb3a05e7dc59971357d9913774b15c05d438319a8e48",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 178,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 598,
+            "completion_tokens": 143,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:01+00:00",
+            "last": "2026-10-04T10:09:01+00:00"
+        }
+    },
+    {
+        "item_id": 9737,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 597,
+        "tokens_out": 143,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question defines philosophy as identifying beliefs and evaluating arguments. \"What do you mean?\" addresses the identification and clarification of concepts/beliefs, while \"How do you know?\" addresses the evaluation of the evidence or arguments supporting those beliefs. This pair of questions is a standard pedagogical framework in philosophy (often attributed to the Socratic method and epistemological inquiry) that directly maps to the two activities described in the prompt. Answer 2's reasoning that Option A is more relevant is incorrect because \"why should we bother\" is a pragmatic or existential question, not a core methodological question for evaluating the truth or validity of beliefs as described in the prompt.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:09:01+00:00",
+            "usage_in": 598,
+            "usage_out": 143
+        }
+    }
+]

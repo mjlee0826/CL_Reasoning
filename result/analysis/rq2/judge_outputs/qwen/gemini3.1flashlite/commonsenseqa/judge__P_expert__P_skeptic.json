@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/commonsenseqa/P_expert.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 174,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/gemini3.1flashlite/commonsenseqa/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "998af20938e87eae830dc284540c821c6e985030e390d81cde5924506d3de266",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 172,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1092,
+            "completion_tokens": 214,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:04+00:00",
+            "last": "2026-10-04T10:08:08+00:00"
+        }
+    },
+    {
+        "item_id": 189,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 551,
+        "tokens_out": 98,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that \"dead\" is the most logical conclusion to the question, but the question specifically asks what someone lacking immortality \"will one day be,\" which refers to their state rather than their ultimate fate. \"Mortal\" (B) directly defines the state of not being immortal, making it the most accurate answer. Answer 2 correctly identifies \"mortal\" as the direct definition of lacking immortality.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:04+00:00",
+            "usage_in": 563,
+            "usage_out": 98
+        }
+    },
+    {
+        "item_id": 1304,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 517,
+        "tokens_out": 116,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question contains a typo, and the intended meaning is likely \"Where are magazines usually sold?\" In this case, \"market\" (B) is the most logical answer as it is a common place for magazines to be sold. While \"doctor\" (C) is a plausible location for finding magazines, the phrasing \"usually old\" does not strongly imply that magazines are typically sold there. The reasoning in Answer 2 misinterprets the question and applies an incorrect assumption about the context of \"old\" magazines.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:08+00:00",
+            "usage_in": 529,
+            "usage_out": 116
+        }
+    }
+]

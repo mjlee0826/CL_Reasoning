@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/mmlu/L_en.json",
+            "result/arms/gpt4omini/mmlu/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 178,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gpt4omini",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/gpt4omini/mmlu/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "0d1998b38135da615effd456814a0a470349dd0dcc665c92334ee514fb3ba825",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 178,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1301,
+            "completion_tokens": 293,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:00+00:00",
+            "last": "2026-10-04T10:09:00+00:00"
+        }
+    },
+    {
+        "item_id": 21,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 1300,
+        "tokens_out": 293,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly performs the addition of the polynomials in $\\mathbb{Z}_8[x]$.\n1. The sum of the coefficients for $x^2$ is $0 + 2 = 2$.\n2. The sum of the coefficients for $x$ is $4 + (-4) = 0$.\n3. The sum of the constant terms is $-5 + 2 = -3$.\n4. In $\\mathbb{Z}_8$, $-3 \\equiv 5 \\pmod 8$.\nThus, the sum is $2x^2 + 5$, which matches choice A.\n\nAnswer 2 contains errors in its reasoning:\n1. It incorrectly converts $-4$ to $4$ in $\\mathbb{Z}_8$ ($-4 \\equiv 4 \\pmod 8$ is true, but it is irrelevant to the sum $4x - 4x$).\n2. It incorrectly converts $-5$ to $3$ in $\\mathbb{Z}_8$ ($-5 \\equiv 3 \\pmod 8$ is true, but then it adds $3 + 4$ instead of $3 + 2$).\n3. It concludes that the result is $2x^2 + 7$, which is mathematically incorrect based on the provided polynomials.\n\nTherefore, Answer 1 is correct.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:09:00+00:00",
+            "usage_in": 1301,
+            "usage_out": 293
+        }
+    }
+]

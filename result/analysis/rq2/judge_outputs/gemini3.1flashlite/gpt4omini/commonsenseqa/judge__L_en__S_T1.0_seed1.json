@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/commonsenseqa/L_en.json",
+            "result/arms/gpt4omini/commonsenseqa/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 174,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gpt4omini",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/gpt4omini/commonsenseqa/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "7c3bec4e71f0325cf959ffdbdbef9553448eac358504394ac313ef792cda2641",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 174,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1184,
+            "completion_tokens": 241,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:46+00:00",
+            "last": "2026-10-04T10:07:57+00:00"
+        }
+    },
+    {
+        "item_id": 302,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 547,
+        "tokens_out": 87,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 identifies that classrooms and schools are often perceived as less interesting to children due to the association with rules and academic work. Answer 2 suggests \"dinner\" is the least interesting, which is subjective and less universally applicable than the common trope of children finding school or classrooms boring. Answer 1 provides a more logical and culturally common perspective regarding children's interests.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:46+00:00",
+            "usage_in": 548,
+            "usage_out": 87
+        }
+    },
+    {
+        "item_id": 1214,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 635,
+        "tokens_out": 154,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question is derived from the short story \"The Necklace\" by Guy de Maupassant. In the story, the protagonist, Mathilde Loisel, undergoes a significant transformation after losing a borrowed necklace and spending ten years in poverty to pay off the debt. The text explicitly states that she became a \"strong, hard, and coarse woman\" because the \"horrible life of the needy\" (the unpleasant circumstances) demanded it. Answer 1 incorrectly assumes \"wife\" is the catalyst, which is a misinterpretation of the character's role rather than the cause of her change. Answer 2 correctly identifies that the \"unpleasant\" nature of her circumstances was the driving force behind her transformation.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:57+00:00",
+            "usage_in": 636,
+            "usage_out": 154
+        }
+    }
+]

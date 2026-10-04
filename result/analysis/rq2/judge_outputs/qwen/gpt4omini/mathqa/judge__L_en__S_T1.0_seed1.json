@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/mathqa/L_en.json",
+            "result/arms/gpt4omini/mathqa/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 295,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gpt4omini",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/gpt4omini/mathqa/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "f4b6757e2aa52d656a828d742d785a93a490bf816f2dfee23c1cf97b218da567",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 294,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1192,
+            "completion_tokens": 140,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:27+00:00",
+            "last": "2026-10-04T10:08:27+00:00"
+        }
+    },
+    {
+        "item_id": 1423,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 1180,
+        "tokens_out": 140,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly calculates the cost of tax-free items as 44, which is not one of the provided options. It then arbitrarily selects option c) 43.1 as the closest match, which is not a valid approach. Answer 2 correctly identifies that the taxable amount is Rs. 6, and thus the tax-free amount should be Rs. 44. However, it then incorrectly concludes that the closest answer is e) 22, likely due to a miscalculation or misinterpretation of the question. Neither answer is fully correct, but Answer 1 at least provides a logical calculation.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:27+00:00",
+            "usage_in": 1192,
+            "usage_out": 140
+        }
+    }
+]

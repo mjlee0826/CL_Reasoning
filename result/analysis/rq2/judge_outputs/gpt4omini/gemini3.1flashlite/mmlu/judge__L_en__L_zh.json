@@ -1,0 +1,155 @@
+[
+    {
+        "Model": {
+            "modelType": "gpt4omini",
+            "temperature": 0.0,
+            "modelName": "gpt-4o-mini-2024-07-18",
+            "displayName": "GPT4o mini"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/mmlu/L_en.json",
+            "result/arms/gemini3.1flashlite/mmlu/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 145,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "gpt4omini",
+        "reference_file": "result/aggregations/gemini3.1flashlite/mmlu/judge__L_en__L_zh.json",
+        "reference_sha256": "0b12acb001da17c2c7ab0d5ecfcab062a3999bf6c3b555d85ff7bb4052c8e690",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 144,
+        "api_usage": {
+            "calls": 3,
+            "calls_without_usage": 0,
+            "prompt_tokens": 2247,
+            "completion_tokens": 374,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gpt-4o-mini-2024-07-18": 3
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:43+00:00",
+            "last": "2026-10-04T10:09:48+00:00"
+        }
+    },
+    {
+        "item_id": 6684,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 581,
+        "tokens_out": 115,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers identify a contradiction in the notice regarding the reservation. Answer 1 emphasizes the ambiguity of the terms used, labeling it as equivocation, while Answer 2 focuses on the inconsistency between the terms \"confirmed\" and \"space-available basis.\" The core issue is that a confirmed reservation should guarantee a spot, which is contradicted by the conditional nature of the space availability. Therefore, Answer 2's identification of inconsistency is more accurate, as it directly addresses the logical contradiction present in the statement.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:09:43+00:00",
+            "usage_in": 588,
+            "usage_out": 115
+        }
+    },
+    {
+        "item_id": 6970,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 500,
+        "tokens_out": 120,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies job enrichment as a concept that involves increasing autonomy and control over work processes, which aligns with the idea of individual freedom to schedule work. However, it may not fully encompass the broader concept of job design, which includes various aspects of how work is structured. Answer 2 accurately categorizes the freedom to schedule work as part of job design, emphasizing the flexibility and adjustments made to enhance motivation and efficiency. Given that job design is a more comprehensive term that includes job enrichment, Answer 2 provides a more accurate classification.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:09:45+00:00",
+            "usage_in": 507,
+            "usage_out": 120
+        }
+    },
+    {
+        "item_id": 10637,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1145,
+        "tokens_out": 139,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that the President has the authority to direct federal employees to assist in emergency functions, even if their primary role is different. It emphasizes the President's broad executive powers in foreign affairs and emergency situations. Answer 2, however, argues that the President's actions are invalid due to a lack of congressional authorization and that the agency's primary function limits its employees' duties. While it is true that the President's powers are not unfettered, the context of emergency aid allows for flexibility in the use of federal resources. Therefore, Answer 1 is more aligned with the legal principles regarding executive authority in emergency situations.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:09:48+00:00",
+            "usage_in": 1152,
+            "usage_out": 139
+        }
+    }
+]

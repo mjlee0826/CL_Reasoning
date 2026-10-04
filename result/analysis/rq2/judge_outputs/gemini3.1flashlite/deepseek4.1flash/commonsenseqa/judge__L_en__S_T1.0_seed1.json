@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/deepseek4.1flash/commonsenseqa/L_en.json",
+            "result/arms/deepseek4.1flash/commonsenseqa/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 194,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "deepseek4.1flash",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/deepseek4.1flash/commonsenseqa/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "d7a373900f2dae676e7c6e860716772ffb4a60a6f0470c4ea89d1fdb2070b134",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 193,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1034,
+            "completion_tokens": 294,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:47+00:00",
+            "last": "2026-10-04T10:07:55+00:00"
+        }
+    },
+    {
+        "item_id": 813,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 570,
+        "tokens_out": 148,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks what the boy was doing \"progressively\" (in a continuous state) at the ball. Answer 1 identifies \"wallflower\" as the best fit because it is a specific idiom for someone who does not dance at a ball due to shyness. However, \"wallflower\" is a noun, not a progressive verb phrase describing an action. Answer 2 correctly identifies that the question asks for a progressive action and notes that \"standing still\" is the grammatically correct progressive form (present participle) that describes the boy's state of not dancing. Answer 2's linguistic analysis of the progressive aspect makes it more accurate than Answer 1.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:47+00:00",
+            "usage_in": 571,
+            "usage_out": 148
+        }
+    },
+    {
+        "item_id": 1987,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 462,
+        "tokens_out": 146,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question is a riddle that uses a contrast: \"It might make you think of buckeyes [Ohio], but an apple tree also grows well in which of the fifty [states]?\" The phrasing \"It might make you think of X, but Y is also true\" implies that the answer is a state other than the one associated with the first clue. While Ohio is the Buckeye State, Washington State is famously known as the \"Apple State\" and is the leading producer of apples in the U.S. Therefore, the riddle is pointing toward Washington State as the intended answer, making Answer 1 the more logical interpretation of the riddle's structure.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:55+00:00",
+            "usage_in": 463,
+            "usage_out": 146
+        }
+    }
+]

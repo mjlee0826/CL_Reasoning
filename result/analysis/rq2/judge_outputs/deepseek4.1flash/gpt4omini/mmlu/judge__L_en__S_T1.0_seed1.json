@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "deepseek4.1flash",
+            "temperature": 0.0,
+            "modelName": "deepseek-flash",
+            "displayName": "DeepSeek V4.1 Flash"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/mmlu/L_en.json",
+            "result/arms/gpt4omini/mmlu/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 178,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gpt4omini",
+        "judge": "deepseek4.1flash",
+        "reference_file": "result/aggregations/gpt4omini/mmlu/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "0d1998b38135da615effd456814a0a470349dd0dcc665c92334ee514fb3ba825",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 178,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1278,
+            "completion_tokens": 404,
+            "refusals": 0
+        },
+        "model_versions": {
+            "deepseek-flash@DeepSeek-V4.1-Flash": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:37+00:00",
+            "last": "2026-10-04T10:09:39+00:00"
+        }
+    },
+    {
+        "item_id": 12189,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 760,
+        "tokens_out": 265,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly treats fundal massage as the next step even though the uterus is already firm and at the umbilicus, which indicates good uterine tone and no evidence of atony or ongoing hemorrhage. Fundal massage is not indicated when the fundus is already firm.  \nAnswer 2 correctly notes that the uterus is firm, bleeding is not excessive, and the patient is stable and bonding. However, it overemphasizes well-baby care education as the “most important next step” when the question is focused on postpartum maternal management. The key issue is that the patient had mildly elevated blood pressure in labor and now has a blood pressure of 132/84, which is not hypertensive by postpartum standards, and she has no signs of preeclampsia. Routine postpartum care, including education and monitoring, is appropriate, but no acute intervention is needed. Among the choices, providing education for well-baby care is the most appropriate because the other options are either unnecessary (fundal massage, methyldopa) or not the priority (sitz baths for mild perineal edema).  \nThus, Answer 2’s conclusion is more consistent with the stable findings, even though its reasoning about “most important” is somewhat imprecise.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:37+00:00",
+            "usage_in": 764,
+            "usage_out": 265
+        }
+    },
+    {
+        "item_id": 13420,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 510,
+        "tokens_out": 139,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies the fourth type as “affectual” in substance but selects option B (“affective”), which is not the standard term Weber used in translation. Answer 2 correctly notes that Weber’s term is “affectual” and selects option A, which matches the standard terminology. The reasoning in Answer 1 is flawed because it treats “affective” as the correct choice despite acknowledging “affectual” as the common term. Answer 2’s reasoning is more accurate in distinguishing “affectual” from “affective” and choosing the term that aligns with Weber’s typology.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:39+00:00",
+            "usage_in": 514,
+            "usage_out": 139
+        }
+    }
+]

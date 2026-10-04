@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/deepseek4.1flash/mathqa/P_expert.json",
+            "result/arms/deepseek4.1flash/mathqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 90,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "deepseek4.1flash",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/deepseek4.1flash/mathqa/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "45e779440711c61b989bdb74cba291c965004cb7af889faf53bfacb1adce2b2a",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 50,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 3832,
+            "completion_tokens": 366,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:46+00:00",
+            "last": "2026-10-04T10:07:46+00:00"
+        }
+    },
+    {
+        "item_id": 1314,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 3831,
+        "tokens_out": 366,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers correctly identify that the condition \"the reversed number is k + 99\" leads to the equation $c - a = 1$, where $a$ is the hundreds digit and $c$ is the units digit. Both answers correctly identify that for each valid pair $(a, c)$, there are 10 possible values for the tens digit $b$ (0 through 9). Both answers correctly identify that for $100 < k < 600$, the possible values for $a$ are $\\{1, 2, 3, 4, 5\\}$. This results in $5 \\times 10 = 50$ possible integers. \n\nSince 50 is not among the choices, both answers attempt to justify selecting a different choice. Answer 1 suggests that the range might have been intended to be $100 < k < 500$ (which would yield 40) or that the hundreds digit 5 was excluded, leading to 40. Answer 2 suggests that the range might have been intended to include $a=6$ (which would yield 60). However, mathematically, the count is 50. Given the constraints of the prompt to choose one of the provided answers, Answer 1 is more logically consistent with the constraint \"less than 600\" by suggesting the exclusion of the $a=5$ case (which would result in a reversed number $\\ge 600$, potentially violating an implicit constraint in some problem contexts), whereas Answer 2 suggests including $a=6$, which explicitly violates the \"less than 600\" constraint. Therefore, Answer 1 is the more reasonable choice.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:46+00:00",
+            "usage_in": 3832,
+            "usage_out": 366
+        }
+    }
+]

@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "gpt4omini",
+            "temperature": 0.0,
+            "modelName": "gpt-4o-mini-2024-07-18",
+            "displayName": "GPT4o mini"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/deepseek4.1flash/mmlu/L_en.json",
+            "result/arms/deepseek4.1flash/mmlu/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 92,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "deepseek4.1flash",
+        "judge": "gpt4omini",
+        "reference_file": "result/aggregations/deepseek4.1flash/mmlu/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "9b436f318a4e4a75398a2de7fe51771b37bf029908bb9132627820351e88a58c",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 91,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 528,
+            "completion_tokens": 138,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gpt-4o-mini-2024-07-18": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:25+00:00",
+            "last": "2026-10-04T10:09:25+00:00"
+        }
+    },
+    {
+        "item_id": 2579,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 521,
+        "tokens_out": 138,
+        "trace": {
+            "judge_output": "Reasoning process  \nAnswer 1 states that 68% of Indians believed diversity makes their country a better place to live, which aligns with the general trend of openness to diversity in India. However, Answer 2 claims that the percentage is 53%, which is also a plausible figure but lower than the first answer. To determine which is more accurate, I need to consider the reliability of the sources and the context of the survey data. Given that the Pew Research Center is a reputable source and that 68% is a commonly cited figure for India in 2018 regarding attitudes towards diversity, Answer 1 is more likely to be correct. \n\nFinal Choice  \n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:09:25+00:00",
+            "usage_in": 528,
+            "usage_out": 138
+        }
+    }
+]

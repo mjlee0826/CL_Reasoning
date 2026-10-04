@@ -1,0 +1,155 @@
+[
+    {
+        "Model": {
+            "modelType": "deepseek4.1flash",
+            "temperature": 0.0,
+            "modelName": "deepseek-flash",
+            "displayName": "DeepSeek V4.1 Flash"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/mmlu/P_expert.json",
+            "result/arms/qwen/mmlu/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 181,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "deepseek4.1flash",
+        "reference_file": "result/aggregations/qwen/mmlu/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "9aac634868c80ac9b7f4fb3a05e7dc59971357d9913774b15c05d438319a8e48",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 178,
+        "api_usage": {
+            "calls": 3,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1709,
+            "completion_tokens": 488,
+            "refusals": 0
+        },
+        "model_versions": {
+            "deepseek-flash@DeepSeek-V4.1-Flash": 3
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:57+00:00",
+            "last": "2026-10-04T10:10:01+00:00"
+        }
+    },
+    {
+        "item_id": 1827,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 610,
+        "tokens_out": 138,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly notes that the Durbin-Watson statistic must be compared to critical values based on sample size and number of regressors. With n=50 and k=2 (plus a constant), the 5% critical bounds are approximately d_L=1.46 and d_U=1.63 (depending on the table). A value of 1.53 falls between these bounds, so the test is inconclusive. Answer 2 incorrectly concludes positive autocorrelation just because the statistic is below 2, ignoring the need for critical values and the inconclusive region. Therefore, Answer 1 is correct.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:57+00:00",
+            "usage_in": 614,
+            "usage_out": 138
+        }
+    },
+    {
+        "item_id": 10025,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 565,
+        "tokens_out": 222,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that Minoan culture, compared to most other early civilizations, shows little evidence of warfare. This is a standard and well-supported point in Minoan archaeology: their settlements and palaces generally lack the heavy fortifications, weaponry, and destruction layers common in contemporary civilizations like Mesopotamia or Egypt. The reasoning is concise and accurate.\n\nAnswer 2 contains several errors. It claims that the development of a common religion is not clearly supported by Minoan findings, but Minoan religion is actually well attested through shrines, figurines, frescoes, and peak sanctuaries. It also downplays the lack of warfare evidence by saying there is still some evidence of it, which is true but does not negate that warfare is far less evident than in other early civilizations. Most importantly, it selects conspicuous consumption by elites (D), yet Minoan elites did display wealth through palaces, luxury goods, and elaborate burials, so D is not the best contrast. The reasoning in Answer 2 is therefore flawed.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:59+00:00",
+            "usage_in": 569,
+            "usage_out": 222
+        }
+    },
+    {
+        "item_id": 13902,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 522,
+        "tokens_out": 128,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly claims that Europe was one of the two main centers for Jewish development after the Bar Kochba revolt. While Jewish communities eventually developed in Europe, this was not one of the two primary centers in the immediate post-revolt period. Answer 1 also incorrectly dismisses Palestine as not being a center of Jewish development after the revolt, when in fact Palestine remained a significant center alongside Babylonia. Answer 2 correctly identifies Palestine and Babylonia as the two main centers for Jewish development after the Bar Kochba revolt, which aligns with historical scholarship on this period.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:10:01+00:00",
+            "usage_in": 526,
+            "usage_out": 128
+        }
+    }
+]

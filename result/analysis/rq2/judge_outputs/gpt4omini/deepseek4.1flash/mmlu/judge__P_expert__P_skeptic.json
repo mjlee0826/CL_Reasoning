@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "gpt4omini",
+            "temperature": 0.0,
+            "modelName": "gpt-4o-mini-2024-07-18",
+            "displayName": "GPT4o mini"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/deepseek4.1flash/mmlu/P_expert.json",
+            "result/arms/deepseek4.1flash/mmlu/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 96,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "deepseek4.1flash",
+        "judge": "gpt4omini",
+        "reference_file": "result/aggregations/deepseek4.1flash/mmlu/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "56706636ccf11ff6721aa9bf52596c07193012f4947d2a43ef85c0591d080adb",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 95,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1141,
+            "completion_tokens": 267,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gpt-4o-mini-2024-07-18": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:24+00:00",
+            "last": "2026-10-04T10:09:27+00:00"
+        }
+    },
+    {
+        "item_id": 3447,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 532,
+        "tokens_out": 139,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies the lack of a well-connected transportation infrastructure as a significant barrier to economic advancement in subsistence economies. It emphasizes the importance of infrastructure for the efficient trade and distribution of goods, which is crucial for economic growth. On the other hand, Answer 2 argues that the lack of currency is the main obstacle, which overlooks the fact that even in the absence of currency, subsistence economies can still function through barter. While currency is important for broader economic activities, the immediate barrier to advancement in subsistence economies is more accurately linked to transportation infrastructure. Therefore, Answer 1 presents a more comprehensive understanding of the issue.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:09:24+00:00",
+            "usage_in": 539,
+            "usage_out": 139
+        }
+    },
+    {
+        "item_id": 9735,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 595,
+        "tokens_out": 128,
+        "trace": {
+            "judge_output": "Reasoning process  \nAnswer 1 correctly identifies that Baier's moral philosophy emphasizes the interests of all sentient beings, which aligns with her ethical considerations. It accurately rules out options A and C for being too narrow and too broad, respectively, and dismisses D as contrary to her views. Answer 2, however, misrepresents Baier's position by suggesting that her ethics are primarily human-centered and focuses on the good of human beings, which does not align with her emphasis on sentience. Therefore, Answer 1 is more accurate in capturing Baier's perspective on genuine moral rules.\n\nFinal Choice  \n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:09:27+00:00",
+            "usage_in": 602,
+            "usage_out": 128
+        }
+    }
+]

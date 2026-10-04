@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/mathqa/L_en.json",
+            "result/arms/gemini3.1flashlite/mathqa/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 94,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/gemini3.1flashlite/mathqa/judge__L_en__L_zh.json",
+        "reference_sha256": "a9abdba207020715ca473e84d7d030a42891a9336555e494f8a556005d9b9437",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 83,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 2960,
+            "completion_tokens": 290,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:12+00:00",
+            "last": "2026-10-04T10:08:18+00:00"
+        }
+    },
+    {
+        "item_id": 1533,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1056,
+        "tokens_out": 84,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer incorrectly assumes that the average annual increase is a simple average of the total percentage increase, which is not how compound growth is calculated. The second answer correctly uses the compound growth formula and calculates the average annual increase as approximately 6.05%, which does not match any of the given options. Therefore, the correct choice is the second answer.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:12+00:00",
+            "usage_in": 1068,
+            "usage_out": 84
+        }
+    },
+    {
+        "item_id": 1804,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1880,
+        "tokens_out": 206,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the remaining days after the first week are calculated as $15/day for 16 days, which leads to a total of $366, not matching any options. It then speculates on possible errors in the question or options without clear justification. Answer 2 correctly calculates the cost as $126 for the first week and $240 for the remaining 16 days, totaling $366. However, it misinterprets the problem by assuming that \"each additional week\" might mean a different calculation, leading to an incorrect conclusion of $336 (option a). The correct interpretation is that the first week is at $18/day and the remaining days are at $15/day, resulting in $366, which is not among the options. Therefore, the most accurate reasoning is Answer 2, even though it arrives at an incorrect final answer due to misinterpretation.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:18+00:00",
+            "usage_in": 1892,
+            "usage_out": 206
+        }
+    }
+]

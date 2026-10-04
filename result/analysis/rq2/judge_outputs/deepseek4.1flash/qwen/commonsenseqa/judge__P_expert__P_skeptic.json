@@ -1,0 +1,155 @@
+[
+    {
+        "Model": {
+            "modelType": "deepseek4.1flash",
+            "temperature": 0.0,
+            "modelName": "deepseek-flash",
+            "displayName": "DeepSeek V4.1 Flash"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/commonsenseqa/P_expert.json",
+            "result/arms/qwen/commonsenseqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 263,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "deepseek4.1flash",
+        "reference_file": "result/aggregations/qwen/commonsenseqa/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "0b6787eb11b1acfee682d93e4aea47d1e46cb3064ee9d49ec79d91fa2ae51300",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 263,
+        "api_usage": {
+            "calls": 3,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1465,
+            "completion_tokens": 386,
+            "refusals": 0
+        },
+        "model_versions": {
+            "deepseek-flash@DeepSeek-V4.1-Flash": 3
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:47+00:00",
+            "last": "2026-10-04T10:08:51+00:00"
+        }
+    },
+    {
+        "item_id": 770,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 471,
+        "tokens_out": 96,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly interprets the question as asking who sits at the center table, and identifies the wedding party as the group typically seated there. Answer 2 incorrectly treats the question as asking for a location, despite the question asking \"who,\" and its reasoning that the options are locations is flawed because \"wedding party\" is a group of people, not a location. Therefore, Answer 1 is the correct one.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:47+00:00",
+            "usage_in": 475,
+            "usage_out": 96
+        }
+    },
+    {
+        "item_id": 985,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 527,
+        "tokens_out": 160,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that the outcome should be negative because Danny hated helping people, and it properly eliminates the positive options. However, its final choice of \"complications\" over \"stress\" is weakly justified—it argues for broader negative consequences, but the question asks what helping always brought, which more naturally points to an emotional or immediate negative result like stress. Answer 2 also correctly narrows to negative options and gives a stronger distinction: \"complications\" refers to difficulties, while \"stress\" directly captures the emotional strain implied by hating the activity. Since the phrasing \"always brought\" suggests a consistent personal reaction, \"stress\" is the more fitting and direct answer. Therefore, Answer 2's reasoning is more accurate.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:49+00:00",
+            "usage_in": 531,
+            "usage_out": 160
+        }
+    },
+    {
+        "item_id": 1154,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 455,
+        "tokens_out": 130,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly interprets \"pass water\" as unrelated to thirst, but \"pass water\" is a euphemism for urination, which is not logically tied to being thirsty or not. The reasoning also mislabels C as the most logical choice without proper justification.  \nAnswer 2 correctly notes that not being thirsty means they wouldn’t drink, and then chooses \"feel pleasure\" as the most plausible action by the river, which fits the context better than the other options. The reasoning in Answer 2 is more coherent and avoids the misinterpretation present in Answer 1.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:51+00:00",
+            "usage_in": 459,
+            "usage_out": 130
+        }
+    }
+]

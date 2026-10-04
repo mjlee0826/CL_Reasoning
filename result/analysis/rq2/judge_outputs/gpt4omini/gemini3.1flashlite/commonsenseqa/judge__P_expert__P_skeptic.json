@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "gpt4omini",
+            "temperature": 0.0,
+            "modelName": "gpt-4o-mini-2024-07-18",
+            "displayName": "GPT4o mini"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/commonsenseqa/P_expert.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 174,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "gpt4omini",
+        "reference_file": "result/aggregations/gemini3.1flashlite/commonsenseqa/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "998af20938e87eae830dc284540c821c6e985030e390d81cde5924506d3de266",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 172,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1161,
+            "completion_tokens": 307,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gpt-4o-mini-2024-07-18": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:47+00:00",
+            "last": "2026-10-04T10:07:51+00:00"
+        }
+    },
+    {
+        "item_id": 156,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 542,
+        "tokens_out": 155,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers present valid points regarding where one might learn to play an upright piano. Answer 1 emphasizes the structured environment of a music class, which is indeed a common setting for learning an instrument. However, it overlooks the fact that a music room (as mentioned in Answer 2) is also a dedicated space for musical instruction, which could be part of a music class. Answer 2 correctly identifies the music room as a logical location for learning, but it mischaracterizes a music class as not being a physical location. Ultimately, while both answers have merit, Answer 1's focus on the music class as the primary learning environment aligns more closely with the intent of the question, as it emphasizes structured learning.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:47+00:00",
+            "usage_in": 549,
+            "usage_out": 155
+        }
+    },
+    {
+        "item_id": 1297,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 605,
+        "tokens_out": 152,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers present valid interpretations of the question, but they focus on different aspects of the scenario. Answer 1 emphasizes the couch as a common object for relaxation and suggests that missing a flight due to staying too long on a couch is a relatable scenario. However, it overlooks the fact that a couch is less commonly associated with oversleeping, which is a more direct reason for missing a flight. Answer 2 correctly identifies the bed as an object where oversleeping is a more likely cause for missing a flight, aligning closely with the context of the question. Therefore, while both answers have merit, Answer 2 provides a stronger rationale based on the specific context of missing a flight due to relaxation.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:51+00:00",
+            "usage_in": 612,
+            "usage_out": 152
+        }
+    }
+]

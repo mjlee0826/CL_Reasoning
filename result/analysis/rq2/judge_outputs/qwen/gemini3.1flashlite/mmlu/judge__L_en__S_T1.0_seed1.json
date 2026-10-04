@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/mmlu/L_en.json",
+            "result/arms/gemini3.1flashlite/mmlu/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 60,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/gemini3.1flashlite/mmlu/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "e3ed39e79403eb65358ad613096000bf8acceb867bf4b4ce621d89a74e47069c",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 60,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1372,
+            "completion_tokens": 159,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:10:00+00:00",
+            "last": "2026-10-04T10:10:01+00:00"
+        }
+    },
+    {
+        "item_id": 520,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 744,
+        "tokens_out": 93,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies D as correct, but the reasoning for D is flawed. While hypercalcemia can lead to polyuria, it does not classically cause oliguria. Answer 2 correctly identifies B as the correct answer, noting that primary hyperparathyroidism is often asymptomatic and discovered incidentally. The reasoning in Answer 2 is more accurate and aligns with standard clinical knowledge.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:10:00+00:00",
+            "usage_in": 756,
+            "usage_out": 93
+        }
+    },
+    {
+        "item_id": 3447,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 604,
+        "tokens_out": 66,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies transportation infrastructure as the main factor, while Answer 2 correctly highlights the critical role of banking services in enabling economic advancement by facilitating capital accumulation and investment. The lack of banking services is a foundational barrier to transitioning from subsistence to a market economy.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:10:01+00:00",
+            "usage_in": 616,
+            "usage_out": 66
+        }
+    }
+]

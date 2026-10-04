@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/mmlu/P_expert.json",
+            "result/arms/gpt4omini/mmlu/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 164,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gpt4omini",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/gpt4omini/mmlu/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "9e2363a96149f8f3a56a76aec30c9f506d5e1c9be8200da191033209896167e3",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 164,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 577,
+            "completion_tokens": 80,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:10:02+00:00",
+            "last": "2026-10-04T10:10:02+00:00"
+        }
+    },
+    {
+        "item_id": 13413,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 565,
+        "tokens_out": 80,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies B as the most comprehensive explanation, but Marxist feminist theory emphasizes the exploitation of women's labor within the capitalist system, which is more directly addressed in option C. Answer 2 correctly highlights the central role of women's domestic labor being exploited by the capitalist economy, which is a core tenet of Marxist feminist theory.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:10:02+00:00",
+            "usage_in": 577,
+            "usage_out": 80
+        }
+    }
+]

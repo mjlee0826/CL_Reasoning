@@ -1,0 +1,155 @@
+[
+    {
+        "Model": {
+            "modelType": "gpt4omini",
+            "temperature": 0.0,
+            "modelName": "gpt-4o-mini-2024-07-18",
+            "displayName": "GPT4o mini"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/mmlu/L_en.json",
+            "result/arms/qwen/mmlu/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 194,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "gpt4omini",
+        "reference_file": "result/aggregations/qwen/mmlu/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "687941311029e862035311f4213a71507be1dec11fba24101bd8957436f2a2bb",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 194,
+        "api_usage": {
+            "calls": 3,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1991,
+            "completion_tokens": 274,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gpt-4o-mini-2024-07-18": 3
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:23+00:00",
+            "last": "2026-10-04T10:09:26+00:00"
+        }
+    },
+    {
+        "item_id": 1011,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 865,
+        "tokens_out": 121,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly identifies that for a single character string a, applying the recursive definition gives a^M = a, which is true. However, the second answer incorrectly states that this is not necessarily true based on the definition, which is a misunderstanding of the base case. The first answer also correctly evaluates option B and C, concluding they are not generally true. The second answer correctly identifies that none of the options are universally true, but it fails to recognize that option A is indeed true. Therefore, the first answer is more accurate overall.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:09:23+00:00",
+            "usage_in": 872,
+            "usage_out": 121
+        }
+    },
+    {
+        "item_id": 2095,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 639,
+        "tokens_out": 63,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly concludes that none of the options satisfy the condition, while Answer 2 correctly identifies that option B has the digit 6 in the ten-thousands place, which is the required condition. Therefore, Answer 2 is the correct choice.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:09:24+00:00",
+            "usage_in": 646,
+            "usage_out": 63
+        }
+    },
+    {
+        "item_id": 3455,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 466,
+        "tokens_out": 90,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly identifies religious differences as a centrifugal force, as they can lead to division within a country. However, the second answer suggests that an attack by another country is a centrifugal force, which is more accurately described as a centripetal force, as it often unites a nation against a common external threat. Therefore, the first answer is more accurate in identifying a centrifugal force.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:09:26+00:00",
+            "usage_in": 473,
+            "usage_out": 90
+        }
+    }
+]

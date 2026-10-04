@@ -1,0 +1,155 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/commonsenseqa/P_expert.json",
+            "result/arms/qwen/commonsenseqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 263,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/qwen/commonsenseqa/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "0b6787eb11b1acfee682d93e4aea47d1e46cb3064ee9d49ec79d91fa2ae51300",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 263,
+        "api_usage": {
+            "calls": 3,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1714,
+            "completion_tokens": 467,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 3
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:46+00:00",
+            "last": "2026-10-04T10:08:11+00:00"
+        }
+    },
+    {
+        "item_id": 220,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 540,
+        "tokens_out": 178,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 argues that a desk drawer is a typical place to store pencils, while Answer 2 argues that a pencil case is the most logical place. Both A and C are plausible locations for finding pencils. However, Answer 1's reasoning contains a logical flaw by dismissing the pencil case as \"more of a container for pencils rather than a location,\" which is contradictory since a container is a location. Conversely, Answer 2 dismisses the desk drawer, cup, and shelf as \"less specific,\" which is also subjective. Between the two, Answer 2 identifies the \"pencil case\" as the most common and direct place one would look for pencils when they run out, which is a more standard association than a desk drawer. Therefore, Answer 2 provides a more conventional reasoning for the context of the question.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:46+00:00",
+            "usage_in": 541,
+            "usage_out": 178
+        }
+    },
+    {
+        "item_id": 301,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 577,
+        "tokens_out": 168,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question is a riddle based on common idioms. \"Night owl\" is a standard idiom for someone active at night. The corresponding idiom for someone active at sunrise is \"early bird\" or \"lark.\" The phrasing \"you'd hear a what at sunrise\" is a play on the idiom \"the early bird catches the worm.\" While a rooster crows at sunrise, \"rooster\" is not an idiom for a person in the same category as \"night owl.\" \"Lark\" is the direct antonym to \"night owl\" in the context of chronotypes (larks vs. owls). Answer 2 correctly identifies the idiomatic relationship between \"night owl\" and \"lark,\" whereas Answer 1 incorrectly focuses on the literal sound of a rooster.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:55+00:00",
+            "usage_in": 578,
+            "usage_out": 168
+        }
+    },
+    {
+        "item_id": 316,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 594,
+        "tokens_out": 121,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 focuses on a specific symptom (throwing up) as the primary consequence, which is a common reaction to food poisoning but is only one of many possibilities. Answer 2 correctly identifies that \"illness\" is a more comprehensive and accurate term to describe the state of a person who has consumed contaminated food, as it encompasses the broad range of symptoms (nausea, fever, cramps, etc.) that would be \"felt\" by the individual. Answer 2 provides a more logical and inclusive reasoning process for the question asked.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:11+00:00",
+            "usage_in": 595,
+            "usage_out": 121
+        }
+    }
+]

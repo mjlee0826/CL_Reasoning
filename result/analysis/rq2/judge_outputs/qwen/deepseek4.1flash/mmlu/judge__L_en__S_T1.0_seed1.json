@@ -1,0 +1,183 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/deepseek4.1flash/mmlu/L_en.json",
+            "result/arms/deepseek4.1flash/mmlu/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 92,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "deepseek4.1flash",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/deepseek4.1flash/mmlu/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "9b436f318a4e4a75398a2de7fe51771b37bf029908bb9132627820351e88a58c",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 91,
+        "api_usage": {
+            "calls": 4,
+            "calls_without_usage": 0,
+            "prompt_tokens": 3070,
+            "completion_tokens": 472,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 4
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:59+00:00",
+            "last": "2026-10-04T10:10:09+00:00"
+        }
+    },
+    {
+        "item_id": 395,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en"
+        ],
+        "tokens_in": 1166,
+        "tokens_out": 128,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies \"Civil regulation\" as the best fit, but \"Civil regulation\" is not a standard or commonly used term in this context. The more accurate and widely recognized term is \"Legal regulation.\" Additionally, while \"outcomes\" may seem logical, \"mechanics\" better fits the idea of regulation extending beyond simple interactions to cover how processes are structured. Answer 2 correctly identifies \"Legal regulation\" as the most appropriate term, with \"Interactions\" fitting for CSO-business relationships and \"Mechanics\" logically describing the broader scope of regulation.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:09:59+00:00",
+            "usage_in": 1178,
+            "usage_out": 128
+        }
+    },
+    {
+        "item_id": 6094,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 557,
+        "tokens_out": 127,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that \"both play an important role\" applies to all three dichotomies (nature vs. nurture, mechanistic vs. organismic, continuity vs. discontinuity) in the same way. However, the phrase is most directly and commonly associated with the nature vs. nurture debate, where it clearly refers to the interaction of biological and environmental factors. The other dichotomies are not typically framed in this exact phrasing. Answer 2 correctly identifies that \"both play an important role\" is most clearly applicable to nature vs. nurture.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:10:02+00:00",
+            "usage_in": 569,
+            "usage_out": 127
+        }
+    },
+    {
+        "item_id": 12445,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 703,
+        "tokens_out": 115,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies the core ethical failure as not addressing the client's needs more directly, which is a broad and less specific reason. The critical issue is that the psychologist failed to take immediate action to ensure the client's safety, such as calling emergency services or verifying that the client had received medical attention. Answer 2 correctly identifies the failure as not directly addressing the life-threatening emergency by not calling a physician directly, which aligns with the ethical duty of psychologists to intervene when a client is in immediate danger.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:10:05+00:00",
+            "usage_in": 715,
+            "usage_out": 115
+        }
+    },
+    {
+        "item_id": 12469,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 596,
+        "tokens_out": 102,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe key distinction lies in the definitions: differential validity refers to a test's ability to predict job performance differing across groups, which aligns with the scenario where females score lower on the test but perform equally on the job. Adverse impact focuses on selection rates, not test scores or job performance. Unfairness is a broader term and not as precise as differential validity in this context. Answer 2 correctly identifies differential validity as the most accurate term.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:10:09+00:00",
+            "usage_in": 608,
+            "usage_out": 102
+        }
+    }
+]

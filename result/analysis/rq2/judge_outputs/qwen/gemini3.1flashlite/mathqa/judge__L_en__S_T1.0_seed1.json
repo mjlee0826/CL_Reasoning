@@ -1,0 +1,183 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/mathqa/L_en.json",
+            "result/arms/gemini3.1flashlite/mathqa/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 73,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/gemini3.1flashlite/mathqa/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "017a48be56f8fd7f71b0a2f708149daea0fc42c2af898a2cf6dea6a66eb840e6",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 68,
+        "api_usage": {
+            "calls": 4,
+            "calls_without_usage": 0,
+            "prompt_tokens": 6824,
+            "completion_tokens": 691,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 4
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:27+00:00",
+            "last": "2026-10-04T10:08:38+00:00"
+        }
+    },
+    {
+        "item_id": 119,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 2104,
+        "tokens_out": 143,
+        "trace": {
+            "judge_output": "Reasoning process\nThe key issue lies in interpreting the ratio \"yoga : exercise = 2 : 3\". If \"exercise\" refers to the total time spent on gym and bike, then yoga time is (2/3) * (50/3) = 100/9 ≈ 11.11 minutes, which is not an option. However, if we consider that the question might have intended for the ratio to be interpreted differently or rounded up, answer 2's calculation of approximately 11.11 minutes rounds to 17 minutes, making option (c) the most plausible based on the given choices.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:27+00:00",
+            "usage_in": 2116,
+            "usage_out": 143
+        }
+    },
+    {
+        "item_id": 174,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 2081,
+        "tokens_out": 133,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the range is up to 29 instead of 38, which leads to an incorrect sum and final answer. Answer 2 correctly identifies all primes between 0 and 38, sums them accurately to 197, and calculates c / 3 as approximately 65.66, which is not one of the choices. However, it acknowledges the discrepancy and considers possible miscalculations or misinterpretations. Given the ambiguity in the question's phrasing and the provided choices, Answer 2 provides a more thorough and accurate reasoning process.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:29+00:00",
+            "usage_in": 2093,
+            "usage_out": 133
+        }
+    },
+    {
+        "item_id": 856,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 1205,
+        "tokens_out": 202,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that if 'a' works as fast as 'b', both take 24 days individually, resulting in a combined work rate of 1/12 per day and a time of 12 days. However, since 12 is not an option, Answer 1 concludes that the question might have intended 'a' to be twice as fast as 'b', which would result in 8 days (choice c). This interpretation is speculative but aligns with standard work-rate problem conventions where such ambiguities are often resolved by assuming a different rate comparison.\n\nAnswer 2 also calculates the correct combined time as 12 days but fails to recognize that this value is not among the options. It then speculates about other interpretations, such as 'a' being 3 times faster, leading to an answer of 6 days (choice e), without sufficient justification. This approach introduces unnecessary assumptions and lacks clarity.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:34+00:00",
+            "usage_in": 1217,
+            "usage_out": 202
+        }
+    },
+    {
+        "item_id": 1738,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 1386,
+        "tokens_out": 213,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the number of possibilities for awarding first and second place among 8 contestants. The key detail is that all competitors have an equal chance of winning, which implies no constraints based on countries. The correct approach is to calculate permutations of 8 contestants taken 2 at a time, which is 8 × 7 = 56. However, since this value is not among the answer choices, it suggests the problem might involve a constraint related to countries. If we consider selecting two different countries for the medals (4 countries, choose 2), and then picking one contestant from each country (2 options per country), the total is 4 × 3 × 2 × 2 = 48. This also does not match the choices. The only plausible interpretation that matches the given choices is considering the number of ways to select two different countries for the medals, which is 4 × 3 = 12. This aligns with answer 2's reasoning.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:38+00:00",
+            "usage_in": 1398,
+            "usage_out": 213
+        }
+    }
+]

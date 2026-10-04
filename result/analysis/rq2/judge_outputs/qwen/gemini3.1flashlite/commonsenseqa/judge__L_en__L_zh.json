@@ -1,0 +1,211 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/commonsenseqa/L_en.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 370,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/gemini3.1flashlite/commonsenseqa/judge__L_en__L_zh.json",
+        "reference_sha256": "209f18de610704a39f4cd25aa7ca8ec34c3aa2bfb0188f13db6c658bdc8c366f",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 369,
+        "api_usage": {
+            "calls": 5,
+            "calls_without_usage": 0,
+            "prompt_tokens": 2972,
+            "completion_tokens": 524,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 5
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:09+00:00",
+            "last": "2026-10-04T10:08:25+00:00"
+        }
+    },
+    {
+        "item_id": 50,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 531,
+        "tokens_out": 98,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies \"mandate\" (B) as the correct answer, but this is the nature of the evacuation itself, not what would be shown on TV. The question asks what came on the TV, implying a broadcasted message related to the evacuation. \"Advisory\" (A) is the most appropriate choice as it refers to a formal notice or warning that would be broadcasted during a mandatory evacuation.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:09+00:00",
+            "usage_in": 543,
+            "usage_out": 98
+        }
+    },
+    {
+        "item_id": 311,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 595,
+        "tokens_out": 110,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that \"being annoyed\" is a participial phrase that fits the grammatical structure of the sentence \"They were [what?].\" It also notes that the other options are nouns and do not fit. Answer 2 incorrectly claims that \"irritation\" (D) is more direct than \"being annoyed\" (B), despite the grammatical mismatch in D. The correct choice must be B, as it is the only one that functions as a predicate adjective.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:13+00:00",
+            "usage_in": 607,
+            "usage_out": 110
+        }
+    },
+    {
+        "item_id": 1052,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 608,
+        "tokens_out": 82,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the beach is the most reasonable answer, but it fails to recognize that a swimming pool is a more direct and common place where towels are brought for use outside of a shower. Answer 2 correctly identifies that both A and C are valid, but prioritizes A as the primary location associated with towel use in recreational settings.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:17+00:00",
+            "usage_in": 620,
+            "usage_out": 82
+        }
+    },
+    {
+        "item_id": 1328,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 702,
+        "tokens_out": 142,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that the question refers to a country where the heir to the throne is not titled \"Prince.\" It explains that in England, the heir is traditionally the Prince of Wales, which might seem contradictory, but the reasoning focuses on the context of the question and the provided choices. However, Answer 2 presents a logical and commonly accepted riddle answer where \"fairy tale\" is the correct choice, as it is a common trick question in riddles where the answer is not a real country but a fictional one. The reasoning in Answer 2 is more aligned with the nature of the question, making it the more accurate choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:22+00:00",
+            "usage_in": 714,
+            "usage_out": 142
+        }
+    },
+    {
+        "item_id": 1713,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 476,
+        "tokens_out": 92,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that \"own home\" (D) is the goal, but the question asks what a computer user using Zillow has as a goal. The primary goal of using Zillow is to search for a house, not necessarily to own one. Answer 2 correctly identifies that the core purpose of using Zillow is to search for houses, making option A the most accurate choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:25+00:00",
+            "usage_in": 488,
+            "usage_out": 92
+        }
+    }
+]

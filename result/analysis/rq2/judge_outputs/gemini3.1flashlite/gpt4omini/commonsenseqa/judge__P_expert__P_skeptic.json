@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/commonsenseqa/P_expert.json",
+            "result/arms/gpt4omini/commonsenseqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 189,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gpt4omini",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/gpt4omini/commonsenseqa/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "6acf70c7492d37e65b5add07cc797d57b147f6c482f393f7439183cb62c9d85e",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 189,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 563,
+            "completion_tokens": 110,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:44+00:00",
+            "last": "2026-10-04T10:07:44+00:00"
+        }
+    },
+    {
+        "item_id": 784,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 562,
+        "tokens_out": 110,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the \"biggest speech in the capital.\" The \"State of the Union\" is a formal, annual address delivered by the President of the United States to a joint session of Congress, which takes place in the U.S. Capitol (the capital). The Gettysburg Address was delivered in Gettysburg, Pennsylvania, not in the capital. Therefore, Answer 2 provides a more accurate contextual understanding of the term \"speech in the capital\" as it relates to the provided options.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:44+00:00",
+            "usage_in": 563,
+            "usage_out": 110
+        }
+    }
+]

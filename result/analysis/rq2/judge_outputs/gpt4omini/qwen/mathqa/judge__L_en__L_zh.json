@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "gpt4omini",
+            "temperature": 0.0,
+            "modelName": "gpt-4o-mini-2024-07-18",
+            "displayName": "GPT4o mini"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/mathqa/L_en.json",
+            "result/arms/qwen/mathqa/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 377,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "gpt4omini",
+        "reference_file": "result/aggregations/qwen/mathqa/judge__L_en__L_zh.json",
+        "reference_sha256": "25d03125c70a20a796150f2a77035f2844a533c88e25f742fe5f26bb8bd601bb",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 377,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1319,
+            "completion_tokens": 189,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gpt-4o-mini-2024-07-18": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:46+00:00",
+            "last": "2026-10-04T10:07:50+00:00"
+        }
+    },
+    {
+        "item_id": 1070,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 597,
+        "tokens_out": 92,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers correctly identify the number of decimal places in the numbers being multiplied. However, Answer 1 incorrectly concludes that the closest option to 7 is 5, while Answer 2 correctly states that the product will have 7 decimal places, which is not an option. Since neither answer is fully correct, but Answer 2 provides the accurate calculation of decimal places, it is the better choice.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:46+00:00",
+            "usage_in": 604,
+            "usage_out": 92
+        }
+    },
+    {
+        "item_id": 1094,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 708,
+        "tokens_out": 97,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly calculates the tax based on the given structure. It accurately computes the tax on the first $40,000 and the tax on the income exceeding that amount, leading to the correct income of $54,000. The second answer, however, incorrectly concludes that the income is $56,000, which does not satisfy the tax equation derived from the problem. Therefore, the first answer is the correct one.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T10:07:50+00:00",
+            "usage_in": 715,
+            "usage_out": 97
+        }
+    }
+]

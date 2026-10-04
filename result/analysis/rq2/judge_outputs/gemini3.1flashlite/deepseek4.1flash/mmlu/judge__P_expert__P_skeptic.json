@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/deepseek4.1flash/mmlu/P_expert.json",
+            "result/arms/deepseek4.1flash/mmlu/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 96,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "deepseek4.1flash",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/deepseek4.1flash/mmlu/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "56706636ccf11ff6721aa9bf52596c07193012f4947d2a43ef85c0591d080adb",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 95,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1144,
+            "completion_tokens": 238,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:01+00:00",
+            "last": "2026-10-04T10:09:01+00:00"
+        }
+    },
+    {
+        "item_id": 10642,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 1143,
+        "tokens_out": 238,
+        "trace": {
+            "judge_output": "Reasoning process\nThe core issue is whether the statute violates the Contracts Clause (Article I, Section 10) by applying retroactively to existing contracts. Under the Contracts Clause, a state law that substantially impairs a contractual relationship is subject to strict scrutiny. While states have police power to regulate, the Supreme Court has held that changing the fundamental remedy for a breach—specifically, converting a self-help forfeiture remedy into a mandatory judicial foreclosure process—constitutes a substantial impairment of the seller's contractual rights. Because the statute imposes a significant burden on the seller's ability to enforce the contract as written (by requiring a 60-day grace period and the costs/delays of a formal foreclosure action), it is likely to be held unconstitutional as applied to existing contracts. Answer 1 correctly identifies that the retroactive application is the primary constitutional hurdle and that the Contracts Clause is the relevant legal framework. Answer 2 incorrectly minimizes the impact of the change, failing to recognize that forcing a party to undergo judicial foreclosure when they bargained for a summary forfeiture remedy is a substantial impairment of the contract's value and enforceability.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:09:01+00:00",
+            "usage_in": 1144,
+            "usage_out": 238
+        }
+    }
+]

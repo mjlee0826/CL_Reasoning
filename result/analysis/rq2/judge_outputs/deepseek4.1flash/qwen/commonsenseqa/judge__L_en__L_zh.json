@@ -1,0 +1,407 @@
+[
+    {
+        "Model": {
+            "modelType": "deepseek4.1flash",
+            "temperature": 0.0,
+            "modelName": "deepseek-flash",
+            "displayName": "DeepSeek V4.1 Flash"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/commonsenseqa/L_en.json",
+            "result/arms/qwen/commonsenseqa/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 572,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "deepseek4.1flash",
+        "reference_file": "result/aggregations/qwen/commonsenseqa/judge__L_en__L_zh.json",
+        "reference_sha256": "80ac113c75197bb8f08063d0e113798d93b1fb394345596d707a6e62cd880e4d",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 572,
+        "api_usage": {
+            "calls": 12,
+            "calls_without_usage": 0,
+            "prompt_tokens": 5257,
+            "completion_tokens": 1753,
+            "refusals": 0
+        },
+        "model_versions": {
+            "deepseek-flash@DeepSeek-V4.1-Flash": 12
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:47+00:00",
+            "last": "2026-10-04T10:09:08+00:00"
+        }
+    },
+    {
+        "item_id": 18,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 449,
+        "tokens_out": 128,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that a pizzeria is a food establishment and that a food court is a typical place to find one while shopping, especially in malls. Its reasoning is consistent with the shopping context in the question.  \nAnswer 2 focuses on Little Italy as a typical place for pizzerias, but the question specifically asks where one would expect to find a pizzeria **while shopping**. Little Italy is a neighborhood, not a shopping venue, so it is less directly tied to the shopping context than a food court. Therefore, Answer 1 is more correct.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:47+00:00",
+            "usage_in": 453,
+            "usage_out": 128
+        }
+    },
+    {
+        "item_id": 99,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 416,
+        "tokens_out": 144,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 reasons that prolonged housework is repetitive and therefore most commonly leads to boredom, which directly matches option D. This is a plausible and common-sense interpretation of the question.  \nAnswer 2 reasons that housework for hours leads to fatigue or stress, and selects option C. However, the question asks what one might feel after doing housework for hours, and while stress is possible, boredom is more directly tied to the repetitive and monotonous nature of housework. Also, Answer 2’s reasoning is in Chinese and does not address why boredom is less fitting.  \nThus, Answer 1 provides the more accurate and better-supported choice.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:49+00:00",
+            "usage_in": 420,
+            "usage_out": 144
+        }
+    },
+    {
+        "item_id": 476,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 394,
+        "tokens_out": 121,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly treats \"habitat\" as a specific place where a native lemur would be found, but the question asks for a location, not a general category. A habitat is not a location in the same sense as the other choices. Answer 2 correctly identifies that native lemurs are typically found in rainforests, which is a specific natural environment and matches the question’s intent. The reasoning in Answer 2 is accurate, while Answer 1’s reasoning is flawed because it chooses an abstract term over a concrete location.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:52+00:00",
+            "usage_in": 398,
+            "usage_out": 121
+        }
+    },
+    {
+        "item_id": 806,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 376,
+        "tokens_out": 173,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 interprets the question as asking what action should be taken after a ball, and reasons that “look first” is a sensible safety step before chasing it. This is a plausible pragmatic interpretation, though the phrasing “run after ball” is awkward and could mean “what do you need in order to run after a ball,” in which case “have legs” would be more literal. However, among the given choices, “look first” is a reasonable action to take after a ball is in play and before running after it.\n\nAnswer 2 claims the action after a ball is usually “skip,” which is not supported by the question or common sense. “Skip” does not logically follow from “run after ball,” and the reasoning is weak and arbitrary. Therefore, Answer 2 is incorrect.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:54+00:00",
+            "usage_in": 380,
+            "usage_out": 173
+        }
+    },
+    {
+        "item_id": 860,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 404,
+        "tokens_out": 143,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 reasons that corner areas are parts of a room or building, and windows are typically installed on walls, so walls are the most plausible choice for having lots of windows. This is a reasonable interpretation of the question in an everyday architectural context.  \nAnswer 2 claims a space shuttle typically has multiple windows in corner areas like the cockpit or observation deck, but this is factually questionable: space shuttles have relatively few windows, and the idea that corner areas of a space shuttle have “lots of windows” is not a common or accurate association. The reasoning is speculative and not well supported.  \nTherefore, Answer 1 is more correct.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:56+00:00",
+            "usage_in": 408,
+            "usage_out": 143
+        }
+    },
+    {
+        "item_id": 909,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 470,
+        "tokens_out": 218,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies foolhardy as reckless and lacking judgment, and its opposite as careful and thoughtful. It selects \"cautious\" (D), which is a strong antonym. However, it overlooks that \"discreet\" (B) is also a common and precise opposite of foolhardy, often meaning prudent and judicious in conduct or speech. Answer 2 correctly notes that foolhardy means rash or imprudent, and its opposite should be prudent or thoughtful. It lists all options as having opposite meaning but then claims \"discreet\" (B) is the most fitting and common antonym. This is a reasonable choice, as \"discreet\" implies showing good judgment, which directly contrasts with foolhardy's lack of sense. Answer 1's reasoning is not incorrect, but Answer 2's selection of \"discreet\" is more precise because foolhardy often implies a lack of discretion, not just caution. Therefore, Answer 2 is the most correct.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:58+00:00",
+            "usage_in": 474,
+            "usage_out": 218
+        }
+    },
+    {
+        "item_id": 920,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 400,
+        "tokens_out": 117,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that a reception area is commonly found in an office building, which is a general and typical setting for waiting for a meeting. It also properly eliminates the other options as less fitting. Answer 2 focuses on a law firm, which is a specific type of office, but the question asks for a general location for waiting in a reception area for a meeting, making \"office building\" the broader and more accurate choice. The reasoning in Answer 2 is narrower and less universally applicable than Answer 1.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:00+00:00",
+            "usage_in": 404,
+            "usage_out": 117
+        }
+    },
+    {
+        "item_id": 1006,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 407,
+        "tokens_out": 138,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 reasons that a wet marmoset would want a warm climate to dry off, but this assumes being wet is unpleasant for the marmoset. The question asks what would make a wet marmoset happy, not what would dry it. Answer 2 reasons that marmosets live in tropical rainforests and like humid environments, so rain would make a wet marmoset happy. This aligns better with the animal’s natural habitat and preferences. Answer 1’s reasoning is flawed because it projects a human-like desire to dry off, while Answer 2’s reasoning is more consistent with biological facts about marmosets.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:02+00:00",
+            "usage_in": 411,
+            "usage_out": 138
+        }
+    },
+    {
+        "item_id": 1047,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 443,
+        "tokens_out": 93,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly treats “going to jail” as the usual way killing is thought of, but that is a legal consequence, not the general characterization of killing itself. Answer 2 correctly identifies “horrible” as the most common general perception of killing, while the other options are either consequences, circumstances, or emotional reactions rather than the typical description. Therefore, Answer 2 is the better choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:03+00:00",
+            "usage_in": 447,
+            "usage_out": 93
+        }
+    },
+    {
+        "item_id": 1919,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 540,
+        "tokens_out": 152,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly treats \"have food\" as too vague while accepting \"eat vegetables\" as the only vegan-appropriate option, but the question does not require the action to be specifically vegan-themed beyond alleviating hunger. The most direct and general solution to hunger is eating food, not necessarily vegetables or making bread. Answer 1 also mischaracterizes option B as not specifying food type, but the question asks what she did to alleviate hunger, and having food directly does that. Answer 2 correctly identifies that being tired of hunger means she needs to eat, and option B is the most direct match. The reasoning in Answer 2 is simpler and more logically aligned with the question’s intent.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:04+00:00",
+            "usage_in": 544,
+            "usage_out": 152
+        }
+    },
+    {
+        "item_id": 1948,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 437,
+        "tokens_out": 186,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 reasons that since Billy wasn't good at communicating, he sought a mentor and put effort into \"learning.\" This is plausible because learning is a broad activity that can include improving communication skills. However, the question asks what he put effort into doing after finding a mentor, and \"learning\" is somewhat generic rather than directly tied to communication.\n\nAnswer 2 reasons that the action should relate to improving communication, and selects \"exchanging ideas\" because it is directly connected to communication. This is more specific and contextually appropriate: a mentor relationship focused on communication would naturally involve exchanging ideas. Answer 1's choice of \"learning\" is not wrong in a general sense, but it is less precise than \"exchanging ideas\" given the communication context. Answer 2's reasoning better matches the direct connection between the mentor, effort, and communication improvement.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:06+00:00",
+            "usage_in": 441,
+            "usage_out": 186
+        }
+    },
+    {
+        "item_id": 1967,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 473,
+        "tokens_out": 140,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly dismisses “travel” because it appears twice (B and D) and overlaps with “go somewhere” (E). However, duplicate options do not invalidate the concept, and “travel” is a broader and more natural fit for being made easier by good winter weather than “ride bike,” which is more specific and less directly tied to winter conditions. Answer 2 correctly identifies “travel” as the most general and appropriate choice, since good weather in winter most commonly facilitates travel by reducing hazards like snow and ice. Answer 1’s reasoning about duplication is a flaw in test-taking logic rather than semantic correctness.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:08+00:00",
+            "usage_in": 477,
+            "usage_out": 140
+        }
+    }
+]

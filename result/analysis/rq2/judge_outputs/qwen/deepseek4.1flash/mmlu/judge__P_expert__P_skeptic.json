@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/deepseek4.1flash/mmlu/P_expert.json",
+            "result/arms/deepseek4.1flash/mmlu/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 96,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "deepseek4.1flash",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/deepseek4.1flash/mmlu/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "56706636ccf11ff6721aa9bf52596c07193012f4947d2a43ef85c0591d080adb",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 95,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1424,
+            "completion_tokens": 209,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:48+00:00",
+            "last": "2026-10-04T10:09:51+00:00"
+        }
+    },
+    {
+        "item_id": 6114,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 573,
+        "tokens_out": 107,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that Dr. Shealy's \"Senior View\" is focused on holistic health and wellness, which may not be the context of the specific advice given. The term \"Senior View\" suggests guidance for older individuals or those in later stages of life, not necessarily young people. Answer 2 correctly interprets the context of \"Senior View\" as advice for students or young people, making \"Stay in school\" a more appropriate and contextually relevant choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:09:48+00:00",
+            "usage_in": 585,
+            "usage_out": 107
+        }
+    },
+    {
+        "item_id": 10355,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 827,
+        "tokens_out": 102,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that retained earnings would be the same at maturity, but this is not true. Using straight-line amortization results in higher interest expense in later years compared to effective interest, which leads to lower net income and thus understated retained earnings. Answer 2 correctly identifies that the bond carrying amount is overstated due to less premium amortization under straight-line, and retained earnings are understated due to higher interest expense in later years.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:09:51+00:00",
+            "usage_in": 839,
+            "usage_out": 102
+        }
+    }
+]

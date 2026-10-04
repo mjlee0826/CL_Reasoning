@@ -1,0 +1,155 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/deepseek4.1flash/commonsenseqa/P_expert.json",
+            "result/arms/deepseek4.1flash/commonsenseqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 186,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "deepseek4.1flash",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/deepseek4.1flash/commonsenseqa/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "a47e45e9a7afc5d04bb4be9125cdc320749b284cf94fe443dab1758066545df8",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 184,
+        "api_usage": {
+            "calls": 3,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1912,
+            "completion_tokens": 293,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 3
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:17+00:00",
+            "last": "2026-10-04T10:08:25+00:00"
+        }
+    },
+    {
+        "item_id": 854,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 566,
+        "tokens_out": 95,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that \"small grapes\" are specifically used in fruit cocktail, but this is not a standard or distinct usage of the term. Answer 2 correctly identifies that small grapes are commonly used in wine making, and the wine press is directly related to this process. The term \"small grapes\" can refer to grapes used for wine production, which are typically smaller in size compared to table grapes. \n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:17+00:00",
+            "usage_in": 578,
+            "usage_out": 95
+        }
+    },
+    {
+        "item_id": 1012,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 560,
+        "tokens_out": 105,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that walking is the most direct choice when children are tired from running, but it fails to consider that riding a bike could be a more efficient and practical alternative for getting somewhere while still resting. Answer 2 correctly identifies that \"ride bike\" (B) is a more logical choice than \"walk\" (D) because it allows children to travel without further exertion, making it a better fit for the context of being tired from running.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:23+00:00",
+            "usage_in": 572,
+            "usage_out": 105
+        }
+    },
+    {
+        "item_id": 1132,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 750,
+        "tokens_out": 93,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the main job of a teacher is to help students \"learn,\" while the question specifically states that the teacher's job is to help students \"commit to memory new skills.\" This directly points to \"memorize\" as the intended answer. Answer 2 correctly identifies that \"commit to memory\" equates to \"memorize\" and selects B as the best choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:25+00:00",
+            "usage_in": 762,
+            "usage_out": 93
+        }
+    }
+]

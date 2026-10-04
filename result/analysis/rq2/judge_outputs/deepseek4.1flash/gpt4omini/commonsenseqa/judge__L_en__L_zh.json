@@ -1,0 +1,267 @@
+[
+    {
+        "Model": {
+            "modelType": "deepseek4.1flash",
+            "temperature": 0.0,
+            "modelName": "deepseek-flash",
+            "displayName": "DeepSeek V4.1 Flash"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/commonsenseqa/L_en.json",
+            "result/arms/gpt4omini/commonsenseqa/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 463,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gpt4omini",
+        "judge": "deepseek4.1flash",
+        "reference_file": "result/aggregations/gpt4omini/commonsenseqa/judge__L_en__L_zh.json",
+        "reference_sha256": "cff13626a5ae096992938ed428db213fb789cc18b9a0d310326274c144ba8cd0",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 463,
+        "api_usage": {
+            "calls": 7,
+            "calls_without_usage": 0,
+            "prompt_tokens": 3590,
+            "completion_tokens": 1243,
+            "refusals": 0
+        },
+        "model_versions": {
+            "deepseek-flash@DeepSeek-V4.1-Flash": 7
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:00+00:00",
+            "last": "2026-10-04T10:09:12+00:00"
+        }
+    },
+    {
+        "item_id": 31,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 491,
+        "tokens_out": 169,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that a “subdivision” is the most likely place to find a gated community, which directly matches the idea of a house that is “gated off from other places.” Its reasoning about gated communities being common in subdivisions is accurate, and it properly dismisses broader or less specific options like city, suburbs, or street.\n\nAnswer 2 incorrectly chooses “suburbs.” While suburbs can have gated communities, the term itself does not imply being gated off. Its reasoning that suburbs offer more space and independent houses with walls or fences does not specifically satisfy “gated off from other places” as well as “subdivision” does. The key concept is a gated community, which is a type of subdivision, not a general suburban area.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:00+00:00",
+            "usage_in": 495,
+            "usage_out": 169
+        }
+    },
+    {
+        "item_id": 806,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 477,
+        "tokens_out": 90,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly interprets the question as asking about the state after running, rather than what is needed to run after a ball. It selects \"get tired,\" which is a possible consequence, not a requirement. Answer 2 correctly identifies that running requires legs, making \"have legs\" the essential prerequisite among the choices. The reasoning in Answer 2 is sound and directly addresses the question.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:01+00:00",
+            "usage_in": 481,
+            "usage_out": 90
+        }
+    },
+    {
+        "item_id": 1030,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 493,
+        "tokens_out": 300,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies freon as a refrigerant used in cooling appliances, but then incorrectly concludes that a television is the best choice. The question asks what James “didn’t need a freon coin in,” and the phrasing suggests the item that obviously does not use freon. A refrigerator does use freon, so it is not the correct choice. Answer 1’s reasoning that a TV is unrelated to refrigeration is true, but it overlooks that the question likely expects the most absurd or clearly unrelated option among the choices. However, among the options, a refrigerator is the one that actually needs freon, so it cannot be the answer. Answer 2 incorrectly reasons that because a refrigerator uses freon, it is the choice where a freon coin is not needed, which is contradictory. The correct choice should be the item that does not use freon, and among the options, a television is a strong candidate, but the question’s wording “even he knew that he didn’t need a freon coin in a what?” implies the answer is something obviously not requiring freon. Still, between the two provided answers, Answer 1 selects C (television), which is more consistent with the idea of not needing freon, while Answer 2 selects A (refrigerator), which is wrong because refrigerators do need freon. Therefore, Answer 1 is the better of the two.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:04+00:00",
+            "usage_in": 497,
+            "usage_out": 300
+        }
+    },
+    {
+        "item_id": 1201,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 522,
+        "tokens_out": 232,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly dismisses \"books\" as primarily text-based, even though picture books and illustrated storybooks are a very common and direct match for \"pictures with a story.\" It also overstates \"art show\" as the best fit, since art shows are not specifically defined by pictures telling a story. Answer 2 correctly identifies that newspapers often use pictures to tell or accompany stories, and it also notes that books can contain story pictures, but it chooses newspaper as the best fit. However, the question asks where people look at pictures with a story, and \"books\" is the most natural and direct answer among the choices, especially for children’s picture books and illustrated stories. Both answers miss that \"books\" is the strongest choice. Since the task is to choose between the two provided answers, Answer 2 is more reasonable than Answer 1 because it at least considers newspapers as story-picture media, while Answer 1’s choice of art show is less directly tied to storytelling. Still, neither is fully correct, but Answer 2 is the better of the two.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:06+00:00",
+            "usage_in": 526,
+            "usage_out": 232
+        }
+    },
+    {
+        "item_id": 1569,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 555,
+        "tokens_out": 142,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that both politeness and smiling are relevant to serving customers well, but its reasoning for choosing smiling over politeness is weak—it asserts smiling \"more directly\" affects customer satisfaction without strong justification. Answer 2 also identifies both as relevant, but its reasoning for choosing politeness is stronger: politeness is a fundamental, consistent aspect of good service, whereas smiling can be situational or superficial. The question asks what a server needs to be, and \"polite\" is a more essential and stable trait than \"smile,\" which is an action rather than a quality. Therefore, Answer 2's conclusion is better supported.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:08+00:00",
+            "usage_in": 559,
+            "usage_out": 142
+        }
+    },
+    {
+        "item_id": 1756,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 536,
+        "tokens_out": 158,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 argues that anxiety is the most direct driver for a follow-up checkup, but it treats “anxiety” and “anxious” as separate emotional options and does not adequately distinguish them from the specific context of a follow-up. A follow-up checkup is typically scheduled or considered because there is unresolved uncertainty about a prior result or condition, not necessarily because anxiety is the primary reason. Answer 2 correctly identifies uncertainty as the most fitting motivation, since follow-up is inherently about clarifying an unknown or unresolved health status. Anxiety, stress, and pain may accompany or result from that uncertainty, but they are less precise as the reason for a follow-up specifically. Therefore, Answer 2’s reasoning is more accurate.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:09+00:00",
+            "usage_in": 540,
+            "usage_out": 158
+        }
+    },
+    {
+        "item_id": 1996,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 488,
+        "tokens_out": 152,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 misinterprets the question: it treats “north of the U.S.” as a general geographic direction within the U.S. rather than a location outside and north of the country. It also incorrectly weighs “small town” and “neighborhood” as plausible answers even though neither is inherently north of the U.S. Its final choice B is not supported by the wording of the question.\n\nAnswer 2 correctly identifies that the question asks for a place north of the U.S., and among the options, only Canada is a country located north of the U.S. It also reasonably notes that barber shops can be found there. This directly satisfies the geographic condition in the question.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:12+00:00",
+            "usage_in": 492,
+            "usage_out": 152
+        }
+    }
+]

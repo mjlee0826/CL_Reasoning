@@ -1,0 +1,267 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/mathqa/L_en.json",
+            "result/arms/qwen/mathqa/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 377,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/qwen/mathqa/judge__L_en__L_zh.json",
+        "reference_sha256": "25d03125c70a20a796150f2a77035f2844a533c88e25f742fe5f26bb8bd601bb",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 377,
+        "api_usage": {
+            "calls": 7,
+            "calls_without_usage": 0,
+            "prompt_tokens": 5812,
+            "completion_tokens": 2239,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 7
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:47+00:00",
+            "last": "2026-10-04T10:08:47+00:00"
+        }
+    },
+    {
+        "item_id": 32,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "none",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 563,
+        "tokens_out": 224,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem states 30% of x = 50% of y, which is 0.3x = 0.5y. Dividing both sides by 0.3y gives x/y = 0.5/0.3 = 5/3. Therefore, the ratio x:y is 5:3. Looking at the provided choices: a) 4:5, b) 3:5, c) 3:7, d) 3:2, e) 4:5. None of the choices match 5:3. Answer 1 incorrectly concludes that 5:3 is equivalent to 3:2 (choice d). Answer 2 correctly identifies the mathematical result as 5:3 and notes that this is not among the provided options. However, since Answer 1 attempts to map the result to an existing choice despite the mathematical error, and Answer 2 correctly identifies the discrepancy, Answer 2 is logically superior in its assessment of the provided options.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:47+00:00",
+            "usage_in": 564,
+            "usage_out": 224
+        }
+    },
+    {
+        "item_id": 551,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 895,
+        "tokens_out": 294,
+        "trace": {
+            "judge_output": "Reasoning process\nIn Answer 1, the calculation is as follows:\n1. Girls who passed = 120. Since 40% of girls passed, $0.4G = 120 \\implies G = 300$.\n2. Girls who passed (120) is 2/3 of the boys who failed. Let $F_b$ be the number of boys who failed. $120 = (2/3)F_b \\implies F_b = 180$.\n3. Since 80% of boys passed, 20% of boys failed. Thus, $0.2B = 180 \\implies B = 900$.\n4. Total students = $B + G = 900 + 300 = 1200$.\nThis calculation is mathematically sound and matches option (a).\n\nIn Answer 2, the reasoning is inconsistent. It correctly identifies $F=300$, but then incorrectly calculates $M$ (boys) as 450. Even if $M=450$, the total would be 750, which is not 3180. The claim that the answer is 3180 is unsupported by the provided logic. Therefore, Answer 1 is correct.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:55+00:00",
+            "usage_in": 896,
+            "usage_out": 294
+        }
+    },
+    {
+        "item_id": 786,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 713,
+        "tokens_out": 226,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem states that the interest is 10% of the average monthly balance and that this interest caused the balance to double to $5080. If the balance doubled, the interest amount must be equal to the balance before the interest was added. Let $B$ be the balance before interest and $I$ be the interest. We are told $B + I = 5080$ and $B = I$ (since the balance doubled). Therefore, $2I = 5080$, which means $I = 2540$. Since $I = 0.10 \\times (\\text{Average Monthly Balance})$, we have $2540 = 0.10 \\times (\\text{Average Monthly Balance})$. Solving for the average monthly balance gives $2540 / 0.10 = 25400$. Answer 2 correctly identifies this logic, whereas Answer 1 fails to correctly interpret the \"doubled\" condition and arrives at an incorrect conclusion.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:25+00:00",
+            "usage_in": 714,
+            "usage_out": 226
+        }
+    },
+    {
+        "item_id": 813,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 879,
+        "tokens_out": 362,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth provided answers correctly set up the system of equations: $x + y = 10$ and $0.45x + 0.35y = 4$. Solving this system:\n1. From $x + y = 10$, we get $y = 10 - x$.\n2. Substitute into the second equation: $0.45x + 0.35(10 - x) = 4$.\n3. $0.45x + 3.5 - 0.35x = 4$.\n4. $0.10x = 0.5$, so $x = 5$.\n5. If $x = 5$, then $y = 5$.\n6. The amount of red pigment is $0.55x = 0.55 \\times 5 = 2.75$.\n\nAnswer 1 incorrectly calculates $x=6$ and $y=4$ and then guesses \"b\". Answer 2 correctly calculates $x=5$ and $y=5$ but makes an arithmetic error in the final step ($0.55 \\times 6 = 3.3$ instead of using $x=5$). However, the calculation $0.55 \\times 5 = 2.75$ matches choice (d). Since both answers failed to reach the correct choice (d) despite the correct setup, Answer 2 is closer to the correct logic, but both are flawed. Given the requirement to choose one, Answer 2 contains the correct algebraic setup and derivation steps, even though it miscalculated the final multiplication.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:30+00:00",
+            "usage_in": 880,
+            "usage_out": 362
+        }
+    },
+    {
+        "item_id": 1538,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1015,
+        "tokens_out": 457,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem states that the total number of feet and heads for chickens and cows is 100. A chicken has 1 head and 2 feet (total 3), and a cow has 1 head and 4 feet (total 5). Let $c$ be the number of chickens and $w$ be the number of cows. The equation is $3c + 5w = 100$. We are also given $c + w = 6s$, where $s$ is the number of sheep.\nIn Answer 1, the equation $3c + 5w = 100$ is correct, but the claim that $s=8$ satisfies the conditions is incorrect: if $s=8$, then $c+w=48$. Substituting $c = 48-w$ into $3c+5w=100$ gives $3(48-w) + 5w = 100 \\Rightarrow 144 - 3w + 5w = 100 \\Rightarrow 2w = -44$, which is impossible.\nIn Answer 2, the equation $5y + 3z = 100$ (where $y$ is cows, $z$ is chickens) is correct. Substituting $z = 6x - y$ (where $x$ is sheep) leads to $5y + 3(6x - y) = 100 \\Rightarrow 2y + 18x = 100 \\Rightarrow y + 9x = 50$.\nTesting the choices:\nIf $x=4$: $y + 36 = 50 \\Rightarrow y = 14$. Then $z = 6(4) - 14 = 10$.\nCheck conditions: $y > z$ ($14 > 10$ is true) and $y > x$ ($14 > 4$ is true).\nAll conditions are satisfied. Answer 2 correctly identifies $x=4$ as the solution.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:42+00:00",
+            "usage_in": 1016,
+            "usage_out": 457
+        }
+    },
+    {
+        "item_id": 1602,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 799,
+        "tokens_out": 511,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem states that in a 160m race, A beats B by 56m or 7 seconds. This means that when A finishes the 160m race, B has covered 160 - 56 = 104m. The 7 seconds represents the time B takes to cover the remaining 56m. \n1. Calculate B's speed: B covers 56m in 7 seconds, so B's speed = 56 / 7 = 8 m/s.\n2. Calculate B's total time to finish the 160m race: Time = Distance / Speed = 160 / 8 = 20 seconds.\n3. Since A beats B by 7 seconds, A's time = B's time - 7 seconds = 20 - 7 = 13 seconds.\n\nEvaluating the provided answers:\n- Answer 1 sets up the equation 160/t = 104/(t+7). Solving this: 160t + 1120 = 104t leads to 56t = -1120, which is mathematically incorrect (the signs were handled poorly in the reasoning).\n- Answer 2 assumes B runs 216m, which is incorrect; the race is 160m.\n- Re-evaluating the logic: B covers the last 56m in 7s. B's speed is 8 m/s. B takes 160/8 = 20s to finish. A finishes 7s earlier, so A takes 13s. This matches choice (c). Neither Answer 1 nor Answer 2 arrived at the correct value (13s), but Answer 1's methodology (using the distance B covered when A finished) is the standard approach for such problems, despite the calculation error in the final step. However, since both provided answers are mathematically flawed in their final result, I must choose the one that follows the standard logic for \"beats by X meters or Y seconds\" problems. Answer 1 correctly identifies that B covers 104m in time $t$, but fails the arithmetic. Answer 2 is conceptually wrong about the distance. Answer 1 is closer to the correct logic.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:45+00:00",
+            "usage_in": 800,
+            "usage_out": 511
+        }
+    },
+    {
+        "item_id": 1807,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 941,
+        "tokens_out": 165,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies the linear relationship $s = mt + b$. Using the points $(6, 30)$ and $(24, 60)$, it calculates the slope $m = (60-30)/(24-6) = 30/18 = 5/3$. It then correctly solves for the intercept $b = 20$ and the final value of $t$ when $s=100$: $100 = (5/3)t + 20 \\implies 80 = (5/3)t \\implies t = 48$. Answer 2 incorrectly calculates the slope and intercept, leading to an incorrect formula and an incorrect result.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:47+00:00",
+            "usage_in": 942,
+            "usage_out": 165
+        }
+    }
+]

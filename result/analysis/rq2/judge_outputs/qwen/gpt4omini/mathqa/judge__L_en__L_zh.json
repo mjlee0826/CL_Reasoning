@@ -1,0 +1,155 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/mathqa/L_en.json",
+            "result/arms/gpt4omini/mathqa/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 365,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gpt4omini",
+        "judge": "qwen",
+        "reference_file": "result/aggregations/gpt4omini/mathqa/judge__L_en__L_zh.json",
+        "reference_sha256": "9e10231423b782f296822552bb9f48824b88f62406ea8ead35e2d92150b0092f",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 358,
+        "api_usage": {
+            "calls": 3,
+            "calls_without_usage": 0,
+            "prompt_tokens": 3381,
+            "completion_tokens": 223,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 3
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:44+00:00",
+            "last": "2026-10-04T10:08:48+00:00"
+        }
+    },
+    {
+        "item_id": 262,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1890,
+        "tokens_out": 68,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the remainder can only be one specific value based on k = 0 to 6, which is not valid since k can be any integer. Answer 2 correctly calculates the possible remainders and identifies that 9 is among the valid remainders.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:44+00:00",
+            "usage_in": 1902,
+            "usage_out": 68
+        }
+    },
+    {
+        "item_id": 1467,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 730,
+        "tokens_out": 70,
+        "trace": {
+            "judge_output": "Reasoning process\nThe correct calculation leads to x = 72, which is not among the choices. Answer 1 incorrectly selects e) 90 as the closest option, while Answer 2 correctly identifies d) 60 as the closest option. Therefore, Answer 2 is more accurate.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:47+00:00",
+            "usage_in": 742,
+            "usage_out": 70
+        }
+    },
+    {
+        "item_id": 1497,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 725,
+        "tokens_out": 85,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies the thousandths digit by multiplying the decimal by 1000 and taking the integer part, which is not the correct method to find the thousandths digit. The correct approach is to directly identify the third digit after the decimal point in the decimal equivalent of the division. Answer 2 correctly identifies the thousandths digit as 2.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T10:08:48+00:00",
+            "usage_in": 737,
+            "usage_out": 85
+        }
+    }
+]

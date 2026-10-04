@@ -1,0 +1,211 @@
+[
+    {
+        "Model": {
+            "modelType": "deepseek4.1flash",
+            "temperature": 0.0,
+            "modelName": "deepseek-flash",
+            "displayName": "DeepSeek V4.1 Flash"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/mmlu/L_en.json",
+            "result/arms/qwen/mmlu/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 449,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "deepseek4.1flash",
+        "reference_file": "result/aggregations/qwen/mmlu/judge__L_en__L_zh.json",
+        "reference_sha256": "5097b63c6024c91c0c39fd207d30071edc0d4fb5d13b256ed752afc472dbbe43",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 449,
+        "api_usage": {
+            "calls": 5,
+            "calls_without_usage": 0,
+            "prompt_tokens": 2844,
+            "completion_tokens": 947,
+            "refusals": 0
+        },
+        "model_versions": {
+            "deepseek-flash@DeepSeek-V4.1-Flash": 5
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:10:12+00:00",
+            "last": "2026-10-04T10:10:17+00:00"
+        }
+    },
+    {
+        "item_id": 110,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 481,
+        "tokens_out": 225,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly includes the lower first molar as a potential infection site for the submandibular lymph nodes. While the submandibular nodes drain the submandibular and sublingual spaces, the lower first molar typically drains to the submandibular nodes only if the infection spreads to the submandibular space; however, in standard anatomical drainage, the lower molars (especially the first molar) primarily drain to the submandibular nodes, but the question likely follows the pattern that the hard palate, upper lip, and upper central incisor drain to submandibular nodes, while the lower first molar drains to submental or cervical nodes depending on the source. Answer 2 correctly identifies that the lower first molar is not a primary drainage site for the submandibular lymph nodes and excludes it, leaving hard palate, upper lip, and upper central incisor as the correct sites. Answer 1's reasoning is flawed because it overincludes the lower first molar without justification, whereas Answer 2's reasoning is consistent with typical lymphatic drainage patterns taught in dental anatomy.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:10:12+00:00",
+            "usage_in": 485,
+            "usage_out": 225
+        }
+    },
+    {
+        "item_id": 243,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 389,
+        "tokens_out": 114,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies hydrogen as the most abundant element in the solar system and helium as the second most abundant. It also correctly notes that methane is a compound, not an element, and that iron is not the second most common element. Its reasoning is accurate and its final answer is correct.\n\nAnswer 2 contains a contradiction: it states that the second most common element is hydrogen, but then says hydrogen is the most abundant and helium is next. This makes its reasoning internally inconsistent and its final answer incorrect.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:10:13+00:00",
+            "usage_in": 393,
+            "usage_out": 114
+        }
+    },
+    {
+        "item_id": 1207,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 698,
+        "tokens_out": 193,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 is incorrect because it claims that 1-butene rearranges to 2-butene in solution. In this reaction, 2-butene is the major product due to Zaitsev’s rule, not because the minor product rearranges. The reasoning also misidentifies the mechanistic basis for the product distribution.\n\nAnswer 2 is correct because it properly applies Zaitsev’s rule: the major product is the more substituted, more stable alkene, 2-butene. The explanation about carbon 3 having fewer hydrogens is a bit imprecise, but the overall reasoning correctly points to the preference for forming the more stable alkene via elimination. Among the given choices, A is the only one that aligns with the idea that the structure of 2-bromobutane favors removal of a hydrogen from carbon 3 to give 2-butene as the major product.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:10:14+00:00",
+            "usage_in": 702,
+            "usage_out": 193
+        }
+    },
+    {
+        "item_id": 5681,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 853,
+        "tokens_out": 198,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies Jacksonian Democracy as the closest match. While Jacksonian Democracy did emphasize the \"common man,\" it was primarily a movement of the 1820s–1830s focused on expanding suffrage for white men and opposing the Second Bank of the United States. It did not share the Populist Party's broad reform agenda regarding corporate regulation, trusts, railroad abuses, monetary policy (like silver coinage), or the direct election of senators. The Populist platform's call to restore government to \"the plain people\" and fight corporate and financial oppression is much more directly connected to the Progressive movement of the early 1900s, which pushed for antitrust legislation, regulation of railroads and banks, income tax, and direct democracy measures. Answer 2 correctly identifies Progressivism as the movement that most closely shared these goals, as Progressives took up many Populist causes after the 1890s.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:10:16+00:00",
+            "usage_in": 857,
+            "usage_out": 198
+        }
+    },
+    {
+        "item_id": 6333,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 403,
+        "tokens_out": 217,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 states that average male genital size is about 4 to 5 inches and chooses B (5 inches). This is incorrect because the commonly cited average erect length is about 5.1–5.5 inches, but the question likely refers to the average size in general, and among the choices, 5 inches is closer to the average erect length than 4 inches. However, Answer 1’s reasoning is vague and does not specify whether it refers to flaccid or erect length, and it incorrectly treats 4–5 inches as making both A and B equally plausible before arbitrarily picking B.\n\nAnswer 2 specifies flaccid length (3.5–4.5 inches) and chooses A (4 inches). This is more precise because the average flaccid length is indeed around 3.5–4.5 inches, making 4 inches the closest choice. The reasoning in Answer 2 is more accurate and better supported.\n\nThus, Answer 2 is the most correct.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:10:17+00:00",
+            "usage_in": 407,
+            "usage_out": 217
+        }
+    }
+]

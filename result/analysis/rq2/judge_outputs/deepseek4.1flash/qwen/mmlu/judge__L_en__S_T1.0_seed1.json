@@ -1,0 +1,127 @@
+[
+    {
+        "Model": {
+            "modelType": "deepseek4.1flash",
+            "temperature": 0.0,
+            "modelName": "deepseek-flash",
+            "displayName": "DeepSeek V4.1 Flash"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs S:T1.0:seed1)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/mmlu/L_en.json",
+            "result/arms/qwen/mmlu/S_T1.0_seed1.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 194,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "qwen",
+        "judge": "deepseek4.1flash",
+        "reference_file": "result/aggregations/qwen/mmlu/judge__L_en__S_T1.0_seed1.json",
+        "reference_sha256": "687941311029e862035311f4213a71507be1dec11fba24101bd8957436f2a2bb",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 194,
+        "api_usage": {
+            "calls": 2,
+            "calls_without_usage": 0,
+            "prompt_tokens": 1364,
+            "completion_tokens": 303,
+            "refusals": 0
+        },
+        "model_versions": {
+            "deepseek-flash@DeepSeek-V4.1-Flash": 2
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:09:55+00:00",
+            "last": "2026-10-04T10:09:56+00:00"
+        }
+    },
+    {
+        "item_id": 1947,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 550,
+        "tokens_out": 156,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 reasons that since electric drives are known for smooth control, simplicity, and reliability, all of B, C, and D are correct, so A (\"all of below\") is the answer. However, this reasoning is flawed because it assumes C (\"it is cheaper in cost\") is universally true, which is not necessarily the case—electric drives can be more expensive initially than some alternatives. Answer 2 correctly identifies that without confirmation that all three statements are true, we cannot select A. It then chooses B as the safest and most accurate based on typical knowledge, since smooth and easy control is a widely accepted advantage of electric drives. The reasoning in Answer 2 is more careful and avoids overgeneralization.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:55+00:00",
+            "usage_in": 554,
+            "usage_out": 156
+        }
+    },
+    {
+        "item_id": 13188,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 806,
+        "tokens_out": 147,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly focuses on the need for female soldiers in peacekeeping as the pragmatic implication, but the question asks about implications of biology, not policy recommendations. It also dismisses D too quickly as merely ideological, when D actually captures the pragmatic tension between protection and vulnerability that affects gender security. Answer 2 correctly identifies that D addresses the ambiguity in women’s security—being harmed by both enemies and protectors—which has direct pragmatic consequences for post-conflict gender security and challenges liberal feminist assumptions. Answer 1’s reasoning mischaracterizes D and overlooks that A’s policy suggestion is not a biological implication. Therefore, Answer 2 is more accurate.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:09:56+00:00",
+            "usage_in": 810,
+            "usage_out": 147
+        }
+    }
+]

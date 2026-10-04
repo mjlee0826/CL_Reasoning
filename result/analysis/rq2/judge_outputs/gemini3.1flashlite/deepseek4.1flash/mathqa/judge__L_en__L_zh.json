@@ -1,0 +1,183 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/deepseek4.1flash/mathqa/L_en.json",
+            "result/arms/deepseek4.1flash/mathqa/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 129,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "deepseek4.1flash",
+        "judge": "gemini3.1flashlite",
+        "reference_file": "result/aggregations/deepseek4.1flash/mathqa/judge__L_en__L_zh.json",
+        "reference_sha256": "50da6ff8f36fad65bd36aa3602b50dbb5279de92fb00dc5d7ae3d1737669ec57",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 74,
+        "api_usage": {
+            "calls": 4,
+            "calls_without_usage": 0,
+            "prompt_tokens": 2700,
+            "completion_tokens": 919,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 4
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:07:46+00:00",
+            "last": "2026-10-04T10:08:26+00:00"
+        }
+    },
+    {
+        "item_id": 202,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 646,
+        "tokens_out": 134,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 attempts to provide a logical justification based on the properties of weighted averages and the distribution of the provided options, even though the problem statement is incomplete. It correctly identifies that the average of two sets is indeed weighted toward the set with more numbers (a mathematical fact). Answer 2 simply states that the problem is unsolvable and arbitrarily selects \"a\" without any logical connection to the options provided. Answer 1 is superior because it acknowledges the mathematical principle underlying the question and attempts to provide a reasoned approach to the selection, whereas Answer 2 fails to provide any reasoning for its final choice.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:46+00:00",
+            "usage_in": 647,
+            "usage_out": 134
+        }
+    },
+    {
+        "item_id": 635,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 698,
+        "tokens_out": 280,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem states that the can is initially filled with a mixture in a 3:2 ratio, and adding 6 liters of milk makes the can \"full\". This implies the initial mixture did not fill the can completely. Let the initial volume of the mixture be $5x$ (where milk is $3x$ and water is $2x$). The capacity of the can is $C$. After adding 6 liters of milk, the can is full, so $C = 5x + 6$. The new amount of milk is $3x + 6$ and the amount of water remains $2x$. The new ratio is $2:1$, so $(3x + 6) / (2x) = 2/1$. Solving this: $3x + 6 = 4x$, which gives $x = 6$. The capacity $C = 5x + 6 = 5(6) + 6 = 36$. Answer 1 correctly identifies that the initial mixture volume ($5x$) plus the added milk (6) equals the total capacity. Answer 2 incorrectly assumes the initial volume $5x$ is equal to the total capacity $V$, ignoring the fact that the can was not full before the 6 liters were added.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:07:55+00:00",
+            "usage_in": 699,
+            "usage_out": 280
+        }
+    },
+    {
+        "item_id": 728,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 662,
+        "tokens_out": 206,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks by what fraction the share of each remaining person \"increased\". In mathematical problems of this type, \"increased by\" typically refers to the percentage or fractional increase relative to the original value. \nOriginal share = C/3.\nNew share = C/2.\nIncrease in absolute terms = C/2 - C/3 = C/6.\nFractional increase = (Increase) / (Original share) = (C/6) / (C/3) = (C/6) * (3/C) = 3/6 = 1/2.\nAnswer 1 calculates the absolute increase (1/6 of the total cost) but fails to express it as a relative increase compared to the original share. Answer 2 correctly identifies that the question asks for the relative increase, which is 1/2 of the original share. Therefore, Answer 2 is the correct interpretation of the problem.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:23+00:00",
+            "usage_in": 663,
+            "usage_out": 206
+        }
+    },
+    {
+        "item_id": 1319,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 690,
+        "tokens_out": 299,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the price on day 3 as a percentage of the sale price on day 1. \nLet $P$ be the original price.\nDay 1 price ($D_1$) = $P \\times 0.96$.\nDay 2 price ($D_2$) = $D_1 \\times 0.96 = P \\times 0.96 \\times 0.96$.\nDay 3 price ($D_3$) = $D_2 \\times 0.90 = P \\times 0.96 \\times 0.96 \\times 0.90$.\nThe question asks for the ratio of $D_3$ to $D_1$:\nRatio = $D_3 / D_1 = (P \\times 0.96 \\times 0.96 \\times 0.90) / (P \\times 0.96) = 0.96 \\times 0.90 = 0.864$.\nConverting 0.864 to a percentage gives 86.4%.\nAnswer 1 incorrectly calculates the ratio relative to the original price instead of the day 1 price. Answer 2 correctly identifies the ratio of the day 3 price to the day 1 price.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "L:en"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T10:08:26+00:00",
+            "usage_in": 691,
+            "usage_out": 299
+        }
+    }
+]

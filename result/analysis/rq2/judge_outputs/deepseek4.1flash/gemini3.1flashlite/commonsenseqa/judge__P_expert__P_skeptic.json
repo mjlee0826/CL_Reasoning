@@ -1,0 +1,99 @@
+[
+    {
+        "Model": {
+            "modelType": "deepseek4.1flash",
+            "temperature": 0.0,
+            "modelName": "deepseek-flash",
+            "displayName": "DeepSeek V4.1 Flash"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/commonsenseqa/P_expert.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 174,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "cross_judge",
+        "generator": "gemini3.1flashlite",
+        "judge": "deepseek4.1flash",
+        "reference_file": "result/aggregations/gemini3.1flashlite/commonsenseqa/judge__P_expert__P_skeptic.json",
+        "reference_sha256": "998af20938e87eae830dc284540c821c6e985030e390d81cde5924506d3de266",
+        "item_filter": "both_answered_disagreement",
+        "n_judged_items": 172,
+        "api_usage": {
+            "calls": 1,
+            "calls_without_usage": 0,
+            "prompt_tokens": 544,
+            "completion_tokens": 148,
+            "refusals": 0
+        },
+        "model_versions": {
+            "deepseek-flash@DeepSeek-V4.1-Flash": 1
+        },
+        "calls_utc": {
+            "first": "2026-10-04T10:08:47+00:00",
+            "last": "2026-10-04T10:08:47+00:00"
+        }
+    },
+    {
+        "item_id": 1274,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 540,
+        "tokens_out": 148,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 argues that \"cupboard\" is more general and commonly used, but it overlooks that \"kitchen cabinet\" is equally standard and often more specific for dishware storage. Its reasoning that \"cupboard\" is the most direct answer is not clearly justified over \"kitchen cabinet.\"  \nAnswer 2 correctly notes that both \"kitchen cabinet\" and \"cupboard\" are plausible, but identifies \"kitchen cabinet\" as the most specific and standard location for storing dishware, which better matches the question's context of a child reaching for a cereal bowl. The reasoning in Answer 2 is more precise and avoids the vague preference seen in Answer 1.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:expert"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T10:08:47+00:00",
+            "usage_in": 544,
+            "usage_out": 148
+        }
+    }
+]
