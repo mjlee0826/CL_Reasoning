@@ -1,0 +1,3141 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs P:expert vs P:skeptic)",
+            "languages": [
+                "english",
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 3,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-k-v1",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/mathqa/L_en.json",
+            "result/arms/gemini3.1flashlite/mathqa/P_expert.json",
+            "result/arms/gemini3.1flashlite/mathqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 105,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "menu_judge",
+        "menu": "M3P",
+        "item_filter": "menu_all_answered_disagreement",
+        "n_judged_items": 99,
+        "order_scheme": "grouped_rotation_seed0",
+        "api_usage": {
+            "calls": 99,
+            "calls_without_usage": 0,
+            "prompt_tokens": 236590,
+            "completion_tokens": 32045,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 99
+        },
+        "calls_utc": {
+            "first": "2026-10-04T15:57:36+00:00",
+            "last": "2026-10-04T16:02:34+00:00"
+        }
+    },
+    {
+        "item_id": 21,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 1625,
+        "tokens_out": 191,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem as stated contains a mathematical inconsistency: the sum of the ages of the 14 students (214) exceeds the total sum of the 15 students (210), resulting in a negative age (-4). All three answers correctly identify this inconsistency. Answer 1 and Answer 2 conclude that the absolute difference (4) is the intended answer, leading to choice 'b'. Answer 3 acknowledges the inconsistency but speculates that a typo might have occurred, leading to a guess of 'd'. In standardized testing contexts where a problem is flawed, the absolute difference is the most common intended path for a student to take. Therefore, Answer 1 and 2 are more logically consistent in their approach to a flawed question than Answer 3, which relies on arbitrary speculation. Between 1 and 2, both provide the same logical path and conclusion.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "960f49e3df279916918eff64f5204c0ed5530a0cc0abd9ab5515eaf9cd3e2bf0"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:57:36+00:00",
+            "usage_in": 1626,
+            "usage_out": 191
+        }
+    },
+    {
+        "item_id": 41,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 2856,
+        "tokens_out": 480,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The branch length is 4 meters.\n2. Markings in thirds: $4/3, 8/3$.\n3. Markings in fifths: $4/5, 8/5, 12/5, 16/5$.\n4. The set of all marking points (in meters) is $\\{4/5, 4/3, 8/5, 12/5, 8/3, 16/5\\}$.\n5. Sorted points: $0, 4/5, 4/3, 8/5, 12/5, 8/3, 16/5, 4$.\n6. The lengths of the pieces are the differences between consecutive points:\n   - $4/5 - 0 = 4/5$\n   - $4/3 - 4/5 = 8/15$\n   - $8/5 - 4/3 = 4/15$\n   - $12/5 - 8/5 = 4/5$\n   - $8/3 - 12/5 = 4/15$\n   - $16/5 - 8/3 = 8/15$\n   - $4 - 16/5 = 4/5$\n7. The distinct lengths are $\\{4/5, 8/15, 4/15\\}$.\n8. Kim removes one piece of every distinct length. The total length removed is $4/5 + 8/15 + 4/15 = 12/15 + 8/15 + 4/15 = 24/15 = 8/5$.\n9. The remaining length is $4 - 8/5 = 12/5$.\n10. The fraction of the original branch remaining is $(12/5) / 4 = 3/5$.\n11. Answer 1 incorrectly identifies the distinct lengths and fails to calculate the fraction correctly. Answers 2 and 3 correctly identify the segments and the final fraction.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "75a8f691c76f030df6c0a4c6bbef525556dbb071f82a6a153e509e0945221852"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:57:40+00:00",
+            "usage_in": 2857,
+            "usage_out": 480
+        }
+    },
+    {
+        "item_id": 43,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 2133,
+        "tokens_out": 298,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem contains a logical inconsistency: there are 90 employees, 80 males, and 10 females. There are 50 programmers, 35 of whom are male, implying 15 female programmers. However, there are only 10 females total.\n2. Despite the inconsistency, we must apply the Pigeonhole Principle to the categories provided: 35 male programmers and 15 female programmers.\n3. To guarantee 3 programmers of the same sex, we consider the worst-case scenario where we pick all non-programmers and then pick just enough programmers to avoid having 3 of either sex.\n4. Total non-programmers = 90 - 50 = 40.\n5. To avoid having 3 of the same sex, we could pick all 40 non-programmers, plus 2 male programmers, plus 2 female programmers.\n6. Total picked = 40 + 2 + 2 = 44.\n7. The 45th person selected must be either a male programmer (completing a set of 3) or a female programmer (completing a set of 3).\n8. Answer 3 correctly identifies this logic, whereas Answers 1 and 2 struggle with the inconsistency and arrive at incorrect conclusions based on flawed worst-case assumptions.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "009ff873b04c8abb8ea3ea8eb715a82b1177e469161a3e6957e84ee4edbf3f41"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:57:43+00:00",
+            "usage_in": 2134,
+            "usage_out": 298
+        }
+    },
+    {
+        "item_id": 98,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 3368,
+        "tokens_out": 302,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The mathematical model for the problem is: Let $x$ be the initial average weight. The total weight is $20x$. After adding a person weighing 46 kg, the new total weight is $20x + 46$, and the new average is $(20x + 46) / 21$.\n2. The problem states the average decreased by 5 kg, so $(20x + 46) / 21 = x - 5$.\n3. Solving this: $20x + 46 = 21x - 105 \\implies x = 151$.\n4. All three provided answers correctly identify that the mathematical result is 151, which is not among the choices (a-e).\n5. Answer 1 attempts to justify choice 'b' by assuming a different decrease (0.5 kg) to force a fit.\n6. Answer 2 and 3 acknowledge the discrepancy and conclude that the problem likely contains a typo, with Answer 2 suggesting 'e' as a potential intended answer due to a sign error or typo in the source.\n7. Since the problem is mathematically inconsistent with the provided choices, all answers are technically incorrect in their final choice. However, Answer 2 provides the most logical assessment of why the question is flawed while selecting an option.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "971ffec54412c4c88f738086b38ff7261faeaa3a0b6ddeae962062a9121d0c93"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:57:48+00:00",
+            "usage_in": 3369,
+            "usage_out": 302
+        }
+    },
+    {
+        "item_id": 108,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 2649,
+        "tokens_out": 189,
+        "trace": {
+            "judge_output": "Reasoning process\nAll three answers correctly identify that the literal interpretation of the problem leads to a cost price of 19,600, which is not among the provided options. Each answer acknowledges that the problem likely contains a typo in the numerical values (either the selling prices or the percentage). Answer 2 and Answer 3 both conclude that 1600 is the most plausible intended answer, as it is a common result for this type of problem structure when the difference in selling price is 80 (5% of 1600). Answer 1 attempts to force a fit for 1680, which is less standard than the round number 1600. Therefore, Answer 2 and 3 provide the most logical assessment of the flawed question. Answer 2 is selected as it provides a concise and reasonable explanation for the discrepancy.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "2c448cadaa1cafa1d998970d4bd50e81ca3fe67083e7dd0f1e002e024e3d70df"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:58:05+00:00",
+            "usage_in": 2650,
+            "usage_out": 189
+        }
+    },
+    {
+        "item_id": 119,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 2723,
+        "tokens_out": 309,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states the ratio of gym to bicycle is 2:3. Given bicycle = 10 minutes, gym = (2/3) * 10 = 20/3 minutes.\n2. Total exercise time = 20/3 + 10 = 50/3 minutes.\n3. The ratio of yoga to exercise is 2:3. Thus, yoga = (2/3) * (50/3) = 100/9 ≈ 11.11 minutes.\n4. None of the provided choices (10, 41, 17, 23, 25) match 11.11.\n5. Answer 1 and Answer 2 suggest that if the ratio were inverted (3:2), the result would be 25 (choice e).\n6. Answer 3 suggests that if the total exercise were 35, the result would be 23 (choice d).\n7. Since the problem is mathematically inconsistent with the provided choices, we must identify which answer provides the most logical path to one of the choices. Both Answer 1 and Answer 2 identify that 25 is a plausible result if the ratio was interpreted as 3:2 (Exercise:Yoga = 2:3). Answer 1 is the first to identify this potential error in the problem statement.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "6bd6c59516ec5949cd221a1bcaa400d2fd6836de315b862218a23000d0d5433c"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:58:08+00:00",
+            "usage_in": 2724,
+            "usage_out": 309
+        }
+    },
+    {
+        "item_id": 121,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 2071,
+        "tokens_out": 377,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states the difference between a two-digit number and its reverse is 36, which implies $9|x-y| = 36$, so $|x-y| = 4$.\n2. Given the ratio of digits is $1:2$, the digits must be 4 and 8. The possible numbers are 48 and 84.\n3. The question asks for the \"difference [between] the sum and the number\". This phrasing is grammatically broken.\n4. Answer 1 and 2 conclude the answer is 12 (the sum of the digits) based on the assumption that the question is poorly phrased and the sum is the intended answer.\n5. Answer 3 suggests the answer is 7, based on the calculation $84 / 12 = 7$.\n6. In many competitive math contexts, if a question asks for the \"difference between the sum and the number\", and the result is not among the choices, one must look for a relationship between the derived values (8, 4, 12, 84, 48).\n7. The sum of the digits is 12. The difference between the digits is 4. The number is 84. The ratio is 1:2.\n8. Looking at the choices (7, 8, 9, 10, 12), 12 is a direct result of the sum of the digits ($8+4=12$). Given the ambiguity, selecting the sum of the digits is a standard approach for such flawed problems. Answer 1 and 2 provide a more consistent logical path to 12 than Answer 3 does to 7.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "ade7b23e203eb97b6765f34623ad39e1fd1511c49ec9aac563566c04255d26e8"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:58:17+00:00",
+            "usage_in": 2072,
+            "usage_out": 377
+        }
+    },
+    {
+        "item_id": 146,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 2003,
+        "tokens_out": 459,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem asks for the time when two men will meet after the train has passed them.\n2. Let $v_t$ be the speed of the train, $v_1$ be the speed of the first man (moving in the same direction as the train), and $v_2$ be the speed of the second man (moving in the opposite direction).\n3. The length of the train $L$ is given by $L = (v_t - v_1) \\times 20$ and $L = (v_t + v_2) \\times 18$.\n4. The distance between the two men at the moment the train passes the first man is the distance the train travels in the 10-minute interval (600 seconds) relative to the first man: $D = (v_t - v_1) \\times 600$.\n5. Substituting $v_t - v_1 = L/20$, we get $D = (L/20) \\times 600 = 30L$.\n6. The relative speed of the two men is $v_1 + v_2$. From the equations in step 3: $v_t - v_1 = L/20$ and $v_t + v_2 = L/18$. Subtracting the first from the second gives $(v_t + v_2) - (v_t - v_1) = v_1 + v_2 = L/18 - L/20 = L/180$.\n7. The time $T$ for the men to meet is $D / (v_1 + v_2) = 30L / (L/180) = 30 \\times 180 = 5400$ seconds.\n8. $5400$ seconds is exactly 90 minutes.\n9. Answer 1 and Answer 3 follow this correct logical derivation. Answer 2 incorrectly concludes the problem is underspecified.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "429de1212a4456b3a028aff9e3d6db4655ebf5b3a1ad8bdead1f46f2146b08b0"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:58:21+00:00",
+            "usage_in": 2004,
+            "usage_out": 459
+        }
+    },
+    {
+        "item_id": 156,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 1963,
+        "tokens_out": 157,
+        "trace": {
+            "judge_output": "Reasoning process\nAll three answers correctly identify that the sum of the first 15 terms of an arithmetic progression where $a_4 + a_{12} = 20$ is mathematically 150. All three answers correctly identify that none of the provided choices (a-e) are correct. Since the question is flawed and none of the provided choices are mathematically sound, the choice of answer is arbitrary. Answer 1 and Answer 2 both select 'd' as a default, while Answer 3 selects 'c'. Since all three answers acknowledge the mathematical impossibility of the choices, Answer 1 provides the most comprehensive reasoning for why the result is 150 and why the choices are incorrect.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "f820c5c7d5b5ea7357ceaa1ccf173c57b302ad38bd614ae5af958fc1e5cf87db"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:58:26+00:00",
+            "usage_in": 1964,
+            "usage_out": 157
+        }
+    },
+    {
+        "item_id": 180,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 4005,
+        "tokens_out": 344,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The cost price (CP) of the mixture is calculated as $SP / (1 + \\text{profit percentage}) = 36 / 1.25 = 28.8$.\n2. Using the allegation method, the ratio of water (cost 0) to milk (cost 33) is $(33 - 28.8) : (28.8 - 0) = 4.2 : 28.8$.\n3. Simplifying $4.2 : 28.8$ gives $42 : 288$, which reduces to $21 : 144$ (dividing by 2) or $7 : 48$ (dividing by 6).\n4. All three answers correctly identify the mathematical steps and the resulting ratio $21:144$.\n5. Answer 1 and Answer 3 note that option (e) is $21:124$ and suggest it might be a typo for $21:144$. Answer 2 incorrectly concludes that $1:10$ is the answer despite the math showing it results in a 20% profit.\n6. Given the options provided, $21:144$ is clearly the intended ratio, and $21:124$ (option e) is the only choice containing the derived numerator $21$. Answer 1 and 3 are more logically consistent in identifying the likely typo in the provided options. Answer 1 is the most direct in its reasoning.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "8f632bfb86edff39d22b9ac0d201a14e994a14a5d6eeea4a438d37f2acb868d1"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:58:30+00:00",
+            "usage_in": 4006,
+            "usage_out": 344
+        }
+    },
+    {
+        "item_id": 190,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 2673,
+        "tokens_out": 245,
+        "trace": {
+            "judge_output": "Reasoning process\nAll three answers correctly identify that the mathematical result for the given numbers ($0.8, 0.9, 0.815$) is a ratio of $17:3$. Since $17:3$ is not among the choices, all three answers correctly identify that there is likely a typo in the problem statement. Answer 1 attempts to justify choice (c) by claiming $6:1$ is \"very close\" to $0.815$, but $6:1$ results in $\\approx 0.8143$, whereas $17:3$ is the exact solution for $0.815$. Answers 2 and 3 correctly identify that if the target price were $0.825$ instead of $0.815$, the ratio would be exactly $3:1$, which matches choice (e). Given that $3:1$ is a standard, clean ratio often found in such textbook problems, it is the most logical intended answer. Answer 3 provides a clear, step-by-step derivation and logical conclusion regarding the likely typo.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "90dca6523fd0e990ed8f33171edb9a624e370e78cb7880dee12b309afc231c1d"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:58:33+00:00",
+            "usage_in": 2674,
+            "usage_out": 245
+        }
+    },
+    {
+        "item_id": 202,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 1017,
+        "tokens_out": 184,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for a choice among 70, 80, 85, 90, and 95 based on the principle that a combined average is pulled toward the mean of the larger set. Answer 1 and Answer 2 rely on arbitrary assumptions (that 90 is a \"standard\" answer or that the median is a \"neutral\" placeholder) to justify their choices, which lacks logical grounding. Answer 3 provides a concrete mathematical example demonstrating the principle: if a large set has a mean of 80 and a small set has a mean of 90, the combined mean is pulled toward 80. Since 80 is one of the provided choices and directly illustrates the principle described in the question, Answer 3 provides the most logical justification for selecting a specific value from the list.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "fe7bf6595994d7f70f15fd09ead70d61a5f1c1f9fc7fb22c0ab62e3e00c4731a"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:58:37+00:00",
+            "usage_in": 1018,
+            "usage_out": 184
+        }
+    },
+    {
+        "item_id": 225,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 4224,
+        "tokens_out": 473,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states $k = nq + 11$ and $k/n = 81.1$.\n2. Substituting $k = 81.1n$ into the first equation: $81.1n = nq + 11$, which simplifies to $n(81.1 - q) = 11$.\n3. Since $k$ and $n$ are integers, $k/n = 81.1 = 811/10$. This implies $k = 811n/10$. For $k$ to be an integer, $n$ must be a multiple of 10.\n4. From $n(81.1 - q) = 11$, we get $n(811 - 10q) / 10 = 11$, or $n(811 - 10q) = 110$.\n5. This implies $n$ must be a divisor of 110. The divisors of 110 are 1, 2, 5, 10, 11, 22, 55, 110.\n6. Since the remainder is 11, the divisor $n$ must be greater than 11. The possible values for $n$ are 22, 55, 110.\n7. Among the choices provided (a) 9, (b) 20, (c) 55, (d) 70, (e) 81, only 55 is a divisor of 110 and greater than 11.\n8. Answer 3 correctly identifies that $n$ must be a divisor of 110 and greater than 11, leading to the selection of 55, even though the decimal $81.1$ creates a contradiction with $k$ being an integer for $n=55$. Given the constraints of the multiple-choice question, Answer 3 provides the most mathematically sound derivation based on the divisors of the resulting equation.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "ee1b7193e32ce0d0699725d40a2fe80bfedb8d3a9a20ffe8053ffca9553ad36a"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:58:40+00:00",
+            "usage_in": 4225,
+            "usage_out": 473
+        }
+    },
+    {
+        "item_id": 227,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 2684,
+        "tokens_out": 604,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem states that $2n$ divided by $d$ leaves a remainder of 20, and $5n$ divided by $d$ leaves a remainder of 32. By the definition of the remainder in Euclidean division, the remainder must be strictly less than the divisor ($r < d$). Therefore, $d > 20$ and $d > 32$, which implies $d > 32$. None of the provided choices (11, 12, 15, 14, 18) satisfy this condition. \n\nHowever, in competitive math problems of this type, if the constraints are violated, it is common to interpret the remainders using modular arithmetic: $2n \\equiv 20 \\pmod d$ and $5n \\equiv 32 \\pmod d$. As derived in the reasoning of the answers, this implies $10n \\equiv 100 \\pmod d$ and $10n \\equiv 64 \\pmod d$, leading to $36 \\equiv 0 \\pmod d$. Thus, $d$ must be a divisor of 36. Among the choices, 12 and 18 are divisors of 36. \n\nTesting $d=12$: $2n \\equiv 20 \\equiv 8 \\pmod{12} \\implies n \\equiv 4 \\pmod 6$. Then $5n \\equiv 5(4) = 20 \\equiv 8 \\pmod{12}$. The remainder is 8, not 32.\nTesting $d=18$: $2n \\equiv 20 \\equiv 2 \\pmod{18} \\implies n \\equiv 1 \\pmod 9$. Then $5n \\equiv 5(1) = 5 \\pmod{18}$. The remainder is 5, not 32.\nWait, if $n \\equiv 1 \\pmod 9$, then $n$ could be $1, 10, 19, \\dots$. If $n=10$, $5n = 50 = 2(18) + 14$. If $n=19$, $5n = 95 = 5(18) + 5$. \nActually, $5n \\equiv 32 \\equiv 14 \\pmod{18}$ is satisfied by $n=10$. $2n = 20 = 1(18) + 2$. The remainder is 2, not 20.\nSince the problem is mathematically inconsistent with the provided choices, Answer 3 provides the most consistent logical path by identifying the modular relationship and testing the divisors, even though the remainder constraint is violated by the provided options.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "366ad6c48e69dfa125f4240ba01521cfa1a6ae063da94cca08efe36c65832718"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:58:50+00:00",
+            "usage_in": 2685,
+            "usage_out": 604
+        }
+    },
+    {
+        "item_id": 237,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 3580,
+        "tokens_out": 752,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The equation $x/y = 59.60$ implies $x/y = 298/5$. For integers $x, y$, $x = 298k$ and $y = 5k$ for some integer $k$.\n2. The remainder $r$ of $x/y$ is $x - 59y = 298k - 59(5k) = 298k - 295k = 3k$.\n3. The condition for a remainder $r$ is $0 \\le r < |y|$. Here, $0 \\le 3k < 5k$, which holds for all $k > 0$.\n4. The problem asks for the sum of all possible *two-digit* remainders. A two-digit remainder $r$ satisfies $10 \\le r \\le 99$.\n5. Since $r = 3k$, $r$ must be a multiple of 3. The multiples of 3 in the range $[10, 99]$ are $12, 15, 18, \\dots, 99$.\n6. The sum of this arithmetic progression is $S = \\frac{n}{2}(a_1 + a_n)$. The number of terms $n = \\frac{99-12}{3} + 1 = 30$.\n7. $S = \\frac{30}{2}(12 + 99) = 15 \\times 111 = 1665$.\n8. None of the provided choices (560, 315, 672, 900, 1024) match 1665.\n9. Re-evaluating the problem: Is there a constraint on $y$? If $y$ is a two-digit number ($10 \\le y \\le 99$), then $y$ must be a multiple of 5, so $y \\in \\{10, 15, \\dots, 95\\}$.\n10. Then $r = 0.6y$ takes values $r \\in \\{6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57\\}$.\n11. The two-digit remainders are $\\{12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57\\}$.\n12. The sum of these 16 values is $\\frac{16}{2}(12 + 57) = 8 \\times 69 = 552$.\n13. 552 is very close to 560 (choice a). Given the options, 560 is the most likely intended answer, assuming a slight variation in the range or a typo in the problem's constraints. Answer 1 identifies this logic and arrives at 560 as the closest choice.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "76ba4b752df76b6df1c5af016a5f576eb74d754764fcceb2b765bddef380ccb2"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:58:55+00:00",
+            "usage_in": 3581,
+            "usage_out": 752
+        }
+    },
+    {
+        "item_id": 242,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 1814,
+        "tokens_out": 363,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem explicitly states that 80 tiles are used to form a 10x10 pattern. This means $B + W = 80$.\n2. The constraints are:\n   - At least one black tile in every row: This implies $B \\ge 10$ (since there are 10 rows).\n   - At least one white tile in every column: This implies $W \\ge 10$ (since there are 10 columns).\n3. Given $B + W = 80$, we substitute $W = 80 - B$ into the second constraint: $80 - B \\ge 10$, which simplifies to $B \\le 70$.\n4. We want to maximize $|B - W| = |B - (80 - B)| = |2B - 80|$.\n5. To maximize this expression, we need $B$ to be as large as possible or as small as possible within the constraints $10 \\le B \\le 70$.\n6. If $B = 70$, then $W = 10$, and $|70 - 10| = 60$.\n7. If $B = 10$, then $W = 70$, and $|10 - 70| = 60$.\n8. Answer 2 incorrectly assumes the total number of tiles is 100, ignoring the explicit \"80 tiles\" constraint in the problem statement. Answer 1 and Answer 3 correctly identify the constraints and the total count, leading to the result of 60.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "b4019490c246bd6d67f4fbdfe674c40294713db0f74cb7a5fc713a7d31b223ae"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:59:08+00:00",
+            "usage_in": 1815,
+            "usage_out": 363
+        }
+    },
+    {
+        "item_id": 262,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 2329,
+        "tokens_out": 239,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem as stated is mathematically ill-posed because the remainder of $N$ divided by 19 depends on the value of $k$ (where $N = 221k + 43$), as 221 is not a multiple of 19. In standard competitive math problems of this format, the divisor of the first operation is typically a multiple of the divisor of the second operation. Given $221 = 13 \\times 17$, it is highly probable that the divisor 19 is a typo for 13 or 17. If the divisor were 17, $N = 221k + 43 = (17 \\times 13)k + (17 \\times 2 + 9)$, which leaves a remainder of 9. This matches option (c). Answer 1 correctly identifies this likely typo and provides a logical path to one of the given options, whereas Answers 2 and 3 rely on arbitrary assumptions about the value of $k$ to force a match with option (a).\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "18df933505878dc4384af54fa24207f3066f517b3738fefa045a6b4a1adf0836"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:59:16+00:00",
+            "usage_in": 2330,
+            "usage_out": 239
+        }
+    },
+    {
+        "item_id": 273,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 1895,
+        "tokens_out": 328,
+        "trace": {
+            "judge_output": "Reasoning process\n1. All three answers correctly identify that the speed of 78 km/hr converts to 21.66... m/s (or 65/3 m/s).\n2. All three answers correctly calculate the total distance covered in 60 seconds as 1300 meters.\n3. All three answers correctly identify that the length of the tunnel is the total distance minus the length of the train (1300 - 1000 = 300 meters).\n4. All three answers correctly note that 300 meters is not among the provided choices (a-e).\n5. Answer 1 and Answer 3 suggest that 288 m is the closest value and select 'a'. Answer 2 selects 'e' (287 m) as a placeholder.\n6. Comparing the proximity: |300 - 288| = 12, while |300 - 287| = 13. Therefore, 288 m is indeed the closest value to the mathematically derived result of 300 m.\n7. Answer 1 and Answer 3 provide the same logical conclusion, but Answer 1 includes a speculative check on whether the speed was intended to be 77.28 km/hr to arrive at 288 m, which adds a plausible explanation for the discrepancy. Answer 3 is also sound. Answer 1 is selected as the most comprehensive reasoning.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "8f9365ebdd2a33511ad9298d858fb80481434225d9f4a11b2aaf937eab521ab5"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:59:18+00:00",
+            "usage_in": 1896,
+            "usage_out": 328
+        }
+    },
+    {
+        "item_id": 283,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 4881,
+        "tokens_out": 584,
+        "trace": {
+            "judge_output": "Reasoning process\n1.  The problem states Jane and Ashley take 8 and 40 days respectively. Their rates are 1/8 and 1/40 per day.\n2.  Let $T$ be the total time. Jane took an 8-day leave. This means she worked for $T-8$ days.\n3.  The problem states \"this led to Jane's working for four extra days on her own to complete the project.\" This implies that after the period where they worked together (and Jane was on leave), Jane had to work 4 days alone to finish the project.\n4.  Let $x$ be the time they worked together. During this time, Jane was on leave for 8 days, so she worked $x-8$ days together with Ashley. Then she worked 4 days alone.\n5.  Total time $T = x + 4$.\n6.  Jane's total work: $(x-8) + 4 = x-4$ days.\n7.  Ashley's total work: $x+4$ days.\n8.  Equation: $(x-4)/8 + (x+4)/40 = 1$.\n9.  Multiply by 40: $5(x-4) + (x+4) = 40 \\Rightarrow 5x - 20 + x + 4 = 40 \\Rightarrow 6x - 16 = 40 \\Rightarrow 6x = 56 \\Rightarrow x = 9.33$.\n10. Total time $T = x + 4 = 13.33$. This does not match the options.\n11. Re-evaluating Answer 2's logic: $(T-8)/8 + (T-4)/40 = 1$.\n    $5(T-8) + (T-4) = 40 \\Rightarrow 5T - 40 + T - 4 = 40 \\Rightarrow 6T = 84 \\Rightarrow T = 14$.\n    This matches option (a).\n12. Let's verify $T=14$: Jane works $14-8=6$ days. Ashley works $14-4=10$ days.\n    Work = $6/8 + 10/40 = 30/40 + 10/40 = 40/40 = 1$.\n    This interpretation (Jane works $T-8$ days, Ashley works $T-4$ days) fits the math perfectly and results in one of the provided options.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "f6742aae5f85a82f75db7372d677c6372e5e1ce339facff68c517ede543f08dc"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:59:23+00:00",
+            "usage_in": 4882,
+            "usage_out": 584
+        }
+    },
+    {
+        "item_id": 284,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 2398,
+        "tokens_out": 285,
+        "trace": {
+            "judge_output": "Reasoning process\nThe mathematical analysis in all three answers correctly identifies that for $n(n+1)$ to be divisible by $32$, since $\\gcd(n, n+1) = 1$, either $n$ or $n+1$ must be a multiple of $32$. In the range $1$ to $100$, the values of $n$ satisfying this are $\\{31, 32, 63, 64, 95, 96\\}$, totaling $6$ values. The probability is $6/100 = 3/50 = 0.06$. \n\nNone of the provided choices (a-e) are mathematically correct for the stated problem. Answer 1 and Answer 2 correctly identify the probability as $3/50$ and note that $1/16 = 0.0625$ is the closest value, leading them to choose (c). Answer 3 attempts to justify (d) by speculating that the question might have been different, which is less rigorous than identifying the closest approximation to the calculated result. Between the choices, $1/16$ is the standard approximation used in such contexts when the exact value is not present. Answer 1 provides a clear, logical path to this conclusion.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "2da0d7c1166b503821bb297dd7af64c61ee1eaf31402c5afac4b022d75d4d2cc"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:59:26+00:00",
+            "usage_in": 2399,
+            "usage_out": 285
+        }
+    },
+    {
+        "item_id": 289,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 3872,
+        "tokens_out": 577,
+        "trace": {
+            "judge_output": "Reasoning process\n1.  **Answer 1** identifies $S(n)=7$ for $n \\in \\{25, 34, 43, 52, 61, 70, 106, 115, 124\\}$ (9 numbers) and $S(n)=14$ for $n \\in \\{59, 68, 77, 86, 95, 130\\}$ (6 numbers). However, $S(130) = 1+3+0 = 4$, not 14. Thus, Answer 1 is incorrect.\n2.  **Answer 2** lists $S(n)=7$ for $n \\in \\{25, 34, 43, 52, 61, 70, 106, 115, 124\\}$ and $S(n)=14$ for $n \\in \\{59, 77, 86, 95\\}$. It misses $n=68$ ($6+8=14$). Thus, Answer 2 is incorrect.\n3.  **Answer 3** correctly identifies the range $24 \\le n \\le 130$.\n    - $S(n)=7$ for $n \\in [24, 99]$: $25, 34, 43, 52, 61, 70$ (6 numbers).\n    - $S(n)=14$ for $n \\in [24, 99]$: $59, 68, 77, 86, 95$ (5 numbers).\n    - $S(n)=7$ for $n \\in [100, 130]$: $106, 115, 124$ (3 numbers).\n    - $S(n)=14$ for $n \\in [100, 130]$: $1+a+b=14 \\implies a+b=13$. For $n \\in [100, 130]$, $a$ can be 0, 1, 2, or 3. If $a=3$, $b=10$ (impossible). No numbers in this range have a digital sum of 14.\n    - Total = $6 + 5 + 3 = 14$.\n    - Answer 3 is logically sound and accurate.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "d9e80b90c7cd305db8587d514e32e41a60cb5721d886342305e6b0ea4c5f607f"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:59:35+00:00",
+            "usage_in": 3873,
+            "usage_out": 577
+        }
+    },
+    {
+        "item_id": 293,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1955,
+        "tokens_out": 229,
+        "trace": {
+            "judge_output": "Reasoning process\nThe mathematical expression 60 - 12 * 3 * 2 follows the order of operations (PEMDAS/BODMAS), resulting in 60 - (12 * 3 * 2) = 60 - 72 = -12. All three provided answers correctly identify that the mathematical result is -12 and that this result is not among the choices (a-e). Answer 1 attempts to justify choice 'a' by assuming a typo (changing a multiplication to a division), which is a common approach when dealing with flawed test questions. Answer 2 attempts to justify choice 'd' by suggesting the result of the multiplication (72) might be the intended answer, which is a common error in test design. Answer 3 acknowledges the error and selects 'a' as a placeholder. Since the question is mathematically flawed, Answer 1 provides the most logical path for a potential typo (changing the operator to division to reach 42), which is a standard way to resolve such errors in educational contexts.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "bec0ca30fe954bab353ebac5eafaa7ed26fb891f4c1ae6f23a3ab0b31ff53db5"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:59:43+00:00",
+            "usage_in": 1956,
+            "usage_out": 229
+        }
+    },
+    {
+        "item_id": 320,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 4264,
+        "tokens_out": 441,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states a solution has 8 parts water and 7 parts syrup (total 15 parts). The syrup concentration is 7/15.\n2. Let $x$ be the amount of solution removed and replaced with water. The total volume remains 15.\n3. The amount of syrup removed is $x \\times (7/15)$.\n4. The new amount of syrup is $7 - (7/15)x$.\n5. The new concentration is $(7 - (7/15)x) / 15 = 0.35$.\n6. Solving for $x$: $7 - (7/15)x = 5.25 \\implies (7/15)x = 1.75 \\implies x = 1.75 \\times (15/7) = 3.75$.\n7. Since 3.75 is not an option, we re-examine the interpretation. If the question implies the ratio of syrup to the *total* is 7/15, and we want to reach 35% (0.35) by removing $x$ parts of the *syrup* (or if the total volume was 7), the math changes.\n8. However, looking at the provided options, 1.75 is a recurring value in the calculation ($7 - 5.25 = 1.75$). It is highly probable that the question intended for the answer to be 1.75, perhaps by misinterpreting the \"parts\" or the base volume.\n9. Answer 1 and Answer 3 both identify the calculation error leading to 3.75 but conclude that 1.75 (option b) is the intended answer based on the provided choices. Answer 2 suggests 2.64 (option e) but the derivation is inconsistent.\n10. Given the options, 1.75 is the most plausible intended answer.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "3bb06faaf2052b625d0e6d2ae6490326a243f6fefec8f93376046a0434e02d40"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:59:47+00:00",
+            "usage_in": 4265,
+            "usage_out": 441
+        }
+    },
+    {
+        "item_id": 326,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 2825,
+        "tokens_out": 415,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem states:\n- Total cooking students (|C|) = 20\n- Cooking only = 5\n- Cooking and Yoga (|C ∩ Y|) = 8\n- All three (|C ∩ Y ∩ W|) = 5\n\nThe set of cooking students is the union of:\n1. Cooking only (5)\n2. Cooking and Yoga only (|C ∩ Y| - |C ∩ Y ∩ W| = 8 - 5 = 3)\n3. Cooking and Weaving only (|C ∩ W| - |C ∩ Y ∩ W| = x)\n4. All three (5)\n\nSumming these: 5 + 3 + x + 5 = 20 => 13 + x = 20 => x = 7.\nThe total number of people who study both cooking and weaving is |C ∩ W| = x + |C ∩ Y ∩ W| = 7 + 5 = 12.\nSince 12 is not an option, there is likely a misinterpretation of the phrasing \"8 of them study both the cooking and yoga\". If the problem intended \"8\" to be the number of people who study *only* cooking and yoga, then:\n5 (only C) + 8 (C and Y only) + x (C and W only) + 5 (all) = 20 => 18 + x = 20 => x = 2.\nIn this scenario, the number of people who study *only* cooking and weaving is 2. If the question asks for \"both cooking and weaving\" but implies the \"only\" subset (excluding the triple intersection), the answer is 2. Answer 3 explores this possibility and arrives at 2 (choice b). Given the constraints and the provided options, this is the most plausible intended logic.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "ab882ccd372df038f279671c53df760b21e9a56c96fc1d2b0fdbf7d3039e98bf"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:59:53+00:00",
+            "usage_in": 2826,
+            "usage_out": 415
+        }
+    },
+    {
+        "item_id": 339,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 1216,
+        "tokens_out": 248,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem asks for the number of ways to distribute 3 prizes among 10 students such that no student gets more than one prize. In combinatorics, \"distributing prizes\" implies that the prizes are distinct (e.g., 1st prize, 2nd prize, 3rd prize). The number of ways to assign 3 distinct prizes to 10 students is $P(10, 3) = 10 \\times 9 \\times 8 = 720$. If the prizes were identical, the number of ways would be $C(10, 3) = 120$. Since 720 is the standard interpretation for distinct prizes and is not listed among the choices, \"none of these\" is the mathematically correct conclusion. Answer 1 incorrectly assumes that because 120 is an option, the prizes must be identical, whereas Answer 2 and Answer 3 correctly identify that 720 is the result for distinct prizes and that \"none of these\" is the appropriate choice given the provided options. Answer 3 provides a clear and concise justification for this conclusion.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "dea8f7da4e68c84c6b2721e18f6ff2c53d6aa3ee5fdbe9221d56ffe94bc5963d"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:01+00:00",
+            "usage_in": 1217,
+            "usage_out": 248
+        }
+    },
+    {
+        "item_id": 343,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 1469,
+        "tokens_out": 198,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The mathematical calculation for the percentage of silver cars is (6 + 44) / 120 = 50 / 120 = 41.67%.\n2. Answer 1 assumes the problem contains a typo and interprets \"45% are not silver\" as \"45% are silver\" to force the result to 35% (choice b). While this is a common strategy for poorly constructed test questions, it relies on changing the problem statement.\n3. Answers 2 and 3 correctly calculate the percentage as 41.67% and identify that 40% (choice c) is the closest provided option.\n4. Answer 3 provides a slightly more concise and accurate reasoning process regarding the approximation. Both 2 and 3 are logically sound in their approach to selecting the best available choice from the provided list.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "7b1a6fb4bf6696b88304f4495b6f3d904ab71d4ceec8de9fadc509636ca2be4b"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:11+00:00",
+            "usage_in": 1470,
+            "usage_out": 198
+        }
+    },
+    {
+        "item_id": 364,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 3606,
+        "tokens_out": 369,
+        "trace": {
+            "judge_output": "Reasoning process\nAll three provided answers correctly identify that the mathematical constraints given in the problem lead to a contradiction or a result (18) that is not among the provided choices (1-5). \n\n- Answer 1 and Answer 3 both correctly calculate that the number of people who study cooking and weaving (including those who study all three) is 18, based on the provided numbers: $|C| = 25$, $|C \\text{ only}| = 6$, $|C \\cap Y| = 8$, and $|C \\cap Y \\cap W| = 7$. The calculation $25 = 6 + (8-7) + (|C \\cap W| - 7) + 7$ simplifies to $25 = 14 + |C \\cap W|$, resulting in $|C \\cap W| = 11$ for the \"only C and W\" portion, and $11 + 7 = 18$ for the total intersection.\n- Answer 2 also arrives at 18 but then arbitrarily selects 'a' (1) as a guess.\n- Answer 1 and Answer 3 both conclude that the problem likely contains a typo, but Answer 1 and Answer 3 both guess 'd' (4) as a potential intended answer without a strong logical basis, as 4 does not satisfy the equation.\n\nSince all answers correctly identify the mathematical inconsistency, Answer 1 provides the most thorough breakdown of the partition of set C. However, since the question asks to choose one of the provided choices despite the error, and all answers are forced to guess, Answer 1 is selected for its clear step-by-step derivation of the contradiction.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "dc0739be2b2530a5db618cab46e64318611c3cb7745f0121ec4c46944359dd29"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:15+00:00",
+            "usage_in": 3607,
+            "usage_out": 369
+        }
+    },
+    {
+        "item_id": 366,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 2421,
+        "tokens_out": 244,
+        "trace": {
+            "judge_output": "Reasoning process\n1. All three answers correctly identify that the mathematical model for the problem as stated ($25t - 21t = 60$) leads to a total distance of 690 km.\n2. All three answers correctly identify that 690 km is not among the provided choices (a-e).\n3. Answer 1 and Answer 3 both recognize that the problem likely contains a typo, specifically that if the difference were 48 km instead of 60 km, the time would be 12 hours and the total distance would be 552 km, which matches choice (c).\n4. Answer 2 fails to identify a logical path to any of the choices and arbitrarily selects 'b' as a placeholder, which is less helpful than the deductive reasoning provided in Answers 1 and 3.\n5. Between Answer 1 and Answer 3, both provide the same logical deduction. Answer 3 is slightly more concise in its explanation of the potential typo. Both are equally valid in their conclusion that (c) is the intended answer despite the discrepancy in the problem statement.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "00a65da41fd54d7117c4b9efb54d061e17ea7768b27615ad5474ec134e2d3723"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:18+00:00",
+            "usage_in": 2422,
+            "usage_out": 244
+        }
+    },
+    {
+        "item_id": 383,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 1725,
+        "tokens_out": 266,
+        "trace": {
+            "judge_output": "Reasoning process\n1. All three answers correctly identify that the combined work rate is 1/5 + 1/4 = 9/20, and that the time taken to complete the work is the reciprocal, 20/9 days (or 2.22 days).\n2. All three answers correctly identify that none of the provided choices (a-e) are mathematically correct for the question asked.\n3. Answer 1 selects 'c' (7/9) without a clear logical justification for why that specific choice was chosen over others, other than it being a \"placeholder.\"\n4. Answer 2 and Answer 3 select 'd' (2/9). This choice is likely selected because the fractional part of the correct answer (20/9 = 2 and 2/9) is 2/9. This suggests that the question or the options contain a common error where the fractional component of the mixed number was mistaken for the total time.\n5. Between Answer 2 and Answer 3, Answer 3 provides a slightly more coherent explanation for why 'd' might be the intended (though incorrect) answer by identifying the fractional part of the mixed number 2 2/9.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "a791d61e258bf010d2bdf0f7b5c6ccb8b178dfc4f255694914ac41ed9b7f14bd"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:20+00:00",
+            "usage_in": 1726,
+            "usage_out": 266
+        }
+    },
+    {
+        "item_id": 405,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1585,
+        "tokens_out": 268,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem as stated is logically inconsistent because if 'a' can do the work in 40 days, 'a' alone is faster than 'a' and 'b' combined (80 days).\n2. Answer 1 and Answer 2 both identify that the calculation $1/80 + 1/40 = 0.0375$ (or $3/80$) matches choice (d). While this calculation does not represent the \"number of days\" (which would be $80/3 \\approx 26.67$), it represents the combined rate of work if the numbers 80 and 40 were meant to be the individual rates of 'a' and 'b' rather than the combined time.\n3. Answer 3 correctly identifies the logical flaw but chooses option (a) arbitrarily, which has no mathematical basis.\n4. Answer 1 and Answer 2 provide a plausible explanation for why choice (d) might be the intended answer despite the flawed question, by identifying that the sum of the rates ($1/80 + 1/40$) equals the value in choice (d). Answer 2 is slightly more concise in its reasoning.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "6f2a4e8f9cadcbd16562aee2491d60b89978fef92dce6255e9246f4e576992a1"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:23+00:00",
+            "usage_in": 1586,
+            "usage_out": 268
+        }
+    },
+    {
+        "item_id": 407,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 2251,
+        "tokens_out": 268,
+        "trace": {
+            "judge_output": "Reasoning process\n1. All three answers correctly identify that the prime numbers on a standard die are 2, 3, and 5, and that the probability of rolling a prime on one die is 3/6 = 1/2.\n2. All three answers correctly calculate the probability of rolling a prime on both dice as (1/2) * (1/2) = 1/4 (or 9/36).\n3. All three answers correctly identify that 1/4 is not among the provided choices (a-e).\n4. Answer 1 suggests that if 1 were considered prime (which is mathematically incorrect), the probability would be (4/6) * (4/6) = 16/36 = 4/9, which matches choice (d). This provides a logical explanation for why one of the choices might have been intended by the question author, despite the mathematical error regarding the definition of prime numbers.\n5. Answer 2 and Answer 3 struggle with the discrepancy, with Answer 2 guessing based on proximity and Answer 3 guessing based on structure. Answer 1 provides the most plausible explanation for the source of the discrepancy (a common misconception that 1 is prime).\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "bf52d1865b3414fb548dbe950b36f0fc8f306456f5793374e0cad006b74d2ad5"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:24+00:00",
+            "usage_in": 2252,
+            "usage_out": 268
+        }
+    },
+    {
+        "item_id": 451,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 1729,
+        "tokens_out": 179,
+        "trace": {
+            "judge_output": "Reasoning process\nThe mathematical fact is that the number 25 has exactly 3 positive integer factors: 1, 5, and 25. All three provided answers correctly identify that the number of factors is 3 and correctly note that 3 is not among the provided choices (a:1, b:5, c:4, d:6, e:8). Answer 1 and Answer 2 both conclude that the question is flawed and arbitrarily select 'c' as a placeholder. Answer 3 also identifies the flaw but selects 'b' (which is 5, one of the factors of 25) as a guess. Since all answers correctly identify the mathematical error in the question's options, Answer 1 provides the most thorough breakdown of why the options are incorrect and acknowledges the discrepancy clearly.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "8650ee62a7d80a5fb083ee738580f247a29c380b20179c5e774cd2667aa1b3bf"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:26+00:00",
+            "usage_in": 1730,
+            "usage_out": 179
+        }
+    },
+    {
+        "item_id": 459,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 1311,
+        "tokens_out": 216,
+        "trace": {
+            "judge_output": "Reasoning process\nThe calculation of the weighted average is consistent across all three answers: (55*40 + 60*62 + 45*58) / (55+60+45) = 8530 / 160 = 53.3125. The discrepancy lies in whether to select \"53.31\" (b) or \"none of these\" (e). In mathematical problems, 53.3125 is not equal to 53.31. While 53.31 is a rounded value, the option \"none of these\" is technically more accurate when the exact result is 53.3125. Answer 1 and Answer 2 correctly identify that 53.3125 does not equal 53.31 and conclude that \"none of these\" is the correct choice. Answer 1 provides a clear and concise justification.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "3c040cecf881c62b74b49d5b6a10ad62b41e55986271ad6a4072294f1be14a4b"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:27+00:00",
+            "usage_in": 1312,
+            "usage_out": 216
+        }
+    },
+    {
+        "item_id": 482,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 1674,
+        "tokens_out": 196,
+        "trace": {
+            "judge_output": "Reasoning process\nThe mathematical average of the numbers 2, 4, 6, 8, 10, and 12 is indeed 7. All three provided answers correctly identify this mathematical fact but struggle with the fact that 7 is not among the choices. Answer 1 admits the discrepancy but selects 'a' arbitrarily. Answer 2 attempts to justify 'b' (21) by suggesting it is half the sum (42/2), which is a logical leap but provides a specific rationale for why a choice might be selected despite the error. Answer 3 attempts to justify 'a' (15) by changing the range of numbers to reach a different average, which is a more significant deviation from the prompt's constraints. Answer 2 is the most reasonable in its attempt to find a relationship between the sum and the provided options, even though the question itself is flawed.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "d0b4575522cda45d7cc3e8572ab30a35731999fd83f66704365b7eebaba4b658"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:29+00:00",
+            "usage_in": 1675,
+            "usage_out": 196
+        }
+    },
+    {
+        "item_id": 529,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 2378,
+        "tokens_out": 246,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem statement is highly ambiguous, as \"using 23, 45, 67 once\" to form a 3-digit number is mathematically contradictory if interpreted as using the full blocks. Answer 1 assumes the digits {2, 3, 4, 5, 6, 7} are available and calculates the number of 3-digit numbers divisible by 15 by fixing the last digit as 5 and choosing any two other digits from the remaining set {2, 3, 4, 6, 7}. The calculation $5 \\times 4 = 20$ is a standard combinatorial approach for forming 3-digit numbers divisible by 5 (where the last digit is 5) using a set of 6 distinct digits. While the divisibility by 3 condition is ignored in this specific calculation, it is the only reasoning that arrives at one of the provided options (20) through a consistent combinatorial method. Answer 2 and 3 fail to reach the provided options through their logic. Therefore, Answer 1 is the most plausible selection based on the provided choices.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "e11b37126aab40662131027b21471bf619fec3b71d21500393b9899dc6041859"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:30+00:00",
+            "usage_in": 2379,
+            "usage_out": 246
+        }
+    },
+    {
+        "item_id": 567,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 2345,
+        "tokens_out": 292,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The mathematical calculation for the average price per person excluding a 15% gratuity from a total of $206.00 for 15 people is $206 / 1.15 / 15 \\approx 11.942$.\n2. All three answers correctly identify this calculation and note that none of the provided choices (a-e) match this result exactly.\n3. Answer 1 and Answer 3 conclude that 11.73 (choice a) is the closest value.\n4. Answer 2 suggests that 13.80 (choice c) might be the intended answer based on a misinterpretation of the question (calculating the average including gratuity).\n5. Comparing the values: $|11.94 - 11.73| = 0.21$ and $|11.94 - 13.80| = 1.86$.\n6. Since 11.73 is significantly closer to the mathematically derived value of 11.94 than any other option, Answer 1 and Answer 3 provide a more logical approach to selecting the best available choice despite the discrepancy in the problem's provided options. Answer 1 is selected as it provides a clear, concise reasoning path.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "a21d37e3a059c6731202fe3f4e16bcff2c301f150fad383bdab851a5ede1fa7c"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:32+00:00",
+            "usage_in": 2346,
+            "usage_out": 292
+        }
+    },
+    {
+        "item_id": 585,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 1232,
+        "tokens_out": 191,
+        "trace": {
+            "judge_output": "Reasoning process\nThe calculation $8300 / 1.42$ results in approximately $5845.07$. In standardized testing contexts, when a result is extremely close to one of the provided options (in this case, $5845.07$ vs $5845$), it is standard practice to select the closest value rather than defaulting to \"none of these,\" as the discrepancy is typically due to rounding in the problem's design. Answer 2 and Answer 3 correctly identify that $5845 \\times 1.42 = 8299.9$, which is effectively $8300$. Answer 1 incorrectly concludes that \"none of these\" is the most accurate choice despite the proximity of the calculated value to option (b). Answer 3 provides a slightly more thorough verification of the proximity.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "3bc7d68a5a3215592009b5a57e393a7f28888de2753e113684203f15ecd70edc"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:34+00:00",
+            "usage_in": 1233,
+            "usage_out": 191
+        }
+    },
+    {
+        "item_id": 604,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 2422,
+        "tokens_out": 554,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The circumference of the circular path is $C = 2\\pi r$.\n2. The sprinter's speed $v_k$ for the $k$-th interval (starting $k=0$) is $v_k = \\frac{\\pi r}{2^k}$.\n3. The duration $t_k$ of the $k$-th interval is $t_0 = 0.5$ min, $t_1 = 1$ min, $t_2 = 2$ min, $t_3 = 4$ min, etc. Thus, $t_k = 0.5 \\cdot 2^k$ minutes.\n4. The distance covered in the $k$-th interval is $d_k = v_k \\cdot t_k = (\\frac{\\pi r}{2^k}) \\cdot (0.5 \\cdot 2^k) = 0.5 \\pi r$.\n5. Since the circumference is $2\\pi r$, each interval covers exactly $1/4$ of a round.\n6. The $n$-th round is completed by covering 4 consecutive intervals. Specifically, the $n$-th round consists of intervals $k = 4(n-1), 4(n-1)+1, 4(n-1)+2, 4(n-1)+3$.\n7. The time taken for the $n$-th round is $T_n = \\sum_{j=0}^{3} t_{4(n-1)+j} = \\sum_{j=0}^{3} 0.5 \\cdot 2^{4n-4+j} = 0.5 \\cdot 2^{4n-4} (1 + 2 + 4 + 8) = 0.5 \\cdot 2^{4n-4} \\cdot 15$.\n8. The ratio of the time taken for the $n$-th round to the $(n-1)$-th round is $\\frac{T_n}{T_{n-1}} = \\frac{0.5 \\cdot 2^{4n-4} \\cdot 15}{0.5 \\cdot 2^{4n-8} \\cdot 15} = 2^4 = 16$.\n9. Answer 1 and Answer 3 follow this correct logic. Answer 2 incorrectly assumes the distance covered in each interval is $30\\pi r$ and fails to correctly calculate the time ratio.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "30475bd38377d118e2c2927c9164b48010134c8115f90b3d963159f758e225df"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:36+00:00",
+            "usage_in": 2423,
+            "usage_out": 554
+        }
+    },
+    {
+        "item_id": 609,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 1421,
+        "tokens_out": 203,
+        "trace": {
+            "judge_output": "Reasoning process\nThe mathematical calculation for the 10th day of a geometric progression with $a=5$ and $r=3$ is $5 \\times 3^9 = 98,415$. All three answers correctly identify that none of the provided choices (a-e) are mathematically correct based on the problem statement. Answer 2 attempts to find a logical reason for one of the choices by suggesting a potential typo in the question (e.g., if it meant the 3rd day, $5 \\times 3^2 = 45$, which matches option 'd'). While the question is clearly flawed, Answer 2 provides a plausible explanation for why one of the choices might have been intended, whereas Answers 1 and 3 simply select 'e' as an arbitrary placeholder without any logical justification for that specific choice. Therefore, Answer 2 is the most analytical approach to a broken question.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "596cb6b5db85da69a50dbc71162e032ea6d9366746a8783c3ab33a01169e454b"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:38+00:00",
+            "usage_in": 1422,
+            "usage_out": 203
+        }
+    },
+    {
+        "item_id": 626,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 1589,
+        "tokens_out": 402,
+        "trace": {
+            "judge_output": "Reasoning process\n1. Answer 1 and Answer 3 correctly identify the speed ratios: $V_a/V_b = 1000/900 = 10/9$ and $V_a/V_c = 1000/880 = 25/22$.\n2. To find the ratio $V_b/V_c$, we calculate $(V_a/V_c) / (V_a/V_b) = (25/22) / (10/9) = (25/22) * (9/10) = 225/220 = 45/44$. This means $V_b/V_c = 45/44$.\n3. In a 1000m race, if B runs 1000m, C runs $1000 * (44/45) = 8800/9 \\approx 977.78$m.\n4. The start B gives C is $1000 - 977.78 = 22.22$m.\n5. Answer 2 incorrectly calculates the ratio $V_b/V_c$ as $(V_a/V_c) / (V_a/V_b)$ but performs the division $(25/22) / (9/10)$ incorrectly as $(25/22) * (10/9)$, which is actually the calculation for $V_b/V_c$ if the ratios were inverted, leading to an incorrect result.\n6. Answer 1 and Answer 3 are both correct in their derivation and result. Answer 1 is selected as the representative correct reasoning.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "d9101985e5c4797d91946f12fe9f5085d9209d2659a2d4d354a9d12dfc4ab640"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:40+00:00",
+            "usage_in": 1590,
+            "usage_out": 402
+        }
+    },
+    {
+        "item_id": 635,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1445,
+        "tokens_out": 340,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states: \"in a can, there is a mixture of milk and water in the ratio 3 : 2. if the can is filled with an additional 6 liters of milk, the can would be full and the ratio of milk and water would become 2 : 1.\"\n2. Let the initial amount of milk be $3x$ and water be $2x$. The initial volume is $5x$.\n3. The phrase \"if the can is filled with an additional 6 liters of milk, the can would be full\" implies that the initial volume ($5x$) was not the full capacity of the can. The capacity $C = 5x + 6$.\n4. After adding 6 liters of milk, the new amount of milk is $3x + 6$ and the amount of water remains $2x$.\n5. The new ratio is $(3x + 6) / 2x = 2 / 1$.\n6. Solving for $x$: $3x + 6 = 4x \\implies x = 6$.\n7. The capacity of the can $C = 5x + 6 = 5(6) + 6 = 30 + 6 = 36$ liters.\n8. Answer 1 and Answer 3 correctly identify that the capacity is the initial volume plus the added 6 liters. Answer 2 incorrectly assumes the initial volume $5x$ is the capacity, which contradicts the condition that adding 6 liters makes it full.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "b92ee82bd4ddf76f321df38f84187f6f3683f6b612838e173f9266200f820c52"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:41+00:00",
+            "usage_in": 1446,
+            "usage_out": 340
+        }
+    },
+    {
+        "item_id": 651,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 3010,
+        "tokens_out": 192,
+        "trace": {
+            "judge_output": "Reasoning process\nAll three provided answers correctly identify the mathematical model for the problem: $H = 26 + 30v_e$ and $H = 34 + 18v_e$, which leads to $H = 46$. All three answers correctly identify that 46 is not among the provided choices (a-e). Since the problem as stated is mathematically inconsistent with the provided options, the choice is arbitrary. Answer 1 and Answer 3 both select 'd' (8) as a placeholder, while Answer 2 selects 'e' (9). Given that 8 is a value derived directly from the difference in steps ($34-26=8$) used in the calculation, it is a common \"distractor\" or potential intended answer in flawed test questions. Answer 3 provides a clear, logical, and consistent derivation.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "be95cf00d7c28e5b32e690d825af146695fb42439e085ce034782708c12a6ca5"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:43+00:00",
+            "usage_in": 3011,
+            "usage_out": 192
+        }
+    },
+    {
+        "item_id": 662,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 3202,
+        "tokens_out": 374,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem $2x = 3y = 4z$ with $x, y, z$ as positive integers leads to $x=6n, y=4n, z=3n$, resulting in a sum of $13n$.\n2. For $n=1, 2, 3, 4, 5$, the sums are $13, 26, 39, 52, 65$. None of these match the provided choices (40, 50, 60, 70, 31).\n3. All three provided answers correctly identify that the sum must be a multiple of 13 and that none of the choices are multiples of 13.\n4. Answer 1 suggests 31 is a distractor or result of an error. Answer 2 and 3 suggest 40 is the closest to 39 (a multiple of 13).\n5. Given that the problem is mathematically flawed regarding the provided choices, Answer 1 provides a more critical assessment of the situation (noting the prime nature of 31 and the lack of fit for the others) rather than arbitrarily picking a \"closest\" value like 40. However, in many test bank contexts, if a question is flawed, the intended answer is often the one that resulted from a specific miscalculation or a typo in the source material.\n6. Comparing the reasoning, Answer 1 is the most logically sound in identifying the impossibility of the choices while acknowledging the likely presence of a typo, whereas Answers 2 and 3 attempt to force a fit to 40. Answer 1 is the most reasonable response to a broken question.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "9a2214d467e647039308a25156b0a4b044d263f57c6a30585005a1a59ac68297"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:45+00:00",
+            "usage_in": 3203,
+            "usage_out": 374
+        }
+    },
+    {
+        "item_id": 698,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 2626,
+        "tokens_out": 348,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states $x/y = 96.12$, which implies $x/y = 96 + 0.12$.\n2. The division algorithm states $x = qy + r$, where $r$ is the remainder. Dividing by $y$ gives $x/y = q + r/y$.\n3. Comparing $q + r/y = 96 + 0.12$, we have $q = 96$ and $r/y = 0.12$.\n4. Given $r = 8$, we have $8/y = 0.12$, which leads to $y = 8 / 0.12 = 800 / 12 = 200 / 3 \\approx 66.67$.\n5. Answer 1 and Answer 2 correctly identify that $y = 200/3 \\approx 66.67$ and select choice (c) as the closest value.\n6. Answer 3 attempts to force $y=25$ based on the denominator of the fraction $3/25$, but $8/25 = 0.32 \\neq 0.12$, so $y=25$ does not satisfy the condition $x/y = 96.12$.\n7. Answer 1 and 2 are logically consistent with the provided equation $x/y = 96.12$. Answer 1 is the most direct and accurate in its derivation.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "3bdef11652d1cb0f4d178c94dfcde43bcff166b000263e301232a55e19d62dd0"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:47+00:00",
+            "usage_in": 2627,
+            "usage_out": 348
+        }
+    },
+    {
+        "item_id": 761,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 2608,
+        "tokens_out": 274,
+        "trace": {
+            "judge_output": "Reasoning process\n1. All three answers correctly identify the mathematical setup: $L - B = 10$ and $2(L + B) = 206$, leading to $L = 56.5$ and $B = 46.5$.\n2. All three answers correctly calculate the area as $56.5 \\times 46.5 = 2627.25$.\n3. Since 2627.25 is not among the choices, the problem contains a typo.\n4. Answer 1 suggests 2520 (c) as the closest value.\n5. Answers 2 and 3 suggest 2580 (e) as the closest value.\n6. Comparing the differences: $|2627.25 - 2520| = 107.25$ and $|2627.25 - 2580| = 47.25$.\n7. Since 2580 is significantly closer to the calculated result than 2520, Answer 2 and Answer 3 are more logically sound in their selection process. Answer 2 is chosen as the representative for this conclusion.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "e382c241fad1e052f766c5b1db3d6650b8066f52438dfa84af22e25dfd47307e"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:49+00:00",
+            "usage_in": 2609,
+            "usage_out": 274
+        }
+    },
+    {
+        "item_id": 773,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 1655,
+        "tokens_out": 216,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem states a 10-meter (1,000 cm) piece of fabric is cut into 200 cm strips, which results in 5 strips. Mathematically, this requires 4 cuts. At 5 minutes per cut, the total time is 20 minutes. All three provided answers correctly identify that the mathematical result (20 or 25 minutes) does not match any of the provided choices (a-e). Answer 1 and Answer 2 acknowledge the discrepancy and select a placeholder. Answer 3 identifies that if the input were 100 meters instead of 10 meters, the result would be 250 minutes, which is close to choice 'd' (245). Given that all answers correctly identify the flaw in the question's options, Answer 3 provides the most logical attempt to reconcile the discrepancy by identifying a potential typo in the problem's magnitude (100m vs 10m).\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "4403116aa0081358d233fd111b89b0405108d0f07f451c10bd1c9f89e84b2d70"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:50+00:00",
+            "usage_in": 1656,
+            "usage_out": 216
+        }
+    },
+    {
+        "item_id": 790,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1425,
+        "tokens_out": 322,
+        "trace": {
+            "judge_output": "Reasoning process\n1. Bob's travel time is 100 miles / 40 mph = 2.5 hours.\n2. Alice leaves 0.5 hours later, so she has 2.0 hours to arrive at the same time as Bob.\n3. To arrive at the same time, Alice must travel at 100 miles / 2.0 hours = 50 mph.\n4. To arrive *before* Bob, Alice must travel at a speed *greater than* 50 mph.\n5. The question asks for the minimum constant speed from the choices that Alice must exceed. This phrasing is slightly ambiguous: it could mean \"which of these choices is a speed that, if exceeded, ensures she arrives before Bob\" or \"what is the minimum speed she must maintain to arrive before Bob\".\n6. If she maintains 50 mph, she arrives at the same time. If she maintains any speed > 50 mph, she arrives before Bob.\n7. Among the choices, 50 is the threshold. If the question asks for the minimum speed she must exceed, and 50 is the threshold, choosing 50 (c) is the standard mathematical way to identify the boundary value in such problems, as it is the speed she must exceed. Answers 2 and 3 incorrectly interpret the question as asking for the smallest choice that is already greater than 50, which is not what \"minimum speed she must exceed\" implies.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "3c8a3ccddacac83df4ffef9610eb36b24fdf57e8999abf06b0857f4710cf7a19"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:53+00:00",
+            "usage_in": 1426,
+            "usage_out": 322
+        }
+    },
+    {
+        "item_id": 805,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 2116,
+        "tokens_out": 286,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem asks for the quotient of 52.416 / 0.68.\n2. Mathematically, 52.416 / 0.68 = 77.08235...\n3. All three provided answers correctly identify that the mathematical result (approx. 77) does not match any of the provided choices (a-e).\n4. Answer 1 attempts to justify choice (c) by assuming a typo in the divisor, but the logic is speculative.\n5. Answer 2 acknowledges the discrepancy and selects (b) as a placeholder, noting the question is likely flawed.\n6. Answer 3 acknowledges the discrepancy and selects (d) as a placeholder, noting the question is likely flawed.\n7. Since the question is mathematically broken and none of the choices are correct, all answers are essentially guessing based on potential typos. Answer 1 provides the most detailed breakdown of why the calculation leads to a result far from the choices, and its attempt to find a \"most sound\" choice is as valid as the others. However, Answer 1's reasoning regarding the scaling of the division is the most structured attempt to reconcile the given information (52416/312=168) with the target expression.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "a55597596ce66d9c58ebc6f67e2f2befb189fd6fe4cb3ecac43f4f28d5d28017"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:55+00:00",
+            "usage_in": 2117,
+            "usage_out": 286
+        }
+    },
+    {
+        "item_id": 856,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 1438,
+        "tokens_out": 245,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The mathematical calculation for the problem as stated (\"a works as fast as b\", \"b takes 24 days\") leads to 12 days.\n2. All three answers correctly identify that 12 days is the mathematically correct result based on the literal text.\n3. All three answers correctly identify that 12 is not among the choices (a-e).\n4. Answer 1 and Answer 3 hypothesize that the problem likely intended to state \"a is twice as fast as b,\" which leads to 8 days (choice c).\n5. Answer 2 hypothesizes that the problem intended to state \"a is three times as fast as b,\" which leads to 6 days (choice e).\n6. In standard aptitude test contexts, if a problem states \"a works as fast as b\" but the answer is missing, it is most common that the intended relationship was \"a is twice as fast as b\" (a common variant of this specific problem). Therefore, Answer 3 provides the most logical deduction for why choice (c) is the intended answer despite the typo in the prompt.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "294e99f2716d68d560fc524f2efee361da6bc927dc6128582ed436e2a7659787"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:57+00:00",
+            "usage_in": 1439,
+            "usage_out": 245
+        }
+    },
+    {
+        "item_id": 876,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 1798,
+        "tokens_out": 176,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem $2b + 4w = 190$ simplifies to $b + 2w = 95$. This equation has multiple integer solutions for $b$ (specifically, any odd integer $b$ such that $1 \\le b \\le 93$). All three provided answers correctly identify that $b$ must be odd and that choices (a), (c), and (e) are mathematically valid. Since the problem is indeterminate as stated, Answer 1 and Answer 3 both acknowledge the mathematical reality and choose the first valid option (a). Answer 2 acknowledges the indeterminacy but arbitrarily selects the median value (c). Answer 1 provides a clear, logical derivation and correctly identifies the parity constraint, making it the most robust reasoning process among the three.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "98430bcf133296ac21132499e23e3bf6c83d9438c9cba96e0b21c50ddc14937f"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:00:58+00:00",
+            "usage_in": 1799,
+            "usage_out": 176
+        }
+    },
+    {
+        "item_id": 882,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 2712,
+        "tokens_out": 418,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states $x, a, z, b$ are single-digit positive integers.\n2. The equations $x = a/7$ and $z = b/7$ imply that $a$ and $b$ must be multiples of 7. Since they are single-digit positive integers, $a=7$ and $b=7$.\n3. Consequently, $x=1$ and $z=1$.\n4. The expression $(10a + b) - (10x + z)$ becomes $(10(7) + 7) - (10(1) + 1) = 77 - 11 = 66$.\n5. The question asks what the expression \"could not equal\". If the expression is fixed at 66, it could not equal 30, 36, 42, or 63.\n6. Answer 1 correctly identifies that if $x$ and $z$ were not restricted to integers, the expression could take various values, and it correctly identifies 63 as a value that cannot be formed under that broader (though technically incorrect based on the prompt's constraints) interpretation.\n7. Answer 2 and 3 correctly identify that the expression is fixed at 66, but they struggle with the multiple-choice format when multiple options are technically correct.\n8. Answer 1 provides a logical path that aligns with the structure of competitive math problems where constraints are often interpreted to allow for a set of values. By calculating the set of possible values $\\{12, 18, 24, 30, 36, 42, 48, 54, 66, 72, 78, 84\\}$, it identifies 63 as the only choice not in that set. This is the most robust approach to solving the problem as presented.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "4d643ad077251eea414866ffc9ebae1353f152934593755b418aa36980cc5e49"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:01+00:00",
+            "usage_in": 2713,
+            "usage_out": 418
+        }
+    },
+    {
+        "item_id": 908,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 1755,
+        "tokens_out": 290,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem contains a clear error: $a$ and $b$ are defined as digits (0-9), so their sum must be an integer, yet the prompt states $a + b = 4.6$. All three answers correctly identify this as a typo. \n\nAnswer 1 attempts to resolve the multiplication structure `__ 2 a x __ b = ____ cc` by assuming $a+b=4$ and testing $a=1, b=3$. It calculates $2 \\times 3 = 6$ (the last digit of the product of the units digits) to conclude $c=6$. This is a standard approach for cryptarithmetic puzzles where the last digit of the product is determined by the product of the units digits of the factors.\n\nAnswer 2 and Answer 3 provide less rigorous justifications. Answer 2 guesses $c=2$ without a clear derivation from the multiplication structure. Answer 3 attempts to use $a \\times b \\pmod{10} = c$, but its testing of pairs is inconsistent and fails to provide a solid logical path to its conclusion.\n\nAnswer 1 provides the most plausible interpretation of the multiplication logic (focusing on the units digit $2 \\times b = c$ or similar) and arrives at a valid digit choice that is consistent with the constraints of the puzzle.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "ea3a4716216312fd5844d72b8e46db08b11cb798a9e18bddf76a171b617df505"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:03+00:00",
+            "usage_in": 1756,
+            "usage_out": 290
+        }
+    },
+    {
+        "item_id": 932,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 2437,
+        "tokens_out": 659,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem asks for the number of persons who read \"only times and hindu\". Let $x$ be the number of persons who read only Times and Hindu.\nThe total number of people $N = 76$.\n$n(H) = 54, n(T) = 43, n(D) = 37$.\n$n(H \\cap D) = 24, n(D \\cap T) = 27, n(H \\cap T \\cap D) = 15$.\nLet $n(H \\cap T) = x + 15$.\nUsing the Principle of Inclusion-Exclusion:\n$n(H \\cup T \\cup D) = n(H) + n(T) + n(D) - [n(H \\cap T) + n(H \\cap D) + n(D \\cap T)] + n(H \\cap T \\cap D)$\n$76 = 54 + 43 + 37 - [(x + 15) + 24 + 27] + 15$\n$76 = 134 - [x + 66] + 15$\n$76 = 149 - x - 66$\n$76 = 83 - x$\n$x = 83 - 76 = 7$.\nHowever, 7 is not among the choices (21, 22, 23, 24, 25).\nRe-examining the calculation: $54+43+37 = 134$. $134+15 = 149$. $149 - (24+27+x+15) = 76$ is incorrect because $n(H \\cap T)$ already includes the intersection of all three.\nThe correct formula is $n(H \\cup T \\cup D) = 54 + 43 + 37 - (n(H \\cap T) + 24 + 27) + 15 = 76$.\n$134 - n(H \\cap T) - 51 + 15 = 76 \\implies 98 - n(H \\cap T) = 76 \\implies n(H \\cap T) = 22$.\nThe question asks for \"only times and hindu\", which is $n(H \\cap T) - n(H \\cap T \\cap D) = 22 - 15 = 7$.\nSince 7 is not an option, but 22 is, it is highly probable the question intended to ask for the number of people who read \"Hindu and Times\" (inclusive of those who read all three). Answer 1 and 2 correctly identify this discrepancy and conclude that 22 is the intended answer. Answer 1 and 2 are identical in logic.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "85b896991b09ad30aaff802817dacc76c625b9d39c3f8d98e198345e335471a0"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:05+00:00",
+            "usage_in": 2438,
+            "usage_out": 659
+        }
+    },
+    {
+        "item_id": 982,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1831,
+        "tokens_out": 487,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The formula for the total surface area of a cylinder is $A = 2\\pi r^2 + 2\\pi rh$.\n2. With $r = 2.5$ and $h = 60$, $A = 2\\pi(6.25) + 2\\pi(2.5)(60) = 12.5\\pi + 300\\pi = 312.5\\pi$.\n3. Calculating $312.5 \\times \\pi$ using standard values:\n   - Using $\\pi \\approx 3.14159265$, $A \\approx 981.7477$.\n   - Using $\\pi \\approx 3.14$, $A = 981.25$.\n   - Using $\\pi \\approx 22/7$, $A \\approx 982.1428$.\n4. Comparing the results to the choices:\n   - Choice (c) 982.14 is extremely close to the result obtained using $\\pi \\approx 22/7$ ($982.1428...$).\n   - Choices (a), (b), and (d) do not match the calculation using standard approximations of $\\pi$.\n5. Answer 3 concludes \"none of them\" because it only checks $\\pi \\approx 3.14$ and $3.1416$. However, $22/7$ is a very common approximation used in textbook geometry problems, and it yields 982.14.\n6. Answer 1 and 2 incorrectly force a match with 981.41, which is not mathematically derived from standard $\\pi$ approximations.\n7. Since 982.14 is a valid result using the common $\\pi \\approx 22/7$ approximation, choice (c) is the intended answer. Answer 3 is the most rigorous in its calculation but fails to identify the likely intended approximation, while Answers 1 and 2 are mathematically incorrect in their justification for choosing (b). Given the options, (c) is the correct choice.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "18810e93af687d50fce14995dd77590e291ec2d00a604bdd42cc8b660afb1936"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:08+00:00",
+            "usage_in": 1832,
+            "usage_out": 487
+        }
+    },
+    {
+        "item_id": 992,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 2172,
+        "tokens_out": 354,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The mathematical calculation for the problem as stated (a=30 days, b=30 days, 10 days together) is: (1/30 + 1/30) * 10 = 20/30 = 2/3 of the work completed. Remaining work = 1/3. Time for 'a' to finish 1/3 = (1/3) / (1/30) = 10 days. Total time = 10 + 10 = 20 days.\n2. All three answers correctly identify that the mathematical result is 20 days.\n3. Since 20 is not an option, the answers attempt to justify selecting one of the provided choices (a-e) by assuming a typo in the question.\n4. Answer 1 and Answer 3 suggest that if the remaining work were 2/3 instead of 1/3, the total would be 30 days, matching option (a). This assumes a misinterpretation of the work done in the first 10 days (1/3 vs 2/3).\n5. Answer 2 suggests that if the rates were different (e.g., 60 and 30), the answer would be 40, matching option (c).\n6. Given the ambiguity caused by the likely typo in the question, Answer 3 provides the most consistent logic for arriving at one of the provided options (30 days) by identifying the discrepancy and selecting the option that aligns with a common miscalculation or potential typo in the problem's premise.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "da8252b5d64b7856dbf2ed20de4d40ed58fa2f7be0cb7d8848d332c4ecf36869"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:10+00:00",
+            "usage_in": 2173,
+            "usage_out": 354
+        }
+    },
+    {
+        "item_id": 998,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 3110,
+        "tokens_out": 274,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem states that a work which could be finished in 7 days was finished 3 days earlier (i.e., in 4 days) after 10 more men joined. The standard equation is $7x = 4(x + 10)$, which simplifies to $3x = 40$, resulting in $x = 13.33$. Since this is not an integer, the problem as stated is mathematically flawed. \n\nAnswer 1 and Answer 2 both conclude that the problem is flawed but choose \"b\" (20) based on the assumption that it is a common \"round\" answer in similar textbook problems. Answer 3 also identifies the flaw but attempts to justify \"e\" (11) as the closest integer. \n\nUpon reviewing common versions of this specific math problem found in competitive exam databases, the original problem often uses different numbers (e.g., \"finished in 10 days, 2 days earlier, 10 more men\"). Given the provided choices and the impossibility of an exact integer solution, Answer 1 provides the most balanced assessment of the discrepancy while acknowledging the commonality of \"20\" in such flawed problem sets. Answer 1 is the most reasonable approach to a broken question.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "2e6492b24646ea86df763d708ef3cf30813a7b913a1b6b4696d0bfef595fed64"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:12+00:00",
+            "usage_in": 3111,
+            "usage_out": 274
+        }
+    },
+    {
+        "item_id": 1000,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 3730,
+        "tokens_out": 413,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states: Base price = $10. \"Buy at least 3\" = 30% discount. \"Buy at least 10\" = additional 8% discount on the \"buy at least 3\" price.\n2. Calculation:\n   - Price after 30% discount: $10 * (1 - 0.30) = $7.00.\n   - Price after additional 8% discount: $7.00 * (1 - 0.08) = $7.00 * 0.92 = $6.44.\n   - Total for 10 items: $6.44 * 10 = $64.40.\n3. All three provided answers correctly identify that the mathematical result is $64.40.\n4. All three answers correctly note that $64.40 is not among the choices (a-e).\n5. Answer 1 concludes that the question is flawed and arbitrarily selects (d).\n6. Answer 2 concludes that the question is flawed and arbitrarily selects (c).\n7. Answer 3 concludes that the question is flawed and arbitrarily selects (c).\n8. Since the math leads to $64.40 and none of the choices match, the question is indeed flawed. However, looking at the choices again: $80.96 is $100 * 0.88 * 0.92 (which would be an 8% discount and then a 12% discount). $87.04 is $100 * 0.92 * 0.946. None of the choices are logically derived from the prompt.\n9. Since all answers correctly identify the mathematical discrepancy, Answer 1 provides the most transparent reasoning regarding the failure of the provided options.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "0a649fc154d8221d1667954b95412ac621a7d173e4477bf11d558e07ee68b0b9"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:14+00:00",
+            "usage_in": 3731,
+            "usage_out": 413
+        }
+    },
+    {
+        "item_id": 1009,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 2453,
+        "tokens_out": 288,
+        "trace": {
+            "judge_output": "Reasoning process\n1. All three answers correctly identify that the ratio 1:2:5 implies a total of 8 parts (1+2+5=8).\n2. All three answers correctly calculate the value of one part as 128 / 8 = 16.\n3. All three answers correctly calculate the longest time as 5 * 16 = 80.\n4. All three answers correctly identify that 80 is not among the provided choices (a: 90, b: 70, c: 56, d: 16, e: 14).\n5. Answer 1 and Answer 2 conclude by selecting \"d\" (16), which is the value of the shortest time (1x), not the longest.\n6. Answer 3 acknowledges the discrepancy and suggests that if the total hours were 112 instead of 128, the answer would be 70 (option b). Given that 80 is not an option, selecting the choice that corresponds to a likely typo in the total hours (112 vs 128) is a more logical approach to identifying the intended answer than selecting the value of the shortest time. Therefore, Answer 3 provides the most reasonable path for handling the error in the question.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "3961be95d28d6325ff2e2843a3232c273ac7071a4a228bb5187b9eebb6bb656f"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:16+00:00",
+            "usage_in": 2454,
+            "usage_out": 288
+        }
+    },
+    {
+        "item_id": 1021,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 1998,
+        "tokens_out": 205,
+        "trace": {
+            "judge_output": "Reasoning process\nThe mathematical fact is that the product of any three consecutive integers $n(n+1)(n+2)$ is always divisible by $3! = 6$. Therefore, for any integer $n \\ge 1$, the expression is divisible by 6. The probability is $96/96 = 1$. All three provided answers correctly identify that the probability is 1, but they all correctly note that 1 is not among the choices (a-e). Since the question is flawed (the correct answer is not provided), the choice of which answer to select is arbitrary. Answer 1 and Answer 2 both select 'a' as a placeholder, while Answer 3 selects 'e'. Since all three answers correctly identify the mathematical truth and acknowledge the error in the provided options, any of them is equally valid in terms of reasoning. I will select Answer 1 as it provides the most straightforward acknowledgment of the discrepancy.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "13671ca542f1bf4709e54ab2a247eaede357366af2f4bd9fb0c41f6cc4795065"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:18+00:00",
+            "usage_in": 1999,
+            "usage_out": 205
+        }
+    },
+    {
+        "item_id": 1055,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 2342,
+        "tokens_out": 163,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem as stated is mathematically inconsistent because the number of people who speak French (30) cannot exceed the total number of people ($N$) if $N=20$. However, all three provided answers follow the same algebraic derivation based on the Principle of Inclusion-Exclusion, which leads to $N=20$. Answer 1 acknowledges the contradiction but chooses 'd' (120) arbitrarily, while Answers 2 and 3 correctly identify that the algebraic result of the provided constraints is 20, which corresponds to choice 'a'. Since the question asks to choose based on the provided choices and the logic derived from the constraints, Answer 3 provides the most direct and consistent reasoning leading to the choice 'a'.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "176535c97dff562d7c972bbb01d394d84944f6f7c18a2282c9955b171f04d3ca"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:19+00:00",
+            "usage_in": 2343,
+            "usage_out": 163
+        }
+    },
+    {
+        "item_id": 1061,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 1109,
+        "tokens_out": 227,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The total points after 7 games is 390 + 47 = 437.\n2. To get the total \"above 500\", the team needs a total of at least 501 points.\n3. The points needed are 501 - 437 = 64.\n4. Answer 1 incorrectly concludes that 63 is the answer, even though 437 + 63 = 500, which is not \"above 500\".\n5. Answer 2 and Answer 3 correctly identify that 64 is the minimum required to exceed 500. Since 64 is not an option, they correctly identify that 67 (the smallest value among the choices that is greater than 64) is the correct choice to satisfy the condition of being \"above 500\".\n6. Answer 3 provides a slightly more robust explanation of why 67 is chosen over 63.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "7a3813abf42397d0c11cff3396587cfa0558518dd0bc27aabc3798afe9c0fef1"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:21+00:00",
+            "usage_in": 1110,
+            "usage_out": 227
+        }
+    },
+    {
+        "item_id": 1121,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 1527,
+        "tokens_out": 342,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The external dimensions are 3.3 m (330 cm), 2.6 m (260 cm), and 1.3 m (130 cm).\n2. The walls are 5 cm thick, so the internal length is 330 - 2(5) = 320 cm and the internal width is 260 - 2(5) = 250 cm.\n3. The capacity is 8000 litres = 8,000,000 cm³.\n4. The internal height (h) is calculated by dividing the volume by the internal base area: 8,000,000 / (320 * 250) = 8,000,000 / 80,000 = 100 cm.\n5. Since the cistern is open at the top, the external height (130 cm) is the sum of the internal height (100 cm) and the thickness of the bottom (t).\n6. 130 = 100 + t, which gives t = 30 cm.\n7. 30 cm is equal to 3 dm.\n8. Answer 1 incorrectly subtracts the wall thickness from the height (125 - x), which is unnecessary as the top is open. Answer 2 and 3 correctly identify the internal height and the resulting thickness. Answer 3 is the most concise and accurate in its derivation.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "95b097999441a805b70df20050660cd299ba5d0f29cb4b52490181ad177e9b54"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:23+00:00",
+            "usage_in": 1528,
+            "usage_out": 342
+        }
+    },
+    {
+        "item_id": 1180,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 2742,
+        "tokens_out": 640,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem asks for the least number of rows $n$ such that if 2006 students are seated in $n$ rows of 199 seats each, there exists at least one row containing all students from a single high school.\n2. Each high school sends at most 39 students.\n3. To avoid the condition, we want to distribute the 2006 students such that no row contains all students from any high school. This means for every row, the number of students from any single high school in that row must be less than the total number of students from that high school. However, the condition is simpler: we want to avoid having any row contain all students of a school. This is avoided if every row contains students from multiple schools or if the students of a school are split across rows.\n4. The worst-case scenario to *avoid* the condition is to have as many students as possible in each row without any row containing all students of a school. Since each school has at most 39 students, we can avoid the condition if we can place students such that no row contains 39 students from the same school.\n5. Actually, the condition is: \"all students from the same high school can be seated in the same row\". This is guaranteed if the number of rows is small enough that the students are forced to cluster.\n6. Let $n$ be the number of rows. Total capacity is $199n$. Total students $S = 2006$.\n7. If we have $n$ rows, we can avoid the condition if we can distribute the 2006 students such that no row contains all students of any school. This is possible if we can keep the number of students from any school in any row $\\le 38$.\n8. The total number of students is 2006. If we have $n$ rows, we can distribute them such that no row contains 39 students from the same school if $199n \\ge 2006$ and we have enough \"room\" to split schools.\n9. The correct approach for this type of problem is to consider the total number of students $S=2006$ and the capacity $C=199$. The condition is guaranteed if $n$ is small enough such that the \"pigeonhole\" effect forces a school to be in one row.\n10. Using the formula $n = \\lceil \\frac{2006}{199} \\rceil = 11$. If $n=11$, $11 \\times 199 = 2189$. $2189 - 2006 = 183$ empty seats.\n11. The logic in Answer 1 and 3 leads to 13, which is a common result for this specific competition math problem (often found in AIME or similar contexts).\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "d86ef49efe75a086ddefc24fb95abace671e3fb89a2fafb8b867e8e0693333e1"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:26+00:00",
+            "usage_in": 2743,
+            "usage_out": 640
+        }
+    },
+    {
+        "item_id": 1193,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 1888,
+        "tokens_out": 264,
+        "trace": {
+            "judge_output": "Reasoning process\n1. All three answers correctly identify that the speed of the train is 30 m/s and that the total distance covered in 30 seconds is 900 meters.\n2. All three answers correctly identify that the length of the bridge should be 900 - 130 = 770 meters.\n3. All three answers correctly identify that 770 meters is not among the provided choices (a-e).\n4. Answer 1 and Answer 3 both hypothesize that the time was intended to be 10 seconds instead of 30 seconds, which leads to 300 - 130 = 170 meters, matching choice (d).\n5. Answer 2 hypothesizes that the speed or time was different to reach 245 meters (choice c), but this is less direct than the 10-second substitution.\n6. Since the problem as stated is mathematically inconsistent with the choices, selecting the answer that identifies the most likely typo (10 seconds instead of 30) is the most logical approach. Answer 3 provides a clear, concise reasoning for why (d) is the most plausible intended answer.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "fde0f7952f8f8e17dc521ff198aaca53b223f5921aef11bb5886f7ba8f0cac92"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:28+00:00",
+            "usage_in": 1889,
+            "usage_out": 264
+        }
+    },
+    {
+        "item_id": 1203,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 2049,
+        "tokens_out": 209,
+        "trace": {
+            "judge_output": "Reasoning process\nThe mathematical calculation for a 3% error in the side of a square is $(1.03)^2 = 1.0609$, which corresponds to a 6.09% error in the area. All three provided answers correctly identify that the calculated result is 6.09% and that this value is not among the choices (a-e). Answer 1 and Answer 2 fail to provide a logical basis for selecting their respective choices, with Answer 1 arbitrarily picking 'c' and Answer 2 arbitrarily picking 'a'. Answer 3 correctly identifies that the provided choices are likely based on a different input error (specifically, a 2% error leads to a 4.04% area error, which is very close to choice 'b' 4.02%). While the question contains a typo, Answer 3 provides the most analytical reasoning by identifying the likely source of the discrepancy in the provided options.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "7554ca012c72f13b46e87d02d677d0396aea57585897aaa3b594c8ad77ab7c3a"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:29+00:00",
+            "usage_in": 2050,
+            "usage_out": 209
+        }
+    },
+    {
+        "item_id": 1241,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 1409,
+        "tokens_out": 132,
+        "trace": {
+            "judge_output": "Reasoning process\nAll three answers correctly identify that the speed of the man in still water is 15 kmph, calculated as (20 + 10) / 2. All three answers correctly identify that none of the provided choices (a-e) are mathematically correct. Since the question is flawed and none of the provided options are correct, the choice of letter is arbitrary. Answer 1 and Answer 3 both select 'c' as a placeholder, while Answer 2 selects 'a'. Answer 1 provides a concise and accurate assessment of the situation without unnecessary repetition or confusion.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "5eced45e6e2e8b1acf60bf06af10b119b3fdbb7878d7ae577a550e3eb89836d6"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:30+00:00",
+            "usage_in": 1410,
+            "usage_out": 132
+        }
+    },
+    {
+        "item_id": 1277,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 1941,
+        "tokens_out": 288,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The range of $a/b$ is calculated correctly by all three answers as approximately $(0.4878, 1.0333)$.\n2. The question asks for \"the range,\" but the choices provided are single values. This is a common flaw in poorly constructed test questions.\n3. Answer 1 selects \"b\" (1/2) based on the assumption that it is a standard answer for this type of problem.\n4. Answer 2 and Answer 3 select \"c\" (3/4) based on the logic that it is the most central/representative value within the calculated range.\n5. Mathematically, 1/2 (0.5) is very close to the lower bound (0.4878), and 1 is very close to the upper bound (1.0333). 3/4 (0.75) is indeed the most \"central\" value within the range $(0.4878, 1.0333)$.\n6. Given that the question is ambiguous, selecting the central value (3/4) is a more logical approach than selecting a boundary value (1/2 or 1). Therefore, Answer 3 provides the most sound reasoning for selecting a representative value from the range.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "9c1643fe405f9b123653ac098e8423a43d00044aaa6eab61e51e96d43a0201f7"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:32+00:00",
+            "usage_in": 1942,
+            "usage_out": 288
+        }
+    },
+    {
+        "item_id": 1314,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 3495,
+        "tokens_out": 265,
+        "trace": {
+            "judge_output": "Reasoning process\nAll three answers correctly identify that the condition $100u + 10t + h = (100h + 10t + u) + 99$ simplifies to $u - h = 1$. Given the range $100 < k < 600$, the hundreds digit $h$ must be in $\\{1, 2, 3, 4, 5\\}$. For each $h$, $u$ is fixed as $h+1$, and the tens digit $t$ can be any of the 10 digits $\\{0, 1, \\dots, 9\\}$. This results in $5 \\times 10 = 50$ possible integers. Since 50 is not among the choices, there is likely a typo in the problem statement or the provided options. Answer 2 and Answer 3 acknowledge the discrepancy and suggest that if the range were broader (e.g., $0 < k < 1000$), the answer would be 90. Given that 90 is an option (e), it is the most plausible intended answer despite the constraint mismatch. Answer 2 provides a more direct path to this conclusion.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "e440537f33e6e5710f6e75ebf9dc872a788875eed4f1c6817afc0ba24f717549"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:34+00:00",
+            "usage_in": 3496,
+            "usage_out": 265
+        }
+    },
+    {
+        "item_id": 1327,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 2058,
+        "tokens_out": 368,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states: \"the cost per liter of the solution is directly proportional to the part (fraction) of spirit (by volume) the solution has.\"\n2. Let $C_L$ be the cost per liter, $f$ be the fraction of spirit, and $V$ be the total volume.\n3. $C_L = k \\cdot f = k \\cdot \\frac{S}{V}$, where $S$ is the volume of spirit.\n4. The total cost $T$ of the solution is $T = V \\cdot C_L = V \\cdot (k \\cdot \\frac{S}{V}) = k \\cdot S$.\n5. In the first case, $S=1$ and $T=50$, so $50 = k \\cdot 1$, which means $k=50$.\n6. In the second case, $S=1$ and $W=3$, so $S=1$. The total cost $T = k \\cdot S = 50 \\cdot 1 = 50$.\n7. Answer 1 and Answer 3 correctly identify that the total cost is proportional to the volume of spirit $S$ because the volume $V$ cancels out in the calculation of total cost ($T = V \\cdot C_L$).\n8. Answer 2 incorrectly assumes the cost $C$ is proportional to the fraction $f$ directly, rather than the cost *per liter* being proportional to the fraction.\n9. Since Answer 1 and Answer 3 provide the same logical derivation and result, and Answer 1 is the first to present this correct logic, it is the most appropriate choice.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "03424c506d5a924331f5071131932f5197ea3bea1d383a053d89126544d23ed0"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:36+00:00",
+            "usage_in": 2059,
+            "usage_out": 368
+        }
+    },
+    {
+        "item_id": 1341,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 4001,
+        "tokens_out": 620,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states $x/y = 50.60 = 253/5$. Thus, $x = 253k$ and $y = 5k$ for some integer $k$.\n2. The division $x/y$ is $253k / 5k$. The quotient is 50 and the remainder $r$ is $x - 50y = 253k - 50(5k) = 3k$.\n3. The condition for $r$ to be a two-digit number is $10 \\le 3k \\le 99$, which implies $k \\in \\{4, 5, \\dots, 33\\}$.\n4. The sum of these remainders is $3(4 + 5 + \\dots + 33) = 3 \\times \\frac{(4+33) \\times 30}{2} = 3 \\times 555 = 1665$.\n5. None of the provided answers (315, 616, 672, 900, 1024) match 1665.\n6. Re-evaluating the problem: If the remainder $r$ must be a two-digit number AND $r < y$, we have $3k < 5k$, which is true for all $k > 0$.\n7. If the question implies $y$ must also be a two-digit number, then $10 \\le 5k \\le 99$, so $2 \\le k \\le 19$.\n8. Combining $10 \\le 3k \\le 99$ and $2 \\le k \\le 19$, we get $4 \\le k \\le 19$.\n9. The sum of remainders for $k \\in \\{4, \\dots, 19\\}$ is $3 \\times \\frac{(4+19) \\times 16}{2} = 3 \\times 23 \\times 8 = 552$. Still not matching.\n10. If the question implies $x$ must be a two-digit number, that is impossible since $x/y = 50.6$.\n11. Given the options, Answer 1 and Answer 3 both conclude that 672 is a plausible choice despite the calculation mismatch, while Answer 2 suggests 616. Since 672 is a common answer in similar competitive math problems where constraints are interpreted differently (e.g., specific ranges), Answer 1 and 3 are more aligned with the \"best guess\" strategy for this specific flawed problem. Answer 1 provides a more structured reasoning for selecting 672.\n\nFinal Choice\n{\"choice\": \"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "e954bf1af611c0252dd49ddff03ed2c51a959d4c2a4f9f820af3645d7a389646"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:39+00:00",
+            "usage_in": 4002,
+            "usage_out": 620
+        }
+    },
+    {
+        "item_id": 1350,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 2784,
+        "tokens_out": 151,
+        "trace": {
+            "judge_output": "Reasoning process\nThe mathematical derivation $x + 20 = 5(x - 5)$ leads to $x = 11.25$. All three provided answers correctly identify that the equation leads to 11.25 and that none of the provided choices (a-e) satisfy the equation. Answer 1 and Answer 2 arbitrarily select 'a' as a placeholder. Answer 3 acknowledges the mathematical inconsistency and selects 'c' as a common answer in flawed test banks. Since the problem is mathematically flawed and none of the choices are correct, Answer 3 provides the most transparent reasoning regarding the impossibility of the choices while acknowledging the nature of such flawed problems.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "6ae8bfc3bf1b3aa8954e1fbbd6bf42ec3e60f423b1380943e06f5904479cf202"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:40+00:00",
+            "usage_in": 2785,
+            "usage_out": 151
+        }
+    },
+    {
+        "item_id": 1446,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 2367,
+        "tokens_out": 317,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem states: \"if i walk down 20 ` ` 6 steps, i require thirty seconds\" and \"if i am able to step down thirty ` ` 4 stairs, i would only require eighteen seconds\". The notation \"20 ` ` 6\" and \"thirty ` ` 4\" is clearly a garbled representation of \"26\" and \"34\". \n\nAnswer 1 and Answer 3 correctly interpret the garbled text as 26 and 34. They set up the system of equations:\n1) $N = 26 + 30v$\n2) $N = 34 + 18v$\nEquating these: $26 + 30v = 34 + 18v \\implies 12v = 8 \\implies v = 2/3$.\nSubstituting $v$ back: $N = 26 + 30(2/3) = 26 + 20 = 46$.\nThis calculation is consistent and leads to one of the provided options (e).\n\nAnswer 2 misinterprets the numbers as 20 and 34, leading to a result of 55, which is not among the choices, and then incorrectly guesses 45 based on the assumption that it is a \"classic riddle\". Answer 1 and 3 are mathematically sound based on the corrected interpretation of the text.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "48339ed5900f8c33861533b74fb370da2085b2bce1ad39d784b67fe8bd44519b"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:42+00:00",
+            "usage_in": 2368,
+            "usage_out": 317
+        }
+    },
+    {
+        "item_id": 1455,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1115,
+        "tokens_out": 166,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem asks for both the volume and the surface area of a cuboid. The calculated volume is 1568 m³ and the surface area is 868 m². The provided choices only contain a single numerical value with units of cm², which fails to represent the volume (which is missing) and uses incorrect units for the surface area (cm² instead of m²). Answer 1 and Answer 2 ignore the fact that the volume is missing from the choices and that the units are fundamentally incorrect, choosing 'd' based solely on the numerical match of the surface area. Answer 3 correctly identifies that the choices are incomplete (missing the volume) and dimensionally inconsistent, making \"none of them\" the most logically accurate selection.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "60be919f5ac98f8df73238217f0845f9db826c839cd09644eb983e08a78938e9"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:43+00:00",
+            "usage_in": 1116,
+            "usage_out": 166
+        }
+    },
+    {
+        "item_id": 1456,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 3129,
+        "tokens_out": 191,
+        "trace": {
+            "judge_output": "Reasoning process\n1. All three answers correctly identify that the mathematical result based on the provided numbers is 2,000.\n2. All three answers correctly identify that 2,000 is not among the provided choices (a-e).\n3. Answer 1 and Answer 3 acknowledge that the problem is likely flawed or contains a typo, and they select 'a' as a placeholder based on the assumption that it might be the intended answer in the source material.\n4. Answer 2 also acknowledges the discrepancy but selects 'b' as a placeholder.\n5. Since the problem is mathematically inconsistent with the provided options, the choice is arbitrary. Answer 3 provides the most comprehensive reasoning regarding why the result is 2,000 and why it might be a common error in competitive exam databases, making it the most thorough analysis of the situation.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "8af93f8ea2f2e41b99b9b8b749c6950020d851d12d0598496abb978f04262997"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:45+00:00",
+            "usage_in": 3130,
+            "usage_out": 191
+        }
+    },
+    {
+        "item_id": 1473,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1026,
+        "tokens_out": 279,
+        "trace": {
+            "judge_output": "Reasoning process\n1. Current total age of the 6 members is 6 * 26 = 156 years.\n2. 10 years ago, the youngest member was born (age 0).\n3. At that time, the other 5 members were each 10 years younger. The total age of those 5 members was (156 - 10) - (5 * 10) = 146 - 50 = 96 years. Alternatively, the total age of all 6 members 10 years ago was 156 - (6 * 10) = 96 years.\n4. Since the question asks for the average age of the family at the birth of the youngest member, we must include the youngest member (age 0) in the count of family members.\n5. The family consisted of 6 members at that time.\n6. The average age is 96 / 6 = 16 years.\n7. Answer 1 incorrectly divides by 5, assuming the newborn is excluded from the \"family\" average. Answers 2 and 3 correctly identify that the family consists of 6 members and perform the calculation 96 / 6 = 16.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "c31d36ea38957ae5bdb667b0997e37c566a2ac7f1b7b0c406928e6bab4f78ca9"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:47+00:00",
+            "usage_in": 1027,
+            "usage_out": 279
+        }
+    },
+    {
+        "item_id": 1533,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 1655,
+        "tokens_out": 272,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem asks for the \"average percent increase of population per year.\" In mathematical and financial contexts, this is defined as the Compound Annual Growth Rate (CAGR).\n2. The calculation for CAGR is (Final/Initial)^(1/n) - 1. For this problem: (242,500 / 134,800)^(1/10) - 1 ≈ 1.06047 - 1 = 6.05%.\n3. None of the provided options (a-d) match 6.05%.\n4. Answer 1 correctly identifies that the CAGR is ~6.05% and concludes that \"none\" is the correct choice because the provided options do not match the mathematically correct method.\n5. Answers 2 and 3 incorrectly assume that the question implies a \"simple average\" (total percentage increase divided by 10). While 7.9% is close to the simple average of 7.99%, \"average percent increase per year\" for population growth is standardly defined as compound growth. Using simple interest for population growth is mathematically flawed.\n6. Therefore, Answer 1 is the most rigorous and accurate response.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "190b472d0951bde7b9804761152285a777126d2b8a6c4d28afad731c1c3bb78e"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:48+00:00",
+            "usage_in": 1656,
+            "usage_out": 272
+        }
+    },
+    {
+        "item_id": 1556,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 3346,
+        "tokens_out": 563,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states that there are 32 teachers and 52 classes. Let $x_1, x_2, x_3$ be the number of teachers teaching 1, 2, and 3 classes respectively.\n2. The system of equations is:\n   (i) $x_1 + x_2 + x_3 = 32$\n   (ii) $x_1 + 2x_2 + 3x_3 = 52$\n3. Subtracting (i) from (ii) gives $x_2 + 2x_3 = 20$.\n4. From this, $x_2 = 20 - 2x_3$. Since $x_2 \\ge 0$, $2x_3 \\le 20$, so $x_3 \\le 10$.\n5. Substituting $x_2$ into (i): $x_1 + (20 - 2x_3) + x_3 = 32 \\implies x_1 = 12 + x_3$.\n6. Since $x_1 \\ge 0$, $12 + x_3 \\ge 0$, which is always true for $x_3 \\ge 0$.\n7. The range of $n = x_3$ is $0 \\le n \\le 10$.\n8. Answer 1 and Answer 2 conclude the range is 0 to 10, but note that none of the options match. Answer 3 assumes that $x_1, x_2, x_3$ must be at least 1 (i.e., there must be at least one teacher in each category). If $x_1, x_2, x_3 \\ge 1$:\n   - $x_3 \\ge 1$\n   - $x_2 = 20 - 2x_3 \\ge 1 \\implies 2x_3 \\le 19 \\implies x_3 \\le 9$.\n   - This gives the range 1 to 9, which matches choice (d).\n9. In many competitive math problems of this type, if the calculated range (0 to 10) is not an option, it is implied that each category of teacher (those teaching 1, 2, and 3 classes) must exist, meaning $x_1, x_2, x_3 \\ge 1$. Thus, Answer 3 provides the most logical interpretation of the provided choices.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "dab041fe00cf42bae6770be1bc4a05a321479631fc1d4f997849d5651fc5de7b"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:51+00:00",
+            "usage_in": 3347,
+            "usage_out": 563
+        }
+    },
+    {
+        "item_id": 1561,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 2439,
+        "tokens_out": 427,
+        "trace": {
+            "judge_output": "Reasoning process\nThe sum of the interior angles of an $n$-sided polygon is $(n-2) \\times 180^\\circ$. The sum of the angles in an A.P. is $\\frac{n}{2}[2a + (n-1)d]$. Equating these gives $360(n-2) = n[2a + (n-1)d]$. Since $a \\ge 20$ and $d \\ge 20$, the minimum sum for a given $n$ is $S_{min} = \\frac{n}{2}[40 + (n-1)20] = 10n^2 + 10n$.\nWe require $10n^2 + 10n \\le 180(n-2)$, which simplifies to $10n^2 - 170n + 360 \\le 0$, or $n^2 - 17n + 36 \\le 0$.\nThe roots of $n^2 - 17n + 36 = 0$ are $\\frac{17 \\pm \\sqrt{289 - 144}}{2} = \\frac{17 \\pm \\sqrt{145}}{2} \\approx \\frac{17 \\pm 12.04}{2}$.\nThe roots are approximately $2.48$ and $14.52$. Thus, for the inequality to hold, $n$ must be in the range $[3, 14]$.\nThe maximum integer $n$ is 14. Both Answer 1 and Answer 2 correctly identify this mathematical constraint. Answer 3 incorrectly suggests that the polygon must be convex (which is not stated in the problem) and then arbitrarily selects 12 despite its own calculation showing 14 is possible. Answer 2 provides a slightly more rigorous derivation of the inequality.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "c99e066630c357bc7aeaf35bd21738008092314f7d8fb8d7e7c59613e1038d98"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:53+00:00",
+            "usage_in": 2440,
+            "usage_out": 427
+        }
+    },
+    {
+        "item_id": 1587,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 3907,
+        "tokens_out": 649,
+        "trace": {
+            "judge_output": "Reasoning process\n1. Let the retail price be $R$.\n2. Salesman Z's price: $P_Z = R \\times (1 - 0.25) = 0.75R$.\n3. Salesman X's price: $P_X = P_Z \\times (1 - 0.05) = 0.75R \\times 0.95 = 0.7125R$.\n4. Salesman Y's average price: $P_{avg} = (P_Z + P_X) / 2 = (0.75R + 0.7125R) / 2 = 1.4625R / 2 = 0.73125R$.\n5. Salesman Y's final price: $P_Y = P_{avg} \\times (1 - 0.30) = 0.73125R \\times 0.7 = 0.511875R$.\n6. The ratio $P_Y / P_X = 0.511875R / 0.7125R = 0.511875 / 0.7125$.\n7. Calculating the ratio: $0.511875 / 0.7125 = 511875 / 712500$.\n8. Dividing both by 1875: $511875 / 1875 = 273$; $712500 / 1875 = 380$.\n9. The ratio is $273 / 380$.\n10. Simplifying $273 / 380$: $273 / 380 \\approx 0.7184$.\n11. Checking the provided options:\n    a) 21/34 ≈ 0.6176\n    b) 55/71 ≈ 0.7746\n    c) 25/34 ≈ 0.7353\n    d) 26/34 ≈ 0.7647\n    e) 27/34 ≈ 0.7941\n12. None of the options match the calculated value $0.7184$ exactly. However, all three provided answers perform the same calculation and arrive at the same ratio ($0.71875$ or $0.7184$), and then struggle to match it to the provided choices. Answer 1 and Answer 3 both conclude that 25/34 is the closest option. Given the constraints, Answer 1 provides a clear, step-by-step derivation that matches the logic of the other answers.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "45bc05e8356e3b2d13f4d93af080423b7f83ffc304fca4172ab2c92c1e9206a3"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:55+00:00",
+            "usage_in": 3908,
+            "usage_out": 649
+        }
+    },
+    {
+        "item_id": 1601,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 2582,
+        "tokens_out": 292,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The total number of committee members is 3 (English) + 4 (Math) + 2 (Social Studies) = 9.\n2. The number of ways to choose 2 members from 9 is 9C2 = (9 × 8) / 2 = 36.\n3. The number of ways to choose 2 social studies teachers from the 2 available is 2C2 = 1.\n4. The probability is 1/36.\n5. All three provided answers correctly identify that the mathematical result is 1/36 and correctly note that this value is not among the provided choices (a-e).\n6. Answer 1 and Answer 3 both conclude that 1/36 is not an option and suggest that there is likely a typo in the source material, opting for 'b' (1/12) as a common placeholder or potential intended answer in flawed test banks. Answer 2 chooses 'e' (1/24) without a clear justification for why that specific choice is better than others.\n7. Since all answers correctly identify the mathematical impossibility of the provided choices, Answer 1 and Answer 3 provide a more consistent reasoning process regarding the discrepancy. Answer 1 is selected as the most representative of the logical evaluation of the error.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "52f0b37e93b13cddabff98fe07ff04b207305202d95e3b85258164c3392344ce"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:01:57+00:00",
+            "usage_in": 2583,
+            "usage_out": 292
+        }
+    },
+    {
+        "item_id": 1608,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 3904,
+        "tokens_out": 666,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem provides three equations:\n1) $2 + 7 = 57$\n2) $3 + 6 = 63$\n3) $5 + 9 = 206$\n\nLet's analyze the pattern:\n- For $2 + 7 = 57$: $(2+7) \\times 6 + 3 = 57$\n- For $3 + 6 = 63$: $(3+6) \\times 7 = 63$\n- For $5 + 9 = 206$: $(5+9) \\times 14 + 10 = 206$\n\nLooking at the multipliers and additions:\n- Multipliers: $6, 7, 14$. These don't show a simple linear progression.\n- Let's try another pattern: $(a+b)^2 - k$.\n- $2+7=9, 9^2=81$. $81 - 57 = 24$.\n- $3+6=9, 9^2=81$. $81 - 63 = 18$.\n- $5+9=14, 14^2=196$. $196 - 206 = -10$.\n- The values subtracted are $24, 18, -10$. No clear pattern.\n\nLet's look at Answer 3's logic: $(a+b) \\times (a+b) + (a \\times b) \\times \\dots$\nActually, let's test the pattern: $(a+b) \\times (a+b) + (a \\times b) \\times \\dots$\n$2+7=9, 9^2=81$. $81 - 24 = 57$.\n$3+6=9, 9^2=81$. $81 - 18 = 63$.\n$5+9=14, 14^2=196$. $196 + 10 = 206$.\nThis is not consistent.\n\nLet's re-examine the pattern in Answer 3: $(5+8) \\times 13 + 17 = 169 + 17 = 186$.\nIf we look at the multipliers used in Answer 3:\n$2+7=9 \\rightarrow 9 \\times 6 + 3 = 57$\n$3+6=9 \\rightarrow 9 \\times 7 = 63$\n$5+9=14 \\rightarrow 14 \\times 14 + 10 = 206$\nThe logic in Answer 3 is the most plausible attempt to find a consistent arithmetic progression for the multipliers and the added constants, even if the pattern is complex. Answer 3 arrives at 186, which is one of the choices.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "11f2171153a9d53a84bfc20b38891d32701ea2443a2db89dd372c5b23911269f"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:00+00:00",
+            "usage_in": 3905,
+            "usage_out": 666
+        }
+    },
+    {
+        "item_id": 1615,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 1691,
+        "tokens_out": 202,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem as stated is logically inconsistent because it provides the answer (10 days) within the premise and then asks for the same value, while the provided choices (a-e) are all decimals less than 2. All three provided answers correctly identify that the question is flawed or contains a typo. Answer 1 acknowledges the flaw and selects 'a' as a placeholder. Answer 2 attempts to find a calculation for 'b's rate (0.075) and selects 'e' (0.0775) as the closest value. Answer 3 attempts to find a calculation for the combined rate (0.1) and selects 'b' (0.125) as the closest value. Since the question is fundamentally broken, Answer 1 is the most honest assessment, as it correctly identifies that there is no logical basis for any of the choices and that the question is nonsensical.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "279670d41b68d2c8cd260d18b28c7c8e9cab709df9f22127e7c2cad5a3e9ee40"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:01+00:00",
+            "usage_in": 1692,
+            "usage_out": 202
+        }
+    },
+    {
+        "item_id": 1618,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 1439,
+        "tokens_out": 280,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states \"a works as fast as b\". Mathematically, this means their rates are equal. If b takes 20 days, a also takes 20 days. Together, they take 20/2 = 10 days.\n2. None of the provided choices (2, 3, 4, 5, 6 2/3) include 10.\n3. Answer 1 and Answer 3 both identify that the question likely contains a typo and assume the intended meaning was \"a works twice as fast as b\" (a common variation of this specific textbook problem), which leads to the calculation: Rate_a = 2/20, Rate_b = 1/20, Combined = 3/20, Time = 20/3 = 6 2/3 days. This matches choice (e).\n4. Answer 2 assumes a different typo (\"a works 3 times as fast as b\") to reach choice (d), which is a less standard interpretation of such problems compared to the \"twice as fast\" assumption.\n5. Answer 1 and 3 provide the most logical resolution to the discrepancy between the text and the choices. Answer 3 is slightly more concise in its reasoning.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "330c7cf01bbf4d2c57c98907ce21b57333367b1276ebb2a9178cfc2a5cf78037"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:03+00:00",
+            "usage_in": 1440,
+            "usage_out": 280
+        }
+    },
+    {
+        "item_id": 1649,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1165,
+        "tokens_out": 182,
+        "trace": {
+            "judge_output": "Reasoning process\nAll three answers correctly identify that the sum of three odd numbers must be odd, making it mathematically impossible to reach the even sum of 30 using the provided set. Answer 2 correctly identifies the standard lateral thinking solution to this riddle (rotating the 9 to a 6), which allows the equation to be solved (6 + 11 + 13 = 30). While the provided choices (a-e) do not contain the numbers used in the solution, Answer 2 is the only one that correctly identifies the nature of the riddle and provides a logical justification for selecting choice 'b' (the target sum itself) as the most relevant option among the choices provided. Answers 1 and 3 admit the problem is impossible but fail to identify the standard riddle solution, leading them to choose 'a' arbitrarily.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "ae59e8eb025be20c183677b90dc75fadb7a9751af44982642415a59f9c3641af"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:05+00:00",
+            "usage_in": 1166,
+            "usage_out": 182
+        }
+    },
+    {
+        "item_id": 1664,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 3470,
+        "tokens_out": 332,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The cost of the item is $15.\n2. The distributor wants a 40% profit on the cost, which is $15 * 0.40 = $6.\n3. The distributor needs to receive $15 + $6 = $21 after the commission is deducted.\n4. The commission is 20% of the price set by the distributor ($P$). The amount the distributor receives is $P - 0.20P = 0.80P$.\n5. Setting $0.80P = 21$ gives $P = 21 / 0.80 = 26.25$.\n6. None of the provided options (18, 30, 22, 22.5, 27) exactly match 26.25.\n7. Answer 1 and Answer 2 conclude that 27 is the closest option and select it.\n8. Answer 3 attempts to justify 22.5, but its own calculation shows that 22.5 results in a 20% profit, not 40%.\n9. Since 26.25 is mathematically correct based on the problem statement, and 27 is the closest value among the choices, Answer 1 and Answer 2 are more logically sound than Answer 3, which forces an incorrect answer. Answer 1 provides a clear, step-by-step derivation that acknowledges the discrepancy.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "ca1ef0414295b63da694099a115387d7867115aed208e7a483f51f45afd3b48a"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:06+00:00",
+            "usage_in": 3471,
+            "usage_out": 332
+        }
+    },
+    {
+        "item_id": 1699,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 3509,
+        "tokens_out": 463,
+        "trace": {
+            "judge_output": "Reasoning process\n1. All three answers correctly identify the rates (1/6 and 1/10) and the combined rate (4/15).\n2. All three answers correctly calculate that 8/15 of the job is completed in the first two hours, leaving 7/15 of the job remaining.\n3. All three answers correctly calculate that the time required for the new guy to finish the remaining 7/15 of the job is (7/15) / (1/10) = 14/3 hours.\n4. 14/3 is approximately 4.66 hours. None of the provided options (a: 1.75, b: 1.33, c: 3.75, d: 3.73, e: 3.4) match 14/3.\n5. Since the mathematical result is consistent across all answers and none match the options, the question likely contains a typo.\n6. Answer 1 chooses 'd' (56/15 = 3.733) as the closest value to 14/3 (4.666).\n7. Answer 2 and 3 choose 'c' (15/4 = 3.75) as a \"common result\" or \"most likely intended answer\".\n8. Comparing 14/3 (4.666) to the options:\n   - |14/3 - 56/15| = |70/15 - 56/15| = 14/15 ≈ 0.933\n   - |14/3 - 15/4| = |56/12 - 45/12| = 11/12 ≈ 0.916\n9. Since 15/4 is mathematically closer to 14/3 than 56/15 is, Answer 3 provides the most logical selection among the choices provided, despite the inherent error in the problem's options.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "b011b8180a5cc9319895ed1bf0c50dcaf89b9b0bc805a10a18dc612ae1d38452"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:09+00:00",
+            "usage_in": 3510,
+            "usage_out": 463
+        }
+    },
+    {
+        "item_id": 1702,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 5308,
+        "tokens_out": 306,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states: \"after a storm deposits 120 billion gallons... the reservoir is 50% full\" and \"the original contents... totaled 280 billion gallons\".\n2. Let $C$ be the capacity. The equation is: $280 + 120 = 0.5C$, which leads to $400 = 0.5C$, so $C = 800$.\n3. The percentage before the storm is $(280 / 800) \\times 100 = 35\\%$.\n4. All three provided answers correctly identify that the mathematical result is 35%, which is not among the choices (a-e).\n5. Answer 1 concludes that the problem likely contains a typo and selects 'a' as a placeholder.\n6. Answer 2 concludes that the problem likely contains a typo and selects 'a' as a placeholder.\n7. Answer 3 concludes that the problem likely contains a typo and selects 'b' as a placeholder.\n8. Since the mathematical result (35%) is not present in any of the choices, all answers are technically incorrect regarding the provided options. However, Answer 1 and Answer 2 provide a more consistent logical derivation of the 35% result before acknowledging the discrepancy. Answer 1 is the most straightforward in its reasoning process.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "0fbb3d6885830407e594f5716fdcd0ab4e6e1a210fe8fd41a5a0ce1c7646d246"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:11+00:00",
+            "usage_in": 5309,
+            "usage_out": 306
+        }
+    },
+    {
+        "item_id": 1738,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 1584,
+        "tokens_out": 203,
+        "trace": {
+            "judge_output": "Reasoning process\nThe mathematical calculation for 8 contestants competing for 1st and 2nd place is 8 × 7 = 56. Since 56 is not among the choices, the question must be interpreted differently. The mention of \"4 different countries\" is the only additional information provided. If the question asks for the number of ways the medals can be awarded to the countries (assuming each country is treated as a single entity or the question is simplified to the country level), the calculation becomes 4 × 3 = 12. Both Answer 1 and Answer 3 identify this logic and arrive at 12, which corresponds to choice (c). Answer 2 suggests 24, which is less logically supported by the provided constraints than the permutation of the 4 countries. Answer 3 provides a more concise and clear explanation for why 12 is the intended answer despite the initial calculation of 56.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "a2ecca55963f7ba0ef86d45ecb488767c18720cf1539d30cc9cb2cdcceb7fcf7"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:12+00:00",
+            "usage_in": 1585,
+            "usage_out": 203
+        }
+    },
+    {
+        "item_id": 1742,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 2314,
+        "tokens_out": 381,
+        "trace": {
+            "judge_output": "Reasoning process\n1. Each triangular prism has 5 faces (2 triangular, 3 rectangular).\n2. When three prisms are joined in a \"ring\" or \"cluster\" configuration (where each prism is attached to the other two), they form a larger triangular prism with a hole in the middle or a larger triangular prism shape.\n3. Specifically, if three prisms are joined such that they share rectangular faces to form a larger triangular prism (where the cross-section is a larger equilateral triangle), the internal rectangular faces are hidden.\n4. In a cluster of three prisms joined along their rectangular faces to form a larger triangular prism:\n   - The 3 outer rectangular faces remain (each is a large face).\n   - The 6 triangular bases (2 per prism) are on the ends. The 3 prisms are arranged such that their bases form a larger triangular base at each end. Thus, there are 2 large triangular faces.\n   - This would result in 5 faces.\n5. However, if the prisms are arranged such that they form a shape where the triangular bases are not fully merged into one large triangle, or if the configuration is different, we look for the count that matches the options.\n6. If the prisms are joined in a ring (each prism attached to two others), there are 3 junctions. Each junction hides 2 rectangular faces. Total rectangular faces = 9. 9 - 6 = 3 external rectangular faces.\n7. The triangular bases: Each prism has 2. Total 6. None of the triangular bases are hidden in a ring configuration.\n8. Total faces = 3 (rectangular) + 6 (triangular) = 9.\n9. This matches option (c). Answer 3 provides this logical derivation.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "3f137f4dccc00f03363dd6265ec027988bd8499e411d65e69151c4ccdb1fbcf8"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:15+00:00",
+            "usage_in": 2315,
+            "usage_out": 381
+        }
+    },
+    {
+        "item_id": 1759,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1534,
+        "tokens_out": 236,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem statement \"a bag of potatoes weighs 39 lbs divided by half of its weight\" is mathematically ambiguous and likely contains a typo or is a poorly constructed riddle. All three answers correctly identify that the literal algebraic interpretation ($x = 39 / (x/2)$) leads to $x^2 = 78$, which does not result in any of the provided options. Answer 1 and Answer 2 struggle to find a logical connection to the choices, with Answer 1 guessing based on proximity and Answer 2 guessing based on common riddle patterns. Answer 3 identifies that 13 is a factor of 39 ($39 / 3 = 13$), suggesting that the \"half\" might be a misstatement for a different divisor or that 13 is the intended answer due to its arithmetic relationship with 39. Given that none of the answers can derive the result mathematically from the text provided, Answer 3 provides the most plausible explanation for why one of the specific choices (13) might be the intended answer in a flawed test question.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "0ed6e06b4d8f4c66bca54bbb34ef435deb4f0785928704520f1462e936948c39"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:16+00:00",
+            "usage_in": 1535,
+            "usage_out": 236
+        }
+    },
+    {
+        "item_id": 1804,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 2559,
+        "tokens_out": 400,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states: $18.00/day for the first week (7 days) and $15.00/day for each additional week.\n2. 23 days = 7 days (1st week) + 16 days (additional).\n3. The phrase \"$15.00/day for each additional week\" is mathematically ambiguous. If interpreted as $15.00/day for all days after the first week, the total is $126 + $240 = $366.\n4. None of the provided options (336, 289, 282, 274, 286) match $366.\n5. Answer 1 and Answer 3 both conclude that the math leads to $366 and then arbitrarily adjust the rate to $10/day to force the result to $286 (option e).\n6. Answer 2 explores the possibility that the \"additional week\" rate ($15/day) applies to the 2nd and 3rd weeks (14 days) and suggests that the remaining 2 days might be free or handled differently, leading to $336 (option a).\n7. $336 is a plausible result if the calculation is: (7 days * $18) + (14 days * $15) = $126 + $210 = $336. This assumes the 23rd day is not charged or the \"additional week\" rate only applies to full weeks.\n8. Given that all answers struggle with the prompt's ambiguity, Answer 2 provides the most logical path to one of the provided choices without assuming a typo in the rate (changing $15 to $10).\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "101e2d103c68a00dfbec5197cf05e279b26d4b70e4a7072550681d61656fdd89"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:19+00:00",
+            "usage_in": 2560,
+            "usage_out": 400
+        }
+    },
+    {
+        "item_id": 1806,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 2498,
+        "tokens_out": 322,
+        "trace": {
+            "judge_output": "Reasoning process\n1. All three answers correctly identify that the total capacity $C$ is 200 billion gallons ($75 / 0.375 = 200$) and that the shortage prior to the storm is 150 billion gallons ($200 - 50 = 150$).\n2. All three answers correctly note that 150 is not among the provided choices (a-e).\n3. Answer 1 suggests choosing (c) 124 based on the logic that the shortage *after* the storm is 125 ($200 - 75 = 125$), which is close to 124.\n4. Answers 2 and 3 suggest choosing (d) 120, but their reasoning for doing so is based on assuming the question contains a typo or that the capacity was different, which is speculative.\n5. Comparing the logic, the shortage *after* the storm is exactly 125 billion gallons ($200 - 75 = 125$). Given the phrasing \"approximately how many billion gallons... were the reservoirs short... prior to the storm\", it is highly probable that the question intended to ask for the shortage *after* the storm, or that 124 is the intended answer due to a slight rounding or typo in the source material. Answer 1 provides the most logical path to one of the provided choices by identifying the post-storm shortage.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "8c61ada0168d25d8a6e2de2c7582c36ced15ab8d93e228a2c932b308c03f911e"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:21+00:00",
+            "usage_in": 2499,
+            "usage_out": 322
+        }
+    },
+    {
+        "item_id": 1822,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 2251,
+        "tokens_out": 186,
+        "trace": {
+            "judge_output": "Reasoning process\nAll three answers correctly identify that the mathematical result is 25 workers. The formula used, (Workers1 * Hours1) / Work1 = (Workers2 * Hours2) / Work2, is standard for this type of problem. Since 25 is not among the choices (10, 20, 30, 40, 50), the problem contains a flaw or a typo. Answer 1 and Answer 2 both conclude that 30 is the most logical choice, while Answer 3 chooses 20. In standardized testing contexts where a calculated answer is exactly between two options, choosing the higher value (30) is often preferred to ensure the work is completed (as 20 would result in insufficient labor). Answer 1 and 2 provide consistent reasoning for selecting 30.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "46d92d53f3d6b911ad943d5728479cb54f1d91103f5121e4881f2abd2f2f36b6"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:22+00:00",
+            "usage_in": 2252,
+            "usage_out": 186
+        }
+    },
+    {
+        "item_id": 1847,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 1846,
+        "tokens_out": 281,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states the track is 1000 meters (1 km) and speeds are 20 km/hr and 14 km/hr.\n2. The relative speed is 34 km/hr. The time to meet is 1 km / 34 km/hr = 1/34 hours, which is approximately 1.76 minutes.\n3. All three answers correctly identify that the mathematical result (1.76 minutes) does not match any of the provided choices (a-e).\n4. Answer 1 suggests choosing 'c' (34 min) simply because the number 34 appears in the relative speed calculation, which is a logical fallacy (matching a number rather than solving the problem).\n5. Answers 2 and 3 acknowledge the discrepancy and hypothesize that there is a typo in the problem's distance (suggesting 11.33 km instead of 1 km) to arrive at 20 minutes.\n6. While the problem is flawed, Answer 2 and 3 provide a more analytical approach to identifying the likely intended answer (20 minutes) by reverse-engineering the math, whereas Answer 1 relies on a superficial numerical coincidence. Answer 2 is slightly more concise in its reasoning.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "23d452cc4fbac28bdd28311fcc92cb3676c4f383b6be82ec64299f659c92d89d"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:24+00:00",
+            "usage_in": 1847,
+            "usage_out": 281
+        }
+    },
+    {
+        "item_id": 1882,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 4183,
+        "tokens_out": 321,
+        "trace": {
+            "judge_output": "Reasoning process\nAll three answers correctly identify that the problem as stated leads to a non-integer result ($5c = 49$). The core of the issue is that the change in candy count when replacing 2 incorrect answers with 2 correct answers is $3(2) - (-2)(2) = 6 + 4 = 10$. If the current score is $S$, then $S + 10 = 31$, meaning $S = 21$. Setting $3c - 2(14-c) = 21$ leads to $5c = 49$. \n\nSince $5c = 49$ is mathematically unavoidable given the problem text, we must look for the most likely intended answer. If the target was 32 instead of 31, $c=10$ (Answer 1 and 2). If the target was 27 instead of 31, $c=9$ (Answer 3). Given that 31 is closer to 32 than 27, and that $c=10$ is a common \"clean\" answer in such problems, Answer 1 and 2 are more logically consistent in their assumption of a typo. Answer 1 provides a clear, step-by-step derivation that acknowledges the non-integer result and identifies the likely typo. Answer 2 is also correct in its derivation. Answer 1 is slightly more concise in its explanation of the discrepancy.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "f0ddbe4bab40e363474e8aad99412899ab3bc18d60dd23aac48282c86e0ee4fc"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:26+00:00",
+            "usage_in": 4184,
+            "usage_out": 321
+        }
+    },
+    {
+        "item_id": 1947,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 2267,
+        "tokens_out": 308,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states the average price of 3 items is 15,000, so the total is 45,000.\n2. The ratio 2:4:8 sums to 14. Dividing 45,000 by 14 does not yield an integer, and the result (approx 6428.57) is not among the choices.\n3. All three answers correctly identify that the problem as stated is mathematically inconsistent with the provided choices.\n4. Answer 1 suggests the ratio might have been 2:3:5 (sum 10), which leads to 45,000/10 = 4,500, and 2 * 4,500 = 9,000 (choice d).\n5. Answers 2 and 3 suggest the ratio or total might be different to arrive at 5,625 (choice c).\n6. Comparing the logic, 9,000 is a much more common result in these types of textbook problems (often involving simple ratios like 2:3:5 or 1:2:3). The assumption in Answer 1 that the ratio was 2:3:5 is a standard way to resolve such errors in test questions. Therefore, Answer 1 provides the most logical path to one of the provided options.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "f8a22e7916343287deb628c028ff568bf20213c8b20e9a83276cce9fdfd9937d"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:28+00:00",
+            "usage_in": 2268,
+            "usage_out": 308
+        }
+    },
+    {
+        "item_id": 1971,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 2097,
+        "tokens_out": 189,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem as stated is mathematically underspecified. It provides a relationship between Shahrukh's speed ($v_s$) and Kajol's speed ($v_k$), but it does not provide any information about Ajay's speed ($v_a$) or the distance at which Shahrukh meets Kajol. Without knowing Ajay's speed, it is impossible to calculate a specific minimum speed for Shahrukh to overtake him. Answers 1 and 2 attempt to force a solution by making arbitrary assumptions about the variables (e.g., assuming $v_k$ is negligible or that 21 is the answer simply because it is the smallest value greater than 20). Answer 3 correctly identifies that the problem is underspecified and that the provided information is insufficient to determine a specific numerical value, making \"none of these\" the most logical choice.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "54d3591a28ec588f5c7d082f259710775267efa2e87263a3809abab83f7db750"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:30+00:00",
+            "usage_in": 2098,
+            "usage_out": 189
+        }
+    },
+    {
+        "item_id": 1984,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:en"
+        ],
+        "tokens_in": 2641,
+        "tokens_out": 420,
+        "trace": {
+            "judge_output": "Reasoning process\nThe mathematical constraint for the integer $n$ on a card is $15 \\le n(n+1) \\le 150$.\nSolving $n(n+1) \\ge 15$:\n$n^2 + n - 15 \\ge 0$. The roots of $n^2 + n - 15 = 0$ are $n = \\frac{-1 \\pm \\sqrt{1 + 60}}{2} \\approx \\frac{-1 \\pm 7.8}{2}$. The positive root is $\\approx 3.4$. Thus, $n \\ge 4$.\nSolving $n(n+1) \\le 150$:\n$n^2 + n - 150 \\le 0$. The roots of $n^2 + n - 150 = 0$ are $n = \\frac{-1 \\pm \\sqrt{1 + 600}}{2} \\approx \\frac{-1 \\pm 24.5}{2}$. The positive root is $\\approx 11.75$. Thus, $n \\le 11$.\nThe valid integers $n$ are $\\{4, 5, 6, 7, 8, 9, 10, 11\\}$. The least is 4 and the greatest is 11.\nNone of the provided choices (a-e) contain the correct upper bound (11). However, all three provided answers correctly identify that the lower bound must be 4, which eliminates (a), (b), and (e). Between (c) and (d), (c) is closer to the correct upper bound (12 vs 14). Answer 1 and Answer 3 both select (c) based on this proximity. Answer 1 provides a clear, logical derivation of the bounds and acknowledges the discrepancy in the options.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "4d6b8a708a10246278156031b0e4ccd5b791d36d1c2fd965057430335a6ae94c"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:32+00:00",
+            "usage_in": 2642,
+            "usage_out": 420
+        }
+    },
+    {
+        "item_id": 1992,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 1618,
+        "tokens_out": 216,
+        "trace": {
+            "judge_output": "Reasoning process\nThe constraints are $100 < x < 199$ and $9 < y < 100$. The product $xy$ must satisfy $100 \\times 9 < xy < 199 \\times 100$, which simplifies to $900 < xy < 19,900$. \n- Answer 1 assumes the variables are integers, which is not stated in the problem, and concludes (e) is the answer based on an arbitrary integer calculation.\n- Answer 2 and Answer 3 correctly identify the upper bound of the product as $199 \\times 100 = 19,900$. They correctly observe that choice (c), 19,956.732, exceeds this upper bound, making it impossible for the product to equal that value. \n- Answer 3 provides a clear and accurate derivation of the range and correctly identifies the impossible value.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "a26019b6377dcad047d18469da07b09f220ed265f2421455a7261ebce02ab9ce"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T16:02:34+00:00",
+            "usage_in": 1619,
+            "usage_out": 216
+        }
+    }
+]
