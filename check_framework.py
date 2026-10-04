@@ -40,13 +40,17 @@ from Aggregator.JudgeAggregator import JudgeAggregator
 from File.File import File
 from File.ResultStore import ResultStore
 from Log.NoLog import NoLog
-from Analysis.splitHalf import recoveryStats
+from Analysis.splitHalf import recoveryStats, makeSplits
+import pandas as pd
 from Strategy.StrategyType import StrategyType
 from Test.TestTokenNums import TOKEN_COUNTERS
 from Analysis.experimentPlan import ARMS_TO_PAIR
 from Analysis.alignment import CellData, alignPair
 from Analysis.metrics import computeRow, subsetMask
 from Analysis.itemExport import pathRows, aggregationRows
+from Analysis.itemMatrix import Block, Cell, PAIR_BY_LABEL
+from Analysis.experimentPlan import PATHS
+from Analysis import probe as rq1
 
 # Hashes of the prompts produced by the legacy OnlyOneLanguage.getPrompt (deleted 2026-10) BEFORE it was refactored onto PromptBuilder
 GOLDEN_QUESTION = 'There is a Problem: \nWhat is 2+2?.\nAnd there are 5 choices\na ) 1 , b ) 2 , c ) 3 , d ) 4 , e ) 5\n'
@@ -715,6 +719,111 @@ def checkModelRequests():
                                temperature=0.0, stream=False))
 
 
+def syntheticBlocks() -> dict:
+    """Two models × two datasets with all 14 paths and judge cells EN+ZH, ZH+JA, EN+S1, P1+P2."""
+    blocks = {}
+    for model in ("m1", "m2"):
+        for dataset, n in (("mathqa", 200), ("mmlu", 120)):
+            rng = np.random.default_rng([len(model), n])
+            correct = {code: rng.random(n) < 0.6 for code in PATHS}
+            answered = {code: np.ones(n, dtype=bool) for code in PATHS}
+            answered["ZH"][:5] = False                                  # both_answered drops these for pairs with ZH
+            if (model, dataset) == ("m1", "mathqa"):
+                correct["ZH"], correct["EN"] = np.ones(n, dtype=bool), np.zeros(n, dtype=bool)
+            cells = {}
+            for label in ("EN+ZH", "ZH+JA", "EN+S1", "P1+P2"):
+                pair = PAIR_BY_LABEL[label]
+                cell = Cell(pair=pair, aggregator="judge", correct_agg=None, dis=None)
+                a, b = cell.codes
+                dis = (correct[a] != correct[b]) | (rng.random(n) < 0.1)
+                cell.dis = dis
+                cell.correct_agg = np.where(dis, rng.random(n) < 0.5, correct[a])
+                if (model, dataset, label) == ("m1", "mathqa", "EN+ZH"):
+                    cell.correct_agg = np.zeros(n, dtype=bool)          # aggregating never pays here
+                cells[(label, "judge")] = cell
+            blocks[(model, dataset)] = Block(model=model, dataset=dataset, item_ids=np.arange(n), correct=correct,
+                                             answered=answered, cells=cells)
+    return blocks
+
+
+def checkProbe():
+    """RQ1 (Analysis/probe.py) on synthetic blocks: H1-only decisions, transfers by path name, flags, the §5 verdict."""
+    check("15a. tie order: EN first, then path codes alphabetically; Excess = 0 is not aggregated (main) / aggregated (sensitivity a)",
+          rq1.strongest({"ZH": 5, "EN": 5}) == "EN" and rq1.strongest({"P2": 3, "P1": 3}) == "P1"
+          and rq1.strongest({"ZH": 3, "SR-ZH": 3}) == "SR-ZH"
+          and rq1.choose(5, {"EN": 5, "ZH": 4}) == rq1.Choice(aggregate=False, aggregate_if_tie=True, tie=True, path="EN"))
+    values = dict(zip(rq1.METRICS, rq1.score(rq1.Choice(False, False, False, "ZH"), 6, {"EN": 7, "ZH": 5}, 10)))
+    check("15b. scores on H2: D / A / S / Oracle and the H2-true path of sensitivity (b)",
+          (values["acc_D"], values["acc_A"], values["acc_S"], values["acc_O"], values["acc_D_truepath"], values["acc_S_truepath"])
+          == (0.5, 0.6, 0.5, 0.7, 0.7, 0.7))
+
+    blocks = syntheticBlocks()
+    first = rq1.runProbes(blocks, ks=(25, 150), reps=3, seed=0)
+    check("15c. same seed, same table", first.equals(rq1.runProbes(syntheticBlocks(), ks=(25, 150), reps=3, seed=0)))
+
+    # Flip every label on H2 of rep 0: decisions (aggregate / tie / short) must not move, scores must
+    one = rq1.runProbes(blocks, ks=(25, 150), reps=1, seed=0)
+    flipped = syntheticBlocks()
+    for block in flipped.values():
+        h2 = ~makeSplits(len(block.item_ids), 1, 0)[0]
+        for code in block.correct:
+            block.correct[code] = np.where(h2, ~block.correct[code], block.correct[code])
+        for cell in block.cells.values():
+            cell.correct_agg = np.where(h2, ~cell.correct_agg, cell.correct_agg)
+    other = rq1.runProbes(flipped, ks=(25, 150), reps=1, seed=0)
+    decisions = ["aggregate", "tie", "short", "reps", "skipped_reps"]
+    check("15d. decisions use only H1: flipping every H2 label changes the scores but no decision",
+          one[decisions].equals(other[decisions]) and not one["acc_A"].equals(other["acc_A"]))
+
+    def row(setting, model, dataset, label, source, baseline="pair", k=rq1.NO_K):
+        found = one[(one["setting"] == setting) & (one["model"] == model) & (one["dataset"] == dataset) & (one["pair"] == label)
+                    & (one["source"] == source) & (one["baseline"] == baseline) & (one["k"] == k)]
+        return found.iloc[0]
+
+    def h2Accuracy(model, dataset, code, label):
+        block = blocks[(model, dataset)]
+        both = block.bothAnswered(block.cells[(label, "judge")])
+        h2 = ~makeSplits(len(block.item_ids), 1, 0)[0] & both
+        return block.correct[code][h2].mean()
+
+    to_model = row(rq1.TRANSFER_MODEL, "m2", "mathqa", "EN+ZH", "m1")
+    to_dataset = row(rq1.TRANSFER_DATASET, "m1", "mmlu", "EN+ZH", "mathqa")
+    to_global = row(rq1.TRANSFER_MODEL, "m2", "mathqa", "EN+ZH", "m1", baseline="global")
+    to_source = row(rq1.TRANSFER_SOURCE, "m1", "mathqa", "EN+S1", "EN+ZH")
+    check("15e. transfers: model / dataset reuse the source's stronger path by name (ZH), the global p* too; "
+          "a source transfer takes the decision from the other pair but the target pair's own H1 path (S1)",
+          to_model["aggregate"] == 0 and to_model["acc_S"] == h2Accuracy("m2", "mathqa", "ZH", "EN+ZH")
+          and to_dataset["aggregate"] == 0 and to_dataset["acc_S"] == h2Accuracy("m1", "mmlu", "ZH", "EN+ZH")
+          and to_global["acc_S"] == h2Accuracy("m2", "mathqa", "ZH", "EN+ZH")
+          and to_source["aggregate"] == 0 and to_source["acc_S"] == h2Accuracy("m1", "mathqa", "S1", "EN+S1"))
+    same_axis = one[(one["setting"] == rq1.TRANSFER_SOURCE_SAME_AXIS) & (one["pair"] == "EN+ZH")]["source"].unique().tolist()
+    check(f"15f. same-axis sources are kept apart ({same_axis}); no transfer crosses model and dataset at once",
+          same_axis == ["ZH+JA"] and set(one[one["setting"] == rq1.TRANSFER_MODEL]["source"]) == {"m1", "m2"}
+          and set(one[one["setting"] == rq1.TRANSFER_DATASET]["source"]) == {"mathqa", "mmlu"})
+    skipped = row(rq1.PROBE_RANDOM, "m1", "mathqa", "EN+ZH", "", k=150)
+    short = row(rq1.PROBE_DIS, "m1", "mathqa", "P1+P2", "", k=150)
+    check("15g. a random probe larger than H1 is skipped and flagged; a short disagreement probe uses all of them and is flagged",
+          skipped["reps"] == 0 and skipped["skipped_reps"] == 1 and short["short"] == 1
+          and (scored := one[one["reps"] > 0])["acc_O"].ge(scored[["acc_D", "acc_A", "acc_S"]].max(axis=1) - 1e-12).all())
+
+    def blocksFor(probe_diff, transfer_diffs, regret_A=1.0):
+        rows = []
+        for setting, k, diffs in [(rq1.PROBE_RANDOM, 200, probe_diff)] + [(t, rq1.NO_K, d) for t, d in zip(rq1.TRANSFERS, transfer_diffs)]:
+            for i, diff in enumerate(diffs):
+                rows.append(dict(setting=setting, baseline="pair", aggregator="judge", k=k, model=f"m{i}", dataset="d",
+                                 regret_A=regret_A, regret_S=2.0, diff_D_A=diff, diff_D_S=diff + 1.0))
+        return pd.DataFrame(rows)
+    good, bad = [0.6, 0.7, 0.8, 0.9], [0.1, -0.2, 0.3, 0.0]
+    success = rq1.criteriaTable(blocksFor(good, [bad, good, bad]))
+    failed = rq1.criteriaTable(blocksFor(good, [bad, bad, bad]))
+    no_room = rq1.criteriaTable(blocksFor(good, [good, good, good], regret_A=0.1))
+    check("15h. §5: space = smaller dumb regret, margin vs the better dumb method ≥ half the space with CI > 0, "
+          "success needs the probe and one transfer; space < 0.2pp means no room",
+          success["better"].tolist() == ["A"] * 4 and success["met"].tolist() == [True, False, True, False]
+          and rq1.verdict(success).startswith("成功") and rq1.verdict(failed).startswith("不成功")
+          and rq1.verdict(no_room).startswith("沒有空間"))
+
+
 def checkTokenCounts():
     """TestTokenNums keeps the legacy strategies' output-token definitions (FakeModel counts words)."""
     model = FakeModel()
@@ -742,6 +851,7 @@ def main():
     checkDebateEquivalence()
     checkTokenCounts()
     checkModelRequests()
+    checkProbe()
     with tempfile.TemporaryDirectory() as tmp:
         checkGenerateAndAggregate(tmp)
         checkRewrite(tmp)

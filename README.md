@@ -143,6 +143,20 @@ python run_analysis.py
 python import_legacy.py -m gpt4omini -d mathqa --sr-dir result/self_reflection
 ```
 
+**⑥ RQ1：少量標註預測「聚合或用單一 path」**（先跑完 ④，它讀 `result/analysis/items/`）
+
+```bash
+python scripts/analysis_rq1/probe_regret.py --check-only          # 只做執行前核對（逐題資料 vs aggregation_cells.csv）
+python scripts/analysis_rq1/probe_regret.py -m gpt4omini qwen     # preliminary -> result/analysis/rq1/preliminary/
+python scripts/analysis_rq1/probe_regret.py                       # 最終（四個模型）-> result/analysis/rq1/
+```
+
+- 規格與判定標準在 `result/analysis/rq1/rq1_criteria.md`。它的「確認」欄填上時間之前，程式只允許 `--check-only`；
+  確認之後不得修改，每份輸出都記錄它的 sha256。
+- 每次重複（200 次，seed 0）把每個資料集切成 H1 / H2（`makeSplits`，同一資料集的模型與配對共用）；
+  決策只用 H1（同格 probe 取 H1 的 k 題；遷移用來源格的整個 H1），評估一律在 H2。程式在 `Analysis/probe.py`，輸入層在 `Analysis/itemMatrix.py`。
+- 輸出：`cells.csv.gz`、`blocks.csv`（每區塊原始數字）、`summary.csv`、`criteria.csv`、`report.md`、`k_curves_{judge,debate}.png`。
+
 ---
 
 ## 5. 驗證
