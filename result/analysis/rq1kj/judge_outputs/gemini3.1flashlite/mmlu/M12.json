@@ -1,0 +1,1324 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh vs L:ja vs L:ru vs L:es vs S:T1.0:seed1 vs S:T1.0:seed2 vs P:expert vs P:skeptic vs W:rewrite1 vs W:rewrite2 vs R:short_cot)",
+            "languages": [
+                "english",
+                "chinese",
+                "japanese",
+                "russian",
+                "spanish",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 12,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-k-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/mmlu/L_en.json",
+            "result/arms/gemini3.1flashlite/mmlu/L_zh.json",
+            "result/arms/gemini3.1flashlite/mmlu/L_ja.json",
+            "result/arms/gemini3.1flashlite/mmlu/L_ru.json",
+            "result/arms/gemini3.1flashlite/mmlu/L_es.json",
+            "result/arms/gemini3.1flashlite/mmlu/S_T1.0_seed1.json",
+            "result/arms/gemini3.1flashlite/mmlu/S_T1.0_seed2.json",
+            "result/arms/gemini3.1flashlite/mmlu/P_expert.json",
+            "result/arms/gemini3.1flashlite/mmlu/P_skeptic.json",
+            "result/arms/gemini3.1flashlite/mmlu/W_rewrite1.json",
+            "result/arms/gemini3.1flashlite/mmlu/W_rewrite2.json",
+            "result/arms/gemini3.1flashlite/mmlu/R_short_cot.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 306,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "menu_judge",
+        "menu": "M12",
+        "item_filter": "menu_all_answered_disagreement",
+        "n_judged_items": 302,
+        "order_scheme": "grouped_rotation_seed0",
+        "api_usage": {
+            "calls": 25,
+            "calls_without_usage": 0,
+            "prompt_tokens": 77273,
+            "completion_tokens": 7021,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 25
+        },
+        "calls_utc": {
+            "first": "2026-10-04T15:52:24+00:00",
+            "last": "2026-10-04T15:53:08+00:00"
+        }
+    },
+    {
+        "item_id": 5,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed2",
+            "P:expert",
+            "W:rewrite1",
+            "S:T1.0:seed1",
+            "R:short_cot",
+            "L:zh",
+            "L:en",
+            "L:ru",
+            "L:es",
+            "P:skeptic",
+            "L:ja",
+            "W:rewrite2"
+        ],
+        "tokens_in": 6197,
+        "tokens_out": 539,
+        "trace": {
+            "judge_output": "Reasoning process\n1. Statement 1: If a group $G$ contains an element $x$ of order 15, the cyclic subgroup $\\langle x \\rangle$ contains exactly $\\phi(15) = 8$ elements of order 15. Thus, the group must have at least 8 elements of order 15. This is true.\n2. Statement 2: If a group has more than 8 elements of order 15, does it necessarily have at least 16? Let $G$ be a group with elements of order 15. The elements of order 15 are partitioned into sets of 8 by the cyclic subgroups of order 15. Specifically, if $x$ has order 15, the set of elements of order 15 in $\\langle x \\rangle$ is $\\{x^k : \\gcd(k, 15)=1\\}$. If $y$ is another element of order 15 not in $\\langle x \\rangle$, then $\\langle y \\rangle$ is a distinct cyclic subgroup of order 15. The intersection $\\langle x \\rangle \\cap \\langle y \\rangle$ must be a subgroup of both. The orders of elements in the intersection must divide $\\gcd(15, 15) = 15$. If the intersection contains an element of order 15, then $\\langle x \\rangle = \\langle y \\rangle$. Thus, distinct cyclic subgroups of order 15 intersect only at elements of order 1, 3, or 5. Since elements of order 15 cannot be in the intersection of two distinct cyclic subgroups of order 15, the sets of elements of order 15 are disjoint. Therefore, the total number of elements of order 15 must be a multiple of 8. If there are more than 8, the next multiple is 16. This is true.\n3. Reviewing the provided answers: Answer 1, 2, 4, 5, 6, 7, 8, 11, and 12 all correctly identify both statements as True. Answer 10 incorrectly claims that the intersection of two cyclic subgroups of order 15 can contain elements of order 15 (which is impossible) or that the count can be 12 or 14 (which is impossible because elements of order 15 are not shared). Answer 9 provides a flawed counter-example logic. Answer 1 is a clear and correct derivation.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "3d91f64912f07dbba315c4000d5e0a889b748fa8c5e766f830e9fdd0ec808a55"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:24+00:00",
+            "usage_in": 6198,
+            "usage_out": 539
+        }
+    },
+    {
+        "item_id": 20,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "P:skeptic",
+            "S:T1.0:seed2",
+            "L:ja",
+            "S:T1.0:seed1",
+            "R:short_cot",
+            "P:expert",
+            "W:rewrite2",
+            "W:rewrite1",
+            "L:zh",
+            "L:en",
+            "L:es"
+        ],
+        "tokens_in": 4278,
+        "tokens_out": 442,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks to evaluate two statements:\n1. $|G + H| = |G||H|$ for finite groups $G$ and $H$ (where $+$ denotes the internal direct product).\n2. If $r|m$ and $s|n$, then $\\mathbb{Z}_m + \\mathbb{Z}_n$ has a subgroup isomorphic to $\\mathbb{Z}_r + \\mathbb{Z}_s$.\n\n- Statement 1: The internal direct product of two groups $G$ and $H$ is isomorphic to the external direct product $G \\times H$. The order of the direct product of two finite groups is indeed the product of their orders. While \"+\" is not the standard notation for the direct product of general groups (usually $\\times$ or $\\oplus$), it is standard in additive notation for abelian groups. Given the context of Statement 2 (which uses $\\mathbb{Z}_m$), the additive notation is appropriate. Thus, Statement 1 is True.\n- Statement 2: In a cyclic group $\\mathbb{Z}_k$, for every divisor $d$ of $k$, there exists a unique subgroup of order $d$, which is isomorphic to $\\mathbb{Z}_d$. If $r|m$, $\\mathbb{Z}_m$ has a subgroup isomorphic to $\\mathbb{Z}_r$. If $s|n$, $\\mathbb{Z}_n$ has a subgroup isomorphic to $\\mathbb{Z}_s$. The direct product of these subgroups is a subgroup of $\\mathbb{Z}_m \\oplus \\mathbb{Z}_n$ and is isomorphic to $\\mathbb{Z}_r \\oplus \\mathbb{Z}_s$. Thus, Statement 2 is True.\n\nSince both statements are true, the correct choice is A. Most answers (1, 2, 3, 5, 7, 8, 9, 10, 11, 12) correctly identify both as true and conclude A. Answer 2 provides a clear, concise, and mathematically accurate justification for both statements.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "749f97ac3d07187b5962a041a8674431e89e6a4cae6d309d1013a23d70a9b4c6"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:26+00:00",
+            "usage_in": 4279,
+            "usage_out": 442
+        }
+    },
+    {
+        "item_id": 263,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "P:expert",
+            "W:rewrite1",
+            "L:zh",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "L:en",
+            "L:es",
+            "P:skeptic",
+            "L:ru",
+            "R:short_cot",
+            "L:ja"
+        ],
+        "tokens_in": 2273,
+        "tokens_out": 246,
+        "trace": {
+            "judge_output": "Reasoning process\nThe 1:2:4 Laplace resonance is a well-known phenomenon in the Jovian system. The resonance maintains the eccentricity of the orbits of Io, Europa, and Ganymede. This eccentricity is the direct cause of the tidal flexing (stretching and squeezing) that Io experiences as it orbits Jupiter, which in turn generates the intense internal heat responsible for its volcanic activity. \n\nMost of the provided answers (1-11) correctly identify that the significance of this resonance is the tidal heating of Io, which is the most scientifically significant consequence of this orbital configuration. Answer 12 argues for B, but while the resonance does make the orbit elliptical, the \"significance\" in scientific literature is almost universally defined by the resulting tidal heating (A). Answer 12's critique of A (\"different directions\" being inaccurate) is pedantic, as the tidal forces do indeed vary in magnitude and direction relative to the moon's body as it moves through its eccentric orbit. Therefore, the answers identifying A are the most accurate in the context of planetary science. Answer 2 provides a very clear and accurate explanation of the mechanism.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "215b047d460cc25becc25f36a1b76654b31928b7f018ef6fda9794dab93bf2f1"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:29+00:00",
+            "usage_in": 2274,
+            "usage_out": 246
+        }
+    },
+    {
+        "item_id": 499,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh",
+            "W:rewrite1",
+            "L:ru",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "P:expert",
+            "L:es",
+            "W:rewrite2",
+            "R:short_cot",
+            "L:ja"
+        ],
+        "tokens_in": 2784,
+        "tokens_out": 223,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks to identify the false statement among four options regarding exercise physiology. \n- Option A is true: Ammonia is a byproduct of the purine nucleotide cycle (AMP deamination) during high-intensity exercise.\n- Option B is false: Muscle lactate accumulation begins almost immediately (within 1-2 seconds) upon the initiation of high-intensity exercise as glycolysis is activated to meet ATP demands. The claim that it does not begin until at least 5 seconds is incorrect.\n- Option C is true: Phosphocreatine (PCr) is the primary immediate energy source and begins to deplete within the first few seconds of high-intensity exercise.\n- Option D is true: During repeated sprints, the rate of lactate accumulation typically declines due to metabolic fatigue, inhibition of glycolytic enzymes, and reduced power output.\n\nAll provided answers (1 through 12) correctly identify that statement B is the false one. Answer 1 provides a clear, accurate, and concise reasoning process that aligns with established exercise physiology principles.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "d22169c3af843bde13ddc1258703caef4c01de73a4085f80a99768cdf9b65f75"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:30+00:00",
+            "usage_in": 2785,
+            "usage_out": 223
+        }
+    },
+    {
+        "item_id": 1503,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "S:T1.0:seed1",
+            "L:en",
+            "L:es",
+            "L:zh",
+            "P:skeptic",
+            "W:rewrite2",
+            "P:expert",
+            "W:rewrite1",
+            "L:ja",
+            "L:ru",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 3843,
+        "tokens_out": 356,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The OKWS (O'Keeffe Web Server) architecture is specifically designed to achieve privilege separation by having a privileged `okd` process bind to privileged ports (e.g., 80/443) and accept connections, then pass the resulting file descriptors to unprivileged worker processes using `SCM_RIGHTS` via Unix domain sockets.\n2. Statement 1: If FD passing is unavailable, the `okd` process cannot hand off the established TCP socket to the worker processes. Since the worker processes are the ones intended to handle the application logic for the client, they would be unable to receive the connection. Thus, statement 1 is True.\n3. Statement 2: The requirement for `okd` to run as root is driven by the need to bind to privileged ports (< 1024). The FD passing mechanism is a tool for privilege *delegation* (allowing workers to be unprivileged), not a requirement for `okd` itself to run as non-root. `okd` must be root to bind the port regardless of whether it passes the FD or handles the connection itself. Therefore, the inability to pass FDs does not make it \"impossible\" for `okd` to run as a non-root user (it would just be unable to perform its specific task of delegating connections). Thus, statement 2 is False.\n4. Comparing the provided answers, Answer 9 correctly identifies that statement 1 is True (due to the inability to hand off connections) and statement 2 is False (because the root requirement is tied to port binding, not the FD passing mechanism itself).\n\nFinal Choice\n{\"choice\": 9}",
+            "choice": 9,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "808aa15096eccd78d2e962d1219ef98b82142b1195850051fe43f31b1b743917"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:32+00:00",
+            "usage_in": 3844,
+            "usage_out": 356
+        }
+    },
+    {
+        "item_id": 2447,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "S:T1.0:seed2",
+            "P:expert",
+            "W:rewrite1",
+            "S:T1.0:seed1",
+            "R:short_cot",
+            "L:zh",
+            "L:en",
+            "L:ru",
+            "L:es",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 3876,
+        "tokens_out": 403,
+        "trace": {
+            "judge_output": "Reasoning process\nThe formula is (~B • E) ⊃ D.\n1. The antecedent is (~B • E). This is a conjunction of two propositions: (~B) and (E).\n2. ~B means \"Izzy does not play Minecraft\" (or \"It is not the case that Izzy plays Minecraft\").\n3. E means \"Ashleigh stops by\".\n4. Therefore, (~B • E) means \"Izzy does not play Minecraft AND Ashleigh stops by\".\n5. The conditional ⊃ means \"If... then...\".\n6. The full translation is \"If (Izzy does not play Minecraft AND Ashleigh stops by), then (Russell makes dinner)\".\n7. Evaluating the choices:\n   - Choice A: \"If it's not the case that both Izzy plays Minecraft and Ashleigh stops by...\" translates to ~(B • E), which is logically equivalent to (~B v ~E). This is incorrect.\n   - Choice B: \"If it's both not the case that Izzy plays Minecraft and Ashleigh stops by...\" is a slightly awkward phrasing, but it correctly identifies the two components of the conjunction: (~B) and (E). It is the only choice that correctly captures the negation applying only to B and the conjunction with E.\n   - Choice C: Incorrect logical structure.\n   - Choice D: Incorrect logical structure (converse).\n8. Answer 1, 4, 5, 8, 10, and 12 correctly identify that B is the intended answer based on the logical structure (~B • E). Answer 2, 3, 6, 7, and 11 incorrectly interpret the scope of the negation or the structure of the formula. Answer 9 correctly identifies the formula but struggles with the phrasing of the choices. Answer 1 provides a clear and accurate breakdown.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "591018f23fce75a858715c6904fe14dfd7e8c7dc84f3a180910b521cf95a1433"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:34+00:00",
+            "usage_in": 3877,
+            "usage_out": 403
+        }
+    },
+    {
+        "item_id": 2570,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "S:T1.0:seed2",
+            "R:short_cot",
+            "S:T1.0:seed1",
+            "L:en",
+            "L:es",
+            "L:zh",
+            "P:skeptic",
+            "W:rewrite2",
+            "P:expert",
+            "W:rewrite1",
+            "L:ja"
+        ],
+        "tokens_in": 2145,
+        "tokens_out": 255,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the GDP per capita of the United States in 1850, adjusted for inflation and PPP in 2011 prices. According to the Maddison Project Database (the standard source for such historical economic data), the GDP per capita for the United States in 1850 in 2011 constant international dollars is approximately $3,000–$3,500. \n\n- Answers 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, and 12 correctly identify that the value is approximately $3,000 (Option B) based on the Maddison Project data.\n- Answer 7 claims the value is around $8,000 (Option C), which is historically inaccurate for the mid-19th century US economy, as that level of GDP per capita was not reached until much later in the 20th century.\n- Among the correct answers, Answer 2 provides a clear, concise, and accurate reasoning process in English, which is the language of the original question.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "2e51879e86e8f466ae88d9b7e0b56b96ce38e83c8253ed6ba41a881fe3b0632a"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:36+00:00",
+            "usage_in": 2146,
+            "usage_out": 255
+        }
+    },
+    {
+        "item_id": 2582,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "P:expert",
+            "L:es",
+            "W:rewrite2",
+            "R:short_cot",
+            "L:ja",
+            "L:en",
+            "L:zh",
+            "W:rewrite1"
+        ],
+        "tokens_in": 2298,
+        "tokens_out": 225,
+        "trace": {
+            "judge_output": "Reasoning process\nThe \"redistribution-with-growth\" (RWG) framework, famously articulated by Chenery et al. (1974), emphasizes structural changes to the economy to ensure that the poor participate in the growth process. The core pillars of this approach are asset redistribution (such as land reform), investment in human capital (such as education), and fiscal redistribution (such as progressive taxation). Minimum wage legislation is a labor market regulation that acts as a price floor, which is distinct from the structural asset and opportunity redistribution strategies central to the RWG model. Answer 9 incorrectly identifies progressive taxation as not being an element, whereas it is a standard fiscal tool for redistribution in this framework. Answers 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, and 12 correctly identify that minimum wage legislation is not a core structural element of the RWG approach. Answer 2 provides a clear, concise, and accurate academic justification for this conclusion.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "3ae2c622c19bacd55d8a9678c50191e5ed997c424a52b016bcc3a615d400a017"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:38+00:00",
+            "usage_in": 2299,
+            "usage_out": 225
+        }
+    },
+    {
+        "item_id": 4237,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "W:rewrite2",
+            "S:T1.0:seed2",
+            "P:expert",
+            "W:rewrite1",
+            "S:T1.0:seed1",
+            "R:short_cot",
+            "L:zh",
+            "L:en",
+            "L:ru",
+            "L:es",
+            "P:skeptic"
+        ],
+        "tokens_in": 12261,
+        "tokens_out": 549,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem asks for the number of arithmetic sequences of consecutive odd integers that sum to 240.\nLet the sequence have $n$ terms, with the first term $a$ being an odd integer. The sum is $S_n = \\frac{n}{2}(2a + 2(n-1)) = n(a + n - 1) = 240$.\nLet $x = a + n - 1$. Then $nx = 240$.\nSince $a$ is an odd integer, $a = x - n + 1$. For $a$ to be odd, $x - n + 1$ must be odd, which means $x - n$ must be even. Thus, $x$ and $n$ must have the same parity.\nSince $nx = 240$ (even), both $n$ and $x$ must be even.\nLet $n = 2k$ and $x = 2m$. Then $(2k)(2m) = 240 \\implies km = 60$.\nThe number of pairs $(k, m)$ such that $km = 60$ corresponds to the number of divisors of 60.\nThe divisors of 60 are 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60. There are 12 such divisors.\nFor each divisor $k$, we have $n = 2k$ and $x = 60/k \\times 2 = 120/k$.\nThen $a = x - n + 1 = 120/k - 2k + 1$.\nSince $k$ is a divisor of 60, $120/k$ is always an even integer, so $a = (\\text{even}) - (\\text{even}) + 1 = \\text{odd}$.\nThus, for every divisor $k$ of 60, we obtain a valid sequence of $n=2k$ consecutive odd integers.\nThere are 12 divisors of 60, so there are 12 such sequences.\nAnswer 11 and Answer 12 correctly identify this logic and arrive at 12. Answer 4 also arrives at 12 but includes some incorrect manual checks. Answer 11 provides a clear, systematic derivation.\n\nFinal Choice\n{\"choice\": 11}",
+            "choice": 11,
+            "chosen_arm": "L:es",
+            "prompt_sha256": "d8e6ac0a2f1825e2648eed81c19ba26e40baf2f0f87f254cca33f1494bc9a58a"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:40+00:00",
+            "usage_in": 12262,
+            "usage_out": 549
+        }
+    },
+    {
+        "item_id": 6109,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "R:short_cot",
+            "L:ru",
+            "S:T1.0:seed2",
+            "S:T1.0:seed1",
+            "W:rewrite1",
+            "W:rewrite2",
+            "L:es",
+            "L:zh",
+            "P:expert",
+            "L:ja"
+        ],
+        "tokens_in": 2076,
+        "tokens_out": 191,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for a correlate of high levels of self-care behaviors. In health psychology literature, particularly studies focusing on the relationship between personality/coping and health, \"Secondary control\" (the ability to adjust one's internal states, expectations, or goals to fit environmental constraints) is frequently identified as a significant predictor of consistent self-care behaviors, especially in the context of chronic illness management. While personality traits like Agreeableness (C) are sometimes associated with health outcomes, the specific construct of \"Secondary control\" (D) is more directly linked to the psychological mechanism of maintaining self-care routines in the face of health challenges. Answers 2, 3, 5, 6, 11, and 12 correctly identify this relationship, but Answer 12 provides a clear and accurate psychological explanation of why secondary control facilitates self-care.\n\nFinal Choice\n{\"choice\": 12}",
+            "choice": 12,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "740ad0447a0a0fbf8a1ca66718b2d3959ec0b3f70523f0de03efb6bfe18aab4d"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:42+00:00",
+            "usage_in": 2077,
+            "usage_out": 191
+        }
+    },
+    {
+        "item_id": 6114,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "L:es",
+            "L:zh",
+            "P:expert",
+            "L:ja",
+            "L:en",
+            "P:skeptic",
+            "R:short_cot",
+            "L:ru",
+            "S:T1.0:seed2",
+            "S:T1.0:seed1",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1498,
+        "tokens_out": 158,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question refers to a specific \"Senior View\" section found in Robert Kiyosaki's book *Rich Dad Poor Dad*. In this specific text, Dr. C. Norman Shealy provides advice to young people. While Dr. Shealy is a holistic physician, in the context of this specific book's chapter, he explicitly advises readers to \"stay in school\" as a foundational step for their future. Answers 1 through 8, 10, and 11 incorrectly assume the advice is about his general medical philosophy on nutrition, whereas Answer 9 and Answer 12 correctly identify the specific context of the book. Answer 9 provides a more detailed and accurate reasoning regarding the source material.\n\nFinal Choice\n{\"choice\": 9}",
+            "choice": 9,
+            "chosen_arm": "L:ru",
+            "prompt_sha256": "e7bb2784c6be20ead15fba98e64958e69b5f634394c81cbad9755cf7ff381fb7"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:43+00:00",
+            "usage_in": 1499,
+            "usage_out": 158
+        }
+    },
+    {
+        "item_id": 6684,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "R:short_cot",
+            "L:zh",
+            "L:en",
+            "L:ru",
+            "L:es",
+            "P:skeptic",
+            "L:ja",
+            "W:rewrite2",
+            "S:T1.0:seed2",
+            "P:expert",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1686,
+        "tokens_out": 192,
+        "trace": {
+            "judge_output": "Reasoning process\nThe core of the issue is the contradiction between the word \"confirm\" (which implies a guarantee) and the phrase \"space-available basis\" (which implies no guarantee). In logic, an inconsistency occurs when two statements cannot both be true. Equivocation, on the other hand, occurs when a term is used with two different meanings in an argument to create a fallacy. While the hotel's notice is certainly misleading and contradictory, it is a classic example of an internal contradiction (inconsistency) rather than a fallacious shift in the definition of a term used to support a conclusion. Most of the provided answers (1, 2, 4, 6, 8, 9, 12) correctly identify this as an inconsistency (D). Among these, Answer 4 provides a clear, concise, and accurate explanation of why the two statements are contradictory.\n\nFinal Choice\n{\"choice\": 4}",
+            "choice": 4,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "c5f215c99f19ab8f2de0e4b4b479c5906fc2ecadca5fcd0feba92a3de387af20"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:45+00:00",
+            "usage_in": 1687,
+            "usage_out": 192
+        }
+    },
+    {
+        "item_id": 6699,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:en",
+            "L:zh",
+            "L:es",
+            "S:T1.0:seed1",
+            "W:rewrite2",
+            "W:rewrite1",
+            "L:ja",
+            "P:expert",
+            "L:ru",
+            "S:T1.0:seed2",
+            "R:short_cot"
+        ],
+        "tokens_in": 4687,
+        "tokens_out": 379,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question describes a situation where someone asserts that a change will have no significant effect, despite a lack of evidence to support that claim. This is a classic example of the \"argument from ignorance\" (*argumentum ad ignorantiam*), which is the fallacy of assuming that a proposition is true (or false) simply because it has not been proven otherwise.\n\nReviewing the 12 provided answers:\n- Answers 1, 5, 6, 7, and 12 suggest that the question is flawed because the correct fallacy is not listed, but they lean toward \"D\" (Argument from Authority) as a potential, albeit incorrect, choice in some test banks.\n- Answers 3, 4, 8, 9, 10, and 11 suggest that \"B\" (Solid/Slippery Slope) is the intended answer, often assuming \"solid slope\" is a typo for \"slippery slope\" or a miscategorization of the fallacy regarding the consequences of change.\n- Answer 2 suggests \"C\" (Appeal to Tradition).\n\nThe fallacy described is fundamentally about the burden of proof. In many poorly constructed logic tests, the \"argument from ignorance\" is sometimes conflated with \"argument from authority\" (if the person claims their own lack of knowledge is the final word) or \"slippery slope\" (if the person is dismissing the potential for a chain of events). However, looking at the provided options, none are correct. Among the provided reasoning processes, Answer 3 provides the most structured logical attempt to map the described scenario to the provided options, even if the mapping is technically flawed due to the question's poor design. Answer 3 correctly identifies the definitions of the options and attempts to find the closest logical link.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "3a6c86d4478de34ee4d8851a91e78e5794996e1fad4166f243889b92698ab8f2"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:47+00:00",
+            "usage_in": 4688,
+            "usage_out": 379
+        }
+    },
+    {
+        "item_id": 6956,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "S:T1.0:seed2",
+            "S:T1.0:seed1",
+            "L:en",
+            "P:skeptic",
+            "P:expert",
+            "L:ru",
+            "L:ja",
+            "L:es",
+            "W:rewrite1",
+            "R:short_cot",
+            "L:zh"
+        ],
+        "tokens_in": 1751,
+        "tokens_out": 171,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks to identify the \"industrial philanthropist\" among the given choices. Seebohm Rowntree (B) is historically and academically recognized as a pioneer of industrial welfare and social reform, specifically known for his studies on poverty and his implementation of progressive social policies within his company, which aligns directly with the term \"industrial philanthropist.\" While Henry Ford (C) engaged in philanthropy later in life through the Ford Foundation, he is primarily defined by mass production and the assembly line. Answers 1, 2, 3, 4, 5, 6, 8, 9, 11, and 12 correctly identify Rowntree as the most accurate fit for the specific term. Answer 1 is the most concise and accurate in its reasoning.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "fe2a211f8a85a231bfa2e2a8725f1140f6442016398da263913745d4281180d5"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:48+00:00",
+            "usage_in": 1752,
+            "usage_out": 171
+        }
+    },
+    {
+        "item_id": 6966,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "R:short_cot",
+            "L:ja",
+            "W:rewrite2",
+            "P:expert",
+            "W:rewrite1",
+            "L:zh",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "L:en",
+            "L:es",
+            "P:skeptic"
+        ],
+        "tokens_in": 2145,
+        "tokens_out": 259,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks to identify which option is not a recognized form of business continuity planning (BCP). BCP is a strategic and tactical capability to plan for and respond to incidents and business disruptions. \n- Contingency planning (A) and Scenario planning (B) are widely recognized methodologies within BCP.\n- Financial planning (C) is a standard corporate function focused on budgeting and capital management, not a methodology for operational resilience.\n- Building planning (D) is often associated with facility management or disaster recovery (e.g., site selection, physical security, or infrastructure resilience), which are integral parts of BCP.\nComparing C and D, \"Financial planning\" is a distinct, separate business discipline that is not a form of BCP, whereas \"Building planning\" (in the context of facility resilience) is frequently a component of BCP. Therefore, C is the most accurate choice as it is the least related to the operational methodology of BCP. Answer 3, 5, 6, 7, 8, and 12 correctly identify C as the answer, but Answer 3 provides the most concise and accurate reasoning regarding the distinction between BCP components and general management functions.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "6315f6b2c58d53562ac40edd4b2957a1dbfef07a9f4f88b60d11fde67aa24dcb"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:50+00:00",
+            "usage_in": 2146,
+            "usage_out": 259
+        }
+    },
+    {
+        "item_id": 7302,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:ru",
+            "L:es",
+            "P:skeptic",
+            "L:ja",
+            "W:rewrite2",
+            "S:T1.0:seed2",
+            "P:expert",
+            "W:rewrite1",
+            "S:T1.0:seed1",
+            "R:short_cot",
+            "L:zh"
+        ],
+        "tokens_in": 3599,
+        "tokens_out": 330,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks with which relative an individual is \"most likely to share a common HLA haplotype.\" \n1. An individual inherits one HLA haplotype from their father and one from their mother.\n2. Consequently, an individual shares exactly one haplotype with their father (100% probability of sharing one) and exactly one haplotype with their mother (100% probability of sharing one).\n3. Similarly, an individual passes one of their two haplotypes to their son, meaning the son shares exactly one haplotype with the individual (100% probability of sharing one).\n4. Siblings (like a sister) have a 25% chance of sharing both haplotypes, a 50% chance of sharing one, and a 25% chance of sharing zero.\n5. The phrase \"share a common HLA haplotype\" refers to the presence of at least one shared haplotype. Since parents and children are guaranteed to share one haplotype (100% probability), while siblings have a 75% probability of sharing at least one, the parents and children are statistically more likely to share a common haplotype than a sibling.\n6. Answer 2 correctly identifies that the probability of sharing at least one haplotype with a parent is 100%, whereas it is lower for a sibling. While Answer 2 chooses \"A\" (Father), it correctly identifies the logic that parents are more likely to share a haplotype than siblings. Among the provided answers, Answer 2 provides the most accurate statistical reasoning regarding the inheritance of a single haplotype.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:ru",
+            "prompt_sha256": "ba7424f2d66e2a59e2e794d701a8f5de52ad8ef4ca27ea16121c9df73f9bfc4d"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:52+00:00",
+            "usage_in": 3600,
+            "usage_out": 330
+        }
+    },
+    {
+        "item_id": 7314,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "R:short_cot",
+            "L:ja",
+            "L:ru",
+            "L:zh",
+            "W:rewrite1",
+            "L:es",
+            "P:expert",
+            "P:skeptic",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "W:rewrite2"
+        ],
+        "tokens_in": 1791,
+        "tokens_out": 153,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the mutational mechanism of δβ-thalassaemia. δβ-thalassaemia is a distinct genetic condition characterized by the reduced or absent synthesis of both δ- and β-globin chains. Unlike β-thalassaemia, which is most commonly caused by point mutations, δβ-thalassaemia is classically and predominantly caused by large deletions that remove the δ- and β-globin genes or their regulatory regions. Answer 3 incorrectly identifies the condition as β-thalassaemia and concludes with a point mutation, whereas the other answers correctly identify the mechanism as a deletion. Answer 1 provides a clear and accurate explanation of the molecular basis of this specific condition.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "33a9452370386e3698b67553da5aabdf50453ce06ccb519a0dc06f39fa1d0e74"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:54+00:00",
+            "usage_in": 1792,
+            "usage_out": 153
+        }
+    },
+    {
+        "item_id": 8519,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "P:skeptic",
+            "L:en",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "W:rewrite2",
+            "W:rewrite1",
+            "R:short_cot",
+            "L:zh",
+            "L:ja",
+            "L:es"
+        ],
+        "tokens_in": 2018,
+        "tokens_out": 201,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks whether the main character (the narrator) does something \"clearly morally wrong.\" In Scenario 1, the narrator observes a nurse stealing. The narrator's action is merely watching; they do not participate in the theft. Therefore, the narrator does not commit a morally wrong act. In Scenario 2, the narrator goes to work, which is not morally wrong. Thus, both scenarios involve the narrator performing actions that are \"Not wrong.\" Answers 1-6, 9, 10, 11, and 12 incorrectly attribute the nurse's moral transgression to the narrator or assume the question asks about the morality of the *scenario* rather than the *main character's actions*. Answer 7 and 8 correctly identify that the narrator does not commit a wrong in either case. Answer 8 provides a more precise justification for why the narrator is not at fault in Scenario 1.\n\nFinal Choice\n{\"choice\": 8}",
+            "choice": 8,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "22f190b676782de3e977fabeca26abc61fb46e7a73cebf9985621eff0d75095c"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:56+00:00",
+            "usage_in": 2019,
+            "usage_out": 201
+        }
+    },
+    {
+        "item_id": 9408,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1",
+            "L:zh",
+            "W:rewrite2",
+            "W:rewrite1",
+            "S:T1.0:seed2",
+            "L:es",
+            "R:short_cot",
+            "L:ru",
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 1762,
+        "tokens_out": 205,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the food category consumed in lower quantities in Wales and Scotland as of 2020 based on UK government \"Family Food\" statistics. Most of the provided answers (1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12) consistently identify \"Fruits and vegetables\" (Option C) as the category with lower consumption in these regions compared to the UK average or other regions like the South East of England. Answer 4 suggests \"Potatoes\" (Option D), which contradicts the established dietary trends reported in the UK's \"Family Food\" datasets, where fruit and vegetable intake is the primary area of regional disparity. Among the answers supporting Option C, Answer 11 provides a comprehensive and accurate summary of the socioeconomic and public health context associated with the 2019/2020 data.\n\nFinal Choice\n{\"choice\": 11}",
+            "choice": 11,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "1b78eb0b292f2dae45e4fca14f4cf3b7baea8a98d1b34bf41ca13e30e75a0d04"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:57+00:00",
+            "usage_in": 1763,
+            "usage_out": 205
+        }
+    },
+    {
+        "item_id": 10638,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "R:short_cot",
+            "L:es",
+            "S:T1.0:seed1",
+            "L:ru",
+            "L:zh",
+            "L:en",
+            "W:rewrite2",
+            "W:rewrite1",
+            "L:ja",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 2295,
+        "tokens_out": 197,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks to identify which option is not a warrantless search exception. Options B (Incident to a lawful arrest), C (Plain view), and D (Stop and frisk) are all well-established exceptions to the Fourth Amendment warrant requirement. Option A, \"Cold pursuit,\" is not a recognized legal doctrine; the correct term is \"Hot pursuit.\" Answers 1, 2, 3, 4, 5, 8, 9, 10, 11, and 12 correctly identify \"Cold pursuit\" as the non-exception and provide the correct reasoning. Answer 6 and Answer 7 incorrectly identify \"Stop and frisk\" as the answer, failing to recognize it as a standard exception under *Terry v. Ohio*. Among the correct answers, Answer 2 provides a clear, concise, and accurate legal justification for why \"Cold pursuit\" is not an exception.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "42d86c55f59b1e6ffd11cb2cd3bdeba96f764d5b8ed673867f92a1a3d920aee7"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:52:59+00:00",
+            "usage_in": 2296,
+            "usage_out": 197
+        }
+    },
+    {
+        "item_id": 10644,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "S:T1.0:seed1",
+            "R:short_cot",
+            "L:zh",
+            "L:en",
+            "L:ru",
+            "L:es",
+            "P:skeptic",
+            "L:ja",
+            "W:rewrite2",
+            "S:T1.0:seed2",
+            "P:expert"
+        ],
+        "tokens_in": 2777,
+        "tokens_out": 253,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the court's decision regarding the admissibility of computer business records when the defendant provides only a minimal foundation. Under the Federal Rules of Evidence (FRE 803(6) and 901), business records require a foundation showing they were made in the regular course of business by a person with knowledge, and they must be authenticated. For computer-generated records, courts consistently require a foundation that establishes the reliability of the computer system and the accuracy of the data processing. A mere assertion that records were kept \"on a regular business basis\" without explaining the system or the process is insufficient to overcome a challenge to both hearsay and authentication. Therefore, the court will require a greater foundation.\n\nAnswers 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, and 12 all correctly identify that a greater foundation is required (Option B). Answer 6 incorrectly concludes that the records are admissible (Option A). Among the correct answers, Answer 2 provides a comprehensive and legally accurate explanation of the requirements for electronically stored information (ESI) under the Federal Rules of Evidence.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "e52a9600a06f172470dcc422a1f30d082fa26531a6e8010d9313a3c2ad044460"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:53:00+00:00",
+            "usage_in": 2778,
+            "usage_out": 253
+        }
+    },
+    {
+        "item_id": 10660,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "W:rewrite2",
+            "W:rewrite1",
+            "R:short_cot",
+            "L:zh",
+            "L:ja",
+            "L:es",
+            "L:ru",
+            "P:skeptic"
+        ],
+        "tokens_in": 3338,
+        "tokens_out": 430,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for a reason that may constitute \"excusable neglect\" or \"good cause\" for a late notice of appeal under FRAP 4(a)(5). \n\n1.  **Legal Standard:** Under *Pioneer Investment Services Co. v. Brunswick Associates L.P.*, the determination of \"excusable neglect\" is equitable, taking into account all relevant circumstances.\n2.  **Evaluation of Options:**\n    *   **Option A:** The \"unique circumstances\" doctrine (reliance on a judge's assurance) was severely curtailed by the Supreme Court in *Bowles v. Russell* (2007), which held that the time limit for filing a notice of appeal is jurisdictional and cannot be waived by judicial error. Thus, A is incorrect.\n    *   **Option B:** Attorney negligence is generally imputed to the client and is rarely sufficient to constitute excusable neglect.\n    *   **Option C:** Severe physical incapacity (hospitalization) is a classic, objective, and external circumstance beyond the litigant's control that courts consistently recognize as a valid basis for finding \"excusable neglect\" or \"good cause.\"\n    *   **Option D:** Jurisdictional deadlines cannot be extended by private agreement between parties.\n3.  **Review of Answers:**\n    *   Answers 1, 2, 3, 4, 5, 6, 7, 8, 11, and 12 correctly identify C as the answer and provide sound legal reasoning.\n    *   Answer 9 incorrectly selects A, relying on the outdated \"unique circumstances\" doctrine.\n    *   Answer 10 incorrectly selects A, failing to account for the *Bowles v. Russell* precedent.\n    *   Among the correct answers, Answer 12 provides the most comprehensive and legally precise reasoning by explicitly referencing the *Pioneer* standard and correctly identifying the limitation of the \"unique circumstances\" doctrine in *Bowles v. Russell*.\n\nFinal Choice\n{\"choice\":\"12\"}",
+            "choice": 12,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "16254cd95e5a466fcc35b750b2877cbf22e2fe8def4e8e0a6c9fb460bfc47620"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:53:03+00:00",
+            "usage_in": 3339,
+            "usage_out": 430
+        }
+    },
+    {
+        "item_id": 13078,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "W:rewrite2",
+            "L:en",
+            "R:short_cot",
+            "L:ja",
+            "L:ru",
+            "L:zh",
+            "W:rewrite1",
+            "L:es",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 2113,
+        "tokens_out": 242,
+        "trace": {
+            "judge_output": "Reasoning process\nThe Westley and MacLean model (1957) is a model of mass communication that includes three main roles: A (Advocate/Source), C (Channel/Gatekeeper), and B (Behavioral system/Audience). In this model, the \"Channel\" (C) is the role responsible for selecting, processing, and transmitting information to the audience (B). The audience (B) is the receiver, but the *role* that describes the mechanism or the way the public obtains the message is the \"channel's role.\" Most of the provided answers (1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12) correctly identify that the channel's role (B) is the mechanism for transmission. Answer 8 incorrectly identifies the receiver as the \"behavioral role\" in a way that misinterprets the question's focus on the transmission mechanism. Among the correct interpretations, Answer 1 provides a clear and concise explanation of the model's components and the function of the channel.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "fce88efafff161b1ae6c10c84fe4d7d75802dd427f295a071e3125b104deadf1"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:53:05+00:00",
+            "usage_in": 2114,
+            "usage_out": 242
+        }
+    },
+    {
+        "item_id": 13413,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "L:ru",
+            "P:expert",
+            "L:zh",
+            "L:ja",
+            "W:rewrite2",
+            "S:T1.0:seed1",
+            "W:rewrite1",
+            "L:en",
+            "R:short_cot",
+            "L:es"
+        ],
+        "tokens_in": 1982,
+        "tokens_out": 246,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the explanation of patriarchy according to Marxist feminism. Marxist feminism is distinct from other branches because it centers its analysis on the capitalist mode of production. Specifically, it argues that women's domestic labor (unpaid reproductive labor) is essential for the reproduction of the labor force, which in turn sustains the capitalist economy. \n\n- Answers 1, 2, 4, 7, 8, 9, 10, 11, and 12 correctly identify that the exploitation of domestic labor is the hallmark of Marxist feminist theory.\n- Answer 3 provides the same conclusion in Russian.\n- Answer 5 provides the same conclusion in Traditional Chinese.\n- Answer 6 incorrectly identifies \"dual systems theory\" (Option D) as the primary definition of Marxist feminism, whereas dual systems theory is more commonly associated with socialist feminism, which seeks to synthesize Marxist and radical feminist perspectives.\n\nAmong the correct answers, Answer 2 provides a very clear and concise comparative analysis, distinguishing Marxist feminism from liberal (A), radical (B), and socialist (D) perspectives, making it the most robust reasoning.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "0c10b41e47c031b13507d4a27dcaef2e5fdad2901aab5f18b0282c140b5d2793"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:53:07+00:00",
+            "usage_in": 1983,
+            "usage_out": 246
+        }
+    },
+    {
+        "item_id": 13612,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:ja",
+            "L:en",
+            "L:zh",
+            "W:rewrite1",
+            "L:ru",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "P:expert",
+            "L:es",
+            "W:rewrite2"
+        ],
+        "tokens_in": 1775,
+        "tokens_out": 176,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the definition of 'New Populism' in the context of American foreign policy. Most of the provided answers (1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12) correctly identify that this term refers to the post-Vietnam era shift toward the democratization of foreign policy, where the executive branch was forced to account for public opinion and legislative oversight, moving away from the \"imperial presidency.\" Answer 5 incorrectly identifies it as neo-isolationism. Among the correct answers, Answer 3 provides a concise and accurate historical context regarding the move away from the \"imperial presidency\" and the Cold War consensus, which is the standard academic definition of this specific term in American diplomatic history.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "ad7527eb623c675cbae8cc5ce629a2fa15d7a12cfd44722e97480a2ccb979f65"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:53:08+00:00",
+            "usage_in": 1776,
+            "usage_out": 176
+        }
+    }
+]

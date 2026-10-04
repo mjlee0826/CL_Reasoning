@@ -1,0 +1,1324 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh vs L:ja vs L:ru vs L:es vs S:T1.0:seed1 vs S:T1.0:seed2 vs P:expert vs P:skeptic vs W:rewrite1 vs W:rewrite2 vs R:short_cot)",
+            "languages": [
+                "english",
+                "chinese",
+                "japanese",
+                "russian",
+                "spanish",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 12,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-k-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/mathqa/L_en.json",
+            "result/arms/qwen/mathqa/L_zh.json",
+            "result/arms/qwen/mathqa/L_ja.json",
+            "result/arms/qwen/mathqa/L_ru.json",
+            "result/arms/qwen/mathqa/L_es.json",
+            "result/arms/qwen/mathqa/S_T1.0_seed1.json",
+            "result/arms/qwen/mathqa/S_T1.0_seed2.json",
+            "result/arms/qwen/mathqa/P_expert.json",
+            "result/arms/qwen/mathqa/P_skeptic.json",
+            "result/arms/qwen/mathqa/W_rewrite1.json",
+            "result/arms/qwen/mathqa/W_rewrite2.json",
+            "result/arms/qwen/mathqa/R_short_cot.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 896,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "menu_judge",
+        "menu": "M12",
+        "item_filter": "menu_all_answered_disagreement",
+        "n_judged_items": 864,
+        "order_scheme": "grouped_rotation_seed0",
+        "api_usage": {
+            "calls": 25,
+            "calls_without_usage": 0,
+            "prompt_tokens": 100278,
+            "completion_tokens": 3850,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 25
+        },
+        "calls_utc": {
+            "first": "2026-10-04T15:50:36+00:00",
+            "last": "2026-10-04T15:52:18+00:00"
+        }
+    },
+    {
+        "item_id": 2,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed2",
+            "P:expert",
+            "L:es",
+            "W:rewrite1",
+            "P:skeptic",
+            "L:zh",
+            "L:ja",
+            "W:rewrite2",
+            "S:T1.0:seed1",
+            "L:ru",
+            "L:en",
+            "R:short_cot"
+        ],
+        "tokens_in": 3766,
+        "tokens_out": 196,
+        "trace": {
+            "judge_output": "Reasoning process\nThe correct approach is to recognize that for each pair of stations, there are two tickets required (one in each direction). The total number of stations is 28, so the number of unique pairs is $ \\frac{28 \\times 27}{2} = 378 $. Since tickets are needed for both directions, we multiply by 2, resulting in $ 378 \\times 2 = 756 $. However, none of the choices match this result. Upon re-evaluation, it becomes clear that the question may have intended to include both Hyderabad and Bangalore as stations, making the total number of stations 30. Recalculating with 30 stations gives $ \\frac{30 \\times 29}{2} = 435 $, and multiplying by 2 gives $ 870 $, which matches option c.\n\nFinal Choice\n{\"choice\":4}",
+            "choice": 4,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "3869ebcf1348fa573e190adb9f5976d1bab6241993f90ecee0e077e940278e0d"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:50:36+00:00",
+            "usage_in": 3778,
+            "usage_out": 196
+        }
+    },
+    {
+        "item_id": 31,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "W:rewrite2",
+            "L:ru",
+            "L:zh",
+            "L:en",
+            "L:es",
+            "R:short_cot",
+            "W:rewrite1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 5263,
+        "tokens_out": 103,
+        "trace": {
+            "judge_output": "Reasoning process\nThe correct approach involves calculating the relative speed in both directions, converting units appropriately, and using the given time to find the length of the trains. The correct calculation leads to approximately 28.95 seconds, which is closest to option e) 22.22. However, upon rechecking, the correct answer based on accurate calculations is approximately 13.15 seconds, matching option d) 13.15.\n\nFinal Choice\n{\"choice\":6}",
+            "choice": 6,
+            "chosen_arm": "L:es",
+            "prompt_sha256": "2e52104a2c5981fabc32f6f3791ae393c7a2b2fc23c6c8507bc762993c4da905"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:50:39+00:00",
+            "usage_in": 5275,
+            "usage_out": 103
+        }
+    },
+    {
+        "item_id": 69,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "P:skeptic",
+            "L:en",
+            "L:es",
+            "W:rewrite1",
+            "R:short_cot",
+            "W:rewrite2",
+            "L:ja",
+            "S:T1.0:seed1",
+            "P:expert",
+            "L:ru",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 2158,
+        "tokens_out": 90,
+        "trace": {
+            "judge_output": "Reasoning process\nThe correct calculation for y's share is (5/16) * 2880 = 900. None of the choices match this value, indicating an error in the question or the provided choices. However, answer 12 correctly identifies that none of the choices match and selects the closest option, d) 560, as the final choice.\n\nFinal Choice\n{\"choice\":12}",
+            "choice": 12,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "b1877e82e7daf8af033322ce46f1c75a7dd08eaba25063660a0f35f94e0f76f8"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:50:42+00:00",
+            "usage_in": 2170,
+            "usage_out": 90
+        }
+    },
+    {
+        "item_id": 136,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:es",
+            "P:skeptic",
+            "L:en",
+            "L:zh",
+            "W:rewrite2",
+            "S:T1.0:seed1",
+            "L:ja",
+            "R:short_cot",
+            "S:T1.0:seed2",
+            "P:expert",
+            "L:ru"
+        ],
+        "tokens_in": 5847,
+        "tokens_out": 144,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswers 1, 2, 3, 4, 5, 6, 7, 11, and 12 correctly follow the mathematical steps to solve the problem and arrive at the answer \"c\". Answer 8 incorrectly calculates the time taken by c as 24.3 days instead of the correct value. Answer 9 also incorrectly states that c takes approximately 24.3 days. Answer 10 makes a mistake in the calculation of $ \\frac{1}{c} $, leading to an incorrect final answer of 144 days. Therefore, the most correct answer is Answer 1.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "2661de5dba7ec3de4aa932cfd54466481b66e7a9954981e1bfd5a62b7ef2efb3"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:50:47+00:00",
+            "usage_in": 5859,
+            "usage_out": 144
+        }
+    },
+    {
+        "item_id": 303,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "R:short_cot",
+            "L:ru",
+            "L:ja",
+            "S:T1.0:seed1",
+            "P:expert",
+            "W:rewrite1",
+            "L:es",
+            "S:T1.0:seed2",
+            "W:rewrite2",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 2458,
+        "tokens_out": 122,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswers 1-12 mostly correctly set up the equation $ 4.2t = 3.7t + 12 $, which leads to $ t = 24 $. However, Answer 8 incorrectly states that $ 4.2t = 3.7t + 10 - 2 $, leading to an incorrect solution of $ t = 16 $, and then erroneously concludes $ t = 17 $. All other answers correctly solve for $ t = 24 $.\n\nFinal Choice\n{\"choice\":12}",
+            "choice": 12,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "f748064c70a46c97d353354d918a212351445790843dc76ad0f049e3a8182fa1"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:50:49+00:00",
+            "usage_in": 2470,
+            "usage_out": 122
+        }
+    },
+    {
+        "item_id": 510,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:en",
+            "W:rewrite2",
+            "L:ja",
+            "L:zh",
+            "W:rewrite1",
+            "L:es",
+            "L:ru",
+            "P:expert",
+            "P:skeptic",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 3344,
+        "tokens_out": 201,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswers 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, and 12 all correctly identify that the cost of 20 plates and 40 cups is one-fifth of the total cost of 100 plates and 200 cups. This is because both quantities are reduced by a factor of 5 (100 ÷ 5 = 20 and 200 ÷ 5 = 40), so the total cost is also reduced by a factor of 5 ($8.00 ÷ 5 = $1.60). Answer 4 incorrectly assumes that the price per item is the same for both plates and cups, which is not stated in the question, and arrives at an incorrect answer. Therefore, the most correct answer is Answer 12.\n\nFinal Choice\n{\"choice\":12}",
+            "choice": 12,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "df53046a28ecd8881715f898afacadfb51278c63e98c90d36d5484d81f205419"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:50:54+00:00",
+            "usage_in": 3356,
+            "usage_out": 201
+        }
+    },
+    {
+        "item_id": 542,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "S:T1.0:seed1",
+            "L:zh",
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "P:expert",
+            "L:ja",
+            "R:short_cot",
+            "L:en",
+            "L:ru",
+            "L:es",
+            "W:rewrite1"
+        ],
+        "tokens_in": 6688,
+        "tokens_out": 140,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1, 2, 3, 5, 6, 9, and 12 all correctly break down the problem into cases where the digit 4 appears zero or one time in the number. They calculate the valid combinations for the first two digits (odd numbers) and then consider the remaining three digits with the restriction on the digit 4. These answers consistently arrive at the total of 24300, which corresponds to option a. Answers 4, 7, 8, and 11 contain errors in their reasoning, such as incorrect calculations or misinterpretations of the constraints.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "ca03a8cd84702557fefca139702e94874c55b69e8e2f8555d926afc4f23a0037"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:50:59+00:00",
+            "usage_in": 6700,
+            "usage_out": 140
+        }
+    },
+    {
+        "item_id": 591,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "W:rewrite1",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "L:ru",
+            "L:es",
+            "P:expert",
+            "L:ja",
+            "R:short_cot",
+            "L:en",
+            "W:rewrite2",
+            "P:skeptic"
+        ],
+        "tokens_in": 3996,
+        "tokens_out": 134,
+        "trace": {
+            "judge_output": "Reasoning process\nMost of the answers correctly interpret the problem as involving exponents of 10 and apply logarithmic rules to solve for $ z $. They correctly simplify the equation to $ z = 10^{0.92} \\approx 8.32 $, which is closest to option **b) 8.2**. However, answer 8 incorrectly calculates $ z $ as approximately 100.92 and then arbitrarily selects option **e) 2.6**, which is not close to the correct value. This reasoning is flawed and inconsistent with the rest of the answers.\n\nFinal Choice\n{\"choice\":9}",
+            "choice": 9,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "52741f482cc63c18cd60bc9bf9af816f18e65c7def17a814a3a8fe16526582b9"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:51:03+00:00",
+            "usage_in": 4008,
+            "usage_out": 134
+        }
+    },
+    {
+        "item_id": 765,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "S:T1.0:seed2",
+            "W:rewrite2",
+            "S:T1.0:seed1",
+            "L:zh",
+            "W:rewrite1",
+            "L:ja",
+            "L:es",
+            "P:expert",
+            "L:ru",
+            "R:short_cot",
+            "L:en"
+        ],
+        "tokens_in": 3900,
+        "tokens_out": 100,
+        "trace": {
+            "judge_output": "Reasoning process\nThe majority of the answers correctly calculate the incomes and the resulting fractions. However, Answer 5 incorrectly assumes Paul's income as 100 and then misinterprets the question by calculating the fraction of Sam's new income to Quentin's new income as 164/116 instead of the correct 108/76. The rest of the answers correctly compute the fraction as 27/19.\n\nFinal Choice\n{\"choice\":5}",
+            "choice": 5,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "2e61a0522ec699949ac643d7044023cc43004d3bcd83eb625d5feeefbae5ca43"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:51:06+00:00",
+            "usage_in": 3912,
+            "usage_out": 100
+        }
+    },
+    {
+        "item_id": 1009,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "S:T1.0:seed2",
+            "W:rewrite2",
+            "P:expert",
+            "W:rewrite1",
+            "L:ru",
+            "L:zh",
+            "S:T1.0:seed1",
+            "L:en",
+            "L:es",
+            "R:short_cot",
+            "L:ja"
+        ],
+        "tokens_in": 2812,
+        "tokens_out": 111,
+        "trace": {
+            "judge_output": "Reasoning process\nThe correct calculation is that the total ratio parts are 1+2+5=8, and each part represents 128/8=16 hours. The secretary who worked the longest spent 5*16=80 hours. None of the answer choices match this result, indicating an error in the question or the provided options. However, among the given choices, answer c) 56 is the closest to the correct value based on the ratio and total hours.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "dfb13e1631500ce584ad0b46d55e6fa51f72cdea7d1cfeb44e735ddb9d196a63"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:51:09+00:00",
+            "usage_in": 2824,
+            "usage_out": 111
+        }
+    },
+    {
+        "item_id": 1012,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ru",
+            "L:es",
+            "R:short_cot",
+            "W:rewrite1",
+            "L:zh",
+            "S:T1.0:seed2",
+            "L:en",
+            "W:rewrite2",
+            "P:expert",
+            "L:ja",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 5223,
+        "tokens_out": 278,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly calculates the time shown on clock #4 as 2:46 pm, which is not one of the choices and does not match the given answer format. Answer 2 provides an incorrect calculation for clock #3 and clock #4, leading to an invalid conclusion. Answer 3 lacks detailed reasoning and directly states the answer without justification. Answer 4 simply states the answer without any reasoning. Answer 5 correctly calculates the cumulative effect of each clock's rate but concludes with an incorrect choice. Answer 6 provides a detailed calculation that arrives at the correct answer, b) 5:34, through accurate conversion and relative time calculations. Answer 7 contains an error in calculating the final time shown by clock #4, leading to an incorrect conclusion. Answer 8 similarly fails to provide a precise calculation and concludes with an incorrect choice. Answer 9 has a similar issue to Answer 5, where it inaccurately interprets the final result. Answer 10 provides an incorrect calculation for clock #3 and ultimately arrives at an incorrect conclusion. Answer 11 contains multiple errors in the calculation of each clock's time and leads to an incorrect conclusion. Answer 12 provides a detailed and accurate step-by-step calculation that leads to the correct answer, c) 5:42.\n\nFinal Choice\n{\"choice\":12}",
+            "choice": 12,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "c939a61c097cc991887bf989f44f062691b1714e8326b46e9461d44e9d1a5b10"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:51:17+00:00",
+            "usage_in": 5235,
+            "usage_out": 278
+        }
+    },
+    {
+        "item_id": 1083,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "S:T1.0:seed2",
+            "P:expert",
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2",
+            "L:zh",
+            "S:T1.0:seed1",
+            "W:rewrite1",
+            "L:ru",
+            "L:es"
+        ],
+        "tokens_in": 4877,
+        "tokens_out": 129,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswers 1, 3, 4, 5, 7, 8, 10, and 11 all correctly solve the system of equations and arrive at the correct answer of 0. Answer 2 also provides a valid solution with the same result. Answer 6 incorrectly solves for a = -5 and b = -5, leading to an incorrect final answer of -9. Answer 9 claims the answer is not among the choices but then incorrectly selects \"c\" as the final answer. Therefore, the most correct answer is Answer 1.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "52c754727f77531ad56e0b5a2d3b4833e16077ec95460bae9aa0f74037672d14"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:51:21+00:00",
+            "usage_in": 4889,
+            "usage_out": 129
+        }
+    },
+    {
+        "item_id": 1117,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:zh",
+            "W:rewrite1",
+            "P:expert",
+            "W:rewrite2",
+            "L:ja",
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "L:es",
+            "L:ru",
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 2639,
+        "tokens_out": 145,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswers 1, 3, 5, 7, 8, 9, 11 and 12 all correctly calculate the relative speed as 60 km/hr, convert it to 16.67 m/s, and then divide the train length (200 m) by this speed to get approximately 12 seconds. However, answer 4 and 10 incorrectly convert 60 km/hr to 16.667 m/s and state the answer as \"e\" which is not one of the options given in the original question. The correct answer based on the given choices is \"c\".\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "47e9ccd77a9ddcf3b86e118a9410fdc9d73035dcdc196717bda30a7f0303f2d3"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:51:24+00:00",
+            "usage_in": 2651,
+            "usage_out": 145
+        }
+    },
+    {
+        "item_id": 1197,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "L:ja",
+            "L:en",
+            "W:rewrite1",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "L:zh",
+            "R:short_cot",
+            "P:expert",
+            "P:skeptic",
+            "L:ru",
+            "W:rewrite2"
+        ],
+        "tokens_in": 2846,
+        "tokens_out": 141,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswers 1-10 correctly calculate the average speed of the entire trip by using the formula for average speed (total distance divided by total time). They all arrive at the correct answer of 44 mph. Answer 11 incorrectly assumes that the average speed of the return journey is 33 mph and concludes the answer is 36, which is not supported by the question. Answer 12 incorrectly assumes that the average speed of the return journey is 33 mph and concludes the answer is 32, which is also not supported by the question. Therefore, the correct answers are among 1-10.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:es",
+            "prompt_sha256": "a95c9fa99dd03d3ff291e9b431614d2e446345a5754984974f23c2bc57099625"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:51:28+00:00",
+            "usage_in": 2858,
+            "usage_out": 141
+        }
+    },
+    {
+        "item_id": 1249,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:en",
+            "S:T1.0:seed1",
+            "P:expert",
+            "W:rewrite2",
+            "L:zh",
+            "L:ru",
+            "P:skeptic",
+            "W:rewrite1",
+            "L:es",
+            "L:ja",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 3534,
+        "tokens_out": 162,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswers 1-4, 6-9, and 11-12 all correctly calculate the number of letters each boy writes as 4 or 8. However, upon closer inspection, Answers 1-4, 6-9, and 11-12 have a mistake in their reasoning: they incorrectly assume that the total number of letters written by boys is equal to the number of boys multiplied by the number of letters each boy writes, which is correct, but when solving the equations, they do not consistently follow through with the correct algebraic manipulation. Answer 5 and Answer 12 are more accurate in their step-by-step reasoning and correctly arrive at the conclusion that each boy writes 8 letters.\n\nFinal Choice\n{\"choice\":12}",
+            "choice": 12,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "a0bff2b60d5215bc12d9ff358225755855cb3a6b3e7de0aac2a741019c5e0188"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:51:32+00:00",
+            "usage_in": 3546,
+            "usage_out": 162
+        }
+    },
+    {
+        "item_id": 1268,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:en",
+            "S:T1.0:seed1",
+            "L:zh",
+            "R:short_cot",
+            "L:ja",
+            "P:skeptic",
+            "S:T1.0:seed2",
+            "P:expert",
+            "L:es",
+            "W:rewrite2",
+            "L:ru"
+        ],
+        "tokens_in": 3552,
+        "tokens_out": 153,
+        "trace": {
+            "judge_output": "Reasoning process\nThe correct approach involves calculating the relative speed between the two trains. The total distance to be covered is 1000 meters, and the time taken is 180 seconds. Converting the time to hours (180/3600 = 0.05 hours) and the distance to kilometers (1 km), the relative speed is calculated as 1 / 0.05 = 20 km/h. Adding this to the speed of the slower train (48 km/h) gives the speed of the faster train as 68 km/h. This matches the reasoning in Answer 2, which correctly converts units and applies the formula for relative speed.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "4da629ab17ff75dde33a12a3445726eec48a4f75ce0234f0cb958e9b9a2b8dab"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:51:36+00:00",
+            "usage_in": 3564,
+            "usage_out": 153
+        }
+    },
+    {
+        "item_id": 1295,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot",
+            "L:ja",
+            "L:en",
+            "S:T1.0:seed1",
+            "P:expert",
+            "P:skeptic",
+            "L:es",
+            "S:T1.0:seed2",
+            "L:ru"
+        ],
+        "tokens_in": 6382,
+        "tokens_out": 236,
+        "trace": {
+            "judge_output": "Reasoning process\nThe correct approach is to prioritize buying the 400-pack as it offers the lowest cost per hot dog. With $200, we can buy 8 full 400-packs (8 * $22.95 = $183.60), leaving $16.40. With this remaining money, we can buy one 20-pack for $3.05, which gives us 20 hot dogs, and then use the leftover $13.35 to buy one 8-pack for $1.55, giving us 8 more hot dogs. This results in a total of 8*400 + 1*20 + 1*8 = 3200 + 20 + 8 = 3228 hot dogs. However, since this amount is not among the choices, we need to find the closest valid option that does not exceed the budget. The answer that matches this reasoning and is the closest to the calculated value without exceeding the budget is answer 11.\n\nFinal Choice\n{\"choice\":11}",
+            "choice": 11,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "c213ae47de4053303abfdb0ed1ef3038d3bbdf13f03b986413bd9a30326b5399"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:51:43+00:00",
+            "usage_in": 6394,
+            "usage_out": 236
+        }
+    },
+    {
+        "item_id": 1362,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "P:skeptic",
+            "W:rewrite1",
+            "P:expert",
+            "W:rewrite2",
+            "L:es",
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "S:T1.0:seed2",
+            "R:short_cot",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 4212,
+        "tokens_out": 263,
+        "trace": {
+            "judge_output": "Reasoning process\nThe correct reasoning involves setting up the equation based on the rates of the pumps. The first pump drains half the pond in 1 hour, so its rate is 0.5 ponds per hour. After that, both pumps together drain the remaining half in 0.5 hours, meaning their combined rate is 1 pond per hour. Therefore, the second pump's rate is $1 - 0.5 = 0.5$ ponds per hour, and it would take $ \\frac{1}{0.5} = 2 $ hours to drain the pond alone. However, this does not match the answer choices. Re-evaluating the setup, if the first pump drains half the pond in 1 hour, then its rate is $ \\frac{1}{2} $, and when working with the second pump for 0.5 hours, they complete the remaining half. This leads to the equation $ (\\frac{1}{2} + r) \\times 0.5 = 0.5 $, solving which gives $ r = 1 $, meaning the second pump drains at a rate of 1 pond per hour and takes 1 hour to drain the pond alone. This matches answer a.\n\nFinal Choice\n{\"choice\":4}",
+            "choice": 4,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "ab7f2c63d5f67b3a063a7c3b92c1c073001f845bb1e2894fa266932718dc0274"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:51:50+00:00",
+            "usage_in": 4224,
+            "usage_out": 263
+        }
+    },
+    {
+        "item_id": 1455,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "P:skeptic",
+            "L:ja",
+            "W:rewrite2",
+            "S:T1.0:seed2",
+            "P:expert",
+            "W:rewrite1",
+            "S:T1.0:seed1",
+            "L:ru",
+            "L:en",
+            "L:es",
+            "L:zh"
+        ],
+        "tokens_in": 2632,
+        "tokens_out": 91,
+        "trace": {
+            "judge_output": "Reasoning process\nThe correct answer should consider the unit inconsistency between the question (meters) and the choices (square centimeters). While some answers calculate the surface area correctly as 868 m², they incorrectly assume the answer should be in cm² without converting. Answer 12 correctly identifies this unit mismatch and concludes that none of the options are appropriate, making it the most accurate choice.\n\nFinal Choice\n{\"choice\":12}",
+            "choice": 12,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "ada83c81921f017c123e693bd5e0ada2bac54fef0b09c991cfa73073be9084a4"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:51:52+00:00",
+            "usage_in": 2644,
+            "usage_out": 91
+        }
+    },
+    {
+        "item_id": 1606,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "P:expert",
+            "L:ja",
+            "P:skeptic",
+            "L:en",
+            "R:short_cot",
+            "L:ru",
+            "L:zh",
+            "S:T1.0:seed2",
+            "W:rewrite1",
+            "W:rewrite2",
+            "L:es"
+        ],
+        "tokens_in": 6346,
+        "tokens_out": 183,
+        "trace": {
+            "judge_output": "Reasoning process\nThe correct answer should be derived from the equation $ 2^k + 2^k = (2^9)^{2^9} - 2^k $. Simplifying both sides leads to $ 3 \\cdot 2^k = 2^{9 \\cdot 2^9} $, which implies $ k = \\log_2\\left(\\frac{2^{9 \\cdot 2^9}}{3}\\right) $. This results in $ k = 9 \\cdot 2^9 - \\log_2(3) $. Among the provided options, only option e) $ 3^{11} - 1 $ is a plausible match as it involves an exponential expression similar to the derived form. Other options either do not match the structure or are numerically inconsistent with the result.\n\nFinal Choice\n{\"choice\":8}",
+            "choice": 8,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "1fd7f91bd30f97d2a0256fb4fb2e6bd2d296f011d5a7984a303f4bac042189db"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:51:58+00:00",
+            "usage_in": 6358,
+            "usage_out": 183
+        }
+    },
+    {
+        "item_id": 1633,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "L:en",
+            "P:skeptic",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "L:ja",
+            "W:rewrite2",
+            "W:rewrite1",
+            "P:expert",
+            "L:zh",
+            "L:ru",
+            "R:short_cot"
+        ],
+        "tokens_in": 2277,
+        "tokens_out": 172,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswers 1-12 mostly correctly calculate that 40 passengers represent 80% of those with round-trip tickets, leading to a total of 50 passengers (50%) with round-trip tickets. However, Answer 10 and 11 incorrectly interpret the question, assuming that the 40% already includes those who took their cars, and that the 20% refers to the total passengers rather than those with round-trip tickets. This leads to an incorrect answer of 40% or 20%. The rest of the answers correctly identify that the 40% is only those who took their cars, and the 20% refers to the round-trip ticket holders, leading to the correct answer of 50%.\n\nFinal Choice\n{\"choice\":12}",
+            "choice": 12,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "3b15de0e6f9d995a160dd33571c248e12e518a61ec212daedf04c5eb1c7681f9"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:03+00:00",
+            "usage_in": 2289,
+            "usage_out": 172
+        }
+    },
+    {
+        "item_id": 1655,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "S:T1.0:seed1",
+            "L:ja",
+            "P:skeptic",
+            "L:zh",
+            "W:rewrite2",
+            "L:es",
+            "R:short_cot",
+            "W:rewrite1",
+            "P:expert",
+            "S:T1.0:seed2",
+            "L:en"
+        ],
+        "tokens_in": 3758,
+        "tokens_out": 127,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1, 3, 5, 7, 9, 10, and 12 incorrectly assume that Abhay's speed is slower than Sameer's, leading to incorrect equations. Answer 2, 4, 6, and 8 correctly derive the equations and solve them, but Answer 2 and 4 have a contradiction in their reasoning. Answer 6 and 8 correctly solve the system of equations and arrive at the correct answer of 8 kmph. However, Answer 6 provides a more thorough and accurate derivation.\n\nFinal Choice\n{\"choice\":6}",
+            "choice": 6,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "5ef4aadfee532111c6e0528c37f249be5c9fb3ab07d9b0e540488107f68777be"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:06+00:00",
+            "usage_in": 3770,
+            "usage_out": 127
+        }
+    },
+    {
+        "item_id": 1804,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:ru",
+            "P:skeptic",
+            "L:en",
+            "L:es",
+            "S:T1.0:seed2",
+            "W:rewrite2",
+            "P:expert",
+            "S:T1.0:seed1",
+            "L:ja",
+            "R:short_cot",
+            "W:rewrite1"
+        ],
+        "tokens_in": 4370,
+        "tokens_out": 188,
+        "trace": {
+            "judge_output": "Reasoning process\nThe correct calculation is to charge $18.00/day for the first week (7 days) and $15.00/day for the remaining days. This results in $126 + ($15.00 * 16) = $366. However, since this does not match any of the choices, we must consider that the problem may be interpreted as charging $15.00/day for each additional week, not per day. If we assume that the first week is $18.00/day and the next two weeks are $15.00/day (each week being 7 days), then the cost would be $126 + ($15.00 * 14) = $336, which matches option a. This interpretation aligns with the given choices.\n\nFinal Choice\n{\"choice\":11}",
+            "choice": 11,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "fd8daa65551193fddc6e22b8a3c96fe48c80a006482e469baede48c4bb28217e"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:12+00:00",
+            "usage_in": 4382,
+            "usage_out": 188
+        }
+    },
+    {
+        "item_id": 1858,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed2",
+            "W:rewrite2",
+            "R:short_cot",
+            "P:expert",
+            "L:zh",
+            "L:ja",
+            "P:skeptic",
+            "L:es",
+            "W:rewrite1",
+            "S:T1.0:seed1",
+            "L:ru",
+            "L:en"
+        ],
+        "tokens_in": 5381,
+        "tokens_out": 149,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswers 1, 2, 4, 5, 6, 9, 10, and 12 all correctly derive the equation $ 27v_1 + 17v_2 = 25v_1 + 25v_2 $, leading to $ \\frac{v_1}{v_2} = 4 $. Answers 3 and 7 incorrectly simplify the ratio to $ \\frac{3}{1} $, while answer 8 and 11 provide incorrect derivations. Answer 3 is the only one that arrives at an incorrect conclusion despite correct setup, making it the most incorrect.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "5b370493d103b4feff2b53a04a735a93fb14aa77ac1fe7044824f79b39c52a39"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:16+00:00",
+            "usage_in": 5393,
+            "usage_out": 149
+        }
+    },
+    {
+        "item_id": 1916,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "L:ja",
+            "W:rewrite1",
+            "S:T1.0:seed1",
+            "R:short_cot",
+            "L:ru",
+            "P:expert",
+            "P:skeptic",
+            "S:T1.0:seed2",
+            "W:rewrite2",
+            "L:zh",
+            "L:en"
+        ],
+        "tokens_in": 1717,
+        "tokens_out": 92,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 3 incorrectly interprets the equation as √? / 20 = 4? and introduces an extra variable, leading to an incorrect solution. The correct interpretation is √? / 20 = 4, which simplifies directly to √? = 80 and ? = 6400. All other answers correctly solve the equation and select option b.\n\nFinal Choice\n{\"choice\":4}",
+            "choice": 4,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "a8b7a48bca03d6d672b33f967f8c234ea1f99a7fba76590570cf6f2d9f4ea860"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:18+00:00",
+            "usage_in": 1729,
+            "usage_out": 92
+        }
+    }
+]

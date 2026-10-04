@@ -1,0 +1,1324 @@
+[
+    {
+        "Model": {
+            "modelType": "deepseek4.1flash",
+            "temperature": 0.0,
+            "modelName": "deepseek-flash",
+            "displayName": "DeepSeek V4.1 Flash"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh vs L:ja vs L:ru vs L:es vs S:T1.0:seed1 vs S:T1.0:seed2 vs P:expert vs P:skeptic vs W:rewrite1 vs W:rewrite2 vs R:short_cot)",
+            "languages": [
+                "english",
+                "chinese",
+                "japanese",
+                "russian",
+                "spanish",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 12,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-k-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "candidate_files": [
+            "result/arms/deepseek4.1flash/mmlu/L_en.json",
+            "result/arms/deepseek4.1flash/mmlu/L_zh.json",
+            "result/arms/deepseek4.1flash/mmlu/L_ja.json",
+            "result/arms/deepseek4.1flash/mmlu/L_ru.json",
+            "result/arms/deepseek4.1flash/mmlu/L_es.json",
+            "result/arms/deepseek4.1flash/mmlu/S_T1.0_seed1.json",
+            "result/arms/deepseek4.1flash/mmlu/S_T1.0_seed2.json",
+            "result/arms/deepseek4.1flash/mmlu/P_expert.json",
+            "result/arms/deepseek4.1flash/mmlu/P_skeptic.json",
+            "result/arms/deepseek4.1flash/mmlu/W_rewrite1.json",
+            "result/arms/deepseek4.1flash/mmlu/W_rewrite2.json",
+            "result/arms/deepseek4.1flash/mmlu/R_short_cot.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 424,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "menu_judge",
+        "menu": "M12",
+        "item_filter": "menu_all_answered_disagreement",
+        "n_judged_items": 410,
+        "order_scheme": "grouped_rotation_seed0",
+        "api_usage": {
+            "calls": 25,
+            "calls_without_usage": 0,
+            "prompt_tokens": 53983,
+            "completion_tokens": 6421,
+            "refusals": 0
+        },
+        "model_versions": {
+            "deepseek-flash@DeepSeek-V4.1-Flash": 25
+        },
+        "calls_utc": {
+            "first": "2026-10-04T15:52:29+00:00",
+            "last": "2026-10-04T15:53:12+00:00"
+        }
+    },
+    {
+        "item_id": 20,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed2",
+            "W:rewrite1",
+            "R:short_cot",
+            "L:ja",
+            "L:ru",
+            "P:expert",
+            "W:rewrite2",
+            "S:T1.0:seed1",
+            "L:zh",
+            "P:skeptic",
+            "L:es",
+            "L:en"
+        ],
+        "tokens_in": 2740,
+        "tokens_out": 305,
+        "trace": {
+            "judge_output": "Reasoning process\nThe key issue is the interpretation of “G + H” in Statement 1. In group theory, “+” is often used for abelian groups under addition, and “internal direct product” usually requires G and H to be normal subgroups with trivial intersection and together generate the whole group. If G + H denotes the internal direct product, then its order is indeed |G||H| when the internal direct product exists. Statement 1 is therefore true under the standard interpretation.\n\nStatement 2: If r | m and s | n, then Z_m has a subgroup isomorphic to Z_r, and Z_n has a subgroup isomorphic to Z_s. Their direct product is a subgroup of Z_m × Z_n isomorphic to Z_r × Z_s. This is true.\n\nThus both statements are true, so the correct choice is A.\n\nMost answers correctly conclude A. Answer 11 incorrectly claims Statement 1 is false because it misinterprets the internal direct product condition; however, the statement itself is about the order of the internal direct product, which is |G||H| when it exists. Therefore Answer 11 is wrong. The other answers that conclude A are correct, but Answer 1 gives a clear and accurate reasoning. Since the task asks to select the most correct one among the 12, and all A answers are essentially correct, the best choice is the one with the clearest correct reasoning. Answer 1 is concise and correct.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "b2df74ddbdf1468c81065b87d17eba1c502cfba325c7530b7ec2759bd1fd8b40"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:29+00:00",
+            "usage_in": 2744,
+            "usage_out": 305
+        }
+    },
+    {
+        "item_id": 110,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:ja",
+            "L:en",
+            "L:zh",
+            "W:rewrite1",
+            "L:ru",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "P:expert",
+            "L:es",
+            "W:rewrite2"
+        ],
+        "tokens_in": 2552,
+        "tokens_out": 272,
+        "trace": {
+            "judge_output": "Reasoning process\nThe submandibular lymph nodes primarily drain the lower lip, floor of the mouth, anterior tongue, and mandibular teeth (especially the lower first molar), as well as some upper lip and anterior hard palate regions. The upper central incisor typically drains to submental nodes, and the hard palate mainly drains to deep cervical nodes, so options including these as primary submandibular drainage sites are anatomically imprecise. However, among the given choices, the question likely expects the most inclusive option that includes the lower first molar, which is a classic submandibular drainage site. Answer 10 correctly identifies that the lower first molar is the key structure draining to submandibular nodes and that the other listed structures do not primarily drain there, making D the only choice including the lower first molar. Answers 1 and 11 incorrectly choose C, omitting the lower first molar. Answers 2, 3, 4, 5, 6, 7, 8, 9, and 12 choose D, but some contain flawed reasoning (e.g., claiming hard palate or upper central incisor drain to submandibular nodes). Answer 10 provides the most accurate reasoning for selecting D based on the lower first molar being the definitive submandibular drainage site among the options.\n\nFinal Choice\n{\"choice\":10}",
+            "choice": 10,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "1fc2c16c699242fc2a16f300b6b798456412091eae4f4d239a3b57667c701bae"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:31+00:00",
+            "usage_in": 2556,
+            "usage_out": 272
+        }
+    },
+    {
+        "item_id": 392,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "W:rewrite2",
+            "W:rewrite1",
+            "L:ru",
+            "L:en",
+            "L:ja",
+            "R:short_cot",
+            "L:es",
+            "S:T1.0:seed2",
+            "S:T1.0:seed1",
+            "L:zh",
+            "P:skeptic"
+        ],
+        "tokens_in": 3151,
+        "tokens_out": 365,
+        "trace": {
+            "judge_output": "Reasoning process\nThe key is to match the three blanks with the standard terminology used in critiques of business-CSO collaborations.\n\n- First blank: The example “one party possess more resources” directly signals **power imbalance**, not “informational asymmetries.” So options C and D are wrong on the first term.\n- Second blank: “unfair distribution of ________, where one party gains more from the relationship” most naturally refers to **benefits**, because the clause explains unequal gains from the relationship. “Resources” is less precise here, especially since resources were already mentioned in the first clause.\n- Third blank: The standard risk term for CSOs losing independence or being absorbed into corporate agendas is **co-opted**, not “hoodwinked.” “Hoodwinked” is more colloquial and less precise in this academic/policy context.\n\nThis creates a problem: the best combination is Power imbalance, Benefits, Co-opted, but that exact option is not listed. Among the given choices:\n- A has the right first and second terms but the weaker third term.\n- B has the right first and third terms but the weaker second term.\n- C and D are wrong on the first term.\n\nSeveral answers incorrectly choose A because they prefer “Benefits” for the second blank and treat “Hoodwinked” as acceptable, but “co-opted” is the more standard and accurate term for CSO risk in this literature. Other answers correctly identify “co-opted” but then either accept “Resources” too readily or misstate the best combination. The most defensible choice among the listed options is B, because “power imbalance” and “co-opted” are strongly correct, and “unfair distribution of resources” is still plausible in this context.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "234973ed7c652de5e20f9ce22dd2b5b66b113fdc76344199bf55378f385201de"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:33+00:00",
+            "usage_in": 3155,
+            "usage_out": 365
+        }
+    },
+    {
+        "item_id": 515,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:ru",
+            "L:ja",
+            "R:short_cot",
+            "P:expert",
+            "L:es",
+            "S:T1.0:seed2",
+            "S:T1.0:seed1",
+            "L:zh",
+            "W:rewrite1",
+            "W:rewrite2",
+            "P:skeptic"
+        ],
+        "tokens_in": 1807,
+        "tokens_out": 189,
+        "trace": {
+            "judge_output": "Reasoning process\nThe key physiological fact is that blood lactate during intermittent sports like soccer rises during high-intensity efforts but is cleared during lower-intensity periods and rest. Most answers correctly note that lactate is usually lower at the end of the game than at the end of the first half, because second-half intensity often declines with fatigue and pacing. Answer 9 is the main outlier: it claims lactate is usually higher at the end of the game, which is not the typical pattern and overstates cumulative lactate accumulation. Answer 12 also adds a minor caveat about values above 3 mM not being rare, but its final choice is still B and its reasoning is broadly consistent. The other answers all support B with essentially correct reasoning. Therefore, the most correct answer is one of the B-selecting responses, and among them Answer 1 is clear, accurate, and directly addresses the typical pattern without unnecessary errors.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "7cb6a8e490245ce9caa927fc5b7e2d5f5713d3c52b6873be2f7b9b09d00beb22"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:35+00:00",
+            "usage_in": 1811,
+            "usage_out": 189
+        }
+    },
+    {
+        "item_id": 1581,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "S:T1.0:seed2",
+            "S:T1.0:seed1",
+            "L:zh",
+            "W:rewrite1",
+            "W:rewrite2",
+            "P:skeptic",
+            "L:en",
+            "L:ru",
+            "L:ja",
+            "R:short_cot",
+            "P:expert"
+        ],
+        "tokens_in": 1984,
+        "tokens_out": 224,
+        "trace": {
+            "judge_output": "Reasoning process\nThe key physics point is that the problem says “immediately after” release, both particles increase in acceleration.  \nIf the charges are opposite, they attract, so they move toward each other; the distance decreases, the Coulomb force increases, and acceleration increases.  \nIf the charges are the same, they repel, so they move apart; the distance increases, the Coulomb force decreases, and acceleration decreases.  \nTherefore, the only consistent case is opposite charges.\n\nChecking the answers:  \n- Answers 1, 2, 3, 5, 6, 7, 10, 11, and 12 correctly conclude opposite charges.  \n- Answer 4 incorrectly concludes same charges.  \n- Answer 8 incorrectly says either is possible.  \n- Answer 9 incorrectly says either is possible.  \n\nAmong the correct ones, the reasoning is essentially the same. Answer 2 is clear and concise, but all correct answers lead to B. The most correct choice is any of the ones with proper reasoning; I will select Answer 2.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "cf2e2432389602e78709ffad4570eb53e61ce82fcd662c795444a71618549951"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:36+00:00",
+            "usage_in": 1988,
+            "usage_out": 224
+        }
+    },
+    {
+        "item_id": 2574,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed2",
+            "L:en",
+            "L:ja",
+            "L:ru",
+            "W:rewrite1",
+            "L:zh",
+            "P:expert",
+            "S:T1.0:seed1",
+            "W:rewrite2",
+            "R:short_cot",
+            "L:es",
+            "P:skeptic"
+        ],
+        "tokens_in": 1393,
+        "tokens_out": 235,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the biggest cause of death in children under five as of 2017. According to WHO and IHME data for that year, preterm birth complications were the leading cause, followed by lower respiratory infections and diarrheal diseases. Answers 1, 2, 3, 4, 5, 6, 7, 10, 11, and 12 correctly identify preterm birth complications as the top cause and provide accurate reasoning. Answers 8 and 9 incorrectly claim lower respiratory infections were the leading cause, which contradicts the 2017 global estimates. Among the correct answers, all are valid, but I need to select the most correct one. Answer 2 provides a clear, detailed reasoning process with specific data (approximately 16% of under-five deaths) and correctly identifies preterm birth complications as the single largest cause. Answer 12 also provides thorough reasoning but includes some unnecessary discussion about neonatal versus post-neonatal causes. Answer 2 is concise, accurate, and directly addresses the question without extraneous information. Therefore, Answer 2 is the most correct.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "301812a500690e2e249809d1d755071939e4d1c29415a19fffec447a85b0b6aa"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:38+00:00",
+            "usage_in": 1397,
+            "usage_out": 235
+        }
+    },
+    {
+        "item_id": 2584,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "L:es",
+            "P:expert",
+            "W:rewrite1",
+            "L:ru",
+            "L:en",
+            "R:short_cot",
+            "L:zh",
+            "P:skeptic",
+            "W:rewrite2"
+        ],
+        "tokens_in": 2088,
+        "tokens_out": 418,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the percentage of adults aged 18 or older who were obese as of 2016, with choices 6%, 13%, 27%, and 46%. This is most likely referencing U.S. adult obesity prevalence, since the choices align with common U.S. data rather than global data. According to CDC NHANES data, the obesity prevalence among U.S. adults in 2015–2016 was approximately 39.8%, which is closest to 46% among the given options.  \n\nAnswer 1 incorrectly treats the question as global and picks 27%, which is too low for U.S. adults and not the best match for global data either.  \nAnswer 2 correctly recalls ~39.8% but then incorrectly says 46% is “far too high” and still chooses D, which is contradictory but ends with the right choice.  \nAnswer 3 correctly recalls ~39.8% and chooses D, with sound reasoning.  \nAnswer 4 gives mixed reasoning but ultimately chooses D based on U.S. data.  \nAnswer 5 correctly notes ~39.8% and chooses D.  \nAnswer 6 correctly recalls ~39.8% and chooses D.  \nAnswer 7 incorrectly assumes global data and chooses B (13%), which is not the best interpretation given the choices and typical U.S. context.  \nAnswer 8 acknowledges U.S. data ~40% but then switches to global 13% and chooses B, which is inconsistent.  \nAnswer 9 incorrectly chooses C (27%) with weak reasoning.  \nAnswer 10 incorrectly uses global data and chooses B.  \nAnswer 11 correctly recalls ~39.8% and chooses D.  \nAnswer 12 correctly recalls ~39.8% and chooses D.  \n\nThe most correct answers are those that identify the U.S. adult obesity rate around 40% and choose D (46%) as the closest option. Among these, Answer 3 provides clear, accurate reasoning without contradiction.  \n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "506f53c16e370cd0061fbcb386d28ba7894dd9b75a015bf04283768e90dec2be"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:40+00:00",
+            "usage_in": 2092,
+            "usage_out": 418
+        }
+    },
+    {
+        "item_id": 2696,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "P:skeptic",
+            "L:en",
+            "L:ru",
+            "L:ja",
+            "R:short_cot",
+            "P:expert",
+            "L:es",
+            "S:T1.0:seed2",
+            "S:T1.0:seed1",
+            "L:zh",
+            "W:rewrite1"
+        ],
+        "tokens_in": 2477,
+        "tokens_out": 321,
+        "trace": {
+            "judge_output": "Reasoning process\nThe key is to identify which reaction runs forward in glycolysis and reverse in fermentation.\n\n- Glycolysis: NAD⁺ is reduced to NADH during the oxidation of glyceraldehyde-3-phosphate. So the forward reaction is NAD⁺ + H⁺ + 2e⁻ → NADH.\n- Fermentation: NADH is oxidized back to NAD⁺ to regenerate the NAD⁺ needed for glycolysis. So the reverse reaction occurs: NADH → NAD⁺ + H⁺ + 2e⁻.\n\nChecking options:\n- A and B occur only in fermentation, not in glycolysis forward.\n- D (ADP + P → ATP) occurs in glycolysis, but fermentation does not reverse it in the main fermentation pathway; ATP is not consumed to regenerate ADP + P as a defining fermentation step.\n- C matches exactly: forward in glycolysis, reverse in fermentation.\n\nNow evaluating the 12 answers:\n- Answers 1, 2, 3, 4, 5, 7, 8, 10, 11 correctly identify C with valid reasoning.\n- Answer 6 incorrectly chooses D and has flawed reasoning about fermentation reversing ATP synthesis.\n- Answer 9 incorrectly chooses D.\n- Answer 12 incorrectly chooses D and contradicts itself by first mentioning NADH/NAD⁺ reversal but then selecting D.\n\nAmong the correct ones, answer 2 provides clear, accurate reasoning without unnecessary complications. Answer 11 is also correct but includes some extra uncertain discussion. The most straightforward and correct is answer 2.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "5f80658b3541e198250dd5f4465d3c0c408d63c4b771a9b21a890b58ae8232d9"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:42+00:00",
+            "usage_in": 2481,
+            "usage_out": 321
+        }
+    },
+    {
+        "item_id": 4752,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:ru",
+            "S:T1.0:seed2",
+            "R:short_cot",
+            "P:skeptic",
+            "L:en",
+            "L:zh",
+            "L:es",
+            "S:T1.0:seed1",
+            "W:rewrite2",
+            "W:rewrite1",
+            "L:ja"
+        ],
+        "tokens_in": 3000,
+        "tokens_out": 200,
+        "trace": {
+            "judge_output": "Reasoning process\nThe correct physics is \\(r = \\frac{mv}{qB}\\). Using \\(m \\approx 9.11\\times10^{-31}\\,\\text{kg}\\), \\(v=10^7\\,\\text{m/s}\\), \\(q \\approx 1.60\\times10^{-19}\\,\\text{C}\\), and \\(B=5\\times10^{-5}\\,\\text{T}\\), the numerator is about \\(9.11\\times10^{-24}\\) and the denominator is about \\(8.0\\times10^{-24}\\), giving \\(r \\approx 1.14\\,\\text{m}\\). The closest option is 1 m, so the correct choice is D.\n\nAnswer 4 is incorrect because it claims \\(r \\approx 1.1\\times10^{-3}\\,\\text{m}\\), which is a calculation error by a factor of about \\(10^3\\). All other answers correctly compute \\(r \\approx 1.14\\,\\text{m}\\) and choose D.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "d5d54062cba6e75e7de13790df48879db16e19f77c5342a6d4720e0b835d7f6c"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:44+00:00",
+            "usage_in": 3004,
+            "usage_out": 200
+        }
+    },
+    {
+        "item_id": 6313,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:zh",
+            "R:short_cot",
+            "W:rewrite2",
+            "P:expert",
+            "L:en",
+            "S:T1.0:seed1",
+            "L:es",
+            "W:rewrite1",
+            "L:ru",
+            "L:ja",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 2089,
+        "tokens_out": 236,
+        "trace": {
+            "judge_output": "Reasoning process\nThe key issue is whether option C (“are mainly on the lower portion of the body”) should be treated as correct.  \n- Answers 1 and 9 correctly note that erogenous zones are not mainly or exclusively on the lower body, since areas such as the neck, ears, lips, and nipples are also common. Therefore, C is not universally true, and D (“all of the above”) is not justified.  \n- Answers 2–8, 10–12 incorrectly accept C as generally true or treat it as sufficient for D, which is a flawed basis for choosing “all of the above.”  \n- The question asks for the best choice. Since A is definitely true and B is also supported, but C is false as stated, the most correct single answer is A, not D.  \n- Among the answers, only Answer 1 and Answer 9 choose A. Answer 1 gives a clear and accurate reasoning process, explicitly rejecting C and D. Answer 9 also chooses A but its reasoning is less precise about B.  \nThus, Answer 1 is the most correct.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "2d786b3744d6cbd69037bfb35f66393f26106753dd5a4f0402419a79f91f19ca"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:45+00:00",
+            "usage_in": 2093,
+            "usage_out": 236
+        }
+    },
+    {
+        "item_id": 6324,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "W:rewrite1",
+            "L:zh",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "L:en",
+            "L:es",
+            "P:skeptic",
+            "L:ru",
+            "R:short_cot",
+            "L:ja",
+            "W:rewrite2"
+        ],
+        "tokens_in": 2393,
+        "tokens_out": 282,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks which religion includes certain people who hold the position that abortion is murder. The key phrase is “certain people,” meaning the position does not need to be universal within the religion.  \n- Orthodox Jews: Some Orthodox Jewish authorities and individuals do regard abortion as a grave sin and in some cases as murder, though mainstream Jewish law permits abortion when the mother’s life is at risk. The question only requires that certain people hold the view, so A can be included.  \n- Fundamentalist Protestants: Many fundamentalist Protestants explicitly hold that abortion is murder. This is clearly correct.  \n- Eastern Orthodox Christians: The Orthodox Church officially opposes abortion and often describes it as murder or equivalent to murder. This is also correct.  \nSince A, B, and C each contain at least some people who hold the position, “all of the above” is the most accurate choice.  \nAnswers that choose only B generally rely on the incorrect assumption that Orthodox Jews and Eastern Orthodox Christians do not include any people with that view, or they treat the question as asking for the most stereotypical group rather than the logically correct multiple-choice answer. Answers 3, 7, and 11 correctly recognize that the “certain people” wording allows for all three groups to be included. Among these, Answer 3 gives the clearest and most accurate reasoning.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "00e8dc671de8fd0b44fdef644183a9e8640c5dd7c52139d9ad56036ce468d646"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:47+00:00",
+            "usage_in": 2397,
+            "usage_out": 282
+        }
+    },
+    {
+        "item_id": 6585,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh",
+            "L:ru",
+            "S:T1.0:seed1",
+            "R:short_cot",
+            "L:ja",
+            "S:T1.0:seed2",
+            "W:rewrite2",
+            "P:expert",
+            "L:en",
+            "P:skeptic"
+        ],
+        "tokens_in": 1918,
+        "tokens_out": 339,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks why Hart’s claim that secondary rules are “power-conferring” seems unconvincing specifically for the rule of recognition. In Hart’s theory, the rule of recognition is a secondary rule that provides criteria for legal validity, but it also functions in practice to impose a duty on judges to identify and apply valid law. This dual aspect—conferring power while also imposing duties—is the standard criticism. Therefore, the correct choice is A.\n\nNow evaluating the 12 answers:\n- Answers 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, and 12 all select A and give reasoning consistent with the above.\n- Answer 4 selects D, claiming the rule of recognition fails to specify the source of authority. This is incorrect because the rule of recognition precisely specifies the criteria or sources of legal validity in Hart’s theory.\n- Among the A-selecting answers, all are essentially correct, but some contain minor imprecisions. For example, Answer 7 says the rule of recognition “specifies the source of authority” and then oddly says the criticism is not that it fails to do so—this is fine, but its phrasing is slightly convoluted. Answer 3 is clear and accurate. Answer 9 explicitly rejects B, C, and D correctly. Answer 12 is also clear and accurate.\n- The most straightforward, accurate, and complete reasoning is in Answer 9, which correctly explains Hart’s distinction, identifies the duty-imposing aspect, and rules out the other options.\n\nFinal Choice\n{\"choice\":9}",
+            "choice": 9,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "f453c6f3461b2a9d415b3086c07b2bdab356a6b2da3857e34b4e73c162c0be25"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:49+00:00",
+            "usage_in": 1922,
+            "usage_out": 339
+        }
+    },
+    {
+        "item_id": 6686,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:es",
+            "L:ja",
+            "L:zh",
+            "L:ru",
+            "W:rewrite2",
+            "P:skeptic",
+            "R:short_cot",
+            "P:expert",
+            "S:T1.0:seed2",
+            "L:en",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 1846,
+        "tokens_out": 189,
+        "trace": {
+            "judge_output": "Reasoning process\nThe key issue is identifying the fallacy that matches “uses an emotionally charged restatement of a claim in place of support for the claim.”  \n“Question begging epithets” is the fallacy of using loaded or emotionally charged language to imply or assume the conclusion without argument. That directly matches the description.  \n“Style over substance” is broader and concerns prioritizing presentation over content, but it does not specifically capture the use of an emotionally charged restatement as a substitute for support.  \n“Hypostatization” and “amphiboly” are unrelated.  \nTherefore, answers choosing B are correct, and answers choosing A are incorrect. Among the B answers, the reasoning is generally sound; some are more concise, but they correctly identify the fallacy. The best answer is one that clearly and accurately explains why B is correct and why the others are not. Answer 1 does this well.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "8af389c35a2e503db662e92c4f13ceb2c2b9560b52cd280845523ff2262e5d4f"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:51+00:00",
+            "usage_in": 1850,
+            "usage_out": 189
+        }
+    },
+    {
+        "item_id": 6959,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "S:T1.0:seed2",
+            "L:es",
+            "S:T1.0:seed1",
+            "P:expert",
+            "L:ja",
+            "W:rewrite2",
+            "L:en",
+            "P:skeptic",
+            "W:rewrite1",
+            "L:ru",
+            "L:zh"
+        ],
+        "tokens_in": 1303,
+        "tokens_out": 224,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks how to describe the thinking and outlook of transformational leaders, with options Strategic, Operational, Functional, and Developmental. Transformational leadership is generally characterized by vision, long-term orientation, inspiration, and change, which aligns most closely with a strategic mindset rather than operational, functional, or purely developmental concerns. Among the 12 answers, several choose A (Strategic) with sound reasoning: Answers 1, 3, 6, 7, 9, 11, and 12. Others choose D (Developmental), arguing growth and empowerment, but this is less directly about “thinking and outlook” than strategic vision. The strongest and most consistent reasoning is that transformational leaders are strategic in outlook. Answer 1 is concise and correct, but Answer 7 is also clear. However, Answer 1’s reasoning is accurate and directly addresses the question without unnecessary additions. Answer 3 and 6 are in other languages but still correct. The best single answer is the one with clear, correct reasoning and proper format: Answer 1.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "f30eebde136d9b6f0b039e182e17fa7a399cd49dd5304f3a784595aae006e2e7"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:53+00:00",
+            "usage_in": 1307,
+            "usage_out": 224
+        }
+    },
+    {
+        "item_id": 6968,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:es",
+            "P:expert",
+            "P:skeptic",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "W:rewrite2",
+            "L:en",
+            "R:short_cot",
+            "L:ja",
+            "L:ru",
+            "L:zh"
+        ],
+        "tokens_in": 1324,
+        "tokens_out": 281,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks which option is not a recognised challenge for modern managers. The standard recognised challenges in management literature are managing communications, managing change, and managing the learning organisation. Micro-managing the workforce is not a recognised challenge but rather a negative management behaviour or style to avoid. Therefore, the correct choice is A.\n\nNow evaluating the 12 answers:\n- Answers 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, and 12 all correctly identify A as the answer with sound reasoning.\n- Answer 11 incorrectly selects B, claiming that managing communications is not a challenge, which contradicts established management theory. Its reasoning is flawed because managing communications is widely recognised as a key challenge for modern managers.\n\nAmong the correct answers, all provide valid reasoning. Answer 1 is the first correct one and clearly explains the distinction. However, the task is to select the most correct answer among the 12. Since all correct answers (1-10, 12) reach the same conclusion with similar reasoning, the first one (Answer 1) is a suitable representative. But the instruction says to select the most correct one based on reasoning correctness. Answer 1's reasoning is accurate and concise. Answer 11 is incorrect. Therefore, I select Answer 1.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "ff65045e0b48ac47264357382a6e1234e96171f5f54a4038d8d7422a9e37922a"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:55+00:00",
+            "usage_in": 1328,
+            "usage_out": 281
+        }
+    },
+    {
+        "item_id": 7312,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "R:short_cot",
+            "L:ru",
+            "S:T1.0:seed2",
+            "S:T1.0:seed1",
+            "W:rewrite1",
+            "W:rewrite2",
+            "L:es",
+            "L:zh",
+            "P:expert",
+            "L:ja"
+        ],
+        "tokens_in": 1389,
+        "tokens_out": 147,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswers 1–9 and 11–12 all identify the correct label as “social epigenetics” and choose B. Their reasoning is consistent with Moshe Szyf’s work linking social-environmental factors such as prenatal maternal stress to epigenetic changes. Answer 10 instead chooses A (“developmental epigenetics”), but that is less specific to Szyf’s social-environmental framing and is not the standard label for this body of work. Among the answers selecting B, Answer 2 provides the clearest step-by-step reasoning, explicitly distinguishing the options and explaining why “social epigenetics” is the standard term. Therefore, Answer 2 is the most correct.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "6180a85d53845eff0b39397adfadbba09293ef52157b9a5596f7eef2d0cbcba7"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:56+00:00",
+            "usage_in": 1393,
+            "usage_out": 147
+        }
+    },
+    {
+        "item_id": 7394,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "S:T1.0:seed1",
+            "L:zh",
+            "P:skeptic",
+            "L:es",
+            "L:en",
+            "S:T1.0:seed2",
+            "W:rewrite1",
+            "R:short_cot",
+            "L:ja",
+            "L:ru",
+            "P:expert"
+        ],
+        "tokens_in": 1409,
+        "tokens_out": 155,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswers 1–9 and 11–12 correctly identify hard-edge painting as characterized by sharp, clean edges, flat areas of uniform color, and an even, solid paint application without visible brushstrokes or blending. They all select A.  \nAnswer 10 is incorrect: it claims hard-edge painting has scratchy brush marks clearly separated, which is not true; that description is closer to certain expressive or painterly styles, not hard-edge painting.  \nTherefore, the most correct answers are the ones selecting A, and among them any is acceptable, but the task asks to select the most correct one. Since all A-selecting answers are essentially correct, I choose the first correct one, Answer 1.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "49dfece30b5b730cfdf1f95bb36199a38c186d4cb31e61f5584d81b13a41c16a"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:57+00:00",
+            "usage_in": 1413,
+            "usage_out": 155
+        }
+    },
+    {
+        "item_id": 8194,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "P:skeptic",
+            "W:rewrite1",
+            "L:es",
+            "P:expert",
+            "W:rewrite2",
+            "L:ru",
+            "S:T1.0:seed2",
+            "R:short_cot",
+            "S:T1.0:seed1",
+            "L:en",
+            "L:ja"
+        ],
+        "tokens_in": 1670,
+        "tokens_out": 249,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for van den Haag’s response to the argument that the death penalty does not deter murderers. His well-known position is retributive: even if deterrence is uncertain or absent, capital punishment is justified because the severity and finality of death are proportionate to the severity and finality of murder. Therefore, the correct choice is C.\n\nAmong the 12 answers:\n- Answers 1, 3, 4, and 7 choose A, but A misstates van den Haag’s main response by focusing on deterrence confidence rather than proportionality.\n- Answer 5 chooses D, but B and C are not both part of his direct response to the deterrence objection in the way described, and A is not his central claim.\n- Answers 2, 6, 8, 9, 10, 11, and 12 choose C and correctly identify the proportionality/retributive argument.\n- The best among these is Answer 11, because it clearly states that van den Haag justifies the death penalty even if it does not deter, based on proportionality between the severity/finality of the punishment and the crime.\n\nFinal Choice\n{\"choice\":11}",
+            "choice": 11,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "43d9766b4913d5d434dda588c4e19d79ab792cff383e325940fc3a8e84b13ef2"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:52:59+00:00",
+            "usage_in": 1674,
+            "usage_out": 249
+        }
+    },
+    {
+        "item_id": 8545,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "W:rewrite1",
+            "W:rewrite2",
+            "L:es",
+            "L:zh",
+            "P:expert",
+            "L:ja",
+            "L:en",
+            "P:skeptic",
+            "R:short_cot",
+            "L:ru",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 2171,
+        "tokens_out": 235,
+        "trace": {
+            "judge_output": "Reasoning process\nThe key issue is whether each scenario is “clearly morally wrong” under ordinary US moral standards as of 2020. Scenario 1 involves deliberately avoiding awareness of starving animals to avoid helping. This is widely regarded as morally callous and wrong, even if there is no legal duty to assist. Scenario 2 involves planting a large garden by a narrow public street. Without additional facts showing obstruction, illegality, or harm, this is not clearly morally wrong. Therefore the correct pattern is Wrong, Not wrong, which corresponds to choice B.\n\nAmong the 12 answers, most correctly choose B. The incorrect ones are Answer 3 and Answer 7, which choose D by treating Scenario 1 as not clearly wrong; that reasoning is too permissive because intentionally ignoring suffering to avoid helping is ordinarily considered morally wrong. Answer 4 is also essentially correct in substance, but it includes non-English reasoning and is less precise. Answer 10 is correct but gives weaker reasoning. The best answer is the one that clearly identifies Scenario 1 as wrong and Scenario 2 as not wrong, which is Answer 1.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "b0fbffb5011f680b769d620b9b003a4ab85264bf7d314417bf19a6e85851c5f4"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:53:01+00:00",
+            "usage_in": 2175,
+            "usage_out": 235
+        }
+    },
+    {
+        "item_id": 10373,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:ru",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "P:expert",
+            "L:es",
+            "W:rewrite2",
+            "R:short_cot",
+            "L:ja",
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 3236,
+        "tokens_out": 356,
+        "trace": {
+            "judge_output": "Reasoning process\nThe key issue is whether the offer was irrevocable under the UCC firm offer rule and when acceptance became effective. Jackson is a merchant, the offer was signed and in writing, and it contained a promise not to revoke but no expiration date. Under UCC § 2-205, this is a firm offer and is irrevocable for a reasonable time, not exceeding three months. Therefore, Jackson’s attempted revocation on day 4 was ineffective. Sands’ acceptance on day 7 was effective upon dispatch under the mailbox rule, so a contract was formed on day 7, when Sands mailed the acceptance. This corresponds to choice D.\n\nNow evaluating the 12 answers:\n- Answer 1: Correct reasoning and answer D.\n- Answer 2: Incorrect. It ignores the firm offer rule and treats the revocation as effective, leading to B.\n- Answer 3: Correct reasoning and answer D.\n- Answer 4: Correct reasoning and answer D.\n- Answer 5: Reasoning is somewhat convoluted but ultimately correct and answer D.\n- Answer 6: Correct reasoning and answer D.\n- Answer 7: Correct reasoning and answer D.\n- Answer 8: Correct reasoning and answer D.\n- Answer 9: Correct reasoning and answer D.\n- Answer 10: Correct reasoning and answer D.\n- Answer 11: Correct reasoning and answer D.\n- Answer 12: Correct reasoning and answer D.\n\nOnly Answer 2 reaches the wrong conclusion. All others correctly identify D. The most correct answer is any of the ones with correct reasoning and answer D. Since the task asks to select the most correct one, I will choose Answer 1 as it is clear and accurate.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "230b763b5dc58ccdc28f8c32fd92af4133bcf1bfc54f4dde69e5103d87c8442b"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:53:03+00:00",
+            "usage_in": 3240,
+            "usage_out": 356
+        }
+    },
+    {
+        "item_id": 10635,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:ja",
+            "L:zh",
+            "P:skeptic",
+            "L:ru",
+            "R:short_cot",
+            "L:en",
+            "S:T1.0:seed1",
+            "L:es",
+            "P:expert",
+            "W:rewrite2",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 4136,
+        "tokens_out": 237,
+        "trace": {
+            "judge_output": "Reasoning process\nThe key issue is whether the defendant can avoid first-degree murder liability for the daughter’s death. The statute requires an unlawful and intentional killing with malice aforethought, and malice is defined as a deliberate intention to take away the life of another. Under transferred intent, if the defendant intended to kill the friend but accidentally killed the daughter, that intent transfers, so A is not a good defense. C is irrelevant because ignorance of the law is no defense. D is weaker because negligence does not directly negate the deliberate intent to kill required by the statute, especially since the defendant intentionally fired at the friend. B is the strongest defense because if he intended only to wound the friend, he lacked the deliberate intention to take a life, which negates the malice required for first-degree murder under this statute. Answers 1, 3, 5, 6, 7, 8, 9, 11, and 12 correctly identify B as the best defense. Answers 2, 4, and 10 incorrectly choose D, overemphasizing negligence despite the intentional shooting and the statutory malice requirement.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "2bccdc4a246acc8867295dce4ae478fbbf526f9dd724b69f8f311e85c47cda1a"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:53:05+00:00",
+            "usage_in": 4140,
+            "usage_out": 237
+        }
+    },
+    {
+        "item_id": 10649,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "R:short_cot",
+            "P:expert",
+            "L:es",
+            "S:T1.0:seed2",
+            "S:T1.0:seed1",
+            "L:zh",
+            "W:rewrite1",
+            "W:rewrite2",
+            "P:skeptic",
+            "L:en",
+            "L:ru"
+        ],
+        "tokens_in": 2730,
+        "tokens_out": 192,
+        "trace": {
+            "judge_output": "Reasoning process\nThe key issue is whether Costco’s catalog was an offer or an invitation to make an offer, and whether Costco’s confirmation was an acceptance or a counteroffer. Under the UCC, a definite expression of acceptance can still form a contract even with additional terms unless the acceptance is expressly made conditional on assent to those terms. Here, Costco’s confirmation stated acceptance was “conditional upon” a loading charge, which makes it a counteroffer rather than an acceptance. Rainmaking did not accept that counteroffer, so no contract was formed. Answers arguing for a contract at $1,000 based on CIF generally misapply CIF or ignore the conditional acceptance problem. Answers arguing for $1,500 incorrectly assume a contract formed on Costco’s added term. The best reasoning is that the confirmation was a counteroffer that was not accepted, so there is no contract.\n\nFinal Choice\n{\"choice\":9}",
+            "choice": 9,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "d834b8ec610bbf01e94abb44692551cc5b64744a62ac66408e33223038fb87ee"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:53:07+00:00",
+            "usage_in": 2734,
+            "usage_out": 192
+        }
+    },
+    {
+        "item_id": 13076,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "L:ru",
+            "R:short_cot",
+            "P:skeptic",
+            "L:en",
+            "L:zh",
+            "W:rewrite1",
+            "L:es",
+            "S:T1.0:seed2",
+            "S:T1.0:seed1",
+            "P:expert",
+            "W:rewrite2"
+        ],
+        "tokens_in": 1730,
+        "tokens_out": 238,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 is incorrect because it claims workforce development is the least likely focus, but stakeholders commonly consider workforce development as a social impact. Answers 2 through 12 all identify financial performance as the correct choice, but some reasoning is flawed: Answer 2 says stakeholders pay less attention to financial performance compared to social/environmental aspects, which is not generally true. Answer 3 says financial performance is considered separately as an internal metric, which is reasonable. Answer 4 notes financial performance is an internal economic result rather than an external world impact, which is the strongest reasoning. Answer 5 is similar but less detailed. Answer 6 is correct but overly long. Answer 7 is correct but vague. Answer 8 is correct but uses Spanish. Answer 9 is correct and concise. Answer 10 is correct and concise. Answer 11 is correct but slightly verbose. Answer 12 is correct but slightly verbose. The best answer is Answer 4 because it clearly explains that financial performance is not normally categorized as an impact on the world, while acknowledging stakeholders do care about it, which resolves the apparent tension in the question.\n\nFinal Choice\n{\"choice\":4}",
+            "choice": 4,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "6099c388145941f747608b6336adee86cc0fa275444c74f287f598b420b44442"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:53:09+00:00",
+            "usage_in": 1734,
+            "usage_out": 238
+        }
+    },
+    {
+        "item_id": 13409,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "W:rewrite1",
+            "L:es",
+            "W:rewrite2",
+            "L:en",
+            "S:T1.0:seed1",
+            "L:ja",
+            "P:expert",
+            "R:short_cot",
+            "S:T1.0:seed2",
+            "L:ru",
+            "L:zh"
+        ],
+        "tokens_in": 1913,
+        "tokens_out": 256,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks which concept has basically the same relational characteristics as Tönnies’s *Gemeinschaft*. The standard sociological correspondence is with Durkheim’s *mechanical solidarity*: both describe traditional, community-based, homogeneous social bonds rooted in shared beliefs and personal ties. *Organic solidarity* corresponds more to *Gesellschaft*, *Gesellschaft* is the opposite concept in Tönnies, and *anomie* is normlessness, not a relational type.\n\nChecking the 12 answers:\n- Answers 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, and 12 all correctly identify mechanical solidarity as the match and choose B.\n- Answer 7 is incorrect because it claims *organic solidarity* is the closest match, which is wrong; organic solidarity is associated with modern, interdependent societies and is closer to *Gesellschaft*.\n- Among the correct answers, all are substantively valid. The instruction asks to select the most correct one, but since they all give the same correct final choice, any of the correct ones would be acceptable. I will select the first correct answer, Answer 1.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "54531e57304903d01607b0bce0f0230861cfc8e37c7f0f2be5e1c14794c21285"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:53:10+00:00",
+            "usage_in": 1917,
+            "usage_out": 256
+        }
+    },
+    {
+        "item_id": 13429,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:es",
+            "L:ru",
+            "P:skeptic",
+            "S:T1.0:seed2",
+            "L:ja",
+            "S:T1.0:seed1",
+            "R:short_cot",
+            "P:expert",
+            "W:rewrite2",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "tokens_in": 1434,
+        "tokens_out": 276,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 3 is incorrect because it chooses A (“disappointment and disproportion”), which are not the standard paired concepts in secularization theory. The standard sociological pairing is disengagement and disenchantment, not disappointment and disproportion.  \nAll other answers except Answer 3 correctly identify C as the answer and provide reasoning that aligns with standard secularization theory: disengagement refers to the separation of religion from social spheres, and disenchantment refers to the decline of magical or supernatural worldviews.  \nAnswer 3 is the only outlier and is wrong. The remaining answers are essentially correct, but I need to select the most correct one. Among them, Answers 1, 4, 5, 7, 8, 9, 10, 11, and 12 give clear, accurate reasoning. Answer 2 and Answer 6 are also correct but less precise in terminology. The best answer should be one that is accurate, concise, and directly matches the standard sociological definition. Answer 1 is concise and correct, but Answer 4 and Answer 9 provide slightly fuller context. However, the instruction asks to select the most correct one among the 12, and all correct ones essentially say the same. I will choose the first correct one that is clear and accurate: Answer 1.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "9a8fa34984049e907b2adc8941604126d19bce47d5c987e86657c5b757c96edb"
+        },
+        "call": {
+            "model_version": "deepseek-flash@DeepSeek-V4.1-Flash",
+            "called_at": "2026-10-04T15:53:12+00:00",
+            "usage_in": 1438,
+            "usage_out": 276
+        }
+    }
+]

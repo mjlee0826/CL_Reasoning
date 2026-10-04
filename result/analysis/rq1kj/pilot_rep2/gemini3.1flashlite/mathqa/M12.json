@@ -1,0 +1,1324 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh vs L:ja vs L:ru vs L:es vs S:T1.0:seed1 vs S:T1.0:seed2 vs P:expert vs P:skeptic vs W:rewrite1 vs W:rewrite2 vs R:short_cot)",
+            "languages": [
+                "english",
+                "chinese",
+                "japanese",
+                "russian",
+                "spanish",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 12,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-k-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/mathqa/L_en.json",
+            "result/arms/gemini3.1flashlite/mathqa/L_zh.json",
+            "result/arms/gemini3.1flashlite/mathqa/L_ja.json",
+            "result/arms/gemini3.1flashlite/mathqa/L_ru.json",
+            "result/arms/gemini3.1flashlite/mathqa/L_es.json",
+            "result/arms/gemini3.1flashlite/mathqa/S_T1.0_seed1.json",
+            "result/arms/gemini3.1flashlite/mathqa/S_T1.0_seed2.json",
+            "result/arms/gemini3.1flashlite/mathqa/P_expert.json",
+            "result/arms/gemini3.1flashlite/mathqa/P_skeptic.json",
+            "result/arms/gemini3.1flashlite/mathqa/W_rewrite1.json",
+            "result/arms/gemini3.1flashlite/mathqa/W_rewrite2.json",
+            "result/arms/gemini3.1flashlite/mathqa/R_short_cot.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 243,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "menu_judge",
+        "menu": "M12",
+        "item_filter": "menu_all_answered_disagreement",
+        "n_judged_items": 222,
+        "order_scheme": "grouped_rotation_seed0",
+        "api_usage": {
+            "calls": 25,
+            "calls_without_usage": 0,
+            "prompt_tokens": 174995,
+            "completion_tokens": 9203,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 25
+        },
+        "calls_utc": {
+            "first": "2026-10-04T15:50:33+00:00",
+            "last": "2026-10-04T15:51:45+00:00"
+        }
+    },
+    {
+        "item_id": 20,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "S:T1.0:seed1",
+            "L:zh",
+            "R:short_cot",
+            "L:en",
+            "W:rewrite1",
+            "W:rewrite2",
+            "P:expert",
+            "L:ru",
+            "L:es"
+        ],
+        "tokens_in": 5046,
+        "tokens_out": 355,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states: \"each item he makes a profit of $40 that constitutes 10% of the item's price to the retailer.\" This phrasing \"price to the retailer\" typically refers to the cost price (CP).\n2. If CP = $400 (since 10% of $400 is $40), then the original selling price (SP) = CP + Profit = $400 + $40 = $440.\n3. A 5% discount on the selling price ($440) is 0.05 * $440 = $22.\n4. The new selling price is $440 - $22 = $418.\n5. The new profit per item is $418 - $400 = $18.\n6. To maintain the original total profit of $4,000 (100 items * $40), the number of items (N) required is N * $18 = $4,000.\n7. N = 4000 / 18 ≈ 222.22.\n8. To justify the policy (i.e., to at least maintain the profit), the retailer must sell at least 223 items.\n9. Answers 2, 3, 4, 6, 7, 8, 9, 10, and 11 follow this correct logical path and arrive at 223. Answer 4 is a clear and concise representation of this logic.\n\nFinal Choice\n{\"choice\":\"4\"}",
+            "choice": 4,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "448798fd40bce7334235030d009f9904faea33bc38a8b5d2eeda9e311e5fe912"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:33+00:00",
+            "usage_in": 5047,
+            "usage_out": 355
+        }
+    },
+    {
+        "item_id": 43,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ru",
+            "R:short_cot",
+            "W:rewrite2",
+            "P:expert",
+            "L:ja",
+            "S:T1.0:seed1",
+            "L:zh",
+            "S:T1.0:seed2",
+            "L:en",
+            "W:rewrite1",
+            "L:es"
+        ],
+        "tokens_in": 6381,
+        "tokens_out": 286,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem asks for the number of employees to select to guarantee 3 programmers of the same sex.\n2. The composition is: 90 total, 50 programmers (35 male, 15 female), 40 non-programmers.\n3. The Pigeonhole Principle states that to guarantee 3 of one category, we must consider the worst-case scenario where we pick all available items that do not satisfy the condition.\n4. The \"non-programmers\" do not contribute to the goal of having 3 programmers of the same sex. Thus, we must pick all 40 non-programmers first.\n5. To avoid having 3 programmers of the same sex, we pick 2 male programmers and 2 female programmers.\n6. Total picked = 40 (non-programmers) + 2 (male programmers) + 2 (female programmers) = 44.\n7. The 45th person selected must be either a male programmer (making 3) or a female programmer (making 3).\n8. Answer 4, 5, 6, 9, 11, and 12 all follow this correct logical path and arrive at 45. Answer 4 is concise and accurate in its reasoning.\n\nFinal Choice\n{\"choice\":\"4\"}",
+            "choice": 4,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "656a92d0bb14bbd93243cf27f5160ef04773fa686dce035021e4612ceb74eaaa"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:36+00:00",
+            "usage_in": 6382,
+            "usage_out": 286
+        }
+    },
+    {
+        "item_id": 108,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:zh",
+            "W:rewrite2",
+            "L:en",
+            "R:short_cot",
+            "L:es",
+            "S:T1.0:seed1",
+            "L:ja",
+            "L:ru",
+            "W:rewrite1",
+            "S:T1.0:seed2",
+            "P:skeptic"
+        ],
+        "tokens_in": 9090,
+        "tokens_out": 270,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem asks for the cost price of an article where selling it for 1000 results in 5% more gain than selling it for 20. Mathematically, this is represented as $(1000 - x) - (20 - x) = 0.05x$, which simplifies to $980 = 0.05x$, leading to $x = 19600$. Since 19600 is not among the choices, it is highly probable that the question contains a typo (e.g., the selling price 20 should have been 920, making the difference 80, which leads to $80 = 0.05x \\implies x = 1600$). Most of the provided answers (1, 2, 4, 5, 7, 8, 10, 11, 12) identify this discrepancy and conclude that 1600 is the intended answer based on common test bank patterns or the assumption of a typo. Answer 5 provides the most concise and logical explanation for the likely intended calculation ($80 / 0.05 = 1600$).\n\nFinal Choice\n{\"choice\":\"5\"}",
+            "choice": 5,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "2bac5e60ca1a97b14d85eee8366c7c5c8e6894acc6b50d7cd60ab205db353f19"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:38+00:00",
+            "usage_in": 9091,
+            "usage_out": 270
+        }
+    },
+    {
+        "item_id": 173,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "W:rewrite1",
+            "W:rewrite2",
+            "L:ru",
+            "P:skeptic",
+            "R:short_cot",
+            "P:expert",
+            "L:zh",
+            "L:es",
+            "L:ja"
+        ],
+        "tokens_in": 5835,
+        "tokens_out": 536,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem states: \"a, b and c can do a piece of work in 11 days, 20 days and 20 days respectively... how soon can the work be done if a is assisted by b and c on alternate days?\".\nThe phrase \"a is assisted by b and c on alternate days\" implies that on one day, 'a' works alone, and on the next day, 'a' is assisted by both 'b' and 'c' (i.e., 'a', 'b', and 'c' work together).\n- Day 1: 'a' works alone. Rate = 1/11.\n- Day 2: 'a', 'b', and 'c' work together. Rate = 1/11 + 1/20 + 1/20 = 1/11 + 2/20 = 1/11 + 1/10 = 21/110.\n- Cycle (2 days) = 1/11 + 21/110 = 10/110 + 21/110 = 31/110.\n- After 6 days (3 cycles): 3 * (31/110) = 93/110.\n- Remaining work = 1 - 93/110 = 17/110.\n- Day 7: 'a' works alone. Rate = 1/11 = 10/110. Remaining = 17/110 - 10/110 = 7/110.\n- Day 8: 'a', 'b', and 'c' work together. Rate = 21/110. Since 7/110 < 21/110, the work is completed on the 8th day.\n\nAnswers 1, 2, 4, 5, 7, 9, and 10 correctly interpret the \"alternate days\" condition as \"a alone\" vs \"a+b+c\". Answers 3, 6, 8, 11, and 12 interpret it as \"a+b\" vs \"a+c\", which is a different interpretation of the phrasing. Among the correct interpretations, Answer 1 provides a clear, accurate step-by-step derivation.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "bec52552dd6f604b27a24457324400c66924245b9d85979256d698c214f47734"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:42+00:00",
+            "usage_in": 5836,
+            "usage_out": 536
+        }
+    },
+    {
+        "item_id": 289,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "W:rewrite2",
+            "P:expert",
+            "L:ru",
+            "L:es",
+            "L:ja",
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "S:T1.0:seed1",
+            "L:zh",
+            "R:short_cot",
+            "L:en"
+        ],
+        "tokens_in": 10581,
+        "tokens_out": 617,
+        "trace": {
+            "judge_output": "Reasoning process\n1. We need to find the number of integers $n$ in the range $24 \\le n \\le 130$ such that the sum of the digits $S(n)$ is a multiple of 7.\n2. The possible multiples of 7 for $S(n)$ are 7 and 14 (since the maximum sum in this range is $S(99)=18$ or $S(129)=12$).\n3. List numbers with $S(n)=7$:\n   - 20s: 25 (1)\n   - 30s: 34 (1)\n   - 40s: 43 (1)\n   - 50s: 52 (1)\n   - 60s: 61 (1)\n   - 70s: 70 (1)\n   - 80s: None\n   - 90s: None\n   - 100s: 106, 115, 124 (3)\n   - Total $S(n)=7$: $1+1+1+1+1+1+3 = 9$.\n4. List numbers with $S(n)=14$:\n   - 20s-40s: None\n   - 50s: 59 (1)\n   - 60s: 68 (1)\n   - 70s: 77 (1)\n   - 80s: 86 (1)\n   - 90s: 95 (1)\n   - 100s: $S(130)=4$, $S(129)=12$, $S(119)=11$, $S(109)=10$. No numbers in 100-130 have $S(n)=14$.\n   - Total $S(n)=14$: $1+1+1+1+1 = 5$.\n5. Total count: $9 + 5 = 14$.\n6. Reviewing the provided answers:\n   - Answer 1, 2, 3, 4, 5, 6, 7, 9, 10 all correctly identify the count as 14.\n   - Answer 8 incorrectly counts 13.\n   - Answer 11 incorrectly counts 15 (claims $S(130)=14$).\n   - Answer 12 incorrectly counts 15 (claims $S(130)=14$).\n   - Answer 1 is the first one that provides the correct reasoning and result.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "109f08bb1598d7233158f39832d59e472886bc2af30c11d1be0e5aec1904648e"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:46+00:00",
+            "usage_in": 10582,
+            "usage_out": 617
+        }
+    },
+    {
+        "item_id": 458,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "L:zh",
+            "S:T1.0:seed1",
+            "W:rewrite1",
+            "L:ja",
+            "L:ru",
+            "W:rewrite2",
+            "R:short_cot",
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 7025,
+        "tokens_out": 292,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The prime numbers between 30 and 50 are 31, 37, 41, 43, and 47.\n2. The sum of these numbers is 31 + 37 + 41 + 43 + 47 = 199.\n3. The average is 199 / 5 = 39.8.\n4. All 12 provided answers correctly identify the prime numbers and calculate the average as 39.8.\n5. All 12 answers correctly note that 39.8 is not among the choices (a: 15, b: 42, c: 45, d: 34, e: 26).\n6. Since the mathematical result is not present in the options, the answers attempt to justify selecting the \"closest\" or \"most likely intended\" option, which is 42 (b).\n7. Answer 12 provides a clear, concise, and accurate step-by-step derivation of the primes, the sum, the average, and the observation that the options are incorrect, ultimately selecting the most plausible choice (b) based on the provided options. It is consistent and follows the logic of the other answers while being well-structured.\n\nFinal Choice\n{\"choice\":\"12\"}",
+            "choice": 12,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "0753a97aee9f99222e7504b7f936993ee07431ea6759c1aec94d6ae085bcc425"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:48+00:00",
+            "usage_in": 7026,
+            "usage_out": 292
+        }
+    },
+    {
+        "item_id": 515,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "S:T1.0:seed1",
+            "L:zh",
+            "R:short_cot",
+            "L:en",
+            "W:rewrite1",
+            "W:rewrite2",
+            "P:expert",
+            "L:ru",
+            "L:es",
+            "L:ja"
+        ],
+        "tokens_in": 7757,
+        "tokens_out": 405,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem asks for the probability of picking a flower that is yellow and straight, given $P(\\text{Green}) = 1/8$ and $P(\\text{Straight}) = 1/2$.\n2. $P(\\text{Yellow}) = 1 - P(\\text{Green}) = 7/8$.\n3. The probability of the intersection $P(\\text{Yellow} \\cap \\text{Straight})$ is generally $P(\\text{Straight}) - P(\\text{Green} \\cap \\text{Straight})$.\n4. Since $P(\\text{Green} \\cap \\text{Straight}) \\leq P(\\text{Green}) = 1/8$, the range for $P(\\text{Yellow} \\cap \\text{Straight})$ is $[1/2 - 1/8, 1/2 - 0] = [3/8, 1/2]$, which is $[0.375, 0.5]$.\n5. Among the choices: a) $1/7 \\approx 0.14$, b) $1/8 = 0.125$, c) $1/4 = 0.25$, d) $3/4 = 0.75$, e) $4/9 \\approx 0.444$.\n6. Only choice (e) $4/9$ falls within the valid range $[0.375, 0.5]$.\n7. Answer 1 correctly identifies the range constraint and selects (e) based on this logical deduction. Other answers incorrectly assume independence (which leads to $7/16 = 0.4375$, which is not an option) or arbitrarily select (c) despite it falling outside the valid range $[0.375, 0.5]$.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "08b40c34437e8ea22cd202865a53fdb71503acfea2d018343df009834930c00b"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:51+00:00",
+            "usage_in": 7758,
+            "usage_out": 405
+        }
+    },
+    {
+        "item_id": 531,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "W:rewrite1",
+            "L:en",
+            "R:short_cot",
+            "L:es",
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "L:ru",
+            "P:expert",
+            "L:zh",
+            "L:ja",
+            "W:rewrite2"
+        ],
+        "tokens_in": 12568,
+        "tokens_out": 365,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem asks for the maximum number of homeowners in a 100-member association where 10% of men and 20% of women are homeowners. Let $M$ be the number of men and $W$ be the number of women, with $M+W=100$. The number of homeowners is $H = 0.1M + 0.2W$. Since $H$ must be an integer, $M$ must be a multiple of 10 and $W$ must be a multiple of 5. Substituting $M = 100 - W$, we get $H = 0.1(100 - W) + 0.2W = 10 + 0.1W$. To maximize $H$, we maximize $W$. The maximum possible value for $W$ is 100 (if $M=0$), which gives $H=20$. If we assume $M, W \\ge 1$, the maximum $W$ is 90 (since $M$ must be a multiple of 10), which gives $H=19$. None of the provided choices (21, 23, 25, 27, 29) are mathematically possible under the given constraints. However, Answer 5 and Answer 10 provide a logical analysis of the constraints and conclude that 21 is the closest value to the theoretical maximum of 20, despite the discrepancy. Answer 5 is a well-reasoned, bilingual (Spanish/English) response that correctly identifies the mathematical constraints and the impossibility of the provided choices, ultimately selecting the closest option.\n\nFinal Choice\n{\"choice\": 5}",
+            "choice": 5,
+            "chosen_arm": "L:es",
+            "prompt_sha256": "5c1e454c942e729d341c16fc8a87c2bd5f107b2a441d2e3026b04b321fb0fa98"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:53+00:00",
+            "usage_in": 12569,
+            "usage_out": 365
+        }
+    },
+    {
+        "item_id": 733,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:es",
+            "S:T1.0:seed2",
+            "L:ja",
+            "P:expert",
+            "L:ru",
+            "L:en",
+            "S:T1.0:seed1",
+            "R:short_cot",
+            "W:rewrite1",
+            "P:skeptic",
+            "W:rewrite2"
+        ],
+        "tokens_in": 14049,
+        "tokens_out": 748,
+        "trace": {
+            "judge_output": "Reasoning process\n1.  **Coordinate Setup**: All answers correctly set up the coordinate system with $Q(0,0)$, $P(0,5)$, and $R(8,0)$.\n2.  **Geometric Derivation**: The line $PR$ is $5x + 8y = 40$. For a point $X(0, a)$ on $PQ$, the line through $X$ parallel to $QR$ is $y=a$. The intersection $Y$ with $PR$ is $(8 - 1.6a, a)$. The line through $Y$ parallel to $PQ$ is $x = 8 - 1.6a$. The intersection $Z$ with $QR$ is $(8 - 1.6a, 0)$.\n3.  **Distance Calculation**: The distance $XZ$ is $\\sqrt{(8 - 1.6a)^2 + a^2}$. Squaring this gives $f(a) = (8 - 1.6a)^2 + a^2 = 64 - 25.6a + 2.56a^2 + a^2 = 3.56a^2 - 25.6a + 64$.\n4.  **Minimization**: The minimum of this quadratic $f(a)$ occurs at $a = \\frac{25.6}{2 \\times 3.56} = \\frac{25.6}{7.12} \\approx 3.5955$.\n5.  **Minimum Value**: The minimum value of $XZ^2$ is $f(3.5955) \\approx 17.9775$. Thus, the minimum length $XZ = \\sqrt{17.9775} \\approx 4.24$.\n6.  **Evaluating Answers**:\n    *   Answers 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12 all correctly derive the distance formula and the minimum value $\\approx 4.24$.\n    *   Answer 4 incorrectly calculates the minimum value as $\\approx 2.16$.\n    *   Among the choices provided in the original question (a: 3.6, b: 2.4, c: 4.0, d: 2.16, e: 3.2), none match 4.24 exactly. However, Answer 1 and Answer 4 suggest that 2.16 might be the intended answer based on some other interpretation (perhaps $XZ$ is not the distance, but a projection or related segment).\n    *   Re-evaluating the geometry: If $XZ$ is the length of the segment $XZ$, the minimum is 4.24. If the question implies $XZ$ is the altitude to the hypotenuse of the triangle formed by the parallel lines, the value is $40/\\sqrt{89} \\approx 4.24$.\n    *   Given the options, 4.0 (c) is the closest numerical value to 4.24. Answer 3, 5, 7, 8, 9, 10, 11, 12 all conclude 4.0 is the intended answer. Answer 3 is a clear and consistent derivation.\n\nFinal Choice\n{\"choice\": 3}",
+            "choice": 3,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "ac97cb8dcd81fb0e5792b94d1caa447430b45248ffbf3b8bdf03da0995eafb62"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:59+00:00",
+            "usage_in": 14050,
+            "usage_out": 748
+        }
+    },
+    {
+        "item_id": 905,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "W:rewrite1",
+            "L:en",
+            "L:zh",
+            "S:T1.0:seed2",
+            "P:expert",
+            "R:short_cot",
+            "W:rewrite2",
+            "L:ru",
+            "S:T1.0:seed1",
+            "L:es",
+            "L:ja"
+        ],
+        "tokens_in": 2068,
+        "tokens_out": 245,
+        "trace": {
+            "judge_output": "Reasoning process\nThe mathematical expression is 12008 - 50 ÷ 10.00. Following the order of operations (PEMDAS/BODMAS), division must be performed before subtraction. \n1. Division: 50 ÷ 10.00 = 5.\n2. Subtraction: 12008 - 5 = 12003.\nComparing this result to the choices: a) 1195, b) 120, c) 12000, d) 12003, e) none. The correct choice is d.\nAnswers 1, 2, 3, 5, 6, 7, 8, 10, 11, and 12 correctly identify the calculation and the choice. Answer 4 incorrectly calculates 12008 - 5 as 11998. Answer 9 uses a non-standard JSON key (\"ответ\" instead of \"answer\"). Among the correct answers, Answer 1 is clear and accurate.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "a0b0b2aa5aa059292dcc57e817e4349310ba7acb47b2f58c73d16b4e41d23340"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:01+00:00",
+            "usage_in": 2069,
+            "usage_out": 245
+        }
+    },
+    {
+        "item_id": 945,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:ja",
+            "S:T1.0:seed2",
+            "L:en",
+            "P:skeptic",
+            "R:short_cot",
+            "W:rewrite2",
+            "L:zh",
+            "L:ru",
+            "S:T1.0:seed1",
+            "W:rewrite1",
+            "L:es"
+        ],
+        "tokens_in": 2849,
+        "tokens_out": 260,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The number is 5,769,354.\n2. The digit 3 is in the hundreds place (the position is 300).\n3. The face value of the digit 3 is 3.\n4. The product of the place value (300) and the face value (3) is 300 * 3 = 900.\n5. Answer 1, 3, 4, 5, 6, 7, 9, 10, 11, and 12 all correctly identify the place value as 300, the face value as 3, and the product as 900, leading to choice (a).\n6. Answer 2 incorrectly identifies the place value as 30 (tens place) and calculates 90.\n7. Answer 8 incorrectly identifies the place value as 10 (tens place) and then confuses the digit 3 with 9, leading to an incorrect conclusion.\n8. Answer 1 provides a clear, accurate, and standard step-by-step reasoning process that matches the correct mathematical result.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "4e8a21c3f0d2d036f31bacca30e177ef1780a82d9ca97ef768b8dea38c39df25"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:03+00:00",
+            "usage_in": 2850,
+            "usage_out": 260
+        }
+    },
+    {
+        "item_id": 1038,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "L:zh",
+            "W:rewrite2",
+            "W:rewrite1",
+            "P:skeptic",
+            "R:short_cot",
+            "S:T1.0:seed1",
+            "L:en",
+            "S:T1.0:seed2",
+            "L:es",
+            "L:ru",
+            "P:expert"
+        ],
+        "tokens_in": 3203,
+        "tokens_out": 351,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem states: \"in one hour, a boat goes 8 km along the stream and 2 km against the stream.\" This phrasing is slightly ambiguous. It could mean the boat travels 8 km downstream *in one hour* and 2 km upstream *in one hour* (two separate scenarios), or it could mean the total time for both legs is one hour. \n\nIf the boat travels 8 km downstream in one hour, its downstream speed is 8 km/h. If it travels 2 km upstream in one hour, its upstream speed is 2 km/h. The speed of the boat in still water is the average of these two speeds: $(8 + 2) / 2 = 5$ km/h. This is the standard interpretation of such problems in competitive exams.\n\nAnswers 3 and 4 interpret the problem as the total time for both legs being one hour ($8/(v+u) + 2/(v-u) = 1$). While this is a mathematically valid interpretation of the phrasing \"in one hour\", it leads to a quadratic equation that requires specific values for $v$ and $u$ that are not uniquely determined without further assumptions. However, the standard interpretation used in the vast majority of these types of math problems is that the boat covers those distances in one hour *each*. Answers 1, 2, 5, 6, 7, 8, 9, 10, 11, and 12 all follow this standard interpretation and arrive at 5 km/h. Answer 1 is a clear and correct representation of this logic.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "5b0ec8ca1dd5cb99dedae70475ff9c4a2225b557c5efa86d97af6e999ded4bf3"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:05+00:00",
+            "usage_in": 3204,
+            "usage_out": 351
+        }
+    },
+    {
+        "item_id": 1061,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "R:short_cot",
+            "P:skeptic",
+            "L:zh",
+            "S:T1.0:seed2",
+            "P:expert",
+            "W:rewrite2",
+            "S:T1.0:seed1",
+            "L:en",
+            "L:ru",
+            "W:rewrite1",
+            "L:ja"
+        ],
+        "tokens_in": 3548,
+        "tokens_out": 276,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The total points after 6 games is 6 * 65 = 390.\n2. After game 7, the total is 390 + 47 = 437.\n3. The goal is to get the total *above* 500, meaning the total must be at least 501.\n4. The points needed are 501 - 437 = 64.\n5. Among the choices (a: 85, b: 74, c: 67, d: 63, e: 28), 63 results in exactly 500, which does not satisfy the condition \"above 500\". 67 is the smallest value provided that results in a total greater than 500 (437 + 67 = 504).\n6. Answers 3, 6, 7, 8, 10, 11, and 12 correctly identify that 63 is insufficient and that 67 is the correct choice based on the provided options. Answer 11 provides a clear, logical step-by-step derivation of this requirement.\n\nFinal Choice\n{\"choice\":\"11\"}",
+            "choice": 11,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "00c0dd6cb42d377b135514d993de78914d94f6a80da5c6c2bbbd19141c12c6f6"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:08+00:00",
+            "usage_in": 3549,
+            "usage_out": 276
+        }
+    },
+    {
+        "item_id": 1121,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "R:short_cot",
+            "P:expert",
+            "L:zh",
+            "L:es",
+            "L:ja",
+            "L:en",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "W:rewrite1",
+            "W:rewrite2",
+            "L:ru"
+        ],
+        "tokens_in": 4871,
+        "tokens_out": 362,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The external dimensions are 3.3 m, 2.6 m, and 1.3 m.\n2. The walls are 5 cm (0.05 m) thick. The internal length is 3.3 - 2(0.05) = 3.2 m. The internal width is 2.6 - 2(0.05) = 2.5 m.\n3. The capacity is 8000 litres = 8 m³.\n4. The internal height (h) is calculated by: Volume = Length × Width × Height. 8 = 3.2 × 2.5 × h. 8 = 8 × h. Therefore, h = 1 m.\n5. The external height is 1.3 m. The difference between the external height and the internal height is the thickness of the bottom (assuming the cistern is open at the top, which is standard for a \"cistern\").\n6. Thickness of bottom = 1.3 m - 1 m = 0.3 m.\n7. 0.3 m = 3 dm.\n8. Comparing this to the choices: a) 90 cm, b) 3 dm, c) 1 m, d) 1.1 cm, e) none of these. Choice (b) is correct.\n9. Answers 2, 3, 4, 5, 6, 7, 8, 9, and 12 correctly identify the logic and the result (3 dm). Answer 3 is a clear and accurate representation of this reasoning.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "7f9e32b375a4dd3132dccca3b3ded0775c2b3ecef8126af0fd32702830aa1c27"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:12+00:00",
+            "usage_in": 4872,
+            "usage_out": 362
+        }
+    },
+    {
+        "item_id": 1148,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "S:T1.0:seed1",
+            "W:rewrite1",
+            "L:en",
+            "R:short_cot",
+            "L:es",
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "L:ru",
+            "P:expert",
+            "L:zh",
+            "L:ja"
+        ],
+        "tokens_in": 6504,
+        "tokens_out": 312,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem asks for the area of a rectangle with width 8 and diagonal 30.\n2. Using the Pythagorean theorem, the length $l$ is $\\sqrt{30^2 - 8^2} = \\sqrt{900 - 64} = \\sqrt{836} \\approx 28.91$.\n3. The area is $8 \\times \\sqrt{836} \\approx 231.3$.\n4. None of the provided choices (240, 180, 100, 150, 160) match the calculated value.\n5. Answers 1 through 11 correctly identify the mathematical result ($\\approx 231.3$) and conclude that there is likely a typo in the problem, choosing 'a' (240) as the closest value or the most likely intended answer based on common Pythagorean triples or potential misinterpretations of the problem statement.\n6. Answer 12 attempts to justify 'e' (160) by assuming the height is 20, which is an arbitrary assumption not supported by the problem's constraints.\n7. Given that the problem is mathematically flawed, choosing the closest value (240) is the standard approach in such test-taking scenarios. Answer 1 provides a clear, logical, and consistent derivation of this conclusion.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "193bf0680257d16e6113ada88d7b23a0cf69f3f66596f2e21832e34542d5b2b6"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:14+00:00",
+            "usage_in": 6505,
+            "usage_out": 312
+        }
+    },
+    {
+        "item_id": 1197,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "P:expert",
+            "W:rewrite2",
+            "L:en",
+            "R:short_cot",
+            "S:T1.0:seed1",
+            "L:es",
+            "P:skeptic",
+            "L:ru",
+            "W:rewrite1",
+            "L:ja",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 3943,
+        "tokens_out": 275,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem asks for the average speed of a round trip. Let $d$ be the distance between the two cities. The time for the first leg is $t_1 = d/66$. The time for the return leg is $t_2 = 2 \\times t_1 = 2(d/66) = d/33$. The total distance is $2d$. The total time is $t_1 + t_2 = d/66 + 2d/66 = 3d/66 = d/22$. The average speed is total distance divided by total time: $2d / (d/22) = 2 \\times 22 = 44$ mph. \n\nAnswers 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, and 12 all correctly identify the logic and arrive at the correct result of 44 (choice e). Answer 3 incorrectly concludes that the answer is 33 and then chooses option (b) based on proximity, which is mathematically flawed. Among the correct answers, Answer 1 is the first one to provide the correct reasoning and result.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "b7bb2a796d600f978a45d434f777fbddba2b02ed45c807537868cc31d93ed39e"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:16+00:00",
+            "usage_in": 3944,
+            "usage_out": 275
+        }
+    },
+    {
+        "item_id": 1307,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "W:rewrite2",
+            "W:rewrite1",
+            "L:ru",
+            "L:ja",
+            "P:skeptic",
+            "L:zh",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "L:en",
+            "P:expert"
+        ],
+        "tokens_in": 4835,
+        "tokens_out": 315,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem asks for the original fraction where the denominator is 6 greater than the numerator, and adding 1 to both results in 4/5.\n2. Let the numerator be $x$ and the denominator be $x+6$. The condition is $\\frac{x+1}{x+7} = \\frac{4}{5}$.\n3. Solving this: $5(x+1) = 4(x+7) \\implies 5x+5 = 4x+28 \\implies x=23$.\n4. The original fraction is $\\frac{23}{29}$.\n5. Answer 1 correctly derives this and selects choice (b).\n6. Answer 2 identifies a typo in the problem text (\"4 5/9\") but correctly deduces that it likely meant 4/5 and selects (b).\n7. Answer 3 incorrectly assumes the typo \"4 5/9\" is literal, fails to solve it, and then guesses (a).\n8. Answers 4, 5, 6, 7, 8, 9, 10, 11, and 12 all correctly solve the equation $\\frac{x+1}{x+7} = \\frac{4}{5}$ and identify (b) as the correct choice.\n9. Answer 1 is the most concise and accurate representation of the standard algebraic approach.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "579c6647bc88ca51acca3a53acf5d33fe2b97e265a0dad951725a2c420674a62"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:19+00:00",
+            "usage_in": 4836,
+            "usage_out": 315
+        }
+    },
+    {
+        "item_id": 1362,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:ru",
+            "L:en",
+            "S:T1.0:seed1",
+            "R:short_cot",
+            "W:rewrite1",
+            "P:skeptic",
+            "W:rewrite2",
+            "L:zh",
+            "L:es",
+            "S:T1.0:seed2",
+            "L:ja"
+        ],
+        "tokens_in": 11711,
+        "tokens_out": 399,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem states: Pump 1 drains 1/2 of the pond in 1 hour (Rate $R_1 = 0.5$ pond/hour).\n2. After 1 hour, 1/2 of the pond remains.\n3. Both pumps together drain the remaining 1/2 of the pond in 0.5 hours.\n4. Combined rate $R_1 + R_2 = (0.5 \\text{ pond}) / (0.5 \\text{ hour}) = 1$ pond/hour.\n5. $0.5 + R_2 = 1 \\implies R_2 = 0.5$ pond/hour.\n6. Time for Pump 2 to drain the pond alone = $1 / 0.5 = 2$ hours.\n7. All provided answers (1-12) struggle with the fact that the calculated result (2 hours) is not among the choices (a-e).\n8. Answer 1, 2, 3, 4, 5, 6, 7, 8, 10, 11 all correctly identify the mathematical result as 2 hours but then struggle to pick an option, often defaulting to 'a' or 'e' based on guessing or assuming a typo.\n9. Answer 12 attempts to reverse-engineer the problem to fit the choices, suggesting 'c' (3 hours) as a possibility if the initial rate was different.\n10. Since the mathematical result is 2 hours and none of the options are correct, the question is flawed. However, Answer 1 provides a consistent, step-by-step derivation that acknowledges the result is 2, and then selects 'a' as a placeholder. Answer 1 is the most straightforward in its derivation.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "e9178c721be3882bd03728bfad5d92bab66d1f3d9e7495e21cc4f39c6c5dfe2b"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:22+00:00",
+            "usage_in": 11712,
+            "usage_out": 399
+        }
+    },
+    {
+        "item_id": 1475,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "P:expert",
+            "L:es",
+            "S:T1.0:seed2",
+            "S:T1.0:seed1",
+            "R:short_cot",
+            "W:rewrite1",
+            "L:ru",
+            "P:skeptic",
+            "L:en",
+            "W:rewrite2",
+            "L:ja"
+        ],
+        "tokens_in": 4521,
+        "tokens_out": 224,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem presents a sequence of equalities: 1=5, 2=4, 3=253, 4=2, 6=15. This is a classic lateral thinking puzzle where the numbers on the left are not variables in a standard algebraic equation, but rather labels or items in a set. In such puzzles, if a relationship $x=y$ is defined, it is often treated as a bidirectional mapping or a simple substitution rule. Since the problem explicitly states $6=15$, it implies that the value associated with the input \"15\" (if treated as a label) or the inverse mapping of the relationship is \"6\". Most of the provided answers (1, 2, 4, 5, 6, 7, 8, 9, 10) correctly identify that the most logical deduction in the absence of a complex mathematical formula is the inverse mapping $15=6$. Answer 5 provides a concise and clear logical justification for this deduction.\n\nFinal Choice\n{\"choice\": 5}",
+            "choice": 5,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "b13bca0086fae7fb2f4616299b51cc7080e9e18256fc07479ec6ad86fe83e2be"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:26+00:00",
+            "usage_in": 4522,
+            "usage_out": 224
+        }
+    },
+    {
+        "item_id": 1587,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "S:T1.0:seed2",
+            "P:expert",
+            "R:short_cot",
+            "L:ja",
+            "P:skeptic",
+            "L:zh",
+            "W:rewrite2",
+            "W:rewrite1",
+            "L:en",
+            "L:es",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 12718,
+        "tokens_out": 628,
+        "trace": {
+            "judge_output": "Reasoning process\n1. Let the retail price be $P = 100$.\n2. Salesman Z's price: $P_z = 100 \\times (1 - 0.25) = 75$.\n3. Salesman X's price: $P_x = 75 \\times (1 - 0.05) = 71.25$.\n4. Salesman Y's average price: $P_{avg} = (75 + 71.25) / 2 = 73.125$.\n5. Salesman Y's final price: $P_y = 73.125 \\times (1 - 0.30) = 51.1875$.\n6. The ratio $P_y / P_x = 51.1875 / 71.25$.\n7. Calculating the ratio: $51.1875 / 71.25 = 0.718421...$\n8. Evaluating the options:\n   a) 21/34 ≈ 0.6176\n   b) 55/71 ≈ 0.7746\n   c) 25/34 ≈ 0.7353\n   d) 26/34 ≈ 0.7647\n   e) 27/34 ≈ 0.7941\n9. None of the options match the calculated value $0.7184$ exactly. However, looking at the provided answers, Answer 4 and Answer 11 conclude that the ratio is $27/34$ based on a calculation error or a different interpretation of the problem. Answer 1, 2, 3, 5, 6, 8, 9, 10, and 12 identify that the ratio is approximately $0.718$ and select \"c\" (25/34) as the closest approximation.\n10. Re-evaluating the fraction $273/380 \\approx 0.7184$. Comparing $273/380$ to the options: $25/34 \\approx 0.735$ and $27/34 \\approx 0.794$.\n11. Given the commonality in the reasoning of the majority of the provided answers (1, 2, 3, 5, 6, 8, 9, 10, 12) that the result is approximately $0.718$ and that \"c\" is the intended choice, Answer 3 provides a clear step-by-step derivation that aligns with the majority consensus.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "ab4cc3732b54b350b62406a0ec513dca64fd7a86b46cc83e7bb3fb14d27026f2"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:30+00:00",
+            "usage_in": 12719,
+            "usage_out": 628
+        }
+    },
+    {
+        "item_id": 1659,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "L:zh",
+            "L:ru",
+            "S:T1.0:seed1",
+            "W:rewrite1",
+            "L:es",
+            "P:expert",
+            "L:ja",
+            "S:T1.0:seed2",
+            "L:en",
+            "P:skeptic",
+            "R:short_cot"
+        ],
+        "tokens_in": 10621,
+        "tokens_out": 483,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem asks for the sum of the first 16 terms ($S_{16}$) of an arithmetic progression given $a_4 + a_{12} = 20$.\n2. The formula for the $n$-th term is $a_n = a_1 + (n-1)d$.\n3. $a_4 + a_{12} = (a_1 + 3d) + (a_1 + 11d) = 2a_1 + 14d = 20$, which simplifies to $a_1 + 7d = 10$.\n4. The sum of the first 16 terms is $S_{16} = \\frac{16}{2}(2a_1 + 15d) = 8(2a_1 + 15d) = 16a_1 + 120d$.\n5. Substituting $a_1 = 10 - 7d$ into the sum formula: $S_{16} = 16(10 - 7d) + 120d = 160 - 112d + 120d = 160 + 8d$.\n6. Most of the provided answers (1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12) correctly identify the relationship $a_1 + 7d = 10$ and the expression $S_{16} = 160 + 8d$. They then conclude that if the answer is a constant, $d$ must be 0, leading to 160.\n7. Answer 4 incorrectly calculates $S_{15}$ instead of $S_{16}$ to arrive at 150.\n8. Answer 1 is the first one to correctly derive the relationship and conclude 160. All answers that conclude 160 are mathematically consistent with the assumption that the problem implies a unique constant answer. Answer 1 provides a clear, step-by-step derivation.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "e6beb5baa5969acf772d05e6ce8518f1d0a425e0bf5a57fca49a852396229a3f"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:33+00:00",
+            "usage_in": 10622,
+            "usage_out": 483
+        }
+    },
+    {
+        "item_id": 1759,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:ja",
+            "S:T1.0:seed2",
+            "L:zh",
+            "P:expert",
+            "W:rewrite2",
+            "L:en",
+            "R:short_cot",
+            "S:T1.0:seed1",
+            "L:es",
+            "P:skeptic",
+            "L:ru"
+        ],
+        "tokens_in": 7309,
+        "tokens_out": 241,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem \"a bag of potatoes weighs 39 lbs divided by half of its weight\" is mathematically ambiguous and likely contains a typo or is a poorly phrased riddle. Let $x$ be the weight. The equation $x = 39 / (x/2)$ leads to $x^2 = 78$, which has no integer solution among the choices. Other interpretations like $x = 39 + x/2$ lead to $x = 78$, which is also not an option. Many of the provided answers (2, 3, 6, 8, 10, 11, 12) recognize the mathematical inconsistency and attempt to find the most plausible \"riddle\" answer. Answer 11 provides a concise analysis of why the math fails and why 13 is the most likely intended answer (as 39/3 = 13, often appearing in such riddles where \"half\" is a distractor or misstated). Answer 11 is the most balanced and logical in its assessment of the flawed problem statement.\n\nFinal Choice\n{\"choice\": 11}",
+            "choice": 11,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "42df6eadc7144a49fcbb04509a9c7125b24577f1544f5468fe6d3da83532db1c"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:36+00:00",
+            "usage_in": 7310,
+            "usage_out": 241
+        }
+    },
+    {
+        "item_id": 1816,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:en",
+            "L:ja",
+            "L:zh",
+            "P:skeptic",
+            "W:rewrite2",
+            "L:ru",
+            "W:rewrite1",
+            "P:expert",
+            "R:short_cot",
+            "S:T1.0:seed2",
+            "L:es"
+        ],
+        "tokens_in": 8094,
+        "tokens_out": 383,
+        "trace": {
+            "judge_output": "Reasoning process\n1. The problem asks for the percentage saved by purchasing a kit for $67.50 compared to the total individual price of the 5 filters.\n2. The individual prices are: 2 * $7.45 = $14.90, 2 * $10.05 = $20.10, and 1 * $14.50 = $14.50.\n3. The sum of these individual prices is $14.90 + $20.10 + $14.50 = $49.50.\n4. There is a clear discrepancy in the problem statement because the kit price ($67.50) is higher than the sum of the individual prices ($49.50).\n5. However, in standardized test questions of this type, if the numbers are swapped (i.e., the individual total is $67.50 and the kit price is $49.50), the savings would be $67.50 - $49.50 = $18.00.\n6. The percentage saved would then be ($18.00 / $67.50) * 100 = 26.666...%.\n7. This result matches choice (b) 26.66%.\n8. Most of the provided answers (1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12) identify this discrepancy and correctly deduce that the intended calculation leads to 26.66%. Answer 2 provides a clear and concise logical path to this conclusion.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "68d33f72e79061894cfced39a17edf6e7377c13121e6c5d337a6f90dd1130cc7"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:39+00:00",
+            "usage_in": 8095,
+            "usage_out": 383
+        }
+    },
+    {
+        "item_id": 1822,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "W:rewrite2",
+            "L:ru",
+            "W:rewrite1",
+            "P:expert",
+            "R:short_cot",
+            "S:T1.0:seed2",
+            "L:es",
+            "S:T1.0:seed1",
+            "L:en",
+            "L:ja",
+            "L:zh"
+        ],
+        "tokens_in": 7410,
+        "tokens_out": 265,
+        "trace": {
+            "judge_output": "Reasoning process\nThe mathematical calculation for the problem is consistent across all provided answers:\n1. Initial work rate: 45 workers × 8 hours = 360 man-hours for 30 meters.\n2. Work rate per meter: 360 / 30 = 12 man-hours/meter.\n3. Required work for 35 meters: 35 × 12 = 420 man-hours.\n4. Workers needed for 6 hours: 420 / 6 = 70 workers.\n5. Extra workers needed: 70 - 45 = 25 workers.\n\nSince 25 is not among the choices (a: 10, b: 20, c: 30, d: 40, e: 50), all answers correctly identify the mathematical result as 25 and acknowledge the discrepancy with the provided options. Answer 3 provides a clear, logical, and systematic breakdown of the calculation and concludes that 30 is the most plausible choice given the constraints of a multiple-choice format where 25 is missing, which is a standard approach for handling flawed test questions.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "L:ru",
+            "prompt_sha256": "0c423e495529eeecd37e05347d7c8d51458dd8aa62f72c6818fae9a414a17b97"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:42+00:00",
+            "usage_in": 7411,
+            "usage_out": 265
+        }
+    },
+    {
+        "item_id": 1916,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "W:rewrite1",
+            "L:es",
+            "P:skeptic",
+            "L:en",
+            "L:ru",
+            "S:T1.0:seed2",
+            "W:rewrite2",
+            "S:T1.0:seed1",
+            "R:short_cot",
+            "P:expert",
+            "L:zh"
+        ],
+        "tokens_in": 2433,
+        "tokens_out": 310,
+        "trace": {
+            "judge_output": "Reasoning process\nThe problem statement is \"find √ ? / 20 = 4 ?\". The presence of the second question mark at the end of the equation is ambiguous. It could be a typo for a period (making the equation √? / 20 = 4) or it could be part of the equation (making it √? / 20 = 4?). \n\nIf interpreted as √? / 20 = 4, the solution is 6400 (Answer 1, 3, 4, 5, 6, 7, 9, 10, 11, 12).\nIf interpreted as √? / 20 = 4?, where the second ? is the same variable as the first, the equation becomes √x / 20 = 4x. Solving this leads to x = 1/6400, which is not among the choices, making \"none\" (e) the correct answer (Answer 2, 8).\n\nIn standard mathematical test contexts, a trailing question mark at the end of a sentence is almost always a punctuation error for a period. The vast majority of the provided answers (10 out of 12) interpret the equation as √? / 20 = 4. Answer 1 provides a clear, step-by-step derivation that is consistent with the most likely intended meaning of the problem.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "76f7a5a93f5f29971769de3ebb18bf520fe410d037f366ce5ff8e28d67c218e9"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:45+00:00",
+            "usage_in": 2434,
+            "usage_out": 310
+        }
+    }
+]

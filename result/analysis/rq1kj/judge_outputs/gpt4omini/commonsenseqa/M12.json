@@ -1,0 +1,1324 @@
+[
+    {
+        "Model": {
+            "modelType": "gpt4omini",
+            "temperature": 0.0,
+            "modelName": "gpt-4o-mini-2024-07-18",
+            "displayName": "GPT4o mini"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh vs L:ja vs L:ru vs L:es vs S:T1.0:seed1 vs S:T1.0:seed2 vs P:expert vs P:skeptic vs W:rewrite1 vs W:rewrite2 vs R:short_cot)",
+            "languages": [
+                "english",
+                "chinese",
+                "japanese",
+                "russian",
+                "spanish",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 12,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-k-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/commonsenseqa/L_en.json",
+            "result/arms/gpt4omini/commonsenseqa/L_zh.json",
+            "result/arms/gpt4omini/commonsenseqa/L_ja.json",
+            "result/arms/gpt4omini/commonsenseqa/L_ru.json",
+            "result/arms/gpt4omini/commonsenseqa/L_es.json",
+            "result/arms/gpt4omini/commonsenseqa/S_T1.0_seed1.json",
+            "result/arms/gpt4omini/commonsenseqa/S_T1.0_seed2.json",
+            "result/arms/gpt4omini/commonsenseqa/P_expert.json",
+            "result/arms/gpt4omini/commonsenseqa/P_skeptic.json",
+            "result/arms/gpt4omini/commonsenseqa/W_rewrite1.json",
+            "result/arms/gpt4omini/commonsenseqa/W_rewrite2.json",
+            "result/arms/gpt4omini/commonsenseqa/R_short_cot.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 993,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "menu_judge",
+        "menu": "M12",
+        "item_filter": "menu_all_answered_disagreement",
+        "n_judged_items": 993,
+        "order_scheme": "grouped_rotation_seed0",
+        "api_usage": {
+            "calls": 25,
+            "calls_without_usage": 0,
+            "prompt_tokens": 45966,
+            "completion_tokens": 4199,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gpt-4o-mini-2024-07-18": 25
+        },
+        "calls_utc": {
+            "first": "2026-10-04T15:50:34+00:00",
+            "last": "2026-10-04T15:51:35+00:00"
+        }
+    },
+    {
+        "item_id": 7,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "P:expert",
+            "S:T1.0:seed1",
+            "L:en",
+            "L:ru",
+            "W:rewrite1",
+            "L:ja",
+            "L:es",
+            "W:rewrite2",
+            "P:skeptic",
+            "S:T1.0:seed2",
+            "R:short_cot"
+        ],
+        "tokens_in": 2231,
+        "tokens_out": 247,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe majority of the answers correctly identify that the most logical places for forgotten leftovers to be found are a refrigerator or fridge, as these are common storage areas for food. Answers 1, 2, 3, 4, 6, 9, 10, and 11 all conclude with \"fridge\" (D) or \"refrigerator\" (B) as valid options, with a slight preference for \"fridge\" due to its casual usage in conversation. However, answers 5, 7, and 8 incorrectly suggest that a breadbox (C) is the most appropriate choice, which is less common for storing moldy leftovers compared to a refrigerator. Among the answers, I find that answers 2, 4, 6, 10, and 11 provide strong reasoning for choosing \"fridge\" (D) as the most colloquial and commonly used term, while answers 1 and 9 favor \"refrigerator\" (B) for its formality. Given the context of the question and the reasoning provided, I will select answer 11, which balances the casual and formal aspects of the terms used.\n\nFinal Choice  \n{\"choice\":\"11\"}",
+            "choice": 11,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "7d3f337da327d9fbe0bcb8e832c7b51eef277134be951016d6cad59df0cff708"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:50:34+00:00",
+            "usage_in": 2238,
+            "usage_out": 247
+        }
+    },
+    {
+        "item_id": 31,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "W:rewrite1",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "P:skeptic",
+            "P:expert",
+            "L:ja",
+            "W:rewrite2",
+            "L:en",
+            "L:zh",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 1685,
+        "tokens_out": 118,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe majority of the answers suggest that a subdivision is the best option for finding a gated house, which is accurate as subdivisions often feature gated communities designed for privacy and security. However, some answers incorrectly suggest suburbs as the best option, which may not specifically guarantee gated properties. The reasoning in answers 1, 2, 5, 6, 7, 9, 10, and 12 correctly identifies subdivisions as the most suitable choice. Therefore, the most consistent and accurate reasoning aligns with the choice of subdivision.\n\nFinal Choice  \n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "5fd35c221789db17b47ebcd84b6e053beeba06925beac35f62059b3125e2dfa8"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:50:36+00:00",
+            "usage_in": 1692,
+            "usage_out": 118
+        }
+    },
+    {
+        "item_id": 77,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "W:rewrite1",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "L:ru",
+            "L:es",
+            "P:expert",
+            "L:ja",
+            "R:short_cot",
+            "L:en",
+            "W:rewrite2",
+            "P:skeptic"
+        ],
+        "tokens_in": 2143,
+        "tokens_out": 214,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe question revolves around Jamie's failed attempts to reduce her waist size. The most relevant answers should reflect actions that either indicate a continuation of her efforts or a counterproductive outcome. Answers 1, 2, 3, 4, 5, 6, 7, 8, 9, and 11 all suggest that Jamie continued to gain weight or increase her waist size, which aligns with the idea of her efforts failing. However, answers 10 and 12 focus on \"dispare,\" which implies a feeling of hopelessness rather than a physical action. While \"dispare\" could reflect her emotional state, it does not directly answer what she continued to do. Among the answers, those indicating an increase in size (particularly \"gain weight\") are more aligned with the context of her failed attempts. Therefore, the most consistent and logical choice is answer 2, which clearly states that she continued to \"gain weight,\" directly correlating with her failure to reduce her waist size.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "7366936592443c198d4967911ed18a10be23fbf746f1a08901af2ac978d52191"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:50:39+00:00",
+            "usage_in": 2150,
+            "usage_out": 214
+        }
+    },
+    {
+        "item_id": 151,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:zh",
+            "W:rewrite2",
+            "P:skeptic",
+            "L:ru",
+            "P:expert",
+            "S:T1.0:seed2",
+            "L:ja",
+            "L:es",
+            "S:T1.0:seed1",
+            "L:en",
+            "R:short_cot"
+        ],
+        "tokens_in": 1958,
+        "tokens_out": 141,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe majority of the answers correctly identify \"the forest\" (D) as the most suitable habitat for a fox, emphasizing its role as a natural environment that provides cover and food. Answers 1 through 11 consistently highlight the forest's significance, while also noting that \"grassy field\" (C) could be a possible location but is less specific. Answer 9, however, incorrectly suggests that a grassy field is more likely for trapping a fox, which contradicts the general consensus that forests are more common habitats. Therefore, the best choice is one of the answers that correctly identifies the forest as the most likely place to catch a fox.\n\nFinal Choice  \n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "d37a8641eefe8e788bfaa9931f3679862fed79401d228a5d8e27b6055bd0ea94"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:50:42+00:00",
+            "usage_in": 1965,
+            "usage_out": 141
+        }
+    },
+    {
+        "item_id": 350,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "L:es",
+            "P:expert",
+            "L:ja",
+            "L:zh",
+            "R:short_cot",
+            "W:rewrite1",
+            "S:T1.0:seed2",
+            "L:ru",
+            "S:T1.0:seed1",
+            "P:skeptic",
+            "L:en"
+        ],
+        "tokens_in": 1760,
+        "tokens_out": 204,
+        "trace": {
+            "judge_output": "Reasoning process\nThe majority of the answers correctly identify that the launch pad is part of a larger complex related to space missions. However, the distinction between \"Cape Kennedy\" (B) and \"space center\" (C) is crucial. While \"Cape Kennedy\" is a specific location, \"space center\" is a broader term that encompasses various facilities, including launch pads. Answers that favor \"space center\" (C) provide a more general and inclusive understanding of the complex, making them more accurate. Therefore, the answers that select \"space center\" (C) are more appropriate than those that choose \"Cape Kennedy\" (B). Among the answers, those that consistently choose \"space center\" (C) are stronger, particularly answers 5, 6, 8, 10, 11, and 12. However, answer 11 provides a clear rationale for preferring \"space center\" over \"Cape Kennedy,\" making it the most compelling choice.\n\nFinal Choice\n{\"choice\":\"11\"}",
+            "choice": 11,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "702524966f55dd7cc0a18a1481e18e0f9a28f64752c8fa474e153f70d8edf805"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:50:45+00:00",
+            "usage_in": 1767,
+            "usage_out": 204
+        }
+    },
+    {
+        "item_id": 541,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:zh",
+            "P:expert",
+            "P:skeptic",
+            "S:T1.0:seed2",
+            "L:ru",
+            "R:short_cot",
+            "L:ja",
+            "L:en",
+            "W:rewrite2",
+            "L:es",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1348,
+        "tokens_out": 155,
+        "trace": {
+            "judge_output": "Reasoning process  \nMost of the answers correctly identify that the nickname of the monster loved by the beauty is \"the Beast,\" which is a direct reference to the story \"Beauty and the Beast.\" Answers 1, 3, 4, 5, 6, 7, 9, 10, and 11 all provide accurate reasoning and conclude with the correct answer \"A.\" However, Answer 8 incorrectly suggests that \"ugly\" (B) is a more appropriate nickname, which is not accurate in the context of the story. Answer 12 also correctly identifies \"the Beast\" as the nickname. Therefore, the most consistent and accurate answers are those that affirm \"the Beast\" as the correct nickname.\n\nFinal Choice  \n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "92a24d7f5363db5ab93da3aac6d352779674e2af5ac50b82021fa9fcd08796f8"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:50:48+00:00",
+            "usage_in": 1355,
+            "usage_out": 155
+        }
+    },
+    {
+        "item_id": 567,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "W:rewrite1",
+            "P:expert",
+            "L:ja",
+            "S:T1.0:seed1",
+            "R:short_cot",
+            "S:T1.0:seed2",
+            "L:en",
+            "L:ru",
+            "L:zh",
+            "L:es",
+            "P:skeptic"
+        ],
+        "tokens_in": 2333,
+        "tokens_out": 192,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe majority of the answers suggest that \"beach sand\" (B) is the most likely impediment to the crab's movement, as it can create a loose and difficult surface for crabs to navigate. This reasoning is consistent across answers 1, 2, 3, 5, 6, 7, 8, and is supported by the description of the crab straining while moving. Answers 4, 9, 10, 11, and 12 introduce \"tide pool,\" \"current,\" or \"cooking pot\" as potential impediments, but these options do not align as closely with the context of the crab's natural movement on land. The \"current\" may affect crabs in water but is less relevant to the scenario described. Therefore, the most consistent and logical choice across the majority of answers is \"beach sand\" (B).\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "c9f4ca81f246f68d638db279c4c63a9d054cbbc875c2845ccd7c14d15ef10dac"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:50:51+00:00",
+            "usage_in": 2340,
+            "usage_out": 192
+        }
+    },
+    {
+        "item_id": 620,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "S:T1.0:seed2",
+            "P:expert",
+            "W:rewrite2",
+            "L:ru",
+            "L:en",
+            "R:short_cot",
+            "P:skeptic",
+            "L:zh",
+            "S:T1.0:seed1",
+            "L:ja",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1905,
+        "tokens_out": 230,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe question implies that the person dislikes a certain smell and would rather spray herself with water than deal with that smell. Among the answers, several correctly identify \"swamp\" as a likely candidate for an unpleasant smell, which aligns with the reasoning that she would prefer to avoid it. However, answers that suggest \"perfume\" as the answer (Answers 1, 6, 7, 9, 10, 11) misinterpret the context, as perfume is generally associated with pleasant scents, not unpleasant ones. Therefore, the most consistent and logical choice across the answers is \"swamp,\" which is identified in Answers 2, 3, 4, 5, 8, and 12. Among these, Answers 2, 3, 4, 5, 8, and 12 provide clear reasoning for why \"swamp\" is the best choice. However, Answer 12 provides a more nuanced understanding by comparing both \"swamp\" and \"puddle,\" ultimately concluding that \"swamp\" is the most fitting choice. \n\nFinal Choice\n{\"choice\":\"12\"}",
+            "choice": 12,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "7d7b0bd5eaa63395b09c5e2a6cf974942df08e9dc061e9dd43916335c0fca374"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:50:53+00:00",
+            "usage_in": 1912,
+            "usage_out": 230
+        }
+    },
+    {
+        "item_id": 829,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:es",
+            "R:short_cot",
+            "P:expert",
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "L:ru",
+            "W:rewrite2",
+            "L:ja",
+            "L:en",
+            "L:zh",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 1740,
+        "tokens_out": 149,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe majority of the answers correctly identify that reaching a tentative agreement signifies progress in negotiations. Answers 1, 3, 4, 5, 6, 8, 9, and 11 consistently emphasize \"make progress\" as the most fitting choice, aligning well with the context of the question. Answers 2 and 10 suggest \"accomplish,\" which, while relevant, does not capture the nuance of negotiation as effectively as \"make progress.\" Answer 7, while correct in its reasoning, is less clear in its expression compared to others. Overall, the strongest and most consistent reasoning is found in answers that highlight \"make progress\" as the best choice.\n\nFinal Choice  \n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "a4d48f806a063799983ef24d6ed64de806440758ef7203f5f2f94215871ca639"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:50:56+00:00",
+            "usage_in": 1747,
+            "usage_out": 149
+        }
+    },
+    {
+        "item_id": 1070,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ru",
+            "W:rewrite2",
+            "L:es",
+            "L:ja",
+            "L:en",
+            "W:rewrite1",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "L:zh",
+            "R:short_cot",
+            "P:expert"
+        ],
+        "tokens_in": 1975,
+        "tokens_out": 155,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe majority of the answers correctly identify that the phrase \"had been\" suggests a continuous state of loss, which aligns with the choice \"A) losing money.\" This choice is consistently supported across multiple answers, emphasizing that it reflects an ongoing situation contrary to the promise of profit. However, Answer 4 and Answer 10 deviate from this consensus. Answer 4 suggests \"B) lost,\" which does not fit the grammatical structure of the sentence, and Answer 10 suggests \"E) lose money,\" which is less idiomatic in this context. Therefore, the most accurate and consistent choice across the answers is \"A) losing money,\" as it is the only option that maintains grammatical correctness and contextual relevance throughout.\n\nFinal Choice  \n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "9f350e2ddc04e5b12904031e6da6fc3e9579ef6b93ed1ee32ac8b0cf6fc3180e"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:50:58+00:00",
+            "usage_in": 1982,
+            "usage_out": 155
+        }
+    },
+    {
+        "item_id": 1074,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "L:es",
+            "S:T1.0:seed1",
+            "L:en",
+            "R:short_cot",
+            "W:rewrite1",
+            "L:zh",
+            "W:rewrite2",
+            "P:skeptic",
+            "L:ru",
+            "P:expert",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 1432,
+        "tokens_out": 161,
+        "trace": {
+            "judge_output": "Reasoning process  \nAfter reviewing all 12 answers, it is clear that the majority of them correctly identify \"C) pay attention\" as the skill associated with listening. This option emphasizes the active engagement required in listening, which is a critical aspect of the skill. Other options, such as \"A) able to hear,\" do not capture the essence of listening as they refer to a basic physical ability rather than an active skill. The reasoning in answers 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, and 12 consistently supports the idea that paying attention is fundamental to effective listening. Therefore, I will select the answer that best encapsulates this reasoning.\n\nFinal Choice  \n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "a67e93ad1923562ca535d92dd64a405e724342270864d459e3a2b8593c2b88a3"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:51:01+00:00",
+            "usage_in": 1439,
+            "usage_out": 161
+        }
+    },
+    {
+        "item_id": 1158,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "W:rewrite2",
+            "R:short_cot",
+            "L:ja",
+            "W:rewrite1",
+            "S:T1.0:seed2",
+            "L:en",
+            "P:skeptic",
+            "P:expert",
+            "L:zh",
+            "L:es",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 1696,
+        "tokens_out": 207,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe majority of the answers focus on the expectation that Sally had regarding the people she hired being entertaining. However, the reasoning in answers 1, 4, 10, and 11 suggests that \"making friends\" (A) is the correct choice, which does not align with the context of hiring individuals for entertainment purposes. The other answers (2, 3, 5, 6, 7, 8, 9, and 12) correctly identify that the expectation of entertainment is tied to the fact that they were \"getting paid for\" (D), which is a more logical connection to the context of employment. Therefore, the most consistent and accurate reasoning is found in answers 2, 5, 6, 7, 8, 9, and 12, all of which support option D as the correct answer. Among these, answer 12 provides a clear and concise explanation that aligns well with the question's context.\n\nFinal Choice  \n{\"choice\":\"12\"}",
+            "choice": 12,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "b3d2dfb6d2e74e910435d4fd44591ef0545e77d25bc9cd1122e313d6b3262aac"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:51:03+00:00",
+            "usage_in": 1703,
+            "usage_out": 207
+        }
+    },
+    {
+        "item_id": 1186,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "L:en",
+            "R:short_cot",
+            "L:ja",
+            "L:es",
+            "W:rewrite1",
+            "L:zh",
+            "L:ru",
+            "P:expert",
+            "S:T1.0:seed1",
+            "W:rewrite2"
+        ],
+        "tokens_in": 2025,
+        "tokens_out": 156,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe best answer should identify a specific location where silk can be purchased. Answers 1, 2, 4, 6, 10, and 11 correctly identify \"C) chinatown\" as a well-known area for buying silk, making them strong candidates. Answers 3, 7, 8, and 12 suggest \"A) expensive clothing\" as a place to find silk, but they do not specify a location, which is less relevant to the question. Answer 5 is too broad with \"B) garments\" and does not point to a specific place. Therefore, the most accurate and specific answer is \"C) chinatown,\" which is consistently supported by multiple answers.\n\nFinal Choice  \n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "eeee9c7f092b225ab7c37efa04ee00d3dbc933d70ee5c7aab50b5f1d1b33a36d"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:51:06+00:00",
+            "usage_in": 2032,
+            "usage_out": 156
+        }
+    },
+    {
+        "item_id": 1274,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "S:T1.0:seed1",
+            "R:short_cot",
+            "L:ru",
+            "W:rewrite2",
+            "L:en",
+            "P:skeptic",
+            "S:T1.0:seed2",
+            "L:zh",
+            "L:ja",
+            "W:rewrite1",
+            "P:expert"
+        ],
+        "tokens_in": 2017,
+        "tokens_out": 154,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe majority of the answers correctly identify that the child is looking for a cereal bowl, which is typically found in places associated with food preparation or storage. The most logical locations are the kitchen cabinet and cupboard, as these are common storage areas for bowls. Answers 1 through 11 consistently choose \"kitchen cabinet\" as the best option, emphasizing its specificity and commonality for storing bowls. However, Answer 7 and Answer 12 incorrectly choose \"cupboard\" as the best option, which, while plausible, is less specific than \"kitchen cabinet.\" Therefore, the most accurate and consistent reasoning is found in Answers 1 through 11, with Answer 1 being the first and most straightforward explanation.\n\nFinal Choice  \n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:es",
+            "prompt_sha256": "6ae411fb54feabb0728e7a174d1a9ee884970004e2b2b2b0f1f3db30ec027399"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:51:08+00:00",
+            "usage_in": 2024,
+            "usage_out": 154
+        }
+    },
+    {
+        "item_id": 1315,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:ru",
+            "S:T1.0:seed2",
+            "R:short_cot",
+            "W:rewrite2",
+            "L:zh",
+            "S:T1.0:seed1",
+            "P:expert",
+            "L:es",
+            "P:skeptic",
+            "L:ja",
+            "W:rewrite1"
+        ],
+        "tokens_in": 2077,
+        "tokens_out": 174,
+        "trace": {
+            "judge_output": "Reasoning process  \nAfter reviewing all 12 answers, the majority consistently highlight \"surfing the net\" (B) as the most versatile and engaging option for alleviating boredom on a mobile phone. This is supported by the reasoning that it offers a wide range of activities, including browsing websites, watching videos, and exploring social media. While some answers mention other options like playing cards (C), playing chess (D), or \"seeing new\" (E), they do not provide the same level of engagement or variety as surfing the internet. Additionally, Answer 11 stands out for suggesting \"seeing new\" (E) as the best option, which is less supported by the other answers. Therefore, the most consistent and well-supported choice across the answers is Answer 1, which clearly articulates the benefits of surfing the net.\n\nFinal Choice  \n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "838d9a5b7d974636dffb76716d0433d50ea236857571a26085a893173a39da83"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:51:11+00:00",
+            "usage_in": 2084,
+            "usage_out": 174
+        }
+    },
+    {
+        "item_id": 1321,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "S:T1.0:seed2",
+            "L:ja",
+            "L:ru",
+            "R:short_cot",
+            "L:es",
+            "L:en",
+            "S:T1.0:seed1",
+            "P:expert",
+            "W:rewrite1",
+            "P:skeptic",
+            "W:rewrite2"
+        ],
+        "tokens_in": 1843,
+        "tokens_out": 153,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe majority of the answers correctly identify the locker room as the most intimidating place for shy kids to take a shower due to the presence of peers and the lack of privacy. Answers 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, and 12 all emphasize the social dynamics and exposure associated with locker rooms, making them the most fitting choice. However, Answer 3 incorrectly suggests that a bathroom is the least intimidating place, which contradicts the context of the question regarding shyness in a school setting. Therefore, the most consistent and accurate reasoning is found in the answers that select the locker room as the answer.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "507ce46e60f6e958c7e35cfc7178bec1495650b1b4e6206d751106cdd9a89c36"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:51:13+00:00",
+            "usage_in": 1850,
+            "usage_out": 153
+        }
+    },
+    {
+        "item_id": 1342,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "W:rewrite1",
+            "L:es",
+            "S:T1.0:seed2",
+            "W:rewrite2",
+            "P:skeptic",
+            "L:en",
+            "L:zh",
+            "R:short_cot",
+            "L:ru",
+            "L:ja",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 1341,
+        "tokens_out": 122,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe majority of the answers correctly identify that lips are a feature of the human face. Answers 1 through 7, 9, 10, 11, and 12 all conclude that \"E) human face\" is the most accurate choice, emphasizing its specificity. However, Answer 8 incorrectly suggests that \"D) faces\" is the better option, which is less specific than \"E) human face.\" Therefore, the most consistent and accurate reasoning is found in the answers that select \"E) human face\" as the correct choice.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "aed6157e0335a19dc0cd45b462051bbd5c96f8382503ff1d6ee0b510de81276e"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:51:15+00:00",
+            "usage_in": 1348,
+            "usage_out": 122
+        }
+    },
+    {
+        "item_id": 1389,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "W:rewrite2",
+            "L:es",
+            "P:expert",
+            "L:ja",
+            "L:zh",
+            "R:short_cot",
+            "W:rewrite1",
+            "S:T1.0:seed2",
+            "L:ru",
+            "S:T1.0:seed1",
+            "P:skeptic"
+        ],
+        "tokens_in": 1756,
+        "tokens_out": 153,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe most consistent reasoning across the answers is that a motionless horse is best represented in a painting, as it captures a static image. Answers that suggest a farmyard (like answers 2, 6, and 8) do acknowledge that horses can be still there, but they do not emphasize the idea of a horse being motionless as effectively as the painting option. The painting option is repeatedly highlighted in answers 1, 4, 7, 9, 10, 11, and 12, which all correctly identify that a painting is a context where a horse can be depicted as motionless. Therefore, the most accurate and consistent choice is the one that emphasizes the painting.\n\nFinal Choice  \n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "0faf9c36df915c0f18deefc635f7f2211accf2ec953e697f10fc9c12416e280c"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:51:18+00:00",
+            "usage_in": 1763,
+            "usage_out": 153
+        }
+    },
+    {
+        "item_id": 1485,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "R:short_cot",
+            "L:ja",
+            "L:en",
+            "W:rewrite2",
+            "L:es",
+            "W:rewrite1",
+            "S:T1.0:seed1",
+            "L:zh",
+            "P:expert",
+            "P:skeptic",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 1971,
+        "tokens_out": 149,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe majority of the answers correctly identify that Matt struggles with controlling his anger and suggest that a constructive response would be to \"cool off\" (C). This aligns with the idea of managing emotions rather than resorting to aggression. However, Answers 3, 7, and 9 deviate from this by suggesting that Matt might react aggressively, which contradicts the premise of the question that he has issues controlling his anger. Among the answers, those that consistently advocate for \"cool off\" (C) as the best response are more aligned with the question's context. Therefore, the most appropriate choice is one of the answers that emphasize the need for a constructive approach to anger management.\n\nFinal Choice  \n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:ru",
+            "prompt_sha256": "269d7e04c65044fd37cc0fe5c2d7772cfd83467dfad730ee8550dc2b06f6a235"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:51:20+00:00",
+            "usage_in": 1978,
+            "usage_out": 149
+        }
+    },
+    {
+        "item_id": 1638,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:expert",
+            "S:T1.0:seed1",
+            "L:ru",
+            "W:rewrite1",
+            "W:rewrite2",
+            "P:skeptic",
+            "R:short_cot",
+            "L:es",
+            "L:zh",
+            "L:en",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 1930,
+        "tokens_out": 179,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe majority of the answers correctly identify that a newspaper (B) is a common medium for printed statements, which aligns with the question's context. Answers 2, 3, 5, 6, 7, 11, and 12 all emphasize the newspaper as the best choice, providing clear reasoning for its relevance. However, Answers 1 and 8 suggest a press release (D) as the best option, which, while valid, is more specific and less universally recognized than a newspaper for public statements. Answer 4 incorrectly identifies a smartphone (C) as a printing medium, which it is not. Answer 9 concludes with a letter (E), which is also a valid option but not as fitting as a newspaper. Therefore, the most accurate and widely accepted answer is from those that select the newspaper.\n\nFinal Choice  \n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "dbd458922adea2cc99edffba9c52535a1de2e45e58b82d730ac820c680b66e83"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:51:22+00:00",
+            "usage_in": 1937,
+            "usage_out": 179
+        }
+    },
+    {
+        "item_id": 1659,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "P:expert",
+            "L:ru",
+            "L:en",
+            "W:rewrite2",
+            "S:T1.0:seed2",
+            "L:ja",
+            "R:short_cot",
+            "W:rewrite1",
+            "L:zh",
+            "S:T1.0:seed1",
+            "P:skeptic"
+        ],
+        "tokens_in": 1528,
+        "tokens_out": 109,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe majority of the answers correctly identify \"fun\" as the primary motivation for chatting with friends while wanting to work out. They emphasize the social aspect and how it enhances the workout experience. However, Answer 11 stands out as it suggests \"inspiration\" as the main reason, which, while valid, is less direct than the enjoyment derived from social interaction. Therefore, the most consistent and relevant reasoning across the answers is found in those that highlight \"fun\" as the key motivation.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:es",
+            "prompt_sha256": "ed342fac3384f26078a8067fb54019726874a0e91fd1b56f6b7f568d64391137"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:51:24+00:00",
+            "usage_in": 1535,
+            "usage_out": 109
+        }
+    },
+    {
+        "item_id": 1688,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:ru",
+            "P:skeptic",
+            "W:rewrite2",
+            "W:rewrite1",
+            "P:expert",
+            "L:ja",
+            "L:zh",
+            "L:en",
+            "R:short_cot",
+            "L:es",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 1896,
+        "tokens_out": 216,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe majority of the answers focus on tiredness as the most immediate consequence of shopping all day, which is a valid point. However, some answers (like 7, 8, and 9) emphasize bankruptcy and debt as potential outcomes, which are more long-term consequences rather than immediate effects of a single day of shopping. While these financial issues can arise from excessive shopping, they do not directly relate to the physical experience of shopping all day. The answers that highlight tiredness (like 1, 2, 3, 4, 5, 6, 10, 11, and 12) are more aligned with the question's focus on immediate outcomes. Among these, all consistently conclude that tiredness is the most likely result, making them strong candidates. However, the reasoning in answers 1 through 6, 10, 11, and 12 is particularly clear and consistent in emphasizing tiredness as the most direct consequence. Therefore, I will select one of these answers.\n\nFinal Choice  \n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "0b173f502c2ab1e52173ab4d55cc6c1baa13711fde5235b8646a3be8c1dbddd4"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:51:28+00:00",
+            "usage_in": 1903,
+            "usage_out": 216
+        }
+    },
+    {
+        "item_id": 1828,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "P:skeptic",
+            "L:es",
+            "P:expert",
+            "L:ru",
+            "L:en",
+            "W:rewrite2",
+            "S:T1.0:seed2",
+            "L:ja",
+            "R:short_cot",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "tokens_in": 1776,
+        "tokens_out": 171,
+        "trace": {
+            "judge_output": "Reasoning process\nThe majority of the answers correctly identify that James needs to go to a place that sells tools to find a new hammer. Answers 1, 2, 4, 6, 8, 10, and 11 all conclude that a hardware store is the best option, which is accurate since hardware stores typically carry a wide variety of tools, including hammers. However, answers 5, 9, and 12 suggest that a tool shop is the best option, which is less common than a hardware store for general consumers. While a tool shop is indeed a valid option, the reasoning in those answers does not emphasize the accessibility and commonality of hardware stores as much as the others. Therefore, the most correct answer is one that emphasizes the hardware store as the best choice.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "fcfd509698c2a6dbf2bc517d328e214e9027b9e445d0b2f5e4438242be62ff5a"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:51:31+00:00",
+            "usage_in": 1783,
+            "usage_out": 171
+        }
+    },
+    {
+        "item_id": 1875,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "L:en",
+            "R:short_cot",
+            "P:skeptic",
+            "L:zh",
+            "S:T1.0:seed1",
+            "L:ja",
+            "W:rewrite1",
+            "L:es",
+            "S:T1.0:seed2",
+            "P:expert",
+            "W:rewrite2"
+        ],
+        "tokens_in": 1577,
+        "tokens_out": 156,
+        "trace": {
+            "judge_output": "Reasoning process  \nThe question asks what petrol is used to power. The most direct and specific answer is found in answers that identify a car as the primary vehicle powered by petrol. Answers 2, 3, 4, 5, 6, 9, 10, 11, and 12 all correctly identify \"car\" (E) as the most appropriate choice, emphasizing its common use as a petrol-powered vehicle. In contrast, answers 1, 7, and 8 suggest \"power engines\" (B) as the best answer, which is broader and less specific than \"car.\" Therefore, the most accurate and relevant answer is found in the responses that highlight the direct relationship between petrol and cars.\n\nFinal Choice  \n{\"choice\":\"12\"}",
+            "choice": 12,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "a8bf24e269c11f8c6e29361a5f1ab914dd4dc6254a952290d494feccfa770c46"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:51:33+00:00",
+            "usage_in": 1584,
+            "usage_out": 156
+        }
+    },
+    {
+        "item_id": 1926,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:ru",
+            "L:ja",
+            "S:T1.0:seed2",
+            "R:short_cot",
+            "S:T1.0:seed1",
+            "W:rewrite1",
+            "W:rewrite2",
+            "L:zh",
+            "L:es",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1848,
+        "tokens_out": 134,
+        "trace": {
+            "judge_output": "Reasoning process  \nAfter reviewing all the answers, it is clear that the majority of them correctly identify that placing feet on a table is considered disgusting due to its association with eating and socializing. Answers 1 through 11 consistently emphasize the idea that tables are places where hygiene is prioritized, making them the most inappropriate choice for placing feet. Answer 9, however, incorrectly identifies shoes and socks as the most disgusting option, which contradicts the general consensus about cleanliness and social norms. Therefore, the most accurate and consistent reasoning is found in answers 1 through 11, with answer 1 providing a clear and concise explanation.\n\nFinal Choice  \n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "7307f97d3ad91d587bb2cb58c5b9e34dc50ae0ea7ac653cbb35c48093a360d0c"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-04T15:51:35+00:00",
+            "usage_in": 1855,
+            "usage_out": 134
+        }
+    }
+]

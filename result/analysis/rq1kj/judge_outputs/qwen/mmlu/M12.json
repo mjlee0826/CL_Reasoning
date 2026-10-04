@@ -1,0 +1,1324 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh vs L:ja vs L:ru vs L:es vs S:T1.0:seed1 vs S:T1.0:seed2 vs P:expert vs P:skeptic vs W:rewrite1 vs W:rewrite2 vs R:short_cot)",
+            "languages": [
+                "english",
+                "chinese",
+                "japanese",
+                "russian",
+                "spanish",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 12,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-k-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "candidate_files": [
+            "result/arms/qwen/mmlu/L_en.json",
+            "result/arms/qwen/mmlu/L_zh.json",
+            "result/arms/qwen/mmlu/L_ja.json",
+            "result/arms/qwen/mmlu/L_ru.json",
+            "result/arms/qwen/mmlu/L_es.json",
+            "result/arms/qwen/mmlu/S_T1.0_seed1.json",
+            "result/arms/qwen/mmlu/S_T1.0_seed2.json",
+            "result/arms/qwen/mmlu/P_expert.json",
+            "result/arms/qwen/mmlu/P_skeptic.json",
+            "result/arms/qwen/mmlu/W_rewrite1.json",
+            "result/arms/qwen/mmlu/W_rewrite2.json",
+            "result/arms/qwen/mmlu/R_short_cot.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 971,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "menu_judge",
+        "menu": "M12",
+        "item_filter": "menu_all_answered_disagreement",
+        "n_judged_items": 967,
+        "order_scheme": "grouped_rotation_seed0",
+        "api_usage": {
+            "calls": 25,
+            "calls_without_usage": 0,
+            "prompt_tokens": 54193,
+            "completion_tokens": 2827,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 25
+        },
+        "calls_utc": {
+            "first": "2026-10-04T15:52:28+00:00",
+            "last": "2026-10-04T15:53:31+00:00"
+        }
+    },
+    {
+        "item_id": 4,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "L:zh",
+            "S:T1.0:seed1",
+            "L:ja",
+            "R:short_cot",
+            "L:es",
+            "S:T1.0:seed2",
+            "P:expert",
+            "L:ru"
+        ],
+        "tokens_in": 4782,
+        "tokens_out": 66,
+        "trace": {
+            "judge_output": "Reasoning process\nAll answers correctly perform the polynomial multiplication and reduction modulo 8. However, answer 8 incorrectly reduces the result to just \"6\" instead of \"6x^2 + 4x + 6\". All other answers correctly identify the result as matching option B.\n\nFinal Choice\n{\"choice\":8}",
+            "choice": 8,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "a36cf5b23aef7ad82557720218cac2728f34690c8eb3c2a25accfdee803bcad0"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:28+00:00",
+            "usage_in": 4794,
+            "usage_out": 66
+        }
+    },
+    {
+        "item_id": 100,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:es",
+            "L:ru",
+            "W:rewrite1",
+            "L:ja",
+            "S:T1.0:seed1",
+            "P:skeptic",
+            "S:T1.0:seed2",
+            "L:en",
+            "L:zh",
+            "W:rewrite2",
+            "P:expert"
+        ],
+        "tokens_in": 1982,
+        "tokens_out": 66,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 4 incorrectly states that the most accurate answer is C, but this is not correct. The facial nerve at the stylomastoid foramen controls all functions including salivation, so D is the correct choice. Other answers correctly identify D as the comprehensive answer.\n\nFinal Choice\n{\"choice\":8}",
+            "choice": 8,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "705eb77aeb8f04fec41a477b4f79b596560ff7188ce47e53ade7752a76653338"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:30+00:00",
+            "usage_in": 1994,
+            "usage_out": 66
+        }
+    },
+    {
+        "item_id": 243,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "L:ja",
+            "S:T1.0:seed2",
+            "R:short_cot",
+            "L:en",
+            "S:T1.0:seed1",
+            "P:expert",
+            "W:rewrite2",
+            "L:zh",
+            "L:ru",
+            "P:skeptic",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1067,
+        "tokens_out": 89,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswers 1, 4, 6, 7, 8, 11, and 12 correctly identify helium as the second most common element in the solar system. Answers 2, 3, 5, and 9 incorrectly state that hydrogen is the second most common element, which is factually wrong. The correct answer is D: Helium.\n\nFinal Choice\n{\"choice\":7}",
+            "choice": 7,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "970311cc632a2aef619a33435057f8e6a24f640e1bc2992a32cf9e01c49d3738"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:32+00:00",
+            "usage_in": 1079,
+            "usage_out": 89
+        }
+    },
+    {
+        "item_id": 504,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "P:expert",
+            "P:skeptic",
+            "S:T1.0:seed2",
+            "W:rewrite2",
+            "L:zh",
+            "L:en",
+            "L:es",
+            "L:ja",
+            "W:rewrite1",
+            "S:T1.0:seed1",
+            "R:short_cot"
+        ],
+        "tokens_in": 2092,
+        "tokens_out": 119,
+        "trace": {
+            "judge_output": "Reasoning process\nThe correct answer is C. Answer 1 states that the liver enlarges downwards from the left hypochondrium, which is incorrect as hepatomegaly typically involves enlargement upwards. Answer 6 incorrectly states that B is correct, while the majority of answers (including Answers 2-5, 7-12) correctly identify C as the correct answer. Answer 8 incorrectly states D is correct, but the liver is dull to percussion, not resonant. Therefore, the most correct answer is Answer 12.\n\nFinal Choice\n{\"choice\":12}",
+            "choice": 12,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "ba6f8a008f216713076318573d4020fead0d87c99a23b01ea4deb7900ba87f96"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:35+00:00",
+            "usage_in": 2104,
+            "usage_out": 119
+        }
+    },
+    {
+        "item_id": 1214,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:es",
+            "L:en",
+            "W:rewrite1",
+            "P:expert",
+            "R:short_cot",
+            "L:ru",
+            "P:skeptic",
+            "S:T1.0:seed2",
+            "W:rewrite2",
+            "S:T1.0:seed1",
+            "L:ja"
+        ],
+        "tokens_in": 1914,
+        "tokens_out": 81,
+        "trace": {
+            "judge_output": "Reasoning process\nMost of the answers correctly explain that for a very weak base, the pKb is higher than the pOH. Answer 7 incorrectly states that the pKb would be lower than the pOH, which contradicts the general understanding of pKb and pOH relationships for weak bases. All other answers consistently support the correct reasoning.\n\nFinal Choice\n{\"choice\":7}",
+            "choice": 7,
+            "chosen_arm": "L:ru",
+            "prompt_sha256": "37593b5208fcf2b261b55f840ada61a4ba1d24b50b4b95f00ec1170bb861204d"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:37+00:00",
+            "usage_in": 1926,
+            "usage_out": 81
+        }
+    },
+    {
+        "item_id": 2095,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "P:expert",
+            "S:T1.0:seed1",
+            "L:zh",
+            "L:ja",
+            "L:en",
+            "W:rewrite1",
+            "P:skeptic",
+            "L:ru",
+            "S:T1.0:seed2",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "tokens_in": 2715,
+        "tokens_out": 169,
+        "trace": {
+            "judge_output": "Reasoning process\nThe correct value of the digit 6 in 186,425 is in the thousands place, making its value 6,000. The question asks for a number where the digit 6 has a value exactly 10 times that, which is 60,000. This means the digit 6 must be in the ten-thousands place. Answer 9 incorrectly identifies the position of the digit 6 in 186,425 as the ten-thousands place, leading to an incorrect conclusion that the target value is 600,000 instead of 60,000. All other answers correctly identify the position of the digit 6 and conclude that option B is the correct answer.\n\nFinal Choice\n{\"choice\":9}",
+            "choice": 9,
+            "chosen_arm": "L:ru",
+            "prompt_sha256": "332d06871bc94a4fe17362d19bdd6b5cc26b47902496b7d28e2db32ad5748e85"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:41+00:00",
+            "usage_in": 2727,
+            "usage_out": 169
+        }
+    },
+    {
+        "item_id": 2456,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:en",
+            "W:rewrite1",
+            "L:ru",
+            "L:zh",
+            "P:skeptic",
+            "L:es",
+            "R:short_cot",
+            "L:ja",
+            "S:T1.0:seed1",
+            "W:rewrite2",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 6578,
+        "tokens_out": 129,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 11 incorrectly concludes that Option B is the correct counterexample, but upon closer inspection, it fails to correctly evaluate the truth value of the premises and conclusion in Option B. Specifically, when E, F, and G are all true, both premises are indeed true, and the conclusion is false, making it a valid counterexample. However, Answer 12 provides a more thorough evaluation of all options, correctly identifies Option C as a valid counterexample, and justifies its selection over other potential counterexamples. Therefore, Answer 12 is the most accurate.\n\nFinal Choice\n{\"choice\":12}",
+            "choice": 12,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "a07b498beceaed3848248eee6fd5b186823bb85434565cb7073c17a57a09d1a6"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:45+00:00",
+            "usage_in": 6590,
+            "usage_out": 129
+        }
+    },
+    {
+        "item_id": 2584,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "R:short_cot",
+            "S:T1.0:seed2",
+            "L:ru",
+            "S:T1.0:seed1",
+            "L:ja",
+            "L:zh",
+            "P:expert",
+            "L:es",
+            "L:en",
+            "W:rewrite1",
+            "W:rewrite2"
+        ],
+        "tokens_in": 1569,
+        "tokens_out": 145,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswers 1, 2, 4, 7, and 8 provide conflicting data. Answer 3 and 5-12 consistently cite the CDC's 2016 data of approximately 27% obesity rate among adults aged 18 years or older, which aligns with option C. Answer 3 incorrectly states that the 2016 rate was around 37.7%, which is actually the 2017-2018 rate. The majority of the answers, including Answers 5-12, correctly reference the 2016 CDC data as approximately 27%.\n\nFinal Choice\n{\"choice\":12}",
+            "choice": 12,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "2fcfef106599c0356979fe81705cae357974a5e9ee24d2c5706a83aa0b04cea8"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:48+00:00",
+            "usage_in": 1581,
+            "usage_out": 145
+        }
+    },
+    {
+        "item_id": 3845,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:es",
+            "R:short_cot",
+            "L:ru",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "L:ja",
+            "P:skeptic",
+            "L:en",
+            "P:expert",
+            "W:rewrite1",
+            "W:rewrite2"
+        ],
+        "tokens_in": 1543,
+        "tokens_out": 107,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks what GDP measures. Option A correctly defines GDP as production within a nation's borders. Option C describes the income approach to calculating GDP, which is also correct. Therefore, the correct answer should include both A and C, making option D the correct choice. While some answers incorrectly state that option C refers to NDP or GNP, this is not accurate. The reasoning in answer 12 correctly identifies both A and C as valid aspects of GDP measurement.\n\nFinal Choice\n{\"choice\":12}",
+            "choice": 12,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "51357bcb5456763a0cd7ecfc8ce9270e6e072eb61b76a8cdd09fded7ef069a28"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:50+00:00",
+            "usage_in": 1555,
+            "usage_out": 107
+        }
+    },
+    {
+        "item_id": 5677,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "L:en",
+            "P:skeptic",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "L:ja",
+            "W:rewrite2",
+            "W:rewrite1",
+            "P:expert",
+            "L:zh",
+            "L:ru",
+            "R:short_cot"
+        ],
+        "tokens_in": 2418,
+        "tokens_out": 111,
+        "trace": {
+            "judge_output": "Reasoning process\nThe speech by Senator George McGovern criticizes U.S. involvement in Vietnam, particularly the bombing of North Vietnam and the impact on civilians. This sentiment reflects growing anti-war sentiment that directly influenced legislative actions aimed at limiting executive power in foreign wars, such as the War Powers Act of 1973. While some answers suggest the Tet Offensive or other events, these were not directly influenced by McGovern's speech. The correct answer is A, which is consistently supported across multiple reasoning processes.\n\nFinal Choice\n{\"choice\":8}",
+            "choice": 8,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "8b08358d6df4f74eae138970828c7d0560fd901b753b187f62fab68da00eb4fd"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:52+00:00",
+            "usage_in": 2430,
+            "usage_out": 111
+        }
+    },
+    {
+        "item_id": 5681,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "W:rewrite2",
+            "L:ru",
+            "L:es",
+            "L:ja",
+            "P:skeptic",
+            "R:short_cot",
+            "L:zh",
+            "L:en",
+            "W:rewrite1",
+            "S:T1.0:seed2",
+            "P:expert"
+        ],
+        "tokens_in": 2427,
+        "tokens_out": 137,
+        "trace": {
+            "judge_output": "Reasoning process\nThe Populist Party Platform of 1892 focused on economic reform, opposition to corporate power, and the need for government intervention to benefit the common people. While Jacksonian Democracy (D) also emphasized the rights of the common man and agrarian interests, it did not address the industrial and economic issues that were central to the Populist agenda. Progressivism (A), on the other hand, emerged in the early 1900s and directly addressed many of the same concerns, including regulation of big business, social justice, and reform of corrupt political systems. Therefore, the most accurate answer is A.\n\nFinal Choice\n{\"choice\":7}",
+            "choice": 7,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "d3b163a066db26a91f6ed1614c7d8c906857adad41c6ed603dda3803e02ed242"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:55+00:00",
+            "usage_in": 2439,
+            "usage_out": 137
+        }
+    },
+    {
+        "item_id": 6324,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "R:short_cot",
+            "S:T1.0:seed2",
+            "L:ja",
+            "S:T1.0:seed1",
+            "P:expert",
+            "W:rewrite1",
+            "L:ru",
+            "L:en",
+            "W:rewrite2",
+            "P:skeptic",
+            "L:es"
+        ],
+        "tokens_in": 1529,
+        "tokens_out": 119,
+        "trace": {
+            "judge_output": "Reasoning process\nSeveral answers incorrectly state that Orthodox Jews and Eastern Orthodox Christians hold the view that abortion is murder, which is not universally true. Answer 7, 10, and 12 correctly note that all three groups may hold this view, but answer 12 provides the most comprehensive reasoning supporting the conclusion that all three groups share this stance. However, answer 1 is also correct in stating that all three groups hold this view, and it provides a clear explanation. Between these, answer 1 is more precise in its reasoning.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "751bf5d43b5b79674c12250f137531ce6c33d32f8ac683c0c11ac2e67ac68ef8"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:52:58+00:00",
+            "usage_in": 1541,
+            "usage_out": 119
+        }
+    },
+    {
+        "item_id": 6457,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "S:T1.0:seed2",
+            "L:ja",
+            "S:T1.0:seed1",
+            "L:ru",
+            "R:short_cot",
+            "L:en",
+            "W:rewrite1",
+            "P:skeptic",
+            "W:rewrite2",
+            "L:zh",
+            "L:es"
+        ],
+        "tokens_in": 1699,
+        "tokens_out": 182,
+        "trace": {
+            "judge_output": "Reasoning process\nSeveral answers correctly identify that standard-setting in human rights diplomacy involves setting standards of conduct, not necessarily binding legal standards. However, answer 3 incorrectly claims that standard-setting involves \"binding legal standards\" (option A), which is inaccurate as standard-setting is typically non-binding. Answer 1, 2, 7, 9, and 11 correctly identify option C as the most accurate, but answer 10 and 12 provide more precise reasoning by aligning with the context of treaties and international agreements. Answer 4, 6, 8, and 10 correctly identify option D as the most accurate, emphasizing the establishment of standards of conduct within human rights treaties. Given the detailed reasoning and alignment with the concept of standard-setting in human rights diplomacy, answer 10 provides the most comprehensive and accurate explanation.\n\nFinal Choice\n{\"choice\":10}",
+            "choice": 10,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "8032a5af331ac05a5e8dd276b7b4b870bd9ec8b533c33e1122d2ec662933edca"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:53:01+00:00",
+            "usage_in": 1711,
+            "usage_out": 182
+        }
+    },
+    {
+        "item_id": 6694,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "S:T1.0:seed1",
+            "L:ja",
+            "L:zh",
+            "L:es",
+            "L:en",
+            "W:rewrite1",
+            "P:expert",
+            "R:short_cot",
+            "L:ru",
+            "P:skeptic",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 1705,
+        "tokens_out": 91,
+        "trace": {
+            "judge_output": "Reasoning process\nThe passage presents a straightforward definition of capitalism and socialism without any logical fallacy. It does not commit begging the question, false dilemma, straw man, or appeal to gallery. Answer 5 incorrectly identifies the passage as a false dilemma, as it does not present only two options or ignore other possibilities. The correct answer is that no fallacy is committed, and the most accurate choice is D.\n\nFinal Choice\n{\"choice\":8}",
+            "choice": 8,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "53b202d21bc90b2a85b3e098146ef55ba46041bf516e8f0f7e71f684a709ca06"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:53:03+00:00",
+            "usage_in": 1717,
+            "usage_out": 91
+        }
+    },
+    {
+        "item_id": 6868,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot",
+            "L:ja",
+            "P:skeptic",
+            "P:expert",
+            "L:zh",
+            "S:T1.0:seed2",
+            "L:en",
+            "S:T1.0:seed1",
+            "L:ru",
+            "L:es"
+        ],
+        "tokens_in": 1936,
+        "tokens_out": 92,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswers 1-12 mostly correctly identify that the disadvantage of grid search is its computational inefficiency, particularly for problems with many parameters or when applied to multiple linear regression. However, Answer 11 incorrectly states that grid search is hard to implement, which is not a significant disadvantage compared to its computational inefficiency. The correct answer is D, and it is consistently supported across most answers.\n\nFinal Choice\n{\"choice\":10}",
+            "choice": 10,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "4ec2ad03a876aa3f985c5cd916dce9ff971c3819c92f54e2a59e795530787b32"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:53:05+00:00",
+            "usage_in": 1948,
+            "usage_out": 92
+        }
+    },
+    {
+        "item_id": 6958,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "L:ja",
+            "P:skeptic",
+            "L:en",
+            "P:expert",
+            "W:rewrite1",
+            "W:rewrite2",
+            "L:zh",
+            "L:es",
+            "R:short_cot",
+            "L:ru"
+        ],
+        "tokens_in": 1493,
+        "tokens_out": 66,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 12 incorrectly identifies Frederick Taylor as the associate of the Hawthorn Studies. This is factually wrong, as the Hawthorn Studies are most closely associated with Elton Mayo, not Frederick Taylor. All other answers correctly identify Elton Mayo as the correct answer.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "e3db0bbd36bca5215d31acc8add16574bd3342bd0675bad0b3afd053ace39a29"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:53:07+00:00",
+            "usage_in": 1505,
+            "usage_out": 66
+        }
+    },
+    {
+        "item_id": 7057,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:en",
+            "S:T1.0:seed1",
+            "P:expert",
+            "W:rewrite2",
+            "L:zh",
+            "L:ru",
+            "P:skeptic",
+            "W:rewrite1",
+            "L:es",
+            "L:ja",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 1749,
+        "tokens_out": 113,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question refers to a consumer's imbalance between actual and desired states, which indicates a gap needing resolution. This concept is known as \"need recognition\" or \"problem recognition,\" which is a key step in the consumer decision-making process. While some answers suggest \"Motive development\" (A) or \"Product evaluation\" (D), the most accurate answer is Answer 5, as it correctly identifies that the process involves recognizing a need that requires action, which is best described as \"Motive development.\"\n\nFinal Choice\n{\"choice\":5}",
+            "choice": 5,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "d7b22d9d53eb93a7ef8642b02836705689fe195cee915fa68da7ef52b8b891dd"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:53:10+00:00",
+            "usage_in": 1761,
+            "usage_out": 113
+        }
+    },
+    {
+        "item_id": 7399,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "S:T1.0:seed2",
+            "P:expert",
+            "W:rewrite2",
+            "L:ru",
+            "L:ja",
+            "W:rewrite1",
+            "P:skeptic",
+            "L:zh",
+            "S:T1.0:seed1",
+            "L:es",
+            "R:short_cot"
+        ],
+        "tokens_in": 1358,
+        "tokens_out": 74,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 5 incorrectly identifies the origin of the phrase \"You talkin' to me?\" as coming from the movie *Groundhog Day*, which is factually incorrect. The phrase is famously associated with *Taxi Driver*. All other answers correctly identify *Taxi Driver* as the source of the phrase.\n\nFinal Choice\n{\"choice\":5}",
+            "choice": 5,
+            "chosen_arm": "L:ru",
+            "prompt_sha256": "028a832ebe6bdda570c86742e61c715fc9e57f02bf014401569e1e8f582354bf"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:53:11+00:00",
+            "usage_in": 1370,
+            "usage_out": 74
+        }
+    },
+    {
+        "item_id": 8527,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "W:rewrite1",
+            "L:zh",
+            "L:ru",
+            "P:skeptic",
+            "L:en",
+            "L:es",
+            "S:T1.0:seed2",
+            "W:rewrite2",
+            "P:expert",
+            "S:T1.0:seed1",
+            "L:ja"
+        ],
+        "tokens_in": 2195,
+        "tokens_out": 128,
+        "trace": {
+            "judge_output": "Reasoning process\nScenario 1 involves the main character turning away from their mother-in-law to sneeze. This is a natural reflex and not inherently morally wrong according to US standards in 2020. Scenario 2 involves glaring at children to correct their posture, which may be seen as harsh but is generally not considered morally wrong unless it crosses into abuse or excessive punishment. The reasoning in Answer 12 correctly identifies that Scenario 1 is morally wrong while Scenario 2 is not, aligning with the question's requirement of identifying which scenario involves a clearly morally wrong action.\n\nFinal Choice\n{\"choice\":12}",
+            "choice": 12,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "6fc288f6f85f2d0e94bfb08db911b6efe03046c26827e9cd2f7d2a8ab4cd47d0"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:53:14+00:00",
+            "usage_in": 2207,
+            "usage_out": 128
+        }
+    },
+    {
+        "item_id": 10059,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "R:short_cot",
+            "S:T1.0:seed1",
+            "L:en",
+            "W:rewrite2",
+            "L:zh",
+            "S:T1.0:seed2",
+            "L:es",
+            "L:ja",
+            "L:ru",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1588,
+        "tokens_out": 92,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 10 incorrectly states that \"leisure and a sedentary lifestyle\" (C) is the most appropriate answer, while the other answers correctly identify that all three options (A, B, and C) are evidence of a complex society. The reasoning in Answers 1-9, 11, and 12 consistently and accurately support option D as the correct choice.\n\nFinal Choice\n{\"choice\":12}",
+            "choice": 12,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "63f2d14d7a1a82865f1c84b049620e5be9b7d53f9fa3620d5a6a11f52809a278"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:53:16+00:00",
+            "usage_in": 1600,
+            "usage_out": 92
+        }
+    },
+    {
+        "item_id": 10364,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh",
+            "R:short_cot",
+            "L:ru",
+            "S:T1.0:seed2",
+            "S:T1.0:seed1",
+            "L:es",
+            "P:expert",
+            "W:rewrite1",
+            "L:ja",
+            "W:rewrite2",
+            "P:skeptic"
+        ],
+        "tokens_in": 2265,
+        "tokens_out": 175,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks which type of audit evidence provides the least assurance of reliability. The correct answer is D, as municipal property tax bills are official documents issued by a government entity and are generally reliable. However, several answers incorrectly identify B as the least reliable due to being internal documents. While internal documents like prenumbered receiving reports (B) may have lower reliability compared to external sources, they still provide some level of control and traceability. Municipal property tax bills (D), although prepared in the client's name, are still considered more reliable than internal documents because they are issued by an independent authority. Therefore, the most accurate reasoning and final answer is provided in Answer 1, 5, 6, 8, 9, and 12, with Answer 1 being the first correct one.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "16edb288d32468438a1d9e0feec61ea362bc191dd2f6f51788e64cfb53706a5e"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:53:20+00:00",
+            "usage_in": 2277,
+            "usage_out": 175
+        }
+    },
+    {
+        "item_id": 10633,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:ja",
+            "P:skeptic",
+            "S:T1.0:seed2",
+            "P:expert",
+            "L:es",
+            "W:rewrite2",
+            "L:ru",
+            "W:rewrite1",
+            "L:en",
+            "S:T1.0:seed1",
+            "L:zh"
+        ],
+        "tokens_in": 2329,
+        "tokens_out": 181,
+        "trace": {
+            "judge_output": "Reasoning process\nThe key issue is whether the accountant's testimony about statements made by the taxpayer is admissible. The taxpayer hired the accountant independently, not through her attorney, so the statements are not protected by attorney-client privilege. The work-product rule does not apply because the accountant's work was not in anticipation of litigation. The taxpayer's privilege against self-incrimination may apply, but there is no indication that the taxpayer refused to testify. The statements made to the accountant are considered admissions, which are generally admissible. Therefore, answer 12 incorrectly asserts that the testimony violates attorney-client privilege, while answers 1, 3, 4, 5, 6, 7, 9, 10, and 11 correctly identify the testimony as admissible as an admission. Answer 2 incorrectly applies the work-product rule.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "69238866f809d9afcb26b9d94061c3162ad69359f4b52c3f79a853447917cece"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:53:24+00:00",
+            "usage_in": 2341,
+            "usage_out": 181
+        }
+    },
+    {
+        "item_id": 13054,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "S:T1.0:seed2",
+            "L:en",
+            "L:zh",
+            "R:short_cot",
+            "S:T1.0:seed1",
+            "L:ja",
+            "P:skeptic",
+            "L:ru",
+            "W:rewrite2",
+            "W:rewrite1",
+            "P:expert"
+        ],
+        "tokens_in": 1528,
+        "tokens_out": 137,
+        "trace": {
+            "judge_output": "Reasoning process\nMost of the answers correctly identify that reviewing present and future realities helps a public relations counselor interpret trends for management (B), which is essential for strategic decision-making. However, answer 4 and answer 7 incorrectly suggest that the purpose is to consider the role public relations might play (D), which is a narrower interpretation and not the primary reason for continuously reviewing realities. The majority of the answers, including 1, 2, 3, 5, 6, 8, 9, 10, 11, and 12, consistently support option B as the most accurate choice.\n\nFinal Choice\n{\"choice\":12}",
+            "choice": 12,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "9a1332340f28c7e332b8b92cdfd673c0cd93ba6ba941ff8f3125248945c9fc1d"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:53:27+00:00",
+            "usage_in": 1540,
+            "usage_out": 137
+        }
+    },
+    {
+        "item_id": 13184,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:ja",
+            "P:skeptic",
+            "W:rewrite2",
+            "S:T1.0:seed2",
+            "L:es",
+            "S:T1.0:seed1",
+            "L:zh",
+            "W:rewrite1",
+            "P:expert",
+            "L:ru",
+            "L:en"
+        ],
+        "tokens_in": 1868,
+        "tokens_out": 94,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswers 1-10 and 11 correctly identify B as the odd one out, as it represents an external threat rather than an internal security threat. Answer 6 incorrectly identifies D as the odd one out, but D is still an internal political threat. Answer 12 also incorrectly identifies D as the odd one out for the same reason. Therefore, the most correct answer is Answer 1.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "199c3812be66c2798b1ffbe41d1e4c0afbd4278a17b8aedc13c3b288aa38a3d7"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:53:29+00:00",
+            "usage_in": 1880,
+            "usage_out": 94
+        }
+    },
+    {
+        "item_id": 13629,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:es",
+            "L:zh",
+            "R:short_cot",
+            "S:T1.0:seed2",
+            "L:ja",
+            "S:T1.0:seed1",
+            "P:expert",
+            "W:rewrite1",
+            "L:ru",
+            "L:en",
+            "W:rewrite2"
+        ],
+        "tokens_in": 1564,
+        "tokens_out": 64,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 3 incorrectly attributes the quote to Ronald Reagan, which is not accurate. The quote is widely recognized as being from George Soros, and Reagan is not known for making this specific statement. All other answers correctly identify George Soros as the source of the quote.\n\nFinal Choice\n{\"choice\":5}",
+            "choice": 5,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "3137daa677025e374df2c28cdedf25a45245ab902e8fbf2ac9d9cc9a6de7a1db"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-04T15:53:31+00:00",
+            "usage_in": 1576,
+            "usage_out": 64
+        }
+    }
+]

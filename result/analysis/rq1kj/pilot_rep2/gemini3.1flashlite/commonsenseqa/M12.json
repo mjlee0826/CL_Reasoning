@@ -1,0 +1,1324 @@
+[
+    {
+        "Model": {
+            "modelType": "gemini3.1flashlite",
+            "temperature": 0.0,
+            "modelName": "gemini-3.1-flash-lite",
+            "displayName": "Gemini 3.1 Flash-Lite"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh vs L:ja vs L:ru vs L:es vs S:T1.0:seed1 vs S:T1.0:seed2 vs P:expert vs P:skeptic vs W:rewrite1 vs W:rewrite2 vs R:short_cot)",
+            "languages": [
+                "english",
+                "chinese",
+                "japanese",
+                "russian",
+                "spanish",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 12,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-k-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/commonsenseqa/L_en.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/L_zh.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/L_ja.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/L_ru.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/L_es.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/S_T1.0_seed1.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/S_T1.0_seed2.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/P_expert.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/P_skeptic.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/W_rewrite1.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/W_rewrite2.json",
+            "result/arms/gemini3.1flashlite/commonsenseqa/R_short_cot.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 838,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "menu_judge",
+        "menu": "M12",
+        "item_filter": "menu_all_answered_disagreement",
+        "n_judged_items": 835,
+        "order_scheme": "grouped_rotation_seed0",
+        "api_usage": {
+            "calls": 25,
+            "calls_without_usage": 0,
+            "prompt_tokens": 42638,
+            "completion_tokens": 4919,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gemini-3.1-flash-lite": 25
+        },
+        "calls_utc": {
+            "first": "2026-10-04T15:50:32+00:00",
+            "last": "2026-10-04T15:51:30+00:00"
+        }
+    },
+    {
+        "item_id": 6,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed2",
+            "S:T1.0:seed1",
+            "L:es",
+            "R:short_cot",
+            "L:zh",
+            "L:ja",
+            "W:rewrite2",
+            "P:skeptic",
+            "L:ru",
+            "P:expert",
+            "L:en",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1477,
+        "tokens_out": 196,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks where a woman was heading with a \"checked\" drawstring bag. The term \"checked\" in the context of baggage is a standard procedure for air travel. Answers 1, 2, 4, 7, 8, 9, 10, 11, and 12 correctly identify that \"checked\" implies an airport. Answer 3 provides the same conclusion in Spanish. Answer 5 provides the same conclusion in Chinese. Answer 6 incorrectly interprets the word \"drawstring\" (kinchaku) as a pun for \"safe\" (kinko) in Japanese, which is a linguistic leap not supported by the English context of \"checked baggage.\" Among the correct answers, Answer 8 provides the most comprehensive explanation by acknowledging that while a drawstring bag is an unusual item to check, the verb \"checked\" is the definitive indicator of the airport context.\n\nFinal Choice\n{\"choice\": 8}",
+            "choice": 8,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "008720c9f331b668eae0a782ce810dd4ed80daf9e73d3094548c090225ff192c"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:32+00:00",
+            "usage_in": 1478,
+            "usage_out": 196
+        }
+    },
+    {
+        "item_id": 29,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:ja",
+            "R:short_cot",
+            "S:T1.0:seed2",
+            "L:en",
+            "P:expert",
+            "S:T1.0:seed1",
+            "L:es",
+            "L:ru",
+            "L:zh",
+            "P:skeptic",
+            "W:rewrite2"
+        ],
+        "tokens_in": 1527,
+        "tokens_out": 246,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question is a variation of a common riddle or trick question. While most answers (1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12) logically conclude that cleaning a television screen reduces glare, Answer 2 identifies that this is a classic riddle where the intended answer is usually \"eye black\" (used by players to reduce glare). Since \"eye black\" is not an option, Answer 2 correctly identifies that the question is a trick and that the provided options are nonsensical in the context of the riddle, pointing to D as the intended \"trick\" answer. However, in standard multiple-choice logic where one must choose the most plausible object to clean to reduce glare on a screen, A is the standard interpretation. Comparing the quality of reasoning, Answer 1 provides a clear, concise, and logical explanation for why A is the correct choice in a standard context, whereas Answer 2 relies on an external riddle that isn't explicitly referenced in the prompt. Answer 1 is the most straightforward and accurate reasoning for the provided options.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "f2e80fe794c944bdaae85010d7cd1f62d37471a22de6502085bb4bff135ba13d"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:36+00:00",
+            "usage_in": 1528,
+            "usage_out": 246
+        }
+    },
+    {
+        "item_id": 77,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "W:rewrite1",
+            "L:es",
+            "R:short_cot",
+            "P:expert",
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "L:ru",
+            "W:rewrite2",
+            "L:ja",
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 2128,
+        "tokens_out": 258,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks what Jamie \"continued to do\" in the context of failing to reduce her waist size. The phrase \"continued to do what?\" implies an action that is the opposite of her goal (reducing waist size). \n\n- Answers 1, 2, 4, 5, 6, 7, 10, and 11 correctly identify that \"gain weight\" (A) is the most natural and idiomatic way to describe the physical outcome of failing to lose weight.\n- Answer 3 and 8 incorrectly choose \"augment\" (B), which is a formal transitive verb that does not fit the sentence structure \"She continued to [verb]\" as naturally as \"gain weight.\"\n- Answer 9 identifies that all options are essentially opposites of the goal but fails to select the most idiomatic one.\n- Answer 12 incorrectly assumes \"dispare\" (a misspelling of despair) is the intended answer based on an emotional reaction, ignoring the context of the physical action of waist size management.\n\nAmong the consistent answers, Answer 1 provides a clear and logical explanation for why \"gain weight\" is the most appropriate choice compared to the other synonyms.\n\nFinal Choice\n{\"choice\": 1}",
+            "choice": 1,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "71255957dd44bbe640d87c993f8f57f811f9b3c27c24b68246c2cb9d7a7ab4c9"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:38+00:00",
+            "usage_in": 2129,
+            "usage_out": 258
+        }
+    },
+    {
+        "item_id": 145,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed2",
+            "S:T1.0:seed1",
+            "L:ru",
+            "W:rewrite1",
+            "P:expert",
+            "L:zh",
+            "P:skeptic",
+            "R:short_cot",
+            "L:en",
+            "W:rewrite2",
+            "L:ja",
+            "L:es"
+        ],
+        "tokens_in": 2525,
+        "tokens_out": 207,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question \"What's it called when you have seen something through an eyepiece?\" is grammatically ambiguous. It could be interpreted as asking for the name of the instrument used (which would make C, D, or E plausible) or the name of the visual experience (which would make A plausible). However, in standard English, \"sights\" (A) is not a technical term for the act of looking through an eyepiece, nor is it a standard term for the image seen. The instruments listed (C, D, E) are all devices that possess an eyepiece. Among the provided answers, Answer 2 and Answer 9 provide the most consistent and logical reasoning by identifying that the eyepiece is a defining component of these instruments, with the \"light microscope\" being a primary example used in educational contexts. Answer 2 is particularly well-reasoned, acknowledging the ambiguity while identifying the most scientifically relevant instrument associated with the term \"eyepiece.\"\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "bcb1f15286c149af5c9c3b844f290f3301963e2bb94b9c1af2a90cde1a63bf1d"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:42+00:00",
+            "usage_in": 2526,
+            "usage_out": 207
+        }
+    },
+    {
+        "item_id": 344,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "W:rewrite1",
+            "P:skeptic",
+            "L:ru",
+            "S:T1.0:seed2",
+            "R:short_cot",
+            "W:rewrite2",
+            "L:es",
+            "P:expert",
+            "S:T1.0:seed1",
+            "L:zh",
+            "L:ja"
+        ],
+        "tokens_in": 1521,
+        "tokens_out": 220,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for a \"sense of what\" after running. The phrase \"a sense of\" typically precedes an abstract noun representing a feeling or state of mind (e.g., a sense of satisfaction, a sense of accomplishment). While \"sweating\" (C) is a physical result of running, it is grammatically and semantically awkward to describe it as \"a sense of sweating.\" Most of the provided answers (1, 2, 3, 5, 6, 8, 9, 10, 11, 12) correctly identify \"satisfaction\" (A) as the most logical psychological state. Answer 7 incorrectly prioritizes a physical state over the idiomatic usage of \"a sense of.\" Answer 4 provides correct reasoning but is written in Russian, whereas the prompt implies a preference for English consistency. Among the English responses, Answer 10 provides the most precise linguistic justification by noting that \"a sense of sweating\" is not standard English phrasing.\n\nFinal Choice\n{\"choice\":\"10\"}",
+            "choice": 10,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "d20e44009c51bf8d4fe3e22f98c7d1fc20ab3df4e0a9a665a773d8331375a78c"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:44+00:00",
+            "usage_in": 1522,
+            "usage_out": 220
+        }
+    },
+    {
+        "item_id": 525,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:zh",
+            "L:ru",
+            "L:es",
+            "W:rewrite2",
+            "P:expert",
+            "W:rewrite1",
+            "S:T1.0:seed2",
+            "L:ja",
+            "L:en",
+            "R:short_cot",
+            "P:skeptic"
+        ],
+        "tokens_in": 1446,
+        "tokens_out": 199,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks what happens to cats every day. Evaluating the options, \"need food\" (C) is a biological necessity for survival, making it the most logically sound answer among the choices provided. Answers 1, 3, 4, 5, 6, 7, 8, 10, 11, and 12 correctly identify C as the most logical choice based on biological necessity. Answer 2 provides the same conclusion in Traditional Chinese. Answer 9 incorrectly selects B (\"drink water\") as the most essential, despite the fact that \"need food\" is a more fundamental biological requirement for survival than the specific act of drinking water, which can vary in frequency or be supplemented by moisture in food. Among the correct answers, Answer 12 provides the most comprehensive and rigorous logical evaluation of why the other options are less suitable, making it the most robust reasoning process.\n\nFinal Choice\n{\"choice\": 12}",
+            "choice": 12,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "ab217877d469824ac8ea21cb09fedc38aefbbede3791778f14b6e8f31b013402"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:47+00:00",
+            "usage_in": 1447,
+            "usage_out": 199
+        }
+    },
+    {
+        "item_id": 552,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:ru",
+            "R:short_cot",
+            "L:es",
+            "P:skeptic",
+            "L:en",
+            "W:rewrite2",
+            "L:ja",
+            "S:T1.0:seed2",
+            "P:expert",
+            "L:zh",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1603,
+        "tokens_out": 169,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks what spectators want to find out when teams are evenly matched. In competitive sports, the fundamental purpose of a match is to determine a winner. While \"winning or losing\" (C) describes the binary nature of the outcome, \"one winner\" (D) specifically identifies the objective of the competition—to resolve the parity and crown a victor. Most of the provided answers (1, 3, 4, 6, 7, 9, 10, 12) correctly identify that the goal of a competitive match is to produce a single winner. Answer 10 provides a clear, logical distinction between the state of \"winning or losing\" and the specific outcome of \"one winner,\" making it the most robust reasoning.\n\nFinal Choice\n{\"choice\": 10}",
+            "choice": 10,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "3ca6ce2b14670ff2f37370198a76ff043af03691d2b2ec406262df192f3879e0"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:49+00:00",
+            "usage_in": 1604,
+            "usage_out": 169
+        }
+    },
+    {
+        "item_id": 613,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "P:expert",
+            "W:rewrite1",
+            "L:ru",
+            "L:zh",
+            "S:T1.0:seed1",
+            "L:en",
+            "L:es",
+            "R:short_cot",
+            "L:ja",
+            "P:skeptic",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 2366,
+        "tokens_out": 206,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks when Sarah could have left if she thought she was home all evening. The logic implies that if she was home all evening, the only time she could have left is during the daytime, as \"evening\" and \"night\" are often synonymous or overlapping, and \"early morning\" is a specific subset of the day. Answers 2, 6, 7, and 12 correctly identify that \"daytime\" is the logical period outside of the evening. Answer 12 provides a clear, logical justification for selecting \"daytime\" (E) as the most appropriate category to contrast with \"evening.\" Other answers (like 4, 8, and 11) incorrectly suggest \"night\" (C), which is synonymous with \"evening,\" or choose \"early morning\" (A) as the only option, which is less comprehensive than \"daytime.\" Answer 12 is the most consistent and logically sound.\n\nFinal Choice\n{\"choice\":\"12\"}",
+            "choice": 12,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "7e407576b778e964b1149addbab24e87171eb56ea181b4a38bffed7f483540c7"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:50+00:00",
+            "usage_in": 2367,
+            "usage_out": 206
+        }
+    },
+    {
+        "item_id": 825,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "W:rewrite1",
+            "S:T1.0:seed1",
+            "L:ru",
+            "L:en",
+            "S:T1.0:seed2",
+            "W:rewrite2",
+            "R:short_cot",
+            "P:expert",
+            "L:zh",
+            "L:ja",
+            "P:skeptic"
+        ],
+        "tokens_in": 1740,
+        "tokens_out": 164,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks where a human might sit for extended periods over a bowl of water. The most logical interpretation is that \"bowl of water\" refers to a toilet bowl, which is a standard fixture in a bathroom. Answers 1, 2, 3, 4, 5, 6, 8, 9, 11, and 12 correctly identify this association. Answer 7 incorrectly suggests a sink or basin, which is not typically sat upon. Answer 10 attempts a creative but highly improbable interpretation involving microgravity in a space shuttle, which is not the standard or intended meaning of the question. Among the correct interpretations, Answer 2 provides a clear, concise, and accurate reasoning process in English.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "96f120a040d2ff45f1e3298e41a34475eb3890725ba07c5f913168c27ce03af7"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:52+00:00",
+            "usage_in": 1741,
+            "usage_out": 164
+        }
+    },
+    {
+        "item_id": 1021,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "W:rewrite1",
+            "L:en",
+            "S:T1.0:seed1",
+            "L:zh",
+            "R:short_cot",
+            "L:ja",
+            "P:skeptic",
+            "S:T1.0:seed2",
+            "P:expert",
+            "L:es",
+            "W:rewrite2"
+        ],
+        "tokens_in": 1442,
+        "tokens_out": 135,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks where to put mail after bringing it inside. Answers 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, and 12 all correctly identify that a table is the most logical and conventional place to put mail within a home. Answer 7 incorrectly suggests the post office, which is illogical because the mail has already been brought inside. Among the correct answers, Answer 8 provides the most comprehensive and clear logical breakdown of why the other options are incorrect, making it the most robust reasoning.\n\nFinal Choice\n{\"choice\": 8}",
+            "choice": 8,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "115db21e895c7191ac15e02f3fb53121c6e7cab93fff8b71e580cd6b6b53a089"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:54+00:00",
+            "usage_in": 1443,
+            "usage_out": 135
+        }
+    },
+    {
+        "item_id": 1030,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "L:zh",
+            "W:rewrite2",
+            "W:rewrite1",
+            "P:skeptic",
+            "L:es",
+            "P:expert",
+            "L:en",
+            "L:ja",
+            "R:short_cot",
+            "L:ru",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 2015,
+        "tokens_out": 144,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question refers to a specific plot point from Stephen King's novel *11/22/63*, where the protagonist, Jake Epping (often referred to as George Amberson), deals with a refrigerator repair. The specific detail involves the misconception or the technical reality regarding the use of a \"freon coin\" (or similar refrigerant-related component) in a refrigerator. Answer 11 correctly identifies the source material and the context of the question, whereas the other answers rely on general assumptions about Freon without recognizing the specific literary reference. Answer 11 provides the most accurate reasoning based on the origin of the question.\n\nFinal Choice\n{\"choice\": 11}",
+            "choice": 11,
+            "chosen_arm": "L:ru",
+            "prompt_sha256": "dcd4af70d15f4b0121fe6298deb4953f85d4eefbc6e2cff9a85bf4b9b32230b0"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:57+00:00",
+            "usage_in": 2016,
+            "usage_out": 144
+        }
+    },
+    {
+        "item_id": 1125,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "W:rewrite2",
+            "P:expert",
+            "R:short_cot",
+            "W:rewrite1",
+            "L:ja",
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "L:en",
+            "L:zh",
+            "L:es",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 1540,
+        "tokens_out": 173,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the most appropriate descriptor for \"choppy\" water rapids among the given choices. \n- Answer 2 incorrectly identifies \"shaky\" as the best descriptor, which is not standard terminology for water conditions.\n- Answers 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, and 12 all correctly identify \"dangerous\" (B) as the most logical and contextually accurate descriptor for choppy rapids.\n- Among these, Answer 12 provides the most comprehensive and precise explanation, clearly defining why rapids are dangerous due to turbulence and velocity, while systematically explaining why the other options are incorrect. It is the most well-reasoned and thorough response.\n\nFinal Choice\n{\"choice\": 12}",
+            "choice": 12,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "3d4540e943d4e52f35da8d11e45824825213d8e1d0457343daeabafc7f225293"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:50:59+00:00",
+            "usage_in": 1541,
+            "usage_out": 173
+        }
+    },
+    {
+        "item_id": 1168,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed2",
+            "L:ru",
+            "S:T1.0:seed1",
+            "L:es",
+            "L:ja",
+            "W:rewrite1",
+            "L:en",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite2",
+            "R:short_cot",
+            "L:zh"
+        ],
+        "tokens_in": 1950,
+        "tokens_out": 213,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question is a classic riddle or trivia question often found in pop culture or humor contexts. The premise is that sexual activity occurs far more frequently than successful procreation. Among the choices, \"used condoms\" (D) is a physical byproduct of the act itself when contraception is used, which is a common practice. While \"venereal disease\" (C) is a possible consequence, it is not a universal or intended consequence of every sexual act, whereas the use of a condom is a deliberate action taken during the act. Many sources for this specific riddle identify \"used condoms\" as the intended answer because it represents a direct, physical, and common byproduct of the act of sex that is statistically more frequent than the birth of a child. Answers 2, 5, 6, 8, 9, and 10 correctly identify this logic. Answer 9 provides the most comprehensive reasoning for why \"used condoms\" is the most logical answer in the context of the riddle.\n\nFinal Choice\n{\"choice\": 9}",
+            "choice": 9,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "a88ddd30efbffafe5829a5de947fd8f6317f605a14493b4fcf47fad7ecc8b103"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:02+00:00",
+            "usage_in": 1951,
+            "usage_out": 213
+        }
+    },
+    {
+        "item_id": 1233,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "L:zh",
+            "L:ru",
+            "R:short_cot",
+            "L:en",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "W:rewrite2",
+            "W:rewrite1",
+            "L:es",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 1704,
+        "tokens_out": 177,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks what the upright piano helped get a better sound. The upright piano was specifically engineered to be a space-saving alternative to the grand piano, making it possible to have a high-quality instrument in a domestic setting. While \"music room\" (B) is a plausible location, the historical significance of the upright piano is its democratization of music within the \"house\" (C). Most educational and historical contexts regarding the upright piano emphasize its role in bringing music into the home, thereby improving the sound quality of the house itself. Answers 8, 9, 10, 11, and 12 correctly identify \"house\" as the primary beneficiary of this innovation. Among these, Answer 11 provides the most comprehensive reasoning regarding the acoustic integration and the intended domestic environment.\n\nFinal Choice\n{\"choice\": 11}",
+            "choice": 11,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "3e547e8ad868e187006e31388a6888378d646bd50fb2669abea2d736aab6fc0f"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:04+00:00",
+            "usage_in": 1705,
+            "usage_out": 177
+        }
+    },
+    {
+        "item_id": 1283,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "W:rewrite1",
+            "W:rewrite2",
+            "L:es",
+            "L:ja",
+            "R:short_cot",
+            "P:expert",
+            "L:en",
+            "S:T1.0:seed1",
+            "L:zh",
+            "P:skeptic",
+            "S:T1.0:seed2"
+        ],
+        "tokens_in": 1500,
+        "tokens_out": 179,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks \"What part of us is virginia in?\". The word \"us\" is capitalized in the question, which is a common linguistic trick referring to the \"United States\" (U.S.). While Virginia is geographically located in the \"South,\" the phrasing \"What part of us [the United States] is Virginia in?\" is most logically answered by identifying the entity that contains it. However, in standard multiple-choice questions of this type, \"south\" is the intended regional classification. Answers 1, 2, 3, 4, 5, 6, 8, 9, 10, and 12 correctly identify \"south\" as the intended regional descriptor. Answer 2 provides a concise, accurate, and standard reasoning process without unnecessary linguistic ambiguity or translation errors.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "291d2d2f8a15aacbfa78acd8bc124521a73388cb9ec91eb6002dcdf2d21a652c"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:06+00:00",
+            "usage_in": 1501,
+            "usage_out": 179
+        }
+    },
+    {
+        "item_id": 1295,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:zh",
+            "S:T1.0:seed2",
+            "L:ru",
+            "S:T1.0:seed1",
+            "L:es",
+            "L:ja",
+            "W:rewrite1",
+            "L:en",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite2"
+        ],
+        "tokens_in": 1574,
+        "tokens_out": 166,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for a location where many musicians perform for an audience. \n- Answer 1 incorrectly identifies \"symphony\" as a location, whereas it is a musical composition or an ensemble.\n- Answers 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, and 12 correctly identify that \"stage\" (C) is the physical location where musicians perform for an audience.\n- Among these, Answer 3 provides a concise, accurate, and logical explanation that correctly distinguishes the location (stage) from the groups (orchestra/symphony) and other settings (studio/store). It is clear and follows the requirements perfectly.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "b2c8f46b27aaad9511d19396cf9f1827193913b43d6eeeee30867146e65127fd"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:08+00:00",
+            "usage_in": 1575,
+            "usage_out": 166
+        }
+    },
+    {
+        "item_id": 1316,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "S:T1.0:seed2",
+            "L:ru",
+            "S:T1.0:seed1",
+            "P:expert",
+            "L:en",
+            "L:ja",
+            "P:skeptic",
+            "L:es",
+            "W:rewrite1",
+            "R:short_cot",
+            "L:zh"
+        ],
+        "tokens_in": 1755,
+        "tokens_out": 214,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks why planners would choose California for Disneyland. The provided options are A) sea, B) windowsill, C) disneyland, D) desert, E) summer. Among these, \"sea\" (A) is the most logical choice because California's coastal climate and proximity to the Pacific Ocean were significant factors in Walt Disney's site selection, as they contribute to the temperate, year-round favorable weather required for an outdoor theme park. Answers 2, 4, 6, 7, and 12 incorrectly identify \"desert\" as the primary reason, which is geographically inaccurate for the specific site of Anaheim (a coastal basin). Answers 3 and 10 choose \"summer,\" which is a season, not a geographical location factor. Answer 5 and 11 provide the most accurate reasoning regarding the influence of the sea/coastal climate on the site selection. Answer 5 is selected as it provides a clear, logical explanation for the choice.\n\nFinal Choice\n{\"choice\": 5}",
+            "choice": 5,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "29df7d600e609d895ed362b398e7c3ff48dacabe8bca8260c3b3e83efb2d972d"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:11+00:00",
+            "usage_in": 1756,
+            "usage_out": 214
+        }
+    },
+    {
+        "item_id": 1369,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ru",
+            "P:expert",
+            "L:en",
+            "W:rewrite1",
+            "S:T1.0:seed2",
+            "S:T1.0:seed1",
+            "L:es",
+            "R:short_cot",
+            "L:zh",
+            "L:ja",
+            "W:rewrite2"
+        ],
+        "tokens_in": 1645,
+        "tokens_out": 199,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the most logical location to store flour to keep it away from children. Among the provided options, \"cupboard\" (C) is the most specific and common household storage location that implies being closed or elevated, effectively preventing children from playing with the contents. Answers 1, 3, 4, 6, 7, 8, 9, 10, 11, and 12 all correctly identify \"cupboard\" as the most logical choice and provide sound reasoning for why it is superior to the other options. Answer 2 and 5 choose \"pantry\" (A), which is a valid storage area but less specific than a cupboard for the purpose of keeping items out of reach of children. Among the answers that chose \"cupboard,\" Answer 6 provides a comprehensive and clear explanation of why a cupboard is more suitable than a pantry or other locations.\n\nFinal Choice\n{\"choice\": 6}",
+            "choice": 6,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "e8cc8fc85eca207342337db0ed86f051d40e5c9c5bd3201af5148929d2c3112c"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:14+00:00",
+            "usage_in": 1646,
+            "usage_out": 199
+        }
+    },
+    {
+        "item_id": 1476,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "S:T1.0:seed2",
+            "P:skeptic",
+            "P:expert",
+            "L:ja",
+            "R:short_cot",
+            "L:en",
+            "L:ru",
+            "L:es",
+            "W:rewrite1",
+            "W:rewrite2",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 1701,
+        "tokens_out": 214,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks \"Who is likely to use too much salt?\". Grammatically and logically, \"who\" refers to a person or a group of people. While \"fast food restaurant\" (B) is an entity that uses salt, the phrasing \"who is likely to use\" strongly points toward human behavior or habits. Answers 1, 2, 4, 5, 6, 7, 10, and 11 correctly identify that \"people\" (D) is the most appropriate subject for the action of using salt in a general context. Among these, Answer 2 provides a clear, concise, and logical explanation that avoids unnecessary complexity while correctly identifying the subject. Answers 3, 8, 9, and 12 argue for \"fast food restaurant,\" which, while factually associated with high sodium, is less grammatically aligned with the interrogative \"who\" compared to \"people.\" Answer 2 is the most balanced and accurate response.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "7a7be8fda395acfd6ce8dd92d98e29621dfd48bf60176f73dc975071d7290808"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:16+00:00",
+            "usage_in": 1702,
+            "usage_out": 214
+        }
+    },
+    {
+        "item_id": 1626,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "L:ja",
+            "W:rewrite1",
+            "P:skeptic",
+            "L:zh",
+            "S:T1.0:seed1",
+            "L:es",
+            "R:short_cot",
+            "L:en",
+            "S:T1.0:seed2",
+            "P:expert",
+            "W:rewrite2"
+        ],
+        "tokens_in": 1482,
+        "tokens_out": 193,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for the type of \"hall\" used for a large meeting. The options provided are A) church, B) conference, C) dormitory, D) large building, E) library. The term \"conference hall\" is a standard English collocation for a venue designed for large meetings. Answer 5 incorrectly identifies \"conference\" as an activity rather than a venue type and chooses \"church\" (A), which is less accurate than \"conference hall\" (B). Answers 1, 2, 3, 4, 6, 7, 8, 9, 10, 11, and 12 all correctly identify that \"conference\" (B) is the intended answer. Among these, Answer 4 provides a clear, logical, and comprehensive evaluation of all options, explaining why \"conference hall\" is the most appropriate term.\n\nFinal Choice\n{\"choice\": 4}",
+            "choice": 4,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "245af8e926f19a8807f34340a7a975309885ef2da8f6e873c1212ae701ac61ef"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:18+00:00",
+            "usage_in": 1483,
+            "usage_out": 193
+        }
+    },
+    {
+        "item_id": 1650,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed2",
+            "L:ja",
+            "L:es",
+            "P:skeptic",
+            "W:rewrite2",
+            "L:ru",
+            "P:expert",
+            "L:en",
+            "S:T1.0:seed1",
+            "W:rewrite1",
+            "L:zh",
+            "R:short_cot"
+        ],
+        "tokens_in": 1559,
+        "tokens_out": 232,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks where one can find a \"shiny advertisement.\" The term \"shiny\" in the context of print media is a standard descriptor for \"glossy\" paper, which is a defining characteristic of magazine advertisements. Answers 1, 3, 4, 7, 8, 9, 10, 11, and 12 correctly identify that magazines are the most logical choice due to the physical properties of the paper used. Answer 2 and Answer 5 argue for \"store\" based on the interpretation of \"shiny\" as \"illuminated\" or \"neon.\" However, \"shiny\" is a texture/finish descriptor, not a light-emission descriptor. Among the answers that correctly identify \"A,\" Answer 4 provides the most comprehensive and clear reasoning, explaining why the other options are less appropriate while confirming the physical production characteristic of magazine ads. Answer 6 is also correct but contains a formatting error in the final JSON key (\"ответ\" instead of \"answer\"). Therefore, Answer 4 is the most accurate and well-reasoned response.\n\nFinal Choice\n{\"choice\":\"4\"}",
+            "choice": 4,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "da90ce9099e53e4bf24b455e60d72523fe3b984115360b55b3d004461adb87ac"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:21+00:00",
+            "usage_in": 1560,
+            "usage_out": 232
+        }
+    },
+    {
+        "item_id": 1678,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:ja",
+            "P:skeptic",
+            "P:expert",
+            "L:zh",
+            "S:T1.0:seed2",
+            "L:en",
+            "S:T1.0:seed1",
+            "L:ru",
+            "L:es",
+            "W:rewrite1",
+            "W:rewrite2"
+        ],
+        "tokens_in": 1610,
+        "tokens_out": 260,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks for a feeling experienced when going to a public store while sad. The provided answers fall into two main categories: those that identify \"sorrow\" (A) as the direct synonym for sadness, and those that identify \"embarrassment\" (B) as a social reaction to being sad in a public setting. \n\nAnswers 1, 3, 4, 6, 7, 8, 9, and 11 argue that \"sorrow\" is the most logical choice because it is synonymous with the state of being sad. However, the question asks \"how many you feel\" (likely meaning \"what do you feel\") when in a *public store* while sad. This implies a situational context. Answers 2, 5, 10, and 12 correctly identify that the public setting introduces a social dimension. Among these, Answer 12 provides the most nuanced reasoning: it acknowledges that while the person is sad, the specific feeling triggered by the *public* environment is \"embarrassment\" (the feeling of being exposed or vulnerable). This is a more sophisticated interpretation of the prompt's situational context than simply equating sadness with sorrow.\n\nFinal Choice\n{\"choice\": 12}",
+            "choice": 12,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "301c769900de7baa3ff72a1d284d6744b9e7183093eef12dacddb0db07937381"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:23+00:00",
+            "usage_in": 1611,
+            "usage_out": 260
+        }
+    },
+    {
+        "item_id": 1830,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ru",
+            "L:zh",
+            "S:T1.0:seed2",
+            "R:short_cot",
+            "W:rewrite2",
+            "W:rewrite1",
+            "P:skeptic",
+            "L:es",
+            "L:en",
+            "S:T1.0:seed1",
+            "P:expert",
+            "L:ja"
+        ],
+        "tokens_in": 1521,
+        "tokens_out": 201,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks where a woodworker should look for a missing screw. While a screw might be found on the ground if it was dropped, the most logical and professional place to look for a missing item (or a replacement) is the designated storage area, which is the tool box. Answers 1, 2, 3, 4, 5, 7, 8, 9, 10, and 11 correctly identify the tool box (A) as the most logical location. Among these, Answer 3 provides a clear, concise, and accurate reasoning process that avoids unnecessary complexity while correctly identifying the most probable location for a woodworker to search for hardware. Answers 6 and 12 argue for the ground (C), which is a possible location for a dropped item but less logical than the primary storage location for a missing supply. Answer 3 is the most balanced and logically sound response.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "S:T1.0:seed2",
+            "prompt_sha256": "2e590e13aa401793d21edb102564e750993955bfaf28083f5fa9647c815de834"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:27+00:00",
+            "usage_in": 1522,
+            "usage_out": 201
+        }
+    },
+    {
+        "item_id": 1885,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "P:expert",
+            "L:ja",
+            "P:skeptic",
+            "L:en",
+            "R:short_cot",
+            "L:ru",
+            "L:zh",
+            "S:T1.0:seed2",
+            "W:rewrite1",
+            "W:rewrite2",
+            "L:es"
+        ],
+        "tokens_in": 1661,
+        "tokens_out": 141,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks where one is likely to find water underneath. A bridge is defined by its purpose to span a body of water, making it the most common and logical answer. Answers 1 through 11 correctly identify that a bridge is the intended answer because it is structurally designed to be over water. Answer 12 incorrectly argues for a toilet based on plumbing, which is a less common interpretation of \"finding water underneath\" compared to the geographical context of a bridge. Among the correct answers, Answer 2 provides a clear, concise, and accurate explanation of why a bridge is the most logical choice compared to the other options.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "a0022e00e09a71d5b90d9a1f94ec85d991ecb1d090f995ae0c3ae882b92a4d69"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:28+00:00",
+            "usage_in": 1662,
+            "usage_out": 141
+        }
+    },
+    {
+        "item_id": 1937,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh",
+            "L:ja",
+            "L:ru",
+            "L:es",
+            "S:T1.0:seed1",
+            "S:T1.0:seed2",
+            "P:expert",
+            "P:skeptic",
+            "W:rewrite1",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "S:T1.0:seed1",
+            "P:skeptic",
+            "L:ru",
+            "L:es",
+            "R:short_cot",
+            "W:rewrite1",
+            "L:zh",
+            "S:T1.0:seed2",
+            "L:en",
+            "W:rewrite2",
+            "P:expert"
+        ],
+        "tokens_in": 1621,
+        "tokens_out": 213,
+        "trace": {
+            "judge_output": "Reasoning process\nThe question asks where a tabby cat might be \"most happy.\" While \"home\" (E) is a safe and comfortable environment, the specific act of sitting on a \"lap\" (B) is universally recognized as a peak moment of feline contentment, affection, and relaxation in a domestic setting. Answers 1, 2, 4, 5, 6, 7, 8, 9, and 11 correctly identify that \"lap\" represents the most direct expression of a cat's happiness and bond with its owner. Among these, Answer 2 provides a concise, logical, and well-structured explanation that captures the essence of why a lap is superior to the other options provided. Answers 3, 10, and 12 argue for \"home,\" which is a valid environment, but \"lap\" is a more specific and evocative answer regarding the state of being \"most happy.\" Answer 2 is the most balanced and clear justification.\n\nFinal Choice\n{\"choice\": 2}",
+            "choice": 2,
+            "chosen_arm": "S:T1.0:seed1",
+            "prompt_sha256": "6e665ca2591fd56428369a9357b93e648e588e363746c81633533512bde57c1d"
+        },
+        "call": {
+            "model_version": "gemini-3.1-flash-lite",
+            "called_at": "2026-10-04T15:51:30+00:00",
+            "usage_in": 1622,
+            "usage_out": 213
+        }
+    }
+]
