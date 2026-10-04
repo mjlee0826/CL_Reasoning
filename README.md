@@ -41,6 +41,8 @@ Strategy/            Generate / Aggregate / Rewrite + prompt factories
 Model/  Dataset/  File/  Log/
 Test/                舊格式結果檔的評分（TestEM、TestRecoveryBlind、TestTokenNums ...）
 scripts/analysis_0A/ paper_status 0A 系列分析（split-half、EIV、難度分層 ...）
+scripts/analysis_rq1/ RQ1：少量標註預測「聚合或用單一 path」
+scripts/analysis_rq2/ RQ2：交叉實驗（候選固定、只換 Judge 模型）的呼叫與分析
 scripts/legacy_eval/ 舊格式結果的評分與彙整（test_em、test_tokens、test_em_legacy ...）
 scripts/router/      XLM-R router（原論文的 per-query 語言對路由）
 
@@ -53,6 +55,8 @@ result/aggregations/{model}/{dataset}/{agg}__{arm}__{arm}.json  aggregation 紀�
 result/analysis/aggregation_cells.csv                        run_analysis 輸出
 result/analysis/items/    run_analysis 的逐題匯出（paths.csv.gz、aggregations.csv.gz）
 result/analysis/0A/       0A 系列的 CSV
+result/analysis/rq1/      RQ1 的判定標準與輸出
+result/analysis/rq2/      RQ2 的判定標準、交叉 Judge 的原始輸出（judge_outputs/，付費取得、不可重產）與分析輸出
 result/analysis/legacy/   舊 summary 表
 result/archive/           退出新框架的結果（gemini-2.5-flash-lite/{arms,aggregations}/gemini/...）
 result/baseline/ challenge/ self_reflection/ english_*/ tempature*/ voting/ oldresult/   舊格式結果（唯讀）
@@ -156,6 +160,24 @@ python scripts/analysis_rq1/probe_regret.py                       # 最終（四
 - 每次重複（200 次，seed 0）把每個資料集切成 H1 / H2（`makeSplits`，同一資料集的模型與配對共用）；
   決策只用 H1（同格 probe 取 H1 的 k 題；遷移用來源格的整個 H1），評估一律在 H2。程式在 `Analysis/probe.py`，輸入層在 `Analysis/itemMatrix.py`。
 - 輸出：`cells.csv.gz`、`blocks.csv`（每區塊原始數字）、`summary.csv`、`criteria.csv`、`report.md`、`k_curves_{judge,debate}.png`。
+
+**⑦ RQ2：交叉實驗（候選答案固定，只換 Judge 模型）**（需要主網格的 arm 檔與 Judge 檔，以及 ④ 的 `aggregation_cells.csv`）
+
+```bash
+python scripts/analysis_rq2/run_cross_judge.py check     # §4.1 流程核對：四個模型各重跑 mmlu × EN+S1 自己裁決自己
+python scripts/analysis_rq2/run_cross_judge.py pilot     # §4.2 試跑：每個 Judge 100 題，估全量成本
+python scripts/analysis_rq2/run_cross_judge.py full      # 12 種非對角組合（+ §4.1 判定要重跑的對角線）；-j 可只跑某些 Judge
+python scripts/analysis_rq2/cross_judge.py               # 分析 -> result/analysis/rq2/
+```
+
+- 規格與判定標準在 `result/analysis/rq2/rq2_criteria.md`（已確認，不得修改）；「確認」欄空著時兩支程式都拒跑，輸出記錄它的 sha256。
+- 4 個模型 × 4 個 Judge × 4 個資料集 × 3 個配對（EN+ZH、EN+S1、P1+P2）。只裁決兩條 path 都有答案的分歧題；
+  prompt、候選與呈現順序（主網格 Judge 檔逐題記錄的順序）都和主網格相同，只換 Judge 模型（`Strategy/CrossJudge.py`）。
+- 原始輸出在 `judge_outputs/{judge}/{generator}/{dataset}/judge__*.json`，也是續跑的快取；每筆記錄供應商回傳的版本、呼叫時間與 API token。
+- 每一步都要等上一步完成：`full` 需要 `precheck/precheck.json` 與通過的 `pilot.json`。
+  流程核對一致率 < 95% 的模型，`full` 會用交叉流程重跑它的整條對角線。
+- 分析程式先核對：沿用舊檔的對角線必須和 `aggregation_cells.csv` 完全相同；交叉檔必須完整、順序與主網格相同。不符就停。
+- DeepSeek 在尖峰時段（週一至五 UTC 01–04、06–10）價格加倍，程式會提醒；可用 `-j deepseek4.1flash` 另外排在離峰。
 
 ---
 

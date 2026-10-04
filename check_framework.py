@@ -51,6 +51,9 @@ from Analysis.itemExport import pathRows, aggregationRows
 from Analysis.itemMatrix import Block, Cell, PAIR_BY_LABEL
 from Analysis.experimentPlan import PATHS
 from Analysis import probe as rq1
+from Analysis import crossJudge as rq2
+from Analysis import crossJudgeStats as rq2stats
+from Strategy.CrossJudge import CrossJudge
 
 # Hashes of the prompts produced by the legacy OnlyOneLanguage.getPrompt (deleted 2026-10) BEFORE it was refactored onto PromptBuilder
 GOLDEN_QUESTION = 'There is a Problem: \nWhat is 2+2?.\nAnd there are 5 choices\na ) 1 , b ) 2 , c ) 3 , d ) 4 , e ) 5\n'
@@ -824,6 +827,160 @@ def checkProbe():
           and rq1.verdict(no_room).startswith("沒有空間"))
 
 
+class RecordingModel(FakeModel):
+    """FakeModel of a given modelType that keeps every message list it was sent, in call order."""
+    def __init__(self, model_type: str):
+        super().__init__()
+        self.config.modelType = model_type
+        self.sent = []
+
+    def _complete(self, messages, temperature, seed):
+        self.sent.append(json.loads(json.dumps(messages)))
+        return super()._complete(messages, temperature, seed)
+
+
+def checkCrossJudge(tmp: str):
+    """RQ2 CrossJudge on the arm / judge files of check 6–7 (generator gpt4omini; L:en item 5 has no answer)."""
+    dataset = makeDataset(30)
+    arms = [ArmSpec.from_arm_id("L:en"), ArmSpec.from_arm_id("S:T0.7:seed1")]
+    files = [File(os.path.join(tmp, "arms", f"{arm.file_stem}.json")) for arm in arms]
+    reference = os.path.join(tmp, "aggregations", "judge.json")
+
+    def strategy(model, name, onlyItems=None, ref=reference, cls=CrossJudge):
+        extra = {"generator": "gpt4omini", "referencePath": ref, "onlyItems": onlyItems} if cls is CrossJudge else {}
+        return cls(StrategyConfig(strategyType="aggregate", languages=["english", "english"]), model, dataset, NoLog(),
+                   buildAggregator("judge", model, dataset, None), arms, files, [dataset, dataset],
+                   ResultStore(os.path.join(tmp, "cross", f"{name}.json")), **extra)
+
+    main = RecordingModel("gpt4omini")
+    strategy(main, "main_grid", cls=Aggregate).getRes()
+    ids = sorted(files[0].records_map)
+    dis = [i for i in ids if files[0].getRecordById(i)["parsed_answer"] != files[1].getRecordById(i)["parsed_answer"]]
+    judged = [i for i in dis if all(f.getRecordById(i)["parse_ok"] for f in files)]
+
+    judge = RecordingModel("qwen")
+    failed = strategy(judge, "full").getRes()
+    out = File(os.path.join(tmp, "cross", "full.json"))
+    ref = File(reference)
+    meta = out.metadata
+    check(f"16a. CrossJudge judges only the {len(judged)}/{len(dis)} both-answered disagreements, in the recorded orders; "
+          "metadata names generator and judge; each record keeps its call",
+          failed == [] and sorted(out.records_map) == judged and len(judged) < len(dis)
+          and all(out.records_map[i]["presentation_order"] == ref.records_map[i]["presentation_order"] for i in judged)
+          and (meta["generator"], meta["judge"], meta["n_judged_items"], meta["model_versions"]) == ("gpt4omini", "qwen", len(judged), {"fake-model-v1": len(judged)})
+          and meta["Model"]["modelType"] == "qwen"
+          and all(r["call"]["usage_in"] == 1 and r["call"]["called_at"] for r in out.records_map.values()))
+    sent_main, sent_cross = dict(zip(dis, main.sent)), dict(zip(judged, judge.sent))
+    check("16b. the cross judge receives exactly the main-grid judge prompt for every item",
+          len(main.sent) == len(dis) and len(judge.sent) == len(judged) and all(sent_cross[i] == sent_main[i] for i in judged))
+
+    pilot = RecordingModel("qwen")
+    strategy(pilot, "pilot", onlyItems=set(judged[:3])).getRes()
+    after_pilot = len(File(os.path.join(tmp, "cross", "pilot.json")).records_map)
+    strategy(pilot, "pilot").getRes()
+    calls = len(pilot.sent)
+    strategy(pilot, "pilot").getRes()
+    check("16c. a pilot subset is written first; the full run resumes the same file and never repeats a call",
+          after_pilot == 3 and calls == len(judged) and len(pilot.sent) == calls)
+
+    raised = []
+    other = ResultStore(os.path.join(tmp, "cross", "full.json"))
+    other.metadata["generator"] = "qwen"
+    other.path = os.path.join(tmp, "cross", "other_generator.json")
+    other.save()
+    no_order = ResultStore(reference)
+    no_order.records[dis[0]]["presentation_order"] = None
+    no_order.path = os.path.join(tmp, "cross", "reference_without_order.json")
+    no_order.save()
+    for name, ref_path, reason in (("other_generator", reference, "holds generator"),
+                                   ("missing_order", no_order.path, "no recorded presentation order")):
+        try:
+            strategy(RecordingModel("qwen"), name, ref=ref_path).getRes()
+            raised.append(False)
+        except ValueError as e:
+            raised.append(reason in str(e))
+    check("16d. CrossJudge refuses a file of another generator and stops when a recorded order is missing", all(raised))
+
+
+def checkCrossAnalysis(tmp: str):
+    """RQ2 analysis: the cross path (crossArrays + cellRow) reproduces computeRow on the both_answered subset exactly."""
+    armdir, aggdir = os.path.join(tmp, "rq2", "arms"), os.path.join(tmp, "rq2", "aggregations")
+    rng = np.random.default_rng(5)
+    n = 300
+    answers = {arm_id: [str(rng.choice(["a", "a", "b", "c", ""])) for _ in range(n)] for arm_id in ("L:en", "L:zh")}
+    for arm_id, arm_answers in answers.items():
+        writeResultFile(os.path.join(armdir, "m", "mathqa", f"{ArmSpec.from_arm_id(arm_id).file_stem}.json"), {},
+                        [{"item_id": i, "parsed_answer": a, "parse_ok": a != "", "gold": "a", "tokens_out": 10} for i, a in enumerate(arm_answers)])
+    records = []
+    for i, (x, y) in enumerate(zip(answers["L:en"], answers["L:zh"])):
+        choice = int(rng.choice([1, 2, 2, 0])) if x != y else None
+        order = ["L:en", "L:zh"] if i % 2 else ["L:zh", "L:en"]
+        final = x if x == y else ({"L:en": x, "L:zh": y}[order[choice - 1]] if choice else "")
+        records.append({"item_id": i, "final_answer": final, "off_menu": final not in (x, y), "tokens_out": 0 if x == y else 7,
+                        "presentation_order": order if x != y else None,
+                        "trace": {"judge_output": f'{{"choice":"{choice}"}}' if choice else "none", "choice": choice} if x != y else None})
+    path = os.path.join(aggdir, "m", "mathqa", "judge__L_en__L_zh.json")
+    writeResultFile(path, {"candidate_arms": ["L:en", "L:zh"]}, records)
+
+    cell = CellData(armdir, aggdir, "m", "mathqa")
+    pair = rq2.PAIR_BY_LABEL["EN+ZH"]
+    full = alignPair(cell, pair, path)
+    judged = rq2.judgedItems(cell, pair)
+    subset = {i: records[i] for i in judged}
+    expected = rq2.cellRow(full.subset(subsetMask(full, "both_answered")), pair, subset)
+    found = rq2.cellRow(rq2.crossArrays(cell, pair, subset), pair, subset)
+    plain = computeRow(full.subset(subsetMask(full, "both_answered")), pair, "judge")
+    try:
+        rq2.crossArrays(cell, pair, {i: records[i] for i in judged[1:]})
+        raised = False
+    except ValueError:
+        raised = True
+    check(f"16e. cross path == main path on the both_answered subset ({len(judged)} judged items, recovery_H2 "
+          f"{found['recovery_H2']:.4f}); pick_right = (1 + recovery) / 2; a missing record fails loudly",
+          all(rq2._same(found[k], expected[k]) for k in expected) and all(rq2._same(found[k], plain[k]) for k in plain)
+          and abs(found["pick_right"] - (1 + found["recovery"]) / 2) < 1e-12 and found["n_invalid_choice"] > 0 and raised)
+
+
+def checkCrossJudgeStats():
+    """RQ2 statistics on synthetic cells: effects, the three states, outcomes, residuals (0.75δ), McNemar, Δacc."""
+    judge_bonus = {"gpt4omini": 0.1, "qwen": 0.2, "deepseek4.1flash": 0.4, "gemini3.1flashlite": 0.5}
+
+    def cells(diagonal_bump=0.0):
+        rows = []
+        for g in rq2.MODELS:
+            for j in rq2.MODELS:
+                for d in rq2.DATASETS:
+                    for k, p in enumerate(rq2.PAIRS):
+                        rows.append({"generator": g, "judge": j, "dataset": d, "pair": p.label, "used_in_analysis": True,
+                                     "recovery_H2": judge_bonus[j] + (diagonal_bump if g == j else 0) + (k - 1) * 0.01,
+                                     "acc_final": 0.6 if j in rq2.STRONG else 0.5})
+        return pd.DataFrame(rows)
+
+    R = rq2stats.blockMeans(cells())
+    judge_fx, candidate_fx = rq2stats.blockEffects(R, "judge"), rq2stats.blockEffects(R, "candidate")
+    js, cs = rq2stats.summarize(judge_fx["delta"]), rq2stats.summarize(candidate_fx["delta"])
+    res = rq2stats.residuals(rq2stats.blockMeans(cells(0.08)))
+    diag = rq2stats.summarize(rq2stats.diagonalResiduals(res)["residual"])
+    undetermined = {"mean": 0.06, "ci_low": -0.01, "ci_high": 0.13}
+    check(f"16f. judge-only data: judge effect {js['mean']:.3f} exists, candidate effect {cs['mean']:.3f} absent → (a); "
+          f"a diagonal bump of 0.08 gives residual {diag['mean']:.3f} (0.75δ); undetermined → (e)",
+          abs(js["mean"] - 0.3) < 1e-12 and rq2stats.effectState(js) == rq2stats.EXISTS
+          and abs(cs["mean"]) < 1e-12 and rq2stats.effectState(cs) == rq2stats.ABSENT
+          and rq2stats.outcome(rq2stats.EXISTS, rq2stats.ABSENT) == "a"
+          and rq2stats.outcome(rq2stats.effectState(undetermined), rq2stats.EXISTS) == "e"
+          and abs(diag["mean"] - 0.06) < 1e-12 and rq2stats.selfPreference(diag)
+          and rq2stats.residuals(R)["residual"].abs().max() < 1e-12)
+
+    items = pd.DataFrame([{"generator": g, "judge": j, "dataset": "mmlu", "pair": "EN+ZH", "item_id": i,
+                           "correct_a": True, "correct_b": False, "correct": j in rq2.STRONG}
+                          for g in rq2.MODELS for j in rq2.MODELS for i in range(10)])
+    tests = rq2stats.mcnemar(items)
+    impact = rq2stats.practicalImpact(cells())
+    check("16g. McNemar uses the two generators that are neither judge (b = 20, c = 0); Δacc = strong judges − self, in pp",
+          len(tests) == 4 and (tests["b"] == 20).all() and (tests["c"] == 0).all() and (tests["n_R"] == 20).all()
+          and np.allclose(impact["delta_pp"], 10.0))
+
+
 def checkTokenCounts():
     """TestTokenNums keeps the legacy strategies' output-token definitions (FakeModel counts words)."""
     model = FakeModel()
@@ -857,6 +1014,9 @@ def main():
         checkRewrite(tmp)
         checkRefusals(tmp)
         checkAnalysis(tmp)
+        checkCrossJudge(tmp)
+        checkCrossAnalysis(tmp)
+    checkCrossJudgeStats()
 
     print(f"\n{'All checks passed' if not failures else f'{len(failures)} check(s) failed'}")
     sys.exit(1 if failures else 0)

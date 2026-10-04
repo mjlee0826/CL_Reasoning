@@ -111,7 +111,9 @@ def same(a, b) -> bool:
 def crossCheckLegacy(df: pd.DataFrame, challenge_dir: str):
     """0A-1: every legacy cross-lingual debate row must equal the challenge file's RecoveryBlind metadata exactly."""
     files = legacyChallengeFiles(challenge_dir)
-    rows = df[(df["aggregator"] == "debate") & (df["subset"] == "all") & (df["axis"] == "L")]
+    # Only models with legacy challenge files; newer models' language debates were run by run_aggregate.py and have no legacy file
+    legacy_models = {model for model, _, _ in files}
+    rows = df[(df["aggregator"] == "debate") & (df["subset"] == "all") & (df["axis"] == "L") & df["model"].isin(legacy_models)]
     mismatches = []
     for row in rows.itertuples(index=False):
         languages = {arm_id: ArmSpec.from_arm_id(arm_id).language for arm_id in (row.arm_a, row.arm_b)}

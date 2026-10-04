@@ -23,9 +23,7 @@ probe_regret.py — RQ1：少量標註能否預測「該聚合，還是直接用
 from argparse import ArgumentParser
 from datetime import datetime
 from pathlib import Path
-import hashlib
 import os
-import re
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))   # repo root：Analysis 等套件
@@ -36,6 +34,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 from Analysis.itemMatrix import loadBlocks, crossCheckCells
+from Analysis.preregistration import sha256, confirmationLine
 from Analysis.probe import (KS, PROBE_RANDOM, PROBE_DIS, TRANSFER_MODEL, TRANSFER_DATASET, TRANSFER_SOURCE,
                             TRANSFER_SOURCE_SAME_AXIS, TRANSFERS, NO_K, CRITERIA,
                             runProbes, blockTable, summaryTable, criteriaTable, verdict)
@@ -68,22 +67,6 @@ def parseArgs():
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--check-only", action="store_true", help="Only run the §6 cross-check")
     return parser.parse_args()
-
-
-def sha256(path: str) -> str:
-    with open(path, "rb") as f:
-        return hashlib.sha256(f.read()).hexdigest()
-
-
-def confirmationLine(criteria_path: str) -> str | None:
-    """rq1_criteria.md 的「確認：」行；尚未填入確認時間時回傳 None。"""
-    with open(criteria_path, encoding="utf-8") as f:
-        for line in f:
-            match = re.match(r"\s*-\s*確認：(.*)", line)
-            if match:
-                text = match.group(1).strip()
-                return None if "待填" in text or not text else text
-    return None
 
 
 def pp(value: float, signed: bool = True) -> str:

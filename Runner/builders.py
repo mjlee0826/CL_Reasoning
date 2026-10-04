@@ -31,6 +31,22 @@ def buildEnglishDataset(dataset_name: str, nums: int) -> Dataset:
     }))
 
 
+def buildCandidateDatasets(dataset_name: str, arms: list[ArmSpec], nums: int) -> tuple[Dataset, list[Dataset]]:
+    """
+    Aggregation inputs: the original English dataset (what the judge sees) and each arm's own question text.
+    Arms with the same (language, question source) share one dataset object.
+    """
+    dataset = buildEnglishDataset(dataset_name, nums)
+    sources = {("english", "original"): dataset}
+    armDatasets = []
+    for arm in arms:
+        key = (arm.language, arm.questionSource)
+        if key not in sources:
+            sources[key] = buildArmDataset(dataset_name, arm, nums)
+        armDatasets.append(sources[key])
+    return dataset, armDatasets
+
+
 def runStrategy(strategy: Strategy) -> str:
     """Runs one strategy and returns the status that starts the task's summary line."""
     context = RunContext()

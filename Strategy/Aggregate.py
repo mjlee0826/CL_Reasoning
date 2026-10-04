@@ -62,7 +62,7 @@ class Aggregate(Strategy):
             meta = file.metadata
             found = (meta.get("Arm", {}).get("arm_id"), meta.get("Model", {}).get("modelType"),
                      meta.get("Dataset", {}).get("datasetType"), meta.get("Dataset", {}).get("nums"))
-            expected = (arm.arm_id, self.model.config.modelType, dataset_config.datasetType, dataset_config.nums)
+            expected = (arm.arm_id, self.armModelType(), dataset_config.datasetType, dataset_config.nums)
             if found != expected:
                 raise ValueError(f"{file.file_path} does not match the run: {found} != {expected}")
 
@@ -106,6 +106,33 @@ class Aggregate(Strategy):
         return sorted(item_ids)
 
     # ------------------------------------------------------------------
+    # Hooks (CrossJudge overrides them; the defaults are the main-grid behaviour)
+    # ------------------------------------------------------------------
+    def armModelType(self) -> str:
+        """modelType the candidate arm files must belong to: the aggregating model itself."""
+        return self.model.config.modelType
+
+    def presentationOrders(self, dis_ids: list) -> dict:
+        """{item_id: arm_ids in display order} for the disagreement items (only for aggregators that need one)."""
+        return self.balancedOrders([arm.arm_id for arm in self.arms], dis_ids, self.aggregator.config.seed)
+
+    def selectItems(self, dis_ids: list) -> list:
+        """item_ids that get a record: every item (agreement items are no-ops)."""
+        return self.itemIds
+
+    def extraMetadata(self, dis_ids: list) -> dict:
+        """Fields appended to the metadata of a new result file."""
+        return {}
+
+    def onResponse(self, response):
+        """Called with every aggregator LLMResponse."""
+        self.store.addUsage(response)
+
+    def aggregateItem(self, item_id, presentation_order) -> dict:
+        """The record written for one item; raises AggregatorCallError when the aggregator call failed."""
+        return self.aggregator.aggregate(self.buildItem(item_id, presentation_order)).to_dict()
+
+    # ------------------------------------------------------------------
     # Presentation order
     # ------------------------------------------------------------------
     @staticmethod
@@ -145,9 +172,8 @@ class Aggregate(Strategy):
             item_id for item_id in self.itemIds
             if not self.aggregator.isUnanimous([file.getRecordById(item_id).get("parsed_answer", "") for file in self.armFiles])
         ]
-        orders = {}
-        if self.aggregator.needsPresentationOrder():
-            orders = self.balancedOrders([arm.arm_id for arm in self.arms], dis_ids, self.aggregator.config.seed)
+        orders = self.presentationOrders(dis_ids) if self.aggregator.needsPresentationOrder() else {}
+        targets = self.selectItems(dis_ids)
 
         if not self.store.metadata:
             self.store.metadata = {
@@ -163,23 +189,24 @@ class Aggregate(Strategy):
                 "prompt_hash_unverified_arms": self.unverifiedArms,
                 "schema_version": SCHEMA_VERSION,
                 "source": "aggregate",
+                **self.extraMetadata(dis_ids),
             }
-        self.aggregator.onResponse = self.store.addUsage
+        self.aggregator.onResponse = self.onResponse
 
-        todo = [item_id for item_id in self.itemIds if not self.store.has(item_id)]
+        todo = [item_id for item_id in targets if not self.store.has(item_id)]
         self.log.logMessage(f'{self.config.displayName}: {len(todo)} items to aggregate ({len(dis_ids)} disagreements in total)')
 
         failed = []
         for item_id in tqdm(todo, desc=f"Aggregating {self.config.displayName}"):
             try:
-                record = self.aggregator.aggregate(self.buildItem(item_id, orders.get(item_id)))
+                record = self.aggregateItem(item_id, orders.get(item_id))
             except AggregatorCallError as e:
                 failed.append(item_id)
                 self.log.logMessage(f'API error on item {item_id}: {e}')
                 continue
 
-            self.store.add(record.to_dict())
-            self.log.logMessage(f'Item {item_id}: final {record.final_answer} | off_menu {record.off_menu} | rounds {record.n_rounds}')
+            self.store.add(record)
+            self.log.logMessage(f'Item {item_id}: final {record["final_answer"]} | off_menu {record["off_menu"]} | rounds {record["n_rounds"]}')
 
         self.store.save()
         return failed

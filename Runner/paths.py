@@ -13,3 +13,8 @@ def armPath(outdir: str, model_name: str, dataset_name: str, arm: ArmSpec) -> st
 def aggregationPath(outdir: str, model_name: str, dataset_name: str, aggregator_id: str, arms: list[ArmSpec]) -> str:
     stems = "__".join(arm.file_stem for arm in arms)
     return os.path.join(outdir, model_name, dataset_name, f"{aggregator_id}__{stems}.json")
+
+
+def crossJudgePath(outdir: str, judge_name: str, generator_name: str, dataset_name: str, arms: list[ArmSpec]) -> str:
+    """RQ2 cross-judge file: {outdir}/{judge}/{generator}/{dataset}/judge__{arm}__{arm}.json"""
+    return aggregationPath(os.path.join(outdir, judge_name), generator_name, dataset_name, "judge", arms)

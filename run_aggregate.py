@@ -17,7 +17,7 @@ from Log.OneAgentLog import OneAgentLog
 
 from Runner.paths import ACTIVE_DATASETS, armPath, aggregationPath
 from Runner.tasks import defaultWorkers, interleaveByModel, runTasks
-from Runner.builders import buildModel, buildArmDataset, buildEnglishDataset, runStrategy
+from Runner.builders import buildModel, buildCandidateDatasets, runStrategy
 
 
 def parseArgs():
@@ -54,15 +54,8 @@ def runAggregation(model_name: str, dataset_name: str, aggregator_id: str, arms:
 
     model = buildModel(model_name, 0.0)
 
-    # Original English question (judge) + each arm's own question text; arms with the same source share a dataset
-    dataset = buildEnglishDataset(dataset_name, args.nums)
-    sources = {("english", "original"): dataset}
-    armDatasets = []
-    for arm in arms:
-        key = (arm.language, arm.questionSource)
-        if key not in sources:
-            sources[key] = buildArmDataset(dataset_name, arm, args.nums)
-        armDatasets.append(sources[key])
+    # Original English question (judge) + each arm's own question text
+    dataset, armDatasets = buildCandidateDatasets(dataset_name, arms, args.nums)
 
     aggregator = AggregatorFactory().buildAggregator(
         AggregatorType(aggregator_id),
