@@ -118,19 +118,20 @@ def loadAll(args) -> dict:
     for block, sp in blocksWithSplits(args.armdir, args.aggdir):
         raw[block.dataset][block.model] = block
         splits[block.dataset] = sp
-    coded, gold_text = {}, {}
+    coded, gold_text, answered = {}, {}, {}
     for dataset in DATASETS:
         blocks = [raw[dataset][model] for model in MODELS]
         for pb, cb in zip(blocks, encodeBlocks(blocks)):
             coded[(cb.model, cb.dataset)] = cb
             gold_text[(cb.model, cb.dataset)] = list(pb.gold)
+            answered[(cb.model, cb.dataset)] = pb.answered
     menus = checkMenus(coded)
     plan = buildPlan(coded, menus)
     stage0 = checkStage0(plan, os.path.join(args.out_dir, STAGE0_CALLS))
     if not stage0["ok"]:
         raise SystemExit(f"❌ The plan's calls differ from {STAGE0_CALLS}: {stage0['mismatches']}")
     print(f"計畫：{len(plan.versions)} 個（版本 × 順序），共 {stage0['total']:,} 次呼叫，與第零階段的表相同")
-    return {"coded": coded, "gold_text": gold_text, "splits": splits, "menus": menus, "plan": plan}
+    return {"coded": coded, "gold_text": gold_text, "answered": answered, "splits": splits, "menus": menus, "plan": plan}
 
 
 # ------------------------------------------------------------------

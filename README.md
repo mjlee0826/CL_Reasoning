@@ -335,6 +335,8 @@ python scripts/analysis_rq3gj/run_gj_judge.py pilot      # §11 試跑（582 + 6
 python scripts/analysis_rq3gj/run_gj_judge.py predict    # §7、§8.12、§8.13 的預測（離線，只能寫一次） -> rq3gj_predictions*.csv.gz、manifest
 python scripts/analysis_rq3gj/run_gj_judge.py prerun     # §12 正式跑之前的五項檢查（離線）     -> prerun.json
 python scripts/analysis_rq3gj/run_gj_judge.py full -w 16 # 正式跑（約 100 萬次；可中斷後續跑）
+python scripts/analysis_rq3gj/path_improve_gj.py --dump  # 分析之前：印出 §8.8 抽到的 20 題 Qwen 輸出，標記寫進 LABELS
+python scripts/analysis_rq3gj/path_improve_gj.py         # 分析（離線，約 1–2 分鐘）-> rq3gj_*.csv、圖、report.md
 ```
 
 - 每一步都要上一步的結果檔存在、寫於同一份判定標準之下且通過；不過就停，回報後才往下。呼叫可續跑，已寫入的題目不重複計費。
@@ -342,7 +344,7 @@ python scripts/analysis_rq3gj/run_gj_judge.py full -w 16 # 正式跑（約 100 �
   被換進來的那條候選讀供體（deepseek4.1flash、gemini3.1flashlite）的 arm 檔，供體本身不被呼叫。
 - 計畫（四組 39 份菜單、每份 7 個版本、K = 2 的 3 個配對 × 5 個版本 × 2 種順序、要呼叫的題目、候選順序）在 `Analysis/judgeSubstitution.py`，
   每一步開始時重算並和第零階段的 `rq3gj_stage0_calls.csv` 核對；預測在 `Analysis/judgeSubstitutionPredict.py`；
-  Judge 呼叫用 `Strategy/SubstitutionJudge.py`。
+  Judge 呼叫用 `Strategy/SubstitutionJudge.py`；分析的逐區塊計算在 `Analysis/judgeSubstitutionStats.py`（只讀存好的預測檔，sha256 不符就停）。
 
 ---
 
