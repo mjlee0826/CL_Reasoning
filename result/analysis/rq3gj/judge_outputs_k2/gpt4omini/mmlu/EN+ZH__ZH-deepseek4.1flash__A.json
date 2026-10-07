@@ -1,0 +1,1289 @@
+[
+    {
+        "Model": {
+            "modelType": "gpt4omini",
+            "temperature": 0.0,
+            "modelName": "gpt-4o-mini-2024-07-18",
+            "displayName": "GPT4o mini"
+        },
+        "Dataset": {
+            "datasetType": "mmlu",
+            "displayName": "MMLU",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs L:zh)",
+            "languages": [
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 2,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-v1",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/mmlu/L_en.json",
+            "result/arms/deepseek4.1flash/mmlu/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 341,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "menu_judge",
+        "menu": "EN+ZH",
+        "item_filter": "menu_all_answered_disagreement",
+        "n_judged_items": 337,
+        "order_scheme": "rq3gj_planned",
+        "experiment": "rq3gj",
+        "version": "ZH-deepseek4.1flash",
+        "donor": "deepseek4.1flash",
+        "donor_slot": 1,
+        "donor_arm": "L:zh",
+        "order_label": "A",
+        "candidate_models": [
+            "gpt4omini",
+            "deepseek4.1flash"
+        ],
+        "n_planned_items": 331,
+        "api_usage": {
+            "calls": 39,
+            "calls_without_usage": 0,
+            "prompt_tokens": 29336,
+            "completion_tokens": 5362,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gpt-4o-mini-2024-07-18": 39
+        },
+        "calls_utc": {
+            "first": "2026-10-07T17:55:18+00:00",
+            "last": "2026-10-07T17:56:37+00:00"
+        }
+    },
+    {
+        "item_id": 3,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 682,
+        "tokens_out": 194,
+        "trace": {
+            "judge_output": "Reasoning process\nIn Answer 1, the reasoning for Statement 1 is correct; a factor group of a non-Abelian group can indeed be Abelian, making Statement 1 false. The reasoning for Statement 2 is also correct; if K is a normal subgroup of H and H is a normal subgroup of G, then K is indeed a normal subgroup of G, making Statement 2 true. Therefore, Answer 1 is incorrect as it states that Statement 2 is false. In Answer 2, the reasoning for Statement 1 is also correct, but the reasoning for Statement 2 is incorrect; K is indeed a normal subgroup of G if K is normal in H and H is normal in G. Thus, both statements in Answer 2 are incorrectly labeled as false. Therefore, Answer 1 is the more accurate choice, as it correctly identifies Statement 1 as false and Statement 2 as true.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "25860fdc3f13717b5229a66dc422446cf91b214fefa857920102f95fb5154b1b"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:18+00:00",
+            "usage_in": 689,
+            "usage_out": 194
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 5,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 768,
+        "tokens_out": 194,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly identifies that Statement 1 is true because if a group has an element of order 15, it generates a cyclic subgroup of order 15, which contains 8 elements of order 15 (since φ(15) = 8). However, the reasoning for Statement 2 in the first answer is flawed; it incorrectly states that having more than 8 elements of order 15 does not guarantee at least 16 elements. In fact, if there are more than 8 elements, they must be a multiple of 8, leading to at least 16 elements. The second answer correctly concludes that both statements are true, as it accurately explains that the total number of elements of order 15 must be a multiple of 8, thus confirming that if there are more than 8, there must be at least 16. Therefore, the second answer is the more accurate one.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "dfb7bca0bc4fa2fc3550f586d8d27c18ae01c2ab9c8ef3c5e53cbbdd3d9c345c"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:20+00:00",
+            "usage_in": 775,
+            "usage_out": 194
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 15,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 552,
+        "tokens_out": 152,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly identifies that Statement 1 is true because the real numbers R serve as a splitting field for polynomials with real coefficients over the rationals Q. However, it incorrectly states that Statement 2 is false, which is also correct, but it does not provide a clear justification for why it is true. The second answer correctly identifies both statements as false, but it incorrectly claims that Statement 1 is false. In fact, Statement 1 is true. Therefore, the first answer is more accurate in its assessment of Statement 1, despite its misclassification of Statement 2. The second answer is entirely incorrect regarding Statement 1. Thus, the first answer is the most correct.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "000329e53bd682b478e375f7c0c11ed5a7d23fb0a233e9036cabfab99eb86fb1"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:23+00:00",
+            "usage_in": 559,
+            "usage_out": 152
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 16,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 572,
+        "tokens_out": 99,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly identifies that the inverse of -i in the multiplicative group {1, -1, i, -i} is -i itself, as multiplying -i by -i yields the identity element 1. The second answer incorrectly states that the inverse of -i is i, which is not true since -i * i = -1, not 1. Therefore, the first answer is the correct one.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "9a2ae4c49edee038157c2dbb5e50aa3beb4bd4df8bc5725602ab82bdf3bd46bc"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:24+00:00",
+            "usage_in": 579,
+            "usage_out": 99
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 28,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 635,
+        "tokens_out": 160,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly identifies that Statement 1 is true because a homomorphism can have a larger image if the kernel is non-trivial, allowing for a mapping from a group of order 6 to a group of order 12. However, the second answer correctly states that Statement 1 is false, as the image size must divide the order of the original group, which cannot be 12 for a group of order 6. Therefore, the first answer is incorrect in its assessment of Statement 1. The second answer correctly identifies that Statement 2 is true, as a homomorphism from a group of 6 elements to a group of 12 elements can exist. Thus, the second answer is the more accurate one.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "b9b0e1cc56328f8b72d7b9f2eedf677826c8ba344b82d5919d2f6d2dd778633b"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:27+00:00",
+            "usage_in": 642,
+            "usage_out": 160
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 30,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 548,
+        "tokens_out": 98,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly identifies that Statement 1 is false because a subgroup does not guarantee that left and right cosets are equal unless the subgroup is normal. It also correctly states that Statement 2 is true, as normal subgroups do ensure that the elements commute with respect to the subgroup. The second answer incorrectly claims that Statement 2 is false, which is not accurate. Therefore, the first answer is the more correct one.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "c30788a36866403283f43235c64914444d4020c66419b1195b27949c63a1f102"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:28+00:00",
+            "usage_in": 555,
+            "usage_out": 98
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 101,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 658,
+        "tokens_out": 117,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that a \"dished face\" profile is associated with acromegaly, which can lead to a protruding mandible. However, it overlooks the fact that a dished face is more commonly linked to maxillary deficiencies. Answer 2 accurately connects the dished face profile to a recessive maxilla due to cranial base elongation failure, which aligns with the typical characteristics of a dished face. Therefore, Answer 2 provides a more relevant explanation for the dished face profile.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "0496fa4f9e1f0c37a619dbfa605842fa20333ba5995a9a45f38cee49c096f5a7"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:30+00:00",
+            "usage_in": 665,
+            "usage_out": 117
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 113,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 662,
+        "tokens_out": 125,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that the cricothyroid muscle is paralyzed due to recurrent laryngeal nerve damage, which leads to the vocal fold being tensed and positioned between adduction and abduction. It also accurately states that the interarytenoid muscles are weak, which aligns with the expected physiological response to this type of nerve injury. Answer 2 incorrectly states that the cricothyroid muscle is still functional, which contradicts the typical presentation of recurrent laryngeal nerve damage. Therefore, Answer 1 is the more accurate response.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "0396cfc545c22e1114da258d24b5c8d1aafb07236c0053a2ee95083310cbadab"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:34+00:00",
+            "usage_in": 669,
+            "usage_out": 125
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 122,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 575,
+        "tokens_out": 135,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly identifies that the left side of the tip of the tongue primarily drains to the left submental lymph node. However, it overlooks the fact that lymphatic drainage from the tip of the tongue can also involve both submandibular lymph nodes, as lymphatic drainage can cross the midline. The second answer correctly states that the lymphatic drainage from the left side of the tip of the tongue can indeed flow to both the left and right submandibular lymph nodes, which is a more comprehensive understanding of the lymphatic drainage pattern. Therefore, the second answer is more accurate in this context.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "edaa7768a1e637af098addde05c434a23857c30c5ed00a92e9ef6e579a8cc81a"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:35+00:00",
+            "usage_in": 582,
+            "usage_out": 135
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 131,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 559,
+        "tokens_out": 160,
+        "trace": {
+            "judge_output": "Reasoning process\nIn Answer 1, the explanation correctly identifies that the epiglottis moves downward to cover the laryngeal entrance during swallowing, which is the primary mechanism preventing food from entering the airway. However, it incorrectly states that the upward movement of the epiglottis is the primary mechanism, which is misleading. In Answer 2, it correctly describes the downward movement of the epiglottis as the key action that prevents food from entering the larynx, but it incorrectly states that the constriction of the laryngeal entrance is not the primary mechanism. The most accurate answer is Answer 1, as it correctly identifies the role of the epiglottis, despite the slight misstatement about its movement direction.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "7f02a53202ce3b83412874a66a2bf3494d474b80096b5ccfe6259c8c3860320f"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:37+00:00",
+            "usage_in": 566,
+            "usage_out": 160
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 134,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 584,
+        "tokens_out": 123,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that a complete bilateral cleft palate involves the failure of fusion of the palatine and frontonasal processes, which are crucial for forming the hard palate and nasal region. However, it does not mention the secondary nasal processes, which are also involved in the formation of the palate. Answer 2 correctly includes the palatine, frontonasal, and secondary nasal processes, indicating a more comprehensive understanding of the structures involved in a complete bilateral cleft palate. Therefore, Answer 2 is more accurate as it encompasses all relevant processes.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "0c4976251f082660b38363719b9d14e3e014adc22f85d207baeac0aa9d539f35"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:40+00:00",
+            "usage_in": 591,
+            "usage_out": 123
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 239,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 850,
+        "tokens_out": 145,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that Titan is the only outer solar system moon with a thick atmosphere and evidence of recent geologic activity, making both statements A and B true. However, it inaccurately states that statement C is partially true, as Titan's atmosphere is primarily nitrogen, not hydrocarbons. Answer 2 correctly critiques the claims made in A, B, and C, pointing out that Titan is not the only moon with a thick atmosphere or recent geologic activity, as Enceladus also exhibits these features. It accurately states that Titan's atmosphere is mostly nitrogen, not hydrocarbons. Therefore, Answer 2 provides a more accurate assessment of the statements.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "b46f3110cb6a85b2926ab832faf515ffdbaabe2dd3b0b863abf7d249373e7c76"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:42+00:00",
+            "usage_in": 857,
+            "usage_out": 145
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 268,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 665,
+        "tokens_out": 132,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that all jovian planets have rings, and it accurately describes the nature of the rings and their proximity to the planets. Therefore, it concludes that D is the correct choice. Answer 2, however, incorrectly states that not all jovian planets have rings, which is misleading since all four known jovian planets do possess rings. While it correctly identifies B and C as true, the assertion that A is incorrect undermines the overall validity of the answer. Since Answer 1 provides a comprehensive and accurate overview of the characteristics of planetary rings, it is the more correct choice.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "7c6bd6a88b7d1dd62234221fa30aa35d4404e3ff29231dbbbf7edc428692f3d9"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:45+00:00",
+            "usage_in": 672,
+            "usage_out": 132
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 387,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 684,
+        "tokens_out": 134,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that cryptocurrencies are becoming mainstream and that they are often considered secure, which aligns with the current understanding of the technology. However, it inaccurately describes them as \"Cheap,\" which does not reflect the reality that many cryptocurrencies can be expensive to acquire and trade. Answer 2, while it correctly identifies the mainstream nature of cryptocurrencies and their ethical implications, incorrectly states that they are \"Expensive\" and \"Secure,\" which is more aligned with traditional currencies rather than the evolving nature of cryptocurrencies. Therefore, Answer 1 is more accurate in its overall context despite the mischaracterization of cost.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "a74e52eac6445df059f9e9f6456b24a6e9d0f7f6e579de3edb5b33eb2087c52c"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:47+00:00",
+            "usage_in": 691,
+            "usage_out": 134
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 415,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 544,
+        "tokens_out": 104,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly identifies China as the missing BRIC country. However, it incorrectly states that the BRIC countries have historically leaned towards a market-based approach, which is not accurate; they have traditionally favored a relationship-based approach. The second answer also correctly identifies China as the missing country and accurately describes the traditional relationship-based approach of BRIC countries, along with the recent trend towards market-based mechanisms. Therefore, the second answer is more accurate in its reasoning.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "10e44c5e6769846f976caa294c1c6d2fb9a57fcad4c180a7443055e50f4d982e"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:49+00:00",
+            "usage_in": 551,
+            "usage_out": 104
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 493,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 720,
+        "tokens_out": 135,
+        "trace": {
+            "judge_output": "Reasoning process\nIn Answer 1, the reasoning for option A is incorrect because it states that diplopia can never occur if one eye is covered, which is too absolute. However, it correctly identifies that a sixth nerve palsy causes a divergent squint. In Answer 2, the reasoning for option A acknowledges that while covering one eye typically eliminates diplopia, there are exceptions, making it a more nuanced and accurate statement. The other options in both answers contain inaccuracies regarding the nature of diplopia and the effects of cranial nerve palsies. Therefore, Answer 2 provides a more accurate and comprehensive understanding of the topic.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "9142683aee55e067b6240cf1ccb771b52b437458e10fd9f9d21411d296b936ae"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:51+00:00",
+            "usage_in": 727,
+            "usage_out": 135
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 519,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 723,
+        "tokens_out": 164,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that Graves Disease can cause ophthalmoplegia due to the involvement of extraocular muscles, making option A true. However, it incorrectly states that Graves Disease typically causes a diffuse goiter rather than a multi-nodular goiter, which is a valid point. It also correctly notes that Graves Disease is more common in females than males, which makes option C false. The mention of 'Derbyshire Neck' in relation to Graves Disease is misleading, as it is more associated with iodine deficiency. Answer 2, on the other hand, correctly identifies that Graves Disease is more common in females and provides a historical context for 'Derbyshire Neck', making option D a valid statement. Therefore, Answer 2 is more accurate overall.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "b232a87a60e184920bb6b792618527a6774d87b304116a303adb8537e62962c9"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:53+00:00",
+            "usage_in": 730,
+            "usage_out": 164
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 752,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 644,
+        "tokens_out": 136,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies the importance of maintaining a balance in the population at the midpoint of the logistic curve, which allows for sustainable control without causing population crashes. It emphasizes the dynamics of population growth and resource availability. In contrast, Answer 2 suggests reducing the carrying capacity (K) as the most effective means of control, which may not be practical or feasible in many environments. While lowering K could theoretically reduce the population size, it does not address the immediate dynamics of population control as effectively as maintaining the population at the midpoint. Therefore, Answer 1 presents a more balanced and sustainable approach to controlling the mosquito population.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "1f48b06fc062df3132d841c7b7b70614d1f4925cb8297dfcadc6ecb18d8e0914"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:55+00:00",
+            "usage_in": 651,
+            "usage_out": 136
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 900,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 520,
+        "tokens_out": 89,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly states that the equation ΔH = ΔU + PΔV is a general thermodynamic relation that applies to any process, not limited to constant pressure, temperature, or volume. The second answer incorrectly claims that this equation is only valid for constant pressure processes, which is not true as it can apply to various conditions. Therefore, the first answer is more accurate.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "07eba46f94213b2be29d6e5f8e8e2631470ba49fb275ae56bf83fe883a7a651b"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:57+00:00",
+            "usage_in": 527,
+            "usage_out": 89
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 907,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1617,
+        "tokens_out": 166,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers provide a method to calculate the time required for the polarization to reach twice the thermal equilibrium polarization. Answer 1 concludes that the time is approximately 72.0 seconds, while Answer 2 calculates it to be around 56.6 seconds. The key difference lies in the calculation of the thermal equilibrium polarization \\( p_{eq} \\). Answer 1 does not explicitly calculate \\( p_{eq} \\) but assumes it is small, while Answer 2 provides a detailed calculation of \\( p_{eq} \\) based on the given parameters. The final result from Answer 2 aligns more closely with the expected behavior of the system, as it considers the actual values and their implications. Therefore, Answer 2 is more accurate in its reasoning and conclusion.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "9d3d1a5edacc1985068a93c407ff1246653d4328b4ef0e5f78f9f9f34e83950b"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:55:59+00:00",
+            "usage_in": 1624,
+            "usage_out": 166
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 909,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 808,
+        "tokens_out": 186,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers discuss the EPR spectrum of the t-Bu radical and the corresponding line intensity ratios. Answer 1 correctly identifies that the t-Bu radical has 9 equivalent protons, leading to the ratio of line intensities being 1:9:36:84:126:126:84:36:9:1, which is consistent with the binomial distribution for 9 equivalent protons. Answer 2, while also arriving at a similar conclusion, incorrectly states that the intensity ratio is close to 1:9:36:84:126:126:84:36:9:1 without clearly justifying the equivalence of the protons. The reasoning in Answer 1 is more precise and aligns with the established understanding of the EPR spectrum for the t-Bu radical. Therefore, Answer 1 is the more accurate choice.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "c7674b433b61f3cc358749caa0c4652a20a5ce62470f4fb708d0f68e9b931549"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:02+00:00",
+            "usage_in": 815,
+            "usage_out": 186
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 914,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 555,
+        "tokens_out": 108,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly states that protons and neutrons possess intrinsic spin angular momentum, but it incorrectly claims that they do not have orbital angular momentum at all. In reality, protons and neutrons can have orbital angular momentum when considering their motion within the nucleus. Answer 2 accurately describes that both protons and neutrons can possess both spin and orbital angular momentum due to their composite nature and their movement within the nucleus. Therefore, Answer 2 is the more accurate response.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "f3d3f2555c30963394d7482d098998058c9e9b1b8819104314eacc9abc75f71e"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:03+00:00",
+            "usage_in": 562,
+            "usage_out": 108
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 921,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 990,
+        "tokens_out": 178,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers attempt to calculate the NMR frequency using the Larmor frequency formula, but they arrive at different conclusions. Answer 1 calculates the frequencies for each nuclide and finds that none match 115.5 MHz, concluding that 19F is the closest based on its gyromagnetic ratio. However, the calculations for 19F yield a frequency of approximately 79.8 MHz, which is significantly lower than 115.5 MHz. Answer 2 correctly identifies the relationship between the frequency and the gyromagnetic ratio, calculating the expected gyromagnetic ratio per Tesla for 115.5 MHz and comparing it to known values. It finds that 17O has a gyromagnetic ratio closest to the calculated value, making it the more accurate choice. Therefore, Answer 2 is the more correct response.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "ad3e397f088779c6d28cf0690395e75008c452a64f99acc09fab02df46bd131a"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:06+00:00",
+            "usage_in": 997,
+            "usage_out": 178
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 922,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 701,
+        "tokens_out": 112,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly identifies that statement I is true according to Raoult's law, and statement III is generally true for ideal solutions. However, it correctly states that statement II is not necessarily true due to potential volume changes upon mixing. The second answer incorrectly claims that statement II must be true, which contradicts the understanding of volume changes in mixtures. Therefore, the first answer is more accurate as it correctly identifies the true statements about the binary liquid mixture that obeys Raoult's law.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "9f9ce58fa3c18373a6bfa8fcaaabc5b1705b1d302d38c573ba2bc0139e5b0ec4"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:08+00:00",
+            "usage_in": 708,
+            "usage_out": 112
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 930,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1346,
+        "tokens_out": 207,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 provides a detailed calculation of the g value using the average magnetic field and the appropriate constants. The calculated g value of approximately 2.11 is close to option D (g = 2.005), which is a reasonable choice based on the calculations. However, it does not consider the possibility of using individual resonant field positions for a more accurate estimate. \n\nAnswer 2, on the other hand, uses a different approach by applying a formula that relates the frequency and magnetic field directly to the g value. It arrives at a g value of approximately 2.105 and suggests that the closest reasonable option is A (g = 2.002), which aligns with the expected g value for a sodium atom. This reasoning is more aligned with the physical properties of the sodium atom and its expected g value.\n\nConsidering the accuracy of the calculations and the relevance of the results to the properties of the sodium atom, Answer 2 provides a more appropriate conclusion.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "7598b8913fbeba6391a8332ee0dcf10cfb0ad60d5f2cea09fe6edb2eccf7dfcd"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:11+00:00",
+            "usage_in": 1353,
+            "usage_out": 207
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 1020,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 878,
+        "tokens_out": 122,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly identifies that option B does not effectively deal with deadlock, as it can lead to inefficiencies and does not prevent deadlock. However, it overlooks that option A, while it may change the order of resource allocation, does not eliminate the possibility of deadlock since it does not break the necessary conditions for deadlock. The second answer correctly identifies that option A does not effectively deal with deadlock, as it does not break the circular wait condition. Therefore, the second answer is more accurate in its reasoning regarding the options presented.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "6ba9e85456642816acbdb0110fa8ffeb4fb02ed9df3d376999d96c59918e14a6"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:13+00:00",
+            "usage_in": 885,
+            "usage_out": 122
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 1025,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 592,
+        "tokens_out": 102,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers identify that bitmap graphics have limitations regarding the display of straight lines due to pixelation. However, Answer 1 correctly emphasizes that bitmap graphics can represent realistic lighting and shading, which is a property of bitmap graphics when using techniques like dithering. Answer 2 incorrectly states that realistic lighting and shading is not a property of bitmap graphics, which is misleading. Therefore, Answer 1 is more accurate in its reasoning regarding the properties of bitmap graphics.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "af9f8a4c40a3a127173f4bbbc218a4a89e34a8cfb1ac8c5ba956a1f65a2c3bc1"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:15+00:00",
+            "usage_in": 599,
+            "usage_out": 102
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 1120,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 610,
+        "tokens_out": 165,
+        "trace": {
+            "judge_output": "Reasoning process\nIn Answer 1, the reasoning for Statement 1 is correct; the limit of the product of two converging sequences is indeed the product of their limits. However, the reasoning for Statement 2 is incorrect. The statement claims that there exists a bounded sequence of real numbers with no convergent subsequence, which contradicts the Bolzano-Weierstrass theorem that states every bounded sequence in \\(\\mathbb{R}\\) has a convergent subsequence. Therefore, Statement 2 is false. In Answer 2, the reasoning for Statement 1 is also correct, but the reasoning for Statement 2 correctly identifies that the statement is false due to the Bolzano-Weierstrass theorem. Thus, Answer 2 is the more accurate choice.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "9bb7c20fa94a0d4c059bed28ec66924a875200be53b5e41df93c9fab6efbf444"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:17+00:00",
+            "usage_in": 617,
+            "usage_out": 165
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 1121,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1378,
+        "tokens_out": 144,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer correctly identifies that the operation is not associative and that there is no identity element, leading to the conclusion that it cannot be a group. However, it incorrectly states that all three statements (I, II, and III) are true, which is not accurate because it fails to check the existence of inverses properly. The second answer correctly identifies that the operation is associative and finds that the identity element is 0, which is valid. However, it correctly concludes that not all elements have inverses, making statement III true. Therefore, the second answer is more accurate in its analysis, particularly regarding the identity element and the existence of inverses.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "241f91f9d0d4d3e49f07257b97944c81b874f1f934902793d601441e36f6ce35"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:19+00:00",
+            "usage_in": 1385,
+            "usage_out": 144
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 1122,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1632,
+        "tokens_out": 144,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers provide a method to solve the problem, but they arrive at different conclusions regarding the values of \\(k\\) and \\(j\\). Answer 1 correctly identifies that both Kate and John take 10 days to complete a test, leading to \\(k = j = 10\\). It then calculates the combined work rate when they work simultaneously, yielding a time of 5 days. Answer 2, however, incorrectly derives \\(k = 9\\) and \\(j = 12\\), leading to a different combined work rate and an incorrect time of \\(36/7\\) days. Therefore, Answer 1 is the correct one.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "6a285bb8dbff0e4853a4173413b69c886995f4a5b02a8db77d8b42e6ddcfc99b"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:21+00:00",
+            "usage_in": 1639,
+            "usage_out": 144
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 1208,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 750,
+        "tokens_out": 132,
+        "trace": {
+            "judge_output": "Reasoning process\nIn Answer 1, the reasoning correctly identifies the first action as a violation of a taboo (incest), the second action as a violation of folkways (not tipping), the third action as a violation of the law (sexual assault), and the fourth action as a violation of mores (disrespecting a church). This sequence aligns with societal norms and is logically sound. In contrast, Answer 2 incorrectly states that the answer is A without providing a coherent reasoning process that matches the actions described in the question. Therefore, Answer 1 is the more accurate and well-reasoned response.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "78bbd7204adf60747a72d2a9ea9d1a85a0b113fd96f511b224d572ddc69467f2"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:23+00:00",
+            "usage_in": 757,
+            "usage_out": 132
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 1210,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 625,
+        "tokens_out": 113,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 suggests that decreased dopamine in the synaptic cleft leads to agitation and aggressive behavior, which is not consistent with the typical understanding of dopamine's role in mood regulation. In fact, increased dopamine activity is often associated with such symptoms. Answer 2 correctly identifies that the patient's symptoms may be related to an overactive dopamine system, which aligns with conditions like mania or withdrawal. Therefore, the reasoning in Answer 2 is more accurate in describing the likely state of the dopamine system in this scenario.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "a7767b8c3ca5475910c578ecb0cf709300ec5cbcc45506b3815b91a84495db0d"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:25+00:00",
+            "usage_in": 632,
+            "usage_out": 113
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 1375,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 1020,
+        "tokens_out": 122,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first answer incorrectly concludes that the final voltage across the first capacitor is \\(V_0/3\\) by misapplying the charge conservation principle. The correct approach shows that the charge on the first capacitor is conserved and should equal the charge on the equivalent capacitance of the two capacitors in series. The second answer correctly derives the final voltage as \\(2V_0/3\\) by properly applying charge conservation and recognizing the relationship between the voltages across the capacitors in series. Therefore, the second answer is the correct one.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "a6947b4a20e841e498d1ba305081138e1f8f3477e643948ccaf8e5b922ba9d75"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:27+00:00",
+            "usage_in": 1027,
+            "usage_out": 122
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 1475,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 578,
+        "tokens_out": 139,
+        "trace": {
+            "judge_output": "Reasoning process\nIn Answer 1, the reasoning correctly identifies \"Troya\" as a remote access Trojan, which aligns with the definition of a remote Trojan. However, it does not consider the possibility that \"Game-Troj\" could also fit the description of a remote Trojan, as it suggests functionality related to remote control or theft. In Answer 2, the reasoning for \"Game-Troj\" being a remote Trojan is more aligned with the typical characteristics of remote Trojans, as it explicitly mentions remote control capabilities. Therefore, while both answers have valid points, Answer 2 provides a more comprehensive analysis that aligns better with the question's requirements.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "e6a8090a572957ed34e0a4190d67823ddc70d8747a53cb2d56b338bb049b4201"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:29+00:00",
+            "usage_in": 585,
+            "usage_out": 139
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 1574,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 538,
+        "tokens_out": 114,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that in four-dimensional geometry, the angles of a triangle do not add up to 180°, which aligns with the properties of higher-dimensional geometries. Answer 2, however, suggests that the sum of the angles can sometimes equal 180°, which is misleading as it implies that there are conditions under which this could happen in four-dimensional geometry. Therefore, Answer 1 is more accurate in stating that the angles of a triangle in four-dimensional geometry never add up to 180°.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "ae8ee25811d9211794fbafc7867f71847528468499afcdc6221f999f7b56239a"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:30+00:00",
+            "usage_in": 545,
+            "usage_out": 114
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 1832,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 496,
+        "tokens_out": 95,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies the order condition as a necessary but not sufficient condition for identification, which aligns with standard interpretations in econometrics and statistics. Answer 2, however, states that it cannot determine the nature of the condition due to a lack of specific information, which is not a valid reasoning in this context since the order condition is a well-defined concept. Therefore, Answer 1 is the more accurate response.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "c09b7316102723b5a01e49542275b6a97594e01b085a0abb9a6a1288b9ae24e5"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:32+00:00",
+            "usage_in": 503,
+            "usage_out": 95
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 1923,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 742,
+        "tokens_out": 151,
+        "trace": {
+            "judge_output": "Reasoning process\nBoth answers analyze the firing angle range for a single-phase controlled rectifier circuit. Answer 1 correctly identifies that the output voltage must be greater than the counter emf (200 V) and calculates the firing angle range as 60° to 120°. However, Answer 2 also provides a valid calculation, stating that the sine of the firing angle must be greater than 0.5, leading to a range of 30° to 150°. The critical point is that the firing angle must be limited to ensure the output voltage is above the counter emf, which is correctly captured in Answer 1. Therefore, Answer 1 is more accurate in determining the operational range of the firing angle.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "3e75a00a0d106ad0dbe7efa8e3e9675a82c8a264a1dbd849c9ff45efbbce5b41"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:34+00:00",
+            "usage_in": 749,
+            "usage_out": 151
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 1929,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 603,
+        "tokens_out": 159,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that LC oscillators are typically used to generate frequencies in the range of kilohertz to gigahertz, and it suggests that Option B (100 KHz to 500 MHz) is the most appropriate choice. However, it overlooks the fact that Option A (1 MHz to 500 MHz) is also a valid range for LC oscillators and is more specific to higher frequencies. Answer 2 correctly identifies that Option A (1 MHz to 500 MHz) is the most practical range for typical LC oscillator applications, as it focuses on the higher frequency range where LC oscillators are most commonly used. Therefore, Answer 2 is more accurate in its reasoning regarding the typical frequency range of LC oscillators.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "21ddb6ddb0a6651332a8f97aea4f0fc1c217b41e40334316c26cec61e73daef9"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:36+00:00",
+            "usage_in": 610,
+            "usage_out": 159
+        },
+        "donor_position": 2,
+        "pilot": true
+    },
+    {
+        "item_id": 1937,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "L:zh"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "L:zh"
+        ],
+        "tokens_in": 459,
+        "tokens_out": 107,
+        "trace": {
+            "judge_output": "Reasoning process\nIn Answer 1, the explanation correctly identifies GAL as \"Generic Array Logic,\" which aligns with the standard terminology used in digital logic design. Therefore, the choice D is accurate. In Answer 2, while it also mentions \"Generic Array Logic,\" it incorrectly states that option B (\"通用陣列邏輯\") is the correct translation, which is misleading since B does not correspond to the abbreviation GAL. Thus, Answer 1 is the more accurate response.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "9e5adab250f79776f3a07044ca9331f8febfb13d56ed286a2c4d3eb92473597f"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-07T17:56:37+00:00",
+            "usage_in": 466,
+            "usage_out": 107
+        },
+        "donor_position": 2,
+        "pilot": true
+    }
+]
