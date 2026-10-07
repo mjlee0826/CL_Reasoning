@@ -37,3 +37,15 @@ class MenuJudgeAggregator(JudgeAggregator):
         resolution = super().resolve(item)
         resolution.trace["prompt_sha256"] = self.lastPromptSha256
         return resolution
+
+
+class PairChoiceJudgeAggregator(MenuJudgeAggregator):
+    """
+    RQ3-GJ §8.14 (result/analysis/rq3gj/rq3gj_criteria.md): the K = 2 Judge under the main grid's prompt_version
+    choice-v1. The text comes from the same PromptJudgeChoiceFactory, so at K = 2 it is the main-grid prompt word for
+    word; the prompt sha256 is recorded as in MenuJudgeAggregator.
+    """
+    PROMPT_VERSION = JudgeAggregator.PROMPT_VERSION
+
+    def __init__(self, model: Model, dataset: Dataset, seed: int = 0, answerParser: Callable[[str], str] | None = None):
+        super().__init__(2, model, dataset, seed, answerParser)

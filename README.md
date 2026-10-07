@@ -45,6 +45,14 @@ scripts/analysis_rq1/ RQ1：少量標註預測「聚合或用單一 path」
 scripts/analysis_rq2/ RQ2：交叉實驗（候選固定、只換 Judge 模型）的呼叫與分析
 scripts/analysis_rq1k/ RQ1-K：K 條 path 的多數決 vs 同一份菜單內最強的單一 path（離線）
 scripts/analysis_rq1kj/ RQ1-KJ：K 條 path 的 Judge 版本 vs 同一份菜單內最強的單一 path（呼叫 API）
+scripts/analysis_rq2da/ RQ2-DA：強模型從弱模型的候選中挑 vs 強模型自己直接作答（離線）
+scripts/analysis_rq3/ RQ3：拿掉 path 之後的多數決（M12 去掉一條、去掉兩條 persona；離線）
+scripts/analysis_decomposition/ 主網格 12 組配對的分解總表與圖（Judge、Debate；只描述，離線）
+scripts/analysis_rq3g/ RQ3-G：隨機改進一條 path 對聚合的影響、跨模型替換 vs 隨機模型（離線）
+scripts/analysis_rq3gk/ RQ3-GK：RQ3-G 推廣到 K = 3–12 的菜單與三種平手規則（離線）
+scripts/analysis_rq3gs/ RQ3-GS：在 187 份沒看過的三條菜單上確認挑法（離線）
+scripts/analysis_rq3gsk/ RQ3-GSK：落單程度推廣到 K = 5、7，落單的那條還是最不值得改嗎（離線）
+scripts/analysis_rq3gj/ RQ3-GJ：宿主自己當裁判時，該改哪一條 path（K = 3 的四組菜單與 K = 2；呼叫 API）
 scripts/legacy_eval/ 舊格式結果的評分與彙整（test_em、test_tokens、test_em_legacy ...）
 scripts/router/      XLM-R router（原論文的 per-query 語言對路由）
 
@@ -221,6 +229,120 @@ python scripts/analysis_rq1kj/menu_judge.py                 # 分析 -> result/a
 - 輸出：`rq1kj_blocks.csv`、`rq1kj_compare.csv`（判定三的逐區塊值）、`judge_outputs/items.csv.gz`、`models.csv`、`report.md`、
   `excess_menus.png`、`excess_j_m12_blocks.png`。
 - DeepSeek 在尖峰時段（週一至五 UTC 01–04、06–10）價格加倍，程式會提醒；可用 `-m deepseek4.1flash` 另外排在離峰。
+
+**⑩ RQ2-DA：強裁判挑選 vs 強模型直接作答**（離線；需要 `result/arms`、主網格 Judge 檔、`result/analysis/rq2/` 的交叉檔與 `cross_cells.csv`）
+
+```bash
+python scripts/analysis_rq2da/direct_answer.py               # -> result/analysis/rq2da/
+```
+
+- 規格與判定標準在 `result/analysis/rq2da/rq2da_criteria.md`（已確認，不得修改）；「確認」欄空著時程式拒跑，輸出記錄它的 sha256。
+- 弱模型（gpt4omini、qwen）的兩條 path 都有答案的題目上，答案不同時：Sys_J 用強模型（deepseek4.1flash、gemini3.1flashlite）
+  在 RQ2 挑出的答案，Sys_D 用強模型自己的 L:en。每個 generator × Judge 用 RQ2 判定時實際採用的版本（`cross_cells.csv` 的
+  `used_in_analysis`：GPT、DeepSeek、Gemini 的自己裁決自己是 RQ2 重跑版，Qwen 是主網格）。逐格計算在 `Analysis/directAnswer.py`。
+- 先做三項檢查，任何一項不符就停、不寫輸出：重現 RQ2 結果 13（+2.47 [+1.65, +3.29]，8/8）、48 格的不一致題數 = `cross_cells.csv`、
+  每格 Sys_J − Sys_D = d × (a − b)（1e-9）。
+- 輸出：`rq2da_cells.csv`、`rq2da_blocks.csv`、`report.md`、`systems_by_block.png`。
+
+**⑪ RQ3：拿掉 path 之後的多數決**（離線；需要 `result/arms` 與 `result/analysis/rq1k/rq1k_blocks.csv`）
+
+```bash
+python scripts/analysis_rq3/menu_prune.py                    # -> result/analysis/rq3/
+```
+
+- 規格與判定標準在 `result/analysis/rq3/rq3_criteria.md`（已確認，不得修改）；「確認」欄空著時程式拒跑，輸出記錄它的 sha256。
+- 菜單：M12、12 份 M12−p（去掉一條）、M10（去掉 P1、P2），全部在 M12 的子集（12 條都有答案）上算；多數決、平手規則、S_in、
+  切分（makeSplits(n, 200, 0)）都沿用 RQ1-K。逐切分計算在 `Analysis/menuPrune.py`。
+- 判定一 Prune1：在 H1 上選出拿掉後多數決最好的 p*（平手時先拿掉 ZH、W2、W1、S2、S1、RU、R、P2、P1、JA、ES，EN 最後），H2 上
+  A_V(M12−p*) − A_V(M12)。判定二 ΔExcess = Excess_in(M10) − Excess_in(M12)。
+- 先核對 M12 的 A_V、S_in、Excess_in = `rq1k_blocks.csv`（1e-9）與子集題數；分解的恆等式每次切分核對。不符就停、不寫輸出。
+- 輸出：`rq3_blocks.csv`、`report.md`、`prune_each_path.png`、`excess_m12_m10.png`。
+
+**⑫ 12 組配對的分解總表與圖**（離線、只描述，沒有判定；需要 `aggregation_cells.csv` 與 `result/analysis/items/`）
+
+```bash
+python scripts/analysis_decomposition/pair_tables.py         # -> result/analysis/decomposition/
+```
+
+- 四個新模型、both_answered：Judge 與 Debate 各 12 組配對（只有 5 組共同，分開列）。headroom = 100·d·(c − m)，recovery 用
+  `recovery_H2` / `recovery_blind_H2`；單一最強拿回、聚合拿回、Excess 都是每個區塊先算再平均；「聚合 − L:en」用逐題匯出算。
+- 先核對現況文件的數字（EN+ZH、EN+S1、自我修正的 d、依來源的 recovery），對不上就停、不寫輸出。
+- 輸出：`pair_table_judge`、`pair_table_debate`、`pair_table_judge_by_strength`（.csv/.md）、`cells_long.csv`、
+  `fig_pairs_judge`、`fig_pairs_judge_by_strength`、`fig_pairs_debate`（.png 300 dpi / .pdf）、`report.md`。
+
+**⑬ RQ3-G：改進一條 path，聚合會多多少？該改哪一條？**（離線；需要 `result/arms` 與 `result/analysis/rq3/rq3_blocks.csv`，約 10 分鐘）
+
+```bash
+python scripts/analysis_rq3g/path_improve.py                 # -> result/analysis/rq3g/
+```
+
+- 規格與判定標準在 `result/analysis/rq3g/rq3g_criteria.md`（已確認，不得修改）；「確認」欄空著時程式拒跑，輸出記錄它的 sha256。
+- 隨機改進模型：把 path p 在選擇半、評分半各自隨機改對 t 題，直接算期望值（WV、SB 的規則由選擇半改進後的題數決定）。
+  逐切分計算在 `Analysis/pathImprove.py`；答案編成整數，載入時核對 compareTwoAnswer = 字串相等、整數投票 = `vote`。
+- 判定一 D1：M12、子集一，在選擇半挑「+5pp 時 V 增加最多」的 p*，評分半上 gain(p*) − 其餘 11 條的平均。判定二 D2：宿主
+  gpt4omini / qwen 的 path p 換成供體 deepseek4.1flash / gemini3.1flashlite 的同一條，A_real − A_sim（子集二，有效切分）。
+- 先做四項檢查（重現 RQ3、蒙地卡羅 2,000 次、把 path 換成它自己、子集二的保留比例），前三項不過就停、不寫輸出。
+- 輸出：`rq3g_cells.csv`、`rq3g_substitutions.csv`、`rq3g_curves.csv`、`report.md`（不畫圖）。
+
+**⑭ RQ3-GK：不同的 K 下，改進一條 path 聚合會多多少？**（離線；需要 `result/arms` 與 `result/analysis/rq3g/rq3g_cells.csv`，約 15 分鐘）
+
+```bash
+python scripts/analysis_rq3gk/path_improve_k.py              # -> result/analysis/rq3gk/
+```
+
+- 規格與判定標準在 `result/analysis/rq3gk/rq3gk_criteria.md`（已確認，不得修改；抽到的 120 份菜單列在它的 §3）；
+  其餘定義沿用 `rq3g_criteria.md`。輸出記錄判定標準檔的 sha256。
+- 菜單：K = 3、5、7、9 各 30 份（一個 `default_rng(0)`，`rng.choice(12, K, replace=False)`，重複就重抽），K = 11 的 12 份、
+  M12；另有 M3L、M3S、M3P 只用在檢查。平手規則 A（原本的順序）、B（反過來）、C（平分）；逐切分計算在 `Analysis/pathImproveK.py`。
+- 判定一 E1：K = 3、規則 A，替換後 V − 替換後 SB（8 個弱模型區塊）。判定二：K = 3、規則 C 的 D1（16 個區塊）。
+- 先做四項檢查（重現 RQ3-G 的 M12 與 M3 菜單、規則 C 的核對與蒙地卡羅、菜單清單），不過就停、不寫輸出。
+- 輸出：`rq3gk_k_blocks.csv`、`rq3gk_menu_blocks.csv`、`rq3gk_substitutions.csv`、`fig_a_conversion`、`fig_b_vote_minus_sb`、
+  `fig_c_d1`（.png / .pdf）、`report.md`。
+
+**⑮ RQ3-GS：在沒看過的三條組合上，確認挑法有沒有挑對**（離線；需要 `result/arms` 與 `result/analysis/rq3gk/rq3gk_k_blocks.csv`，約 2 分鐘）
+
+```bash
+python scripts/analysis_rq3gs/path_improve_gs.py             # -> result/analysis/rq3gs/
+```
+
+- 規格與判定標準在 `result/analysis/rq3gs/rq3gs_criteria.md`（已確認，不得修改；187 份確認用的菜單與分組列在它的 §4）；
+  其餘定義沿用 `rq3g_criteria.md`、`rq3gk_criteria.md`。逐切分計算在 `Analysis/pathImproveGS.py`。
+- 效果 = 10 × Σ分子 ÷ Σ分母（替換後 − 替換前的 V 得分，規則 C；分母 = 供體 − 宿主那條 path 的正確率；評分半 ∩ 子集二），
+  任一條 path 無效的（菜單、供體、切分）整個不計。判定一 E1 = 挑出的（選擇半規則 C 的 gain）− 其他的；判定二 E2 =
+  相像那一對 − 落單那條（「明顯落單」組）。
+- 先做四項檢查（重現 RQ3-GK、菜單與分組 = 判定標準檔的表、換成自己、純迴圈手算 gpt4omini × mmlu × GS-001），不過就停、不寫輸出。
+- 輸出：`rq3gs_blocks.csv`、`rq3gs_menu_blocks.csv`、`rq3gs_substitutions.csv`、`fig_a_groups`、`fig_b_degree_vs_e2`（.png / .pdf）、`report.md`。
+
+**⑯ RQ3-GSK：K = 5、7 時，和其他條最不像的那條還是最不值得改嗎？**（離線；需要 `result/arms`、`result/analysis/rq3gs/` 與 `result/analysis/rq3gk/rq3gk_k_blocks.csv`）
+
+```bash
+python scripts/analysis_rq3gsk/path_improve_gsk.py           # -> result/analysis/rq3gsk/
+```
+
+- 規格與判定標準在 `result/analysis/rq3gsk/rq3gsk_criteria.md`（已確認，不得修改）；792 種菜單的表 `rq3gsk_menus_K5.csv`、
+  `rq3gsk_menus_K7.csv` 是確認前寫好的，sha256 記在判定標準檔裡，程式只核對、不覆寫。逐切分計算在 `Analysis/pathImproveGSK.py`。
+- 落單程度推廣到 K 條：s_i = 其他 K − 1 條彼此的一致率平均 − i 和其他條的一致率平均；s_i 相同時平手順序在後的算比較落單
+  （K = 3 時和 RQ3-GS 完全相同）。判定 E_K = 其他 K − 1 條的效果 − 落單那條的效果（「明顯落單」組；門檻 K = 5 為 0.30、K = 7 為 0.20）。
+- 先做六項檢查（K = 3 重現 RQ3-GS 判定二與菜單表、重現 RQ3-GK K = 5、7 的 D1 與轉換率、菜單表 = CSV、換成自己、
+  純迴圈手算 gpt4omini × mmlu × GS5-001），不過就停、不寫輸出。
+- 輸出：`rq3gsk_blocks.csv`、`rq3gsk_menu_blocks.csv`、`rq3gsk_substitutions.csv`、`fig_a_groups`、`fig_b_rank_effect`（.png / .pdf）、`report.md`。
+
+**⑰ RQ3-GJ：讓模型當裁判時，該改哪一條 path？**（呼叫 API；規格與判定標準在 `result/analysis/rq3gj/rq3gj_criteria.md`，已確認，不得修改）
+
+```bash
+python scripts/analysis_rq3gj/run_gj_judge.py check      # §10 流程核對（310 次）            -> precheck/、precheck.json
+python scripts/analysis_rq3gj/run_gj_judge.py pilot      # §11 試跑（582 + 680 次）           -> judge_outputs/、judge_outputs_k2/（pilot: true）、pilot.json
+python scripts/analysis_rq3gj/run_gj_judge.py predict    # §7、§8.12、§8.13 的預測（離線，只能寫一次） -> rq3gj_predictions*.csv.gz、manifest
+python scripts/analysis_rq3gj/run_gj_judge.py prerun     # §12 正式跑之前的五項檢查（離線）     -> prerun.json
+python scripts/analysis_rq3gj/run_gj_judge.py full -w 16 # 正式跑（約 100 萬次；可中斷後續跑）
+```
+
+- 每一步都要上一步的結果檔存在、寫於同一份判定標準之下且通過；不過就停，回報後才往下。呼叫可續跑，已寫入的題目不重複計費。
+- 宿主自己當裁判（gpt4omini、qwen；T = 0、max_tokens 8192、不傳 seed；Qwen 關 thinking）。K = 3 用 choice-k-v1，K = 2 用 choice-v1；
+  被換進來的那條候選讀供體（deepseek4.1flash、gemini3.1flashlite）的 arm 檔，供體本身不被呼叫。
+- 計畫（四組 39 份菜單、每份 7 個版本、K = 2 的 3 個配對 × 5 個版本 × 2 種順序、要呼叫的題目、候選順序）在 `Analysis/judgeSubstitution.py`，
+  每一步開始時重算並和第零階段的 `rq3gj_stage0_calls.csv` 核對；預測在 `Analysis/judgeSubstitutionPredict.py`；
+  Judge 呼叫用 `Strategy/SubstitutionJudge.py`。
 
 ---
 

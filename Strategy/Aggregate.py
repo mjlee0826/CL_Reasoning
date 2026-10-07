@@ -58,11 +58,11 @@ class Aggregate(Strategy):
         self.armFileByArmId = {arm.arm_id: file for arm, file in zip(self.arms, self.armFiles)}
         self.unverifiedArms = []
 
-        for arm, file, arm_questions in zip(self.arms, self.armFiles, self.armQuestions):
+        for arm, file, arm_questions, model_type in zip(self.arms, self.armFiles, self.armQuestions, self.armModelTypes()):
             meta = file.metadata
             found = (meta.get("Arm", {}).get("arm_id"), meta.get("Model", {}).get("modelType"),
                      meta.get("Dataset", {}).get("datasetType"), meta.get("Dataset", {}).get("nums"))
-            expected = (arm.arm_id, self.armModelType(), dataset_config.datasetType, dataset_config.nums)
+            expected = (arm.arm_id, model_type, dataset_config.datasetType, dataset_config.nums)
             if found != expected:
                 raise ValueError(f"{file.file_path} does not match the run: {found} != {expected}")
 
@@ -111,6 +111,10 @@ class Aggregate(Strategy):
     def armModelType(self) -> str:
         """modelType the candidate arm files must belong to: the aggregating model itself."""
         return self.model.config.modelType
+
+    def armModelTypes(self) -> list[str]:
+        """modelType of each candidate arm file, aligned with `arms` (RQ3-GJ swaps one arm for another model's)."""
+        return [self.armModelType()] * len(self.arms)
 
     def presentationOrders(self, dis_ids: list) -> dict:
         """{item_id: arm_ids in display order} for the disagreement items (only for aggregators that need one)."""

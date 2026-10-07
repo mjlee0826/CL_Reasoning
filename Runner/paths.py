@@ -23,3 +23,9 @@ def crossJudgePath(outdir: str, judge_name: str, generator_name: str, dataset_na
 def menuJudgePath(outdir: str, model_name: str, dataset_name: str, menu: str) -> str:
     """RQ1-KJ judge file of one menu: {outdir}/{model}/{dataset}/{menu}.json"""
     return os.path.join(outdir, model_name, dataset_name, f"{menu}.json")
+
+
+def substitutionJudgePath(outdir: str, host: str, dataset_name: str, menu: str, version: str, order: str | None = None) -> str:
+    """RQ3-GJ judge file of one version: {outdir}/{host}/{dataset}/{menu}__{version}[__{order}].json"""
+    stem = f"{menu}__{version}" + (f"__{order}" if order else "")
+    return os.path.join(outdir, host, dataset_name, f"{stem}.json")
