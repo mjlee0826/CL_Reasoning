@@ -1,0 +1,3384 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:ja vs P:expert vs P:skeptic)",
+            "languages": [
+                "japanese",
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 3,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-k-v1",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/commonsenseqa/L_ja.json",
+            "result/arms/qwen/commonsenseqa/P_expert.json",
+            "result/arms/qwen/commonsenseqa/P_skeptic.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 600,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "menu_judge",
+        "menu": "GS-087",
+        "item_filter": "menu_all_answered_disagreement",
+        "n_judged_items": 600,
+        "order_scheme": "rq3gj_planned",
+        "experiment": "rq3gj",
+        "version": "JA-gemini3.1flashlite",
+        "donor": "gemini3.1flashlite",
+        "donor_slot": 0,
+        "donor_arm": "L:ja",
+        "order_label": null,
+        "candidate_models": [
+            "gemini3.1flashlite",
+            "qwen",
+            "qwen"
+        ],
+        "n_planned_items": 598,
+        "api_usage": {
+            "calls": 100,
+            "calls_without_usage": 0,
+            "prompt_tokens": 69057,
+            "completion_tokens": 11305,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 100
+        },
+        "calls_utc": {
+            "first": "2026-10-08T07:27:04+00:00",
+            "last": "2026-10-08T07:34:52+00:00"
+        }
+    },
+    {
+        "item_id": 2,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:ja",
+            "P:skeptic"
+        ],
+        "tokens_in": 740,
+        "tokens_out": 93,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify that a choker is worn around the neck, making \"neck\" the correct answer. Answer 3 incorrectly interprets the question as asking where the choker is worn rather than where it is located, and mistakenly suggests \"jewelry store\" as the answer, which is not the most direct or logical choice based on the phrasing of the question.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "b5c5b6b7aec48a473cb91531f6dbf51f618ff6ba1ff71b55d6d64a502b325599"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:27:04+00:00",
+            "usage_in": 752,
+            "usage_out": 93
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 4,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 617,
+        "tokens_out": 115,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both suggest \"natural habitat\" (C) as the answer, which is reasonable given that a fox is a wild animal. However, Answer 2 provides a more specific and plausible reasoning based on the fox's natural behavior of seeking food, such as a hen house (B). While \"natural habitat\" is a valid interpretation, \"hen house\" directly relates to the fox's potential motive for entering the forest. Therefore, Answer 2 offers a more contextually accurate explanation.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "2134079a10b7abb6fe7b657db86805a1587214b1ade9e7cea084b4ba4cb41237"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:27:06+00:00",
+            "usage_in": 629,
+            "usage_out": 115
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 6,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:ja"
+        ],
+        "tokens_in": 632,
+        "tokens_out": 81,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify that checking a drawstring bag is most logically associated with traveling, and the airport is the only location among the choices where luggage is typically checked. Answer 3 incorrectly assumes a phonetic connection between \"drawstring bag\" and \"safe,\" which is not supported by the question or standard language usage.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "35faae5a28bf6229a032377138c67a68eb5008f295c54f992b99c8efb4bbbcd5"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:27:08+00:00",
+            "usage_in": 644,
+            "usage_out": 81
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 7,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 702,
+        "tokens_out": 116,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that B and D refer to the same appliance and concludes that the refrigerator is the most logical place for leftovers to get old and moldy. However, it incorrectly selects B over D without justification. Answer 2 and Answer 3 both correctly identify that B and D are synonyms and that the refrigerator/fridge is the logical place for leftovers to develop mold. Answer 3 provides a more thorough reasoning by emphasizing the modern usage of \"fridge\" in everyday language, making it the stronger choice.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "c94efc0b5804ccafae089d30ec350e227087cdeded942079670ea55805d82b22"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:27:10+00:00",
+            "usage_in": 714,
+            "usage_out": 116
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 10,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 601,
+        "tokens_out": 88,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 correctly identify that the grocery cart (B) is the most logical place to put grapes just before checking out, as it is where items are typically placed while shopping. Answer 2 incorrectly assumes that putting grapes in the mouth (A) is the final action before checkout, which does not align with the context of placing items before completing a purchase.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "60c3396a3478d5166ce1627f623ec44e480ee5d48b8c164ef45ce8b26ddcf6de"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:27:19+00:00",
+            "usage_in": 613,
+            "usage_out": 88
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 11,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:ja",
+            "P:skeptic"
+        ],
+        "tokens_in": 689,
+        "tokens_out": 109,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2 incorrectly translates the options into Japanese and then back into English, leading to confusion in the reasoning. The term \"anguish\" (B) is not the most accurate description of the emotional state in this context. Answer 1 and Answer 3 both correctly eliminate \"harder\" (A) as it is not an emotion and identify \"bitterness\" (C) as the most appropriate choice due to its direct relation to resentment and frustration from unequal work distribution.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "18e39b19533a5e989dc77e3d3db1f534a682b6faeaaa492646db7b2fe83480ac"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:27:21+00:00",
+            "usage_in": 701,
+            "usage_out": 109
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 12,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 702,
+        "tokens_out": 129,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that a rest area is more directly linked to the idea of relaxing than other options. While rest areas do provide benches for relaxation, there is no strong evidence in the question to suggest this specific location. Answer 2 correctly identifies the garden as a plausible location for working on a hobby and sitting on a bench, making it a reasonable choice. Answer 3 incorrectly suggests that a state park is the most natural choice, despite the lack of direct evidence in the question to support this. Therefore, Answer 2 provides the most logical reasoning based on the information given.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "cc02e811e1a6fbc551947873ac4b2148a04d044aa4b7771bc3acc0821cba5323"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:27:24+00:00",
+            "usage_in": 714,
+            "usage_out": 129
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 17,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 632,
+        "tokens_out": 107,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify that \"sick person\" (C) is the most direct answer, as it refers to someone who is already ill. However, Answer 3 incorrectly states that \"elderly person\" (D) is the most appropriate choice, which is not accurate since the question asks for the type of person who typically contracts illness, not who is more susceptible to illness. The correct answer is clearly C, making Answer 3 incorrect.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "10763c7deef37b10511b375d9505ca7da44d90b105e5a9ebc5a290e789eb8a47"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:27:27+00:00",
+            "usage_in": 644,
+            "usage_out": 107
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 19,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 777,
+        "tokens_out": 149,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both argue that \"satisfaction\" (E) is the most appropriate choice, emphasizing the emotional fulfillment from experiencing a variety of foods. However, the question specifically asks what one \"tends to feel\" when eating everything on a tasting menu, which is more about the immediate physical sensation rather than an emotional outcome. Answer 3 correctly identifies that eating multiple dishes on a tasting menu would lead to a \"full stomach\" (A), which is a direct and immediate result of consuming food. While \"satisfaction\" is a possible outcome, it is not guaranteed and is more subjective. Therefore, Answer 3 provides the most accurate and direct answer.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "bb8ab13ecb3a7bd56a03360fc203729085fac75da27ab89933208cd2cbb7eb57"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:27:38+00:00",
+            "usage_in": 789,
+            "usage_out": 149
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 20,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 701,
+        "tokens_out": 137,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both correctly identify that playing soccer for a long time leads to physical exhaustion, and they both select \"E) getting tired\" as the answer. However, Answer 3 provides a more nuanced argument by pointing out that \"fatigue\" (B) is a more accurate and direct term for the physiological state resulting from prolonged physical exertion. It also correctly notes that \"getting tired\" (E) and \"fatigue\" (B) are closely related but that \"fatigue\" is more precise in this context. Therefore, Answer 3 provides a more accurate and detailed reasoning process.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "e253e21c1736f79a8ac13cee2f45a7bfcc8c73ee8a2459887f692775c0049fea"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:27:40+00:00",
+            "usage_in": 713,
+            "usage_out": 137
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 21,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 620,
+        "tokens_out": 110,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies \"main\" as the most direct opposite of \"back entrance,\" which is not accurate. While \"main\" can imply a primary entrance, it is not the most direct antonym of \"back.\" Answers 2 and 3 both correctly identify \"front\" as the logical opposite of \"back entrance,\" making them more accurate. However, Answer 3 provides a more precise explanation by directly linking \"back entrance\" to \"front\" in terms of spatial positioning.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "6f7f95800255260161bb19a053d3cbe4681bbbc3a84df45f199d4fa4cd086171"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:27:44+00:00",
+            "usage_in": 632,
+            "usage_out": 110
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 25,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 612,
+        "tokens_out": 70,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that \"run errands\" refers to taking money, which is not a typical interpretation in this context. Answers 2 and 3 both correctly interpret \"run errands\" as a code for delivering instructions, making Answer 3 the more detailed and accurate choice.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "1dcb54f147bc4fbabe8b3a9b136516a64eede70b479df956a900f47ce05651eb"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:28:06+00:00",
+            "usage_in": 624,
+            "usage_out": 70
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 26,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 659,
+        "tokens_out": 113,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly selects \"working\" (C) as the answer, which is too vague and does not directly relate to physical exertion. The sentence suggests continuous physical activity, which is best captured by \"moving\" (D). Answer 2 and Answer 3 both correctly identify \"moving\" (D) as the most appropriate choice, with Answer 3 being slightly more concise. However, Answer 2 provides a more detailed reasoning process that clearly explains why \"moving\" is the best fit.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "8143b1576909e225deba3bbfcd601dc7450842e5bc5e9c167519129daf6ffb6d"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:28:09+00:00",
+            "usage_in": 671,
+            "usage_out": 113
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 29,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 681,
+        "tokens_out": 144,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 are based on the assumption that the question refers to cleaning a television screen to prevent glare while watching a football game. However, this interpretation ignores the possibility of a more nuanced or metaphorical meaning. Answer 3 correctly identifies that the question is likely referencing a riddle about \"eye black,\" a practice used by athletes to reduce glare. Since none of the provided options directly refer to \"eye black,\" Answer 3 logically concludes that the most appropriate choice is D, which highlights the irrelevance of the other options. This reasoning aligns with the structure of a typical riddle and provides a more comprehensive understanding of the question.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "265cc8a00e634b0436ef66f01b1140716111cc8d10ac9f39d4313d712e586168"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:28:12+00:00",
+            "usage_in": 693,
+            "usage_out": 144
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 35,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 726,
+        "tokens_out": 118,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that semen becomes \"clear\" after a vasectomy, which is not accurate. Semen's appearance may change slightly, but it does not become clear. Answer 2 suggests \"thin\" as the correct answer, which is plausible but not the most medically accurate description. Answer 3 correctly identifies that the thickness of semen does not change after a vasectomy and points out that the question implies a change in consistency, which is not supported by medical knowledge. Therefore, Answer 3 is the most accurate.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "4d7a6beaea43a1e67f64c03f1df0bfcbbba778b88eefb555a15f6b164611f94b"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:28:21+00:00",
+            "usage_in": 738,
+            "usage_out": 118
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 37,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:ja",
+            "P:skeptic"
+        ],
+        "tokens_in": 790,
+        "tokens_out": 131,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 correctly identify that \"coastal cities\" (D) is the most comprehensive and accurate choice, as it refers to cities along the coast, which are typically known for seafood restaurants. Answer 2 incorrectly selects \"Maine\" (A) as the answer, despite the fact that while Maine is a specific location on the east coast known for seafood, it is not as general or representative of the entire east coast as \"coastal cities.\" Therefore, Answer 1 and Answer 3 are correct, but Answer 3 provides a more thorough explanation.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "f15b91e19db2589bc65f742ea3b310c38f5210203971c5576f14ea69556e928a"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:28:30+00:00",
+            "usage_in": 802,
+            "usage_out": 131
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 46,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:ja",
+            "P:skeptic"
+        ],
+        "tokens_in": 788,
+        "tokens_out": 124,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both suggest that the answer is \"painting\" (A), based on the idea that it's a riddle involving a visual representation. However, this interpretation is not supported by the phrasing of the question or common riddles. Answer 2 suggests \"hen house\" (B) as the answer, which aligns with traditional fables where a thirsty fox searches for water in a farm setting. The reasoning in Answer 2 is more consistent with known riddle structures and the typical context of fox-related fables.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "c5db3770ab6406bf4ab22150b21e682c87c2722b8bc84b3b271c89befd3a3fd6"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:28:52+00:00",
+            "usage_in": 800,
+            "usage_out": 124
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 55,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 770,
+        "tokens_out": 101,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that \"get arrested\" (D) is the immediate legal action taken by the police when they discover a criminal act. While Answers 2 and 3 focus on incarceration, they fail to recognize that \"get arrested\" is the direct action the police would take first, before any formal sentencing or incarceration. The question specifically asks what the cops might do to him, implying the immediate response rather than the long-term consequence.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "1430f4378a8a3b92aeaa92fc0dc05ffcd805fac98023de74c4b2434d3e7247cb"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:28:54+00:00",
+            "usage_in": 782,
+            "usage_out": 101
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 57,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 742,
+        "tokens_out": 122,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly states that \"go to sleep\" (E) is more specific and directly addresses the need for restorative sleep, but the question asks for the \"only way\" to recover from exhaustion, which implies a broader concept of rest rather than just sleep. Answer 3 incorrectly interprets \"have rest\" (B) as being more general than it is, while Answer 2 correctly identifies \"have rest\" (B) as the most comprehensive and accurate choice, as it encompasses both sleep and other forms of rest necessary for recovery.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "881dd14bc9fe91f6727b8bd2c89f9dffb836df7f20ab1af54dff8870341d6fb4"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:28:58+00:00",
+            "usage_in": 754,
+            "usage_out": 122
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 60,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 604,
+        "tokens_out": 102,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that \"cause illness\" (D) is the most direct and general effect of drugs, but this is not universally true for all drugs. Answer 2 suggests \"cloud mind\" (B) as the most general effect, which is reasonable but somewhat vague. Answer 3 argues that \"cause accidents\" (E) is the most direct consequence due to impaired judgment and coordination, which is a strong and widely applicable reasoning.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "6a793134d47baafdd2256171d34bea342bf97ad89a876761d37f156e773cdca5"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:29:07+00:00",
+            "usage_in": 616,
+            "usage_out": 102
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 61,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:ja",
+            "P:skeptic"
+        ],
+        "tokens_in": 628,
+        "tokens_out": 147,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both suggest \"millpond\" (C) as the correct answer, reasoning that a beaver building a dam in a millpond would disrupt water flow and affect machinery. However, \"millpond\" is a specific type of pond created for the purpose of powering mills, and while it is plausible, the question is more general and refers to any water source where a dam could impact machinery. Answer 2 correctly identifies \"lake or river\" (E) as the broader and more appropriate choice since these are common natural water sources where dams can significantly affect water flow and machine functionality. The other options are irrelevant or not related to the context.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "80fc3bc61c5161b1b9ad52bcf30d595620e72a7775e5870d3b9a3e9618071807"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:29:18+00:00",
+            "usage_in": 640,
+            "usage_out": 147
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 63,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:ja",
+            "P:skeptic"
+        ],
+        "tokens_in": 803,
+        "tokens_out": 123,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both suggest \"fallen tree\" (E) as the correct answer, but they fail to recognize that \"under rocks\" (A) is also a valid and specific environment for fungal growth that is not disturbed by sunlight. Answer 3 correctly identifies that \"under rocks\" (A) provides a dark, sheltered environment where fungi can grow without being disturbed by sunlight, making it a more precise choice than \"fallen tree\" (E), which may still be exposed to some sunlight depending on the location. \n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "be3ec4df2034e7363b6c7bda87a19fe3dc3f52bc2ee4e928433b056080c8a48a"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:29:27+00:00",
+            "usage_in": 815,
+            "usage_out": 123
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 67,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:ja"
+        ],
+        "tokens_in": 654,
+        "tokens_out": 80,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly suggests that sex \"clouds judgment,\" which is not a universally applicable or direct outcome of sexual activity. Answer 3 provides a scientifically grounded explanation, emphasizing the release of neurotransmitters that lead to feeling good, making it more accurate. Answer 2 is correct but less detailed in its reasoning compared to Answer 3.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "340db7132f8da06b91d370af2a56eb64ebd74bcc6d5e637659e336ec9c67b9aa"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:29:28+00:00",
+            "usage_in": 666,
+            "usage_out": 80
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 71,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 677,
+        "tokens_out": 99,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 correctly identify \"respond\" (B) as the most appropriate choice, as it aligns with the context of hoping people would react positively to an offer. Answer 2 incorrectly interprets the question by selecting \"contact\" (C), which is not the best fit for the phrase \"hoping people would what well to his offer.\" The phrase implies a reaction or reply, not just making contact.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "fef6fd6a7d43f5b0717cf24541266087ab97722c12baec23292bf1107030fc28"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:29:32+00:00",
+            "usage_in": 689,
+            "usage_out": 99
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 75,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 604,
+        "tokens_out": 71,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 are incorrect because they rely on incorrect information about the location of the John Davis Lodge toll road. Answer 2 correctly identifies that the John Davis Lodge toll road is known as the Merritt Parkway in Connecticut, making \"D) connecticut\" the correct choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "e31c1bbcaba401e75aaf3783cfddf5bec9f5bdc291a922d5e42b2549aa09153b"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:29:33+00:00",
+            "usage_in": 616,
+            "usage_out": 71
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 77,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 682,
+        "tokens_out": 146,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both correctly interpret the phrase \"failed miserably\" as implying that Jamie's efforts to reduce her waist size did not work, leading to an increase in waist size. However, Answer 3 incorrectly concludes that \"make larger\" (D) is the best fit, when \"gain weight\" (A) is more directly related to the context of waist size increase. The question asks what Jamie continued to do, and \"gain weight\" is a more natural and direct consequence of failing to reduce waist size. Therefore, Answer 1 and Answer 2 are more accurate, but Answer 2 provides a clearer and more concise reasoning process.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "96d3d770c84d81e9b53a340bc21bab467d1298e9a4a8a77cf5be1053dfbc3982"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:29:36+00:00",
+            "usage_in": 694,
+            "usage_out": 146
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 87,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 603,
+        "tokens_out": 122,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both suggest \"unable\" as the correct answer, which is grammatically incorrect in the sentence structure \"he complained that he what the simplest activities.\" The phrase should be \"he complained that he was unable to perform the simplest activities,\" making \"unable\" a verb form that does not fit. Answer 2 correctly identifies the reference to G.K. Chesterton's work and explains that the phrase \"impossibility\" is directly referenced in the context, making \"E\" the most accurate choice based on literary context.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "60ca003d8b581af85e60d079544e6d8babe69506fb7fdc7433cd77590f4b6043"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:29:38+00:00",
+            "usage_in": 615,
+            "usage_out": 122
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 90,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:ja"
+        ],
+        "tokens_in": 696,
+        "tokens_out": 142,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify that roses are commonly red and attract bees, making \"rose garden\" (D) a strong candidate. However, they overlook the fact that the question specifically asks about \"red flowers,\" not just any red-colored flowers. While roses are typically red, the term \"red flowers\" in the question is more general and could refer to any flower that is red, not necessarily roses. Answer 3 correctly identifies that a \"field of flowers\" (E) is the most general and accurate answer for where bees would congregate with red flowers, as it encompasses all types of red flowers, not just roses.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "c21801a8db5bbcf06f6f32f100a54c4538a5be5dac9e4687ae77daadaba9234f"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:29:42+00:00",
+            "usage_in": 708,
+            "usage_out": 142
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 96,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 768,
+        "tokens_out": 87,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both correctly identify \"healthier\" (B) as the most comprehensive and accurate result of losing weight. Answer 2 incorrectly prioritizes \"increased energy\" (A) over \"healthier\" (B), despite the fact that \"healthier\" is a broader and more accurate description of the overall positive outcome of weight loss. \n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "a3992155d911d72bfa5c689db0a081cd15610f987d4f4db2f2a9d950af44e645"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:29:46+00:00",
+            "usage_in": 780,
+            "usage_out": 87
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 97,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 640,
+        "tokens_out": 106,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly suggests \"mouth\" (E) as the answer, which is metaphorical and not a typical place where a person would live. Answer 2 and Answer 3 both correctly identify \"building\" (C) as the most logical answer, as it is a standard place for living. Answer 2's reasoning is slightly more detailed but both are valid. Since Answer 3 provides a concise and accurate reasoning process, it is the most correct choice.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "2f22e1558e6567692b77b761555ee623d27de0c6d1d7e211f1d7e68936d5f53f"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:29:48+00:00",
+            "usage_in": 652,
+            "usage_out": 106
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 99,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:ja"
+        ],
+        "tokens_in": 628,
+        "tokens_out": 102,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies boredom as a likely emotion from doing housework for hours, which is a valid possibility. Answer 2 and Answer 3 both argue that stress is the most appropriate choice, but they fail to consider that boredom is a direct and common emotional response to repetitive and prolonged tasks. The question asks what one \"might\" feel, and boredom is a more straightforward and general answer than stress, which is more specific and situational.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "361006d927f41141f2883373e0cfd8ab4c8acd0cdf1213dc46388668dce31a14"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:29:50+00:00",
+            "usage_in": 640,
+            "usage_out": 102
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 102,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 706,
+        "tokens_out": 110,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 3 incorrectly identifies \"angry\" as the correct answer. The question asks for an illness that may be associated with not being glad, unhappy, or gloomy. While \"angry\" is a negative emotion, it is not typically classified as an illness. In contrast, \"depressed\" (option A) is a recognized mental health condition and fits the context of the question better. Answers 1 and 2 correctly identify \"depressed\" as the most appropriate choice.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "038e54a10903f73cb18140a799fc1b91a8b49ecaeaf7d7334563b60a0dc2ee77"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:29:53+00:00",
+            "usage_in": 718,
+            "usage_out": 110
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 103,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 680,
+        "tokens_out": 133,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both suggest that \"go to church\" (A) is the correct answer. However, the question specifically asks about \"hearing testimony,\" which implies an act of listening or receiving information. While going to church may be a place where such testimonies occur, it does not directly involve the act of hearing them. Answer 2 correctly identifies that \"paying attention\" (D) is the most direct action related to hearing testimony, as it involves the active process of listening and being receptive to what is said. Therefore, Answer 2 provides the most accurate reasoning.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "be3c13766b3c1a0461f9596a9f4e5bccfece7c4dade0b80c57fa1a6e73f5852a"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:29:55+00:00",
+            "usage_in": 692,
+            "usage_out": 133
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 104,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:ja"
+        ],
+        "tokens_in": 660,
+        "tokens_out": 102,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 3's reasoning is incorrect because it misinterprets the question. The phrase \"never felt this much what in the morning\" implies a feeling or state that one experiences after rest, not an action or activity. \"Wakefulness\" (D) fits this context as it refers to being awake and alert, which is a natural result of rest. Answer 1 and Answer 2 correctly identify \"wakefulness\" as the most appropriate choice.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "3e77d5cdac99ba4ed7f2876575fa8a0d9766ac1262a3b8e32f3bac1ac07b0071"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:29:58+00:00",
+            "usage_in": 672,
+            "usage_out": 102
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 108,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 532,
+        "tokens_out": 73,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify that the relationship status being ended is \"marriage,\" which corresponds to option C. Answer 3 incorrectly states that the relationship status is \"being married,\" which is not one of the choices. The correct answer is C, so Answer 3 is incorrect.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "ffeedcd35a49c9d3905fbf6380d1d77747c6c424c5326833139de69c025a23c0"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:30:07+00:00",
+            "usage_in": 544,
+            "usage_out": 73
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 111,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 751,
+        "tokens_out": 126,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that a \"small apartment\" can feel spacious for a small dog, but fails to consider that the question emphasizes the dog's perception of space rather than physical size. Answer 2 incorrectly assumes a \"living room\" would be spacious enough for a small dog, ignoring the key point that the dog felt like it had all the space in the world despite being indoors. Answer 3 incorrectly concludes that a \"basket\" would make the dog feel like it had all the space in the world, which contradicts the idea of feeling expansive and comfortable.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "c4a49442f44184ca26215c5e4f9db232ab1a44e570c41759a3274fe62b303d99"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:30:17+00:00",
+            "usage_in": 763,
+            "usage_out": 126
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 114,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:ja",
+            "P:skeptic"
+        ],
+        "tokens_in": 678,
+        "tokens_out": 123,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both suggest \"dessert\" (C) as the correct answer, citing the possibility of a play on words between \"lizard\" and \"dessert.\" However, \"dessert\" is not a valid spelling of \"desert,\" and the question does not provide any indication that this is a wordplay scenario. Answer 3 provides a more logical reasoning process by considering the typical habitat of lizards and the likelihood of encountering them in a garden, making it the most reasonable choice based on the question's context.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "c17b6b52a9603d22f91d104826bec7ae14314fdd18056618239bf1b4eb358327"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:30:20+00:00",
+            "usage_in": 690,
+            "usage_out": 123
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 117,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 699,
+        "tokens_out": 111,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that a \"store\" (D) is the most likely place to find both alcohol and fried foods. However, Answer 2 and Answer 3 provide more accurate reasoning by emphasizing that a \"pub\" (A) is a place where both alcohol and fried foods are typically available, making it a better fit for the question. Answer 1 incorrectly assumes that a \"store\" is the best choice when a \"pub\" is more directly associated with both items. \n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "601d1844616e03dd33fe2b7c8737d0db51b572b6f885f4ad6c50dc25611795cb"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:30:22+00:00",
+            "usage_in": 711,
+            "usage_out": 111
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 124,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:ja",
+            "P:skeptic"
+        ],
+        "tokens_in": 686,
+        "tokens_out": 101,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both argue that a lap (D) is the best choice, emphasizing direct comfort and affection. However, Answer 3 provides a more balanced consideration of all options, noting that while a lap is comforting, a home (B) offers a broader range of comfort, security, and affection consistently. The reasoning in Answer 3 is more comprehensive and considers the cat's overall environment rather than just a specific location.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "58f065d11d2dc8e8f13312679fadac29476fa15cfdb238654e5633321f4eb969"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:30:24+00:00",
+            "usage_in": 698,
+            "usage_out": 101
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 125,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:ja",
+            "P:skeptic"
+        ],
+        "tokens_in": 567,
+        "tokens_out": 69,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 incorrectly interpret the question as asking for a specific example of an East coast area, when the question is asking where such areas are located. Answer 2 correctly identifies that Florida is located in the United States, which is the correct answer to the question.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "801b71670c6b9643317927b43b93cecc0422d32a6b8a093bcc58461d9a1c13d7"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:30:26+00:00",
+            "usage_in": 579,
+            "usage_out": 69
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 129,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 709,
+        "tokens_out": 122,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both argue that \"happy\" (A) is the most direct emotional outcome of listening to music, which is reasonable. However, Answer 2 presents a strong case for \"relaxation\" (E) as the most general and widely recognized effect of music. While \"happy\" is a valid emotional response, \"relaxation\" encompasses a broader range of mental and emotional states that music can induce, making it a more comprehensive answer. Therefore, Answer 2 provides a more accurate and inclusive reasoning process.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "a315e3ccad775d23588578c231a1ec5bb34ba2ee26fcc77bce1d2b34dadc93da"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:30:29+00:00",
+            "usage_in": 721,
+            "usage_out": 122
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 130,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 716,
+        "tokens_out": 137,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that a bridge provides a significant height for creating a splash, but the question does not specify that the rock must be thrown from a height. Answer 2 and Answer 3 both correctly identify that \"surface of earth\" (E) is the most logical choice as it refers to the general location where the rock can be thrown into the river to create a splash. However, Answer 3 contains an error by stating that \"surface of earth\" implies flat, level ground, which is not necessarily true and contradicts the reasoning in Answer 2. Therefore, Answer 2 is the most accurate.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "c68ee0342873cce03b27eb7edb5c3ce096de125ab49474d2faaf19ea8dcd8740"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:30:32+00:00",
+            "usage_in": 728,
+            "usage_out": 137
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 137,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 660,
+        "tokens_out": 126,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both suggest \"prison\" (A) as the correct answer, reasoning that Ben's mistake led to a legal consequence. However, the phrase \"because of his mistake\" does not necessarily imply a legal offense, but rather a personal error or misjudgment. The term \"locked up\" (C) is more general and can encompass situations where someone is confined due to a mistake, not necessarily a legal one. Answer 3 correctly identifies that \"locked up\" fits the context better than \"prison\" in this scenario.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "dfdcc4ac814a760947086815d8888cc476a9c60d34d2d713dc91fc4ad5a2d267"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:30:34+00:00",
+            "usage_in": 672,
+            "usage_out": 126
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 138,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 598,
+        "tokens_out": 101,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly associates ticket booths with amusement parks, while the question specifically refers to \"games.\" Amusement parks are more associated with rides and attractions rather than games. Answer 2 and Answer 3 correctly identify fairgrounds (D) as the most appropriate location for a ticket booth for games, as fairgrounds are commonly associated with games and events. However, Answer 2 is slightly less precise in its reasoning compared to Answer 3.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "00bbe702d11e3a61e1119d0acc66469721106354123a0c3246a40b2de4c6e417"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:30:36+00:00",
+            "usage_in": 610,
+            "usage_out": 101
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 140,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:ja",
+            "P:skeptic"
+        ],
+        "tokens_in": 683,
+        "tokens_out": 114,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies \"mail box\" as a method of delivering letters by hand, when it is actually a place where mail is received. Answer 2 and Answer 3 both suggest \"front door\" (C) as the correct answer, which aligns with the idea of hand delivery. However, Answer 3 provides a more detailed and accurate reasoning process explaining why \"front door\" is the most plausible choice. Answer 2's reasoning is less precise and contains some inaccuracies in its logic.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "32b7fe99c400bf638ed4311e3bea0dcf11bf8bdf8eb60f362a7be1f268c8f155"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:30:45+00:00",
+            "usage_in": 695,
+            "usage_out": 114
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 144,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 742,
+        "tokens_out": 127,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that \"destroy enemy\" (D) is the most appropriate response without considering that the question does not provide enough context to determine the specific action taken. Answer 2 correctly identifies that option E is a restatement of the premise rather than an action, but it concludes that no choice can be definitively selected, which is not valid since the question asks to choose one. Answer 3 correctly identifies that option E describes the event rather than the president's action and selects \"wage war\" (A) as the most appropriate and commonly expected response.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "e54d760e5478b9b83206746195504c0233653fa0bf743b9a11752130db302880"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:30:55+00:00",
+            "usage_in": 754,
+            "usage_out": 127
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 146,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:ja"
+        ],
+        "tokens_in": 680,
+        "tokens_out": 104,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify that the sentence is looking for an adjective that conveys a strong negative connotation to match \"scary.\" They both select \"horrible\" (E), which is appropriate. However, Answer 3 incorrectly interprets the question as asking for a noun to describe the type of decorations, when the sentence clearly requires an adjective to complete the phrase \"they were completely what?\" Therefore, Answer 3 is incorrect.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "f19b12883d299477c61d20f37d3d22da10cbd2ccc56ae1c82db394bcd0e7a4a2"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:31:04+00:00",
+            "usage_in": 692,
+            "usage_out": 104
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 151,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 721,
+        "tokens_out": 111,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly interprets \"caught\" as metaphorical, which is not supported by the question's phrasing. Answer 2 correctly identifies that a fox is more likely to be found in a forest than a grassy field, making D a better choice than C. Answer 3 fails to recognize that \"inside joke\" (B) is not a location and misinterprets the question's intent. Answer 2 provides the most accurate reasoning based on the natural habitat of a fox.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "4a640ceba2c831f3becbea595962c01483f022a2d551bfc9051aa9a73642aa42"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:31:06+00:00",
+            "usage_in": 733,
+            "usage_out": 111
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 155,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 655,
+        "tokens_out": 110,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 correctly identify hospitals as a location with a high likelihood of having many fire extinguishers due to safety regulations and the presence of flammable materials. Answer 2 incorrectly claims that ships have more fire extinguishers than hospitals, which is not accurate. While ships do require fire safety equipment, hospitals are subject to stricter fire safety regulations and have a greater number of potential fire hazards, making them more likely to have a significant number of fire extinguishers.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "984fd3224c70a1b92e4caacdbf77e3ec560d69bacb64aacc567c3a07171cc9f5"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:31:07+00:00",
+            "usage_in": 667,
+            "usage_out": 110
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 156,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 666,
+        "tokens_out": 92,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2 incorrectly suggests that a music store (B) is the best choice for learning to play an upright piano. While some music stores may offer lessons, they are primarily retail spaces and not specifically designed for instruction. Answers 1 and 3 correctly identify that a music class (C) is the most appropriate setting for learning to play a piano, as it is structured for teaching musical skills.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "6ab08f52015c06e3ca8ed45059eb0cf2a228bbeffb991953cb275615348e6ab0"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:31:16+00:00",
+            "usage_in": 678,
+            "usage_out": 92
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 168,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:ja"
+        ],
+        "tokens_in": 731,
+        "tokens_out": 127,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and 2 correctly identify the newspaper office (E) as the most likely location where a printer would be used by thousands of people, as newspapers are produced in large quantities for wide distribution. Answer 3 incorrectly argues that a newspaper office is not a place where \"unspecified many people\" use the printer, which is misleading since newspaper production serves a broad audience. The reasoning in Answer 3 also incorrectly claims that a print shop (D) is designed for handling orders from thousands of customers, which is not necessarily true as print shops can vary in scale.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "bd49b1f5a6478a9e6caf8a48dbde50fe997cc3bef55179d772f9145c0214fc59"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:31:29+00:00",
+            "usage_in": 743,
+            "usage_out": 127
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 171,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 652,
+        "tokens_out": 114,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify that moving out of the city to have a master bedroom implies seeking a suburban home, which is typically associated with larger living spaces. Answer 3 incorrectly assumes that \"large house\" is the best answer, but it fails to consider that the question specifically mentions moving out of the city, which strongly points toward a suburban setting. The term \"suburban home\" (B) directly aligns with the context of relocating from a city for more space and privacy.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "3cfa2350e8f748b2f86aaf5d31770bee691821383f2f99e81e558b318cac7e1d"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:31:31+00:00",
+            "usage_in": 664,
+            "usage_out": 114
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 181,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 650,
+        "tokens_out": 113,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both argue that airports have more telephone booths due to high traffic and the need for communication services. However, Answer 2 presents a different perspective by focusing on the historical and cultural preservation of telephone booths in London, which may not align with the current number of telephone booths. The question asks where there are more telephone booths, implying a current count rather than historical or cultural significance. Therefore, Answers 1 and 3 provide a more relevant reasoning process based on modern usage.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "8a5ba4eb432adce45a1528a4d26a7038e7b2b5d7d2cd6b77ae75bf00a2d30664"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:31:41+00:00",
+            "usage_in": 662,
+            "usage_out": 113
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 184,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 611,
+        "tokens_out": 99,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both correctly identify that laughter is a direct expression of happiness. However, they fail to consider the nuance of the question, which asks what someone feeling happiness \"can fall into.\" This implies a more profound or emotional response rather than a simple expression. Answer 3 correctly identifies that tears can be a result of intense happiness, making it the most appropriate choice based on the phrasing of the question.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "ff6877bac403df5f55a02beefb9c3df10923366704bb499be83a28a65586dd04"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:31:43+00:00",
+            "usage_in": 623,
+            "usage_out": 99
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 186,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 645,
+        "tokens_out": 114,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both select \"A) cook dinner\" as the correct answer, which is reasonable as it directly relates to a chef's evening activity. However, Answer 3 argues that \"prepare food\" (D) is more general and encompasses all the other options, making it a more accurate choice. While \"cook dinner\" is a specific task, \"prepare food\" better represents the broader role of a chef during the evening. Therefore, Answer 3 provides a more comprehensive reasoning.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "4a0a6001862709420a800bea44a716f4d4e85923759b8ac7e6154de561bd7917"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:31:52+00:00",
+            "usage_in": 657,
+            "usage_out": 114
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 189,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 561,
+        "tokens_out": 109,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both conclude that the correct answer is B) mortal, which is logically sound as immortality refers to the state of not dying, so lacking it implies being mortal. However, Answer 2 argues that the correct answer is C) dead, which is incorrect because \"dead\" refers to a current state, while the question asks what someone lacking immortality will one day be, implying a future state. Therefore, Answer 2's reasoning is flawed.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "00e3f80113b3009f73c4ffb2f2af81804e68c4136c385606ee6389e0c89c25f5"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:31:54+00:00",
+            "usage_in": 573,
+            "usage_out": 109
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 191,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 674,
+        "tokens_out": 95,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 3 incorrectly interprets the question. The question is not asking for a description of the properties of untreated glass, but rather what type of glass it is. \"Fragile\" (B) or \"regular\" (D) are more accurate classifications. Answer 3's reasoning is based on incorrect assumptions about the question's intent and misinterprets the meaning of \"treated to be extra strong.\"\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "ece4fe9a9ee8a280fcd1b945c54d287d26f58ff160b868cec674627c327d3dc1"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:31:55+00:00",
+            "usage_in": 686,
+            "usage_out": 95
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 194,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:ja"
+        ],
+        "tokens_in": 693,
+        "tokens_out": 111,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly states that \"two eyes\" (C) is the most universally true answer, but this is a biological trait shared by all humans, not specifically family members. Answer 2 suggests \"names\" (B) as the answer, which is plausible but not the most direct or universal family characteristic. Answer 3 correctly identifies \"brown hair\" (A) as a physical trait often shared within families due to genetic inheritance, making it the most accurate choice based on the question.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "4b5b727ef0b31ba060637c800c7a922753a0cc91ae710ccf285d84673a1532c4"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:32:01+00:00",
+            "usage_in": 705,
+            "usage_out": 111
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 195,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 753,
+        "tokens_out": 120,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies the supermarket (C) as an area with no grass, which is not accurate since supermarkets are buildings and not areas. Answer 2 and Answer 3 both suggest \"surface of earth\" (A) as the answer, but this is too vague and does not specifically indicate an area where items can be sold at a roadside stand. Answer 1's reasoning is more precise in identifying the supermarket as a commercial place where goods can be obtained for sale, even though it may not be an area with no grass.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "0fc925a4b6d9de219b03db758b61d4afeec3ed4e348cbe994b1ee72ca35c0481"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:32:03+00:00",
+            "usage_in": 765,
+            "usage_out": 120
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 197,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 679,
+        "tokens_out": 108,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2 incorrectly identifies \"tennis\" as the correct answer, which is not supported by common cultural or formal dress norms. The question asks where one \"must\" wear a white shoe, implying a requirement rather than a preference. While tennis may traditionally involve white shoes, it is not a mandatory requirement in most contexts. The other answers correctly identify that \"wedding\" (A) is the most logical choice as it is a formal occasion where white shoes are commonly required.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "8ad3ed5aa20b7019125564ed556ee4db058dbdec85ab7e25f4b4f98c65212329"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:32:05+00:00",
+            "usage_in": 691,
+            "usage_out": 108
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 198,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 707,
+        "tokens_out": 164,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly selects B (\"hand writing\") over E (\"hand written\"), despite the fact that \"hand written\" is a more accurate and commonly used term to describe the physical act of writing by hand, which aligns with the context of creating personal cards. Answer 2 and Answer 3 correctly identify \"hand written\" (E) as the most appropriate choice. However, Answer 2 incorrectly refers to \"hand written\" as \"more comprehensive and commonly used to describe the act of writing by hand,\" which is not a significant distinction in this context. Answer 3 provides a clearer and more precise reasoning process by distinguishing between \"hand writing\" (style) and \"hand written\" (method). Therefore, Answer 3 is the most correct.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "e21dce782eff227845c8544f88689dac55177dbf07a6e340a0541b42e657b70c"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:32:07+00:00",
+            "usage_in": 719,
+            "usage_out": 164
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 203,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 678,
+        "tokens_out": 119,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly suggests that \"drill\" is the most appropriate answer, implying that repetition is the main action of a master. However, the question asks what a master has done about their craft, and \"understand\" (E) better reflects the culmination of mastery. Answer 3 also argues for \"understand\" but fails to clearly distinguish between \"learn\" and \"understand\" in the context of mastery. Answer 2 correctly identifies that understanding is the most logical and comprehensive action of a master of their craft.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "e4a484c6dacf8938fa2393f23981a9d599093dec4e219e1a1034dad7fd2fd47d"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:32:17+00:00",
+            "usage_in": 690,
+            "usage_out": 119
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 206,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:ja"
+        ],
+        "tokens_in": 608,
+        "tokens_out": 126,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both conclude that \"feelings\" (E) is the correct answer, reasoning that it relates to emotions and empathy. However, this overlooks the possibility of a wordplay or idiomatic expression. Answer 3 correctly identifies that \"strong bladder\" (D) could be an idiom implying tolerance or endurance, which fits the context of wanting peace with all humans. The other options (A, B, C) are irrelevant to the context. Therefore, Answer 3 provides the most accurate reasoning based on potential idiomatic interpretation.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "c3ecd37adb133d15c0c6b967ce88ba3130bb000d9056680d065d2f0c03bacc25"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:32:21+00:00",
+            "usage_in": 620,
+            "usage_out": 126
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 210,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 688,
+        "tokens_out": 137,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both suggest that notoriety (A) is the correct answer, which is reasonable as sharing an embarrassing situation with many people can lead to public recognition, albeit negative. However, Answer 2 argues that emotional distress (B) is the most likely outcome, which is also valid as the person might feel uncomfortable or anxious. The question asks what \"telling many people\" will lead to, and while notoriety is a possible consequence, emotional distress is a more direct and immediate result of being embarrassed in front of others. Therefore, Answer 2 provides a more accurate reasoning process.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "dba864566816e513fd851101d5e1661ddcbaa77afb32b4f9196e159b1c3caef4"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:32:23+00:00",
+            "usage_in": 700,
+            "usage_out": 137
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 215,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 616,
+        "tokens_out": 112,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and 2 correctly identify \"further education\" (E) as the unique ability, as it refers to a human characteristic that is not limited to specific skills or actions. However, Answer 3 incorrectly argues that \"stand upright\" (B) is a unique ability, which is biologically true for humans but not an \"ability\" in the context of the question. The question asks about an ability, not a physical trait. Therefore, Answer 3's reasoning is flawed.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "076a3bb077e3340d340305bc9eb604799a28611644fc0cfe965fafab90af4811"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:32:44+00:00",
+            "usage_in": 628,
+            "usage_out": 112
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 217,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:ja"
+        ],
+        "tokens_in": 642,
+        "tokens_out": 79,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 3 incorrectly assumes that \"lie down\" (B) is the most direct response to being tired, while \"go to sleep\" (E) is a more specific and accurate action for an animal seeking rest. The reasoning in Answer 1 and Answer 2 correctly identifies \"go to sleep\" as the most appropriate choice.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "be5d1cebce3d511fe5d5d9778ee9ec108cc9e2347407458c921c55cd3e7debba"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:32:45+00:00",
+            "usage_in": 654,
+            "usage_out": 79
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 220,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 671,
+        "tokens_out": 112,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that \"office depot\" is the place to get more pencils, but the question asks where John went, implying a location he already had access to, not a store he needed to visit. Answer 2 incorrectly suggests \"pencil case\" as the answer, which is a container rather than a location. Answer 3 correctly identifies that a desk drawer is the most logical and direct answer, as it is a common place to store pencils and fits the context of the question.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "f7c53c89b845051ebf557fb7be9aff4f39e269988270081c1e303f398bcf0ffd"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:32:48+00:00",
+            "usage_in": 683,
+            "usage_out": 112
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 223,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:ja",
+            "P:skeptic"
+        ],
+        "tokens_in": 772,
+        "tokens_out": 115,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both suggest that a squash court is more commonly found in a fitness center, which is a reasonable assumption. However, the question specifically mentions \"the other end of the public what?\" which implies a public location. A park (D) is a public place where a squash court could be located, making it a more fitting answer based on the phrasing of the question. Answer 3 correctly identifies the public aspect of the question and selects \"park\" as the most appropriate choice.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "39416c500f97594bc2f00258f915799517c1fefb763eaa0140059ce6ad8d7e46"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:32:57+00:00",
+            "usage_in": 784,
+            "usage_out": 115
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 226,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 647,
+        "tokens_out": 144,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both suggest that the balalaika is most commonly associated with a music store, which is a valid point. However, Answer 2 argues that the balalaika is used in orchestral settings, which is also accurate. The key distinction lies in the question's phrasing: \"What could a balalaika be needed for?\" This implies a functional or contextual use rather than a place of sale. While a music store is where one might purchase a balalaika, the more direct and functional need for a balalaika is in an orchestra. Therefore, Answer 2 provides a more accurate interpretation of the question.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "dc8d1bc2366928a3584181d48ed5b802473339631b72b7d3289927933023d77e"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:32:59+00:00",
+            "usage_in": 659,
+            "usage_out": 144
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 227,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 738,
+        "tokens_out": 124,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that Victorian houses are more specific and thus more likely to have historical items, but it fails to recognize that \"older houses\" (B) is a broader and more logical category for accumulating historical items. Answers 2 and 3 correctly identify \"older houses\" as the most likely type of home to have an attic filled with historical items. However, Answer 3 slightly overstates the relevance of \"older houses\" by implying it encompasses a wider range of possibilities than necessary. Answer 2 provides a more concise and accurate reasoning process.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "e15ce72e999ce9df2c5ae9acceb92eedc5f3829e31df0e1e6bd155c09b329284"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:33:03+00:00",
+            "usage_in": 750,
+            "usage_out": 124
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 228,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 617,
+        "tokens_out": 117,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the first occurrence of a state in the choices (C) is the correct answer, even though both C and E refer to Mississippi. Answer 2 correctly identifies that Mississippi is the correct state, but it mistakenly selects E as the answer without considering that the question may have a duplicate option for emphasis. Answer 3 correctly identifies that Mississippi is the intended answer and accounts for the duplicate option by selecting E, which is the second occurrence of Mississippi. Therefore, Answer 3 is the most accurate.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "0fa09d1a6116192c1ecd570252bbe8c57d1281e4405c138a0a7adadb12074839"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:33:25+00:00",
+            "usage_in": 629,
+            "usage_out": 117
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 238,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 735,
+        "tokens_out": 118,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 suggests \"joyful or painful\" (C) as the solution, which introduces a binary emotional state that may not effectively address the dislike of learning. Answer 2 argues for \"fun\" (B), which is a valid approach but may not fully address deeper psychological resistance. Answer 3 advocates for \"interesting\" (A), which directly targets engagement and appeal without implying negative emotions. Among these, Answer 3 provides the most logical and direct approach to transforming the learning process for someone who does not like learning.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "c2bcbb08795a471b7c31d8661c7fe68e6002e10f042ebd22c62e5a3eae982e1d"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:33:28+00:00",
+            "usage_in": 747,
+            "usage_out": 118
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 241,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 615,
+        "tokens_out": 117,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify that \"clean clothes\" (B) is the most direct and literal outcome of cleaning clothes. However, they fail to consider the broader context of a date, where the goal might be more about making a good impression, which aligns with \"attractive appearance\" (D). Answer 3 correctly identifies that the purpose of cleaning clothes for a date may go beyond just cleanliness and relate to making a better impression, which is best captured by \"attractive appearance\" (D).\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "6bf26bf26727e0a7bea8745fc5dcc3f4a0fde1cf9b541bf5f78281e3f002d6ce"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:33:30+00:00",
+            "usage_in": 627,
+            "usage_out": 117
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 244,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:ja"
+        ],
+        "tokens_in": 744,
+        "tokens_out": 133,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly eliminates \"vomiting\" and \"mess\" due to the condition of not spilling anything. It also identifies \"contentment\" as the most appropriate choice for the subtle sense of comfort and satisfaction. Answer 2 argues that \"pleasure\" is more directly associated with the enjoyment, but this overlooks the nuance of comfort and relaxation inherent in eating breakfast in bed. Answer 3 incorrectly claims that \"happiness\" is the most general and common feeling, which is not necessarily accurate in this context. The reasoning in Answer 1 is the most precise and logically sound.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "121573a7eaf1309a0be4371846ed461b62884a4b3ffc6d6d1178b55d2a88a220"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:33:33+00:00",
+            "usage_in": 756,
+            "usage_out": 133
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 249,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 672,
+        "tokens_out": 106,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 3 incorrectly assumes that \"countryside\" (A) is the best answer, but the question specifies that Simon bought the cow to put it to work, not for meat. While the countryside is a general location, the most specific and relevant choice is \"dairy farm\" (C), as it directly relates to using the cow for work (milk production) rather than meat. Answers 1 and 2 correctly identify C as the best choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "6f93be4cfb8cac84d54f848fab55b47607236e1aefe567790cfe0e5dad1ab2ce"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:33:35+00:00",
+            "usage_in": 684,
+            "usage_out": 106
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 251,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 620,
+        "tokens_out": 103,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and 2 correctly identify the pantry as the most appropriate location for canned goods, emphasizing its design for food storage. However, they misinterpret the phrase \"small door\" as referring to the pantry itself, which is not accurate. Answer 3 correctly identifies that a cupboard (D) is typically associated with a small door and is commonly used for storing canned goods, making it the most accurate choice based on the phrasing of the question.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "c986f9aa20dd5df6b502a672d2fe4eb1722dfa0b8ff15c0b60298efabb843d97"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:33:37+00:00",
+            "usage_in": 632,
+            "usage_out": 103
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 253,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:ja",
+            "P:skeptic"
+        ],
+        "tokens_in": 740,
+        "tokens_out": 112,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both correctly identify that a shopping mall (B) is designed to attract a large number of customers, making it the most logical choice for maximizing potential customers. Answer 2 incorrectly assumes that \"big city\" (C) is the best choice based on population density without considering that a shopping mall is a more specific and optimized location for retail. The reasoning in Answer 2 is flawed because it misinterprets the nature of the question and overgeneralizes the options.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "d6d1ba8c1783b47db73f0939fb4f48e6e78bb0b9ba20513bd85fafd0771aba6d"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:33:41+00:00",
+            "usage_in": 752,
+            "usage_out": 112
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 255,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 730,
+        "tokens_out": 103,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and 2 correctly identify that coal or wood (A) involve combustion, a chemical reaction that produces heat. Answer 3 incorrectly claims that \"fire\" (B) is the best choice, as it is not a chemical reaction itself but rather a phenomenon resulting from a chemical reaction. The question specifically asks for a chemical reaction, not a phenomenon. Therefore, Answer 1 and 2 are correct, while Answer 3 is incorrect.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "f8827004484bd8e7a601c2eddd99b8a9834ba1b52ff391f9a61a345bc9e1a7b5"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:33:43+00:00",
+            "usage_in": 742,
+            "usage_out": 103
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 262,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 784,
+        "tokens_out": 106,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both suggest that the cupboard (C) is the correct answer. However, a cupboard is not typically a place where people breathe air, so it cannot be considered a valid location for air to have been breathed by people. Answer 2 correctly identifies that a house (B) could be the best choice because it can be occupied by a few people and is more likely to have air that has been breathed by only a few recently. \n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "565cb9b58686881b999adb9fb6f6a0ad3851f5c5aacda9f92e9f51af73a5d7a0"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:33:46+00:00",
+            "usage_in": 796,
+            "usage_out": 106
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 265,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 668,
+        "tokens_out": 97,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the presence is at \"friend's house,\" which is not directly supported by the question. The question focuses on the dog's action of running to the front window, suggesting the presence is at the window itself. Answers 2 and 3 correctly identify the window as the location where the dog reacted, making them more accurate. However, Answer 3 provides a more concise and focused reasoning process.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "3f38bf26a45fde3687b844950973bf8a897b3141c50f109c53e1d982766e122a"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:33:47+00:00",
+            "usage_in": 680,
+            "usage_out": 97
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 269,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 711,
+        "tokens_out": 126,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly states that a computer is the most appropriate choice, but it does not consider that the cloud is a more modern and accessible option for storing digital files. Answer 2 and Answer 3 correctly identify that the cloud is the most suitable option for storing digital files, as it allows remote access and storage. However, Answer 2 mentions that a computer is \"not the most secure or accessible option for long-term storage,\" which is somewhat subjective. Answer 3 provides a clearer and more comprehensive reasoning process by emphasizing the accessibility and remote nature of cloud storage.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "5a2c66706bff7334b4ab5915e814ba45a5f9566c2443ab159c3dd3df26ce119b"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:33:57+00:00",
+            "usage_in": 723,
+            "usage_out": 126
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 273,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 729,
+        "tokens_out": 93,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that the question is about why books have chapters on the back, which relates to reading books. Answer 2 and Answer 3 incorrectly focus on the phrase \"I like to examine different things\" as the main point of the question, while the actual question is about the structure of books. The correct answer should relate to the act of reading, not examining in a general sense.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "62f0ab3368bb7b7784c748c2010e98b9afe0fa045fa68492fc9e273e9d72de20"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:33:59+00:00",
+            "usage_in": 741,
+            "usage_out": 93
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 275,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "L:ja",
+            "P:skeptic"
+        ],
+        "tokens_in": 722,
+        "tokens_out": 120,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that a homeless shelter is the best option for Jimmy to get a beer, but it doesn't logically connect to the need to avoid his wife or legal issues. Answer 2 incorrectly suggests that the neighbor's house is a safe place to get a beer while avoiding his wife, which is not necessarily true. Answer 3 correctly identifies that prison (E) would be a place where Jimmy could potentially get a beer without involving his wife, making it the most logical choice based on the context of probation and avoiding alcohol.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "3de4be93d691cb359dc9c2fb0dbecec722cc0b295c60c5f68e111c7b79ad90e3"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:01+00:00",
+            "usage_in": 734,
+            "usage_out": 120
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 278,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 644,
+        "tokens_out": 101,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both correctly identify that the throne room (C) is a formal and specific location for a king to meet with an ambassador. However, Answer 3 argues that \"court\" (A) is the most appropriate, which is less specific than the throne room. The throne room is more directly associated with the king's official presence and formal meetings, making it a more precise answer than the general term \"court.\"\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "07c8918574a81ef15799fd8d31fc53a1983306a2994d069f20fe74ab2c6ad793"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:10+00:00",
+            "usage_in": 656,
+            "usage_out": 101
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 279,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 714,
+        "tokens_out": 149,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 assumes that \"concrete\" refers to a concrete surface, and concludes that a street is the most likely answer. However, this misinterprets the question as asking for a place with a concrete surface rather than a ball made of concrete. Answer 2 interprets \"concrete\" metaphorically, but still fails to consider that a \"concrete ball\" is not a typical item used for play. Answer 3 correctly identifies that \"concrete ball\" may refer to a pool ball, which is made of a hard material (often similar to concrete in composition) and is played on a pool table. This interpretation aligns with the literal meaning of the question.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "102ba443ffbbc204f4f438b873ee4ba22e9bac8d519e57656cab293f06ea9a35"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:12+00:00",
+            "usage_in": 726,
+            "usage_out": 149
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 281,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 698,
+        "tokens_out": 162,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both suggest \"getting drunk\" (B) as the correct answer, reasoning that it is a negative activity that would make Jimmy dislike the party. However, the phrasing \"did nothing but\" implies that the activity was repetitive or monotonous, not necessarily negative. \"Have fun\" (E) is more neutral and could be seen as the default activity at a party, which may not align with the idea of something unappealing. Answer 3 argues that \"having fun\" (D) is more appropriate because it is a general activity that people do at parties, and it fits better with the phrasing \"did nothing but.\" Therefore, Answer 3 provides a more accurate interpretation of the question.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "46eea6ce3586770d26b020f837a29ce95ef871fc0aacb4171ba73cfcaffac396"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:16+00:00",
+            "usage_in": 710,
+            "usage_out": 162
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 283,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 724,
+        "tokens_out": 90,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both correctly identify that a special ficus would be found in an arboretum due to its focus on trees and shrubs. However, Answer 3 incorrectly states that a botanical garden is the most appropriate choice, when in fact an arboretum is more specific to woody plants like ficus. The reasoning in Answer 3 is therefore flawed.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "766da963126af9f73496b0bb4508d993b3cedfe61752ea7fcc457e87b94be8ab"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:17+00:00",
+            "usage_in": 736,
+            "usage_out": 90
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 286,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 706,
+        "tokens_out": 152,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and 2 both correctly identify that \"hurt\" (D) is a broader and more appropriate choice than \"falling down\" (E), as the question implies a general danger rather than a specific action. Answer 3 incorrectly argues that \"falling down\" (E) is more direct and includes the possibility of other outcomes like injury or accident, but this reasoning is flawed because \"falling down\" is not necessarily the most comprehensive or likely outcome of riding a bike through rough terrain. The question is asking for what one could find themselves in a dangerous situation, which aligns better with \"hurt\" (D) as it encompasses a range of possible negative outcomes.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "ec6a38ab54f34095ef955a519a3ae08b07c27daa1cfca046cdb62529a88c2300"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:20+00:00",
+            "usage_in": 718,
+            "usage_out": 152
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 287,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 589,
+        "tokens_out": 113,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 correctly interpret \"obtuse\" in the context of a document as meaning unclear or difficult to understand, and they both conclude that \"clear\" (D) is the best choice. However, Answer 2 incorrectly interprets \"obtuse\" as referring to an angle in geometry and selects \"acute angled\" (E), which is not relevant to the metaphorical use of \"obtuse\" in describing a document. Therefore, Answer 2 is incorrect.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "656dff6094cd54810463179e9c85a3926dcaa1080aecd8ba2b4e594b54fce2a3"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:22+00:00",
+            "usage_in": 601,
+            "usage_out": 113
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 298,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 673,
+        "tokens_out": 70,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2 incorrectly states that England might not always have a queen, which is not accurate as England has had a monarchy with a queen for most of its history. Answer 1 and Answer 3 correctly identify that a bee hive might not always have a queen, making them more accurate.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "fd8988a702faf57cf685f798915dc1fce1d45296fd7c1940acdc412095537ff3"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:26+00:00",
+            "usage_in": 685,
+            "usage_out": 70
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 299,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 670,
+        "tokens_out": 128,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both argue that \"have more knowledge\" (E) is the correct answer, reasoning that it provides the foundation for learning hard concepts. However, this reasoning assumes that having more knowledge is a prerequisite rather than a result of learning. The question asks what one \"needs to be\" to learn, which implies a quality or state rather than an accumulation of knowledge. Answer 3 correctly identifies that \"empowering\" (D) aligns with the idea of being able to learn hard concepts by enhancing one's capacity to understand and apply new information.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "9bc0419bc6e63a48766425c018c17d522c7f0492eed07e036edcb8497c26acd9"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:29+00:00",
+            "usage_in": 682,
+            "usage_out": 128
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 300,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 704,
+        "tokens_out": 103,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify that \"expend energy\" (B) is the most relevant choice, as it aligns with the idea of using exercise to manage energy levels and reduce cravings associated with addiction. Answer 3 incorrectly suggests that \"condition heart\" (A) is the correct answer, which is not the primary reason addicts turn to exercise. The main purpose in this context is to expend energy rather than specifically condition the heart.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "46e7524de8a9b355f811286bb9b48ebaa91d7ca013a090c56ff972b18bd69031"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:31+00:00",
+            "usage_in": 716,
+            "usage_out": 103
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 301,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "P:expert",
+            "L:ja"
+        ],
+        "tokens_in": 697,
+        "tokens_out": 109,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 correctly identify that \"lark\" is associated with early risers, which fits the context of hearing something at sunrise. However, Answer 2 argues that \"rooster\" is the correct answer because it crows at dawn. While this is a valid metaphor, the question is more about identifying a person (as opposed to an animal) who would be active at sunrise. Therefore, Answer 2 is less accurate in the context of the question.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:ja",
+            "prompt_sha256": "dde6c86ba7a18b8244eea9086185230aa627f0f28ffb09e051d88398424ee4b6"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:33+00:00",
+            "usage_in": 709,
+            "usage_out": 109
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 302,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 609,
+        "tokens_out": 158,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both conclude that \"A) classroom\" is the least interesting place to children, which is a reasonable assumption based on the idea that classrooms are primarily for learning and may not be as engaging as other options. However, Answer 3 presents a different perspective by suggesting that \"E) dinner\" is not inherently interesting to children, which is also valid. The question asks for the place that is \"not interesting to children,\" and while both A and E could be considered, the reasoning in Answer 3 more directly addresses the concept of \"interest\" by highlighting that dinner is a routine activity rather than an engaging or fun one. Therefore, Answer 3 provides a more accurate and focused reasoning process.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "71776e2171e62986c96773c6d52563cc674a0e0fa18dfcde598ef8dfb8e3c833"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:36+00:00",
+            "usage_in": 621,
+            "usage_out": 158
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 308,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 705,
+        "tokens_out": 99,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2 incorrectly identifies \"containing pots and pans\" as a location, which is not valid. The question asks where the cabinets might be installed, not what they contain. Answer 1 and Answer 3 both correctly identify the kitchen as the most likely installation location based on the context of appearance and common use of cabinets. However, Answer 3 provides a more detailed reasoning process that better addresses the context of appearance and functionality.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "318f7eb45e4fc4a00d49e530243534f55516829f57849121385116fa29d20984"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:40+00:00",
+            "usage_in": 717,
+            "usage_out": 99
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 309,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "tokens_in": 683,
+        "tokens_out": 90,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify \"argument\" (C) as a direct and common result of competition between individuals. However, Answer 3 incorrectly suggests that \"debate\" (B) is more appropriate than \"argument\" (C), as debate implies a structured exchange of ideas rather than the conflict typically associated with competition. Therefore, Answer 3's reasoning is flawed.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "cfd593f9f69133d449eba09f0a5e38ed5ef8e92a4ccb1f4cf5f56ae5435399d2"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:42+00:00",
+            "usage_in": 695,
+            "usage_out": 90
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 313,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 602,
+        "tokens_out": 110,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the refrigerator is the most common place for leaving a paper notice on a house, which is not accurate in the context of a general question about a house. Answer 2 and Answer 3 both correctly identify the front door as the most likely place for a paper notice to be left, as it is a visible and accessible location. However, Answer 2 and Answer 3 are identical in reasoning and final answer, so Answer 2 is the correct choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "b4d6d76120fcbd37b7df82168dd3cb70d56ba893f41aacdba63a3ef1fddd8640"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:44+00:00",
+            "usage_in": 614,
+            "usage_out": 110
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 316,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:ja",
+            "P:skeptic",
+            "P:expert"
+        ],
+        "tokens_in": 720,
+        "tokens_out": 100,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify that consuming uncooked chicken can lead to foodborne illness, which is a general term encompassing various symptoms. However, they both fail to recognize that \"throwing up\" (E) is a direct and immediate consequence of food poisoning caused by bacteria like Salmonella. Answer 3 correctly identifies \"throwing up\" as the most specific and likely response, making it the most accurate choice.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "P:expert",
+            "prompt_sha256": "b598084176728b9a30c5a1035e093a570de155c8f2eba1918e82f804c8a7e84b"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:45+00:00",
+            "usage_in": 732,
+            "usage_out": 100
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 320,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:expert",
+            "P:skeptic",
+            "L:ja"
+        ],
+        "tokens_in": 602,
+        "tokens_out": 87,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify \"birth\" as the most direct and accurate answer to the question, as reproduction begins and ends with new life through birth. Answer 3 incorrectly interprets the question by choosing \"propagation,\" which is a broader term and not as directly related to the specific context of \"new life\" and the beginning/end of life. \n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "b03bb8c04f03922df9278d4d2a05693b540065457fb6b776388e2363a67d6268"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:48+00:00",
+            "usage_in": 614,
+            "usage_out": 87
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 326,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:ja",
+            "P:expert",
+            "P:skeptic"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "P:skeptic",
+            "L:ja",
+            "P:expert"
+        ],
+        "tokens_in": 657,
+        "tokens_out": 115,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify \"disinterest\" (D) as the most appropriate choice, as it directly refers to a lack of interest or concern, which aligns with the context of not caring when doing something. Answer 3 incorrectly selects \"being mean\" (C), which implies negative behavior rather than a lack of care. Therefore, Answer 1 and Answer 2 are correct, but since only one answer can be selected, Answer 1 is more detailed and precise in its reasoning.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "5c36516904ae231c7d7203fdc914d4b9fe3853da661569842c98c5dc183e0d15"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T07:34:52+00:00",
+            "usage_in": 669,
+            "usage_out": 115
+        },
+        "donor_position": 2,
+        "pilot": false
+    }
+]
