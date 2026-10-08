@@ -1,0 +1,1734 @@
+[
+    {
+        "Model": {
+            "modelType": "gpt4omini",
+            "temperature": 0.0,
+            "modelName": "gpt-4o-mini-2024-07-18",
+            "displayName": "GPT4o mini"
+        },
+        "Dataset": {
+            "datasetType": "mathqa",
+            "displayName": "MathQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:es vs W:rewrite1 vs L:zh)",
+            "languages": [
+                "spanish",
+                "english",
+                "chinese"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 3,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-k-v1",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "candidate_files": [
+            "result/arms/gpt4omini/mathqa/L_es.json",
+            "result/arms/gpt4omini/mathqa/W_rewrite1.json",
+            "result/arms/deepseek4.1flash/mathqa/L_zh.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 458,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "menu_judge",
+        "menu": "GS-085",
+        "item_filter": "menu_all_answered_disagreement",
+        "n_judged_items": 400,
+        "order_scheme": "rq3gj_planned",
+        "experiment": "rq3gj",
+        "version": "ZH-deepseek4.1flash",
+        "donor": "deepseek4.1flash",
+        "donor_slot": 2,
+        "donor_arm": "L:zh",
+        "order_label": null,
+        "candidate_models": [
+            "gpt4omini",
+            "gpt4omini",
+            "deepseek4.1flash"
+        ],
+        "n_planned_items": 317,
+        "api_usage": {
+            "calls": 50,
+            "calls_without_usage": 0,
+            "prompt_tokens": 73063,
+            "completion_tokens": 7248,
+            "refusals": 0
+        },
+        "model_versions": {
+            "gpt-4o-mini-2024-07-18": 50
+        },
+        "calls_utc": {
+            "first": "2026-10-08T00:21:28+00:00",
+            "last": "2026-10-08T00:23:15+00:00"
+        }
+    },
+    {
+        "item_id": 1,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:zh",
+            "L:es"
+        ],
+        "tokens_in": 1547,
+        "tokens_out": 179,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 contains multiple errors in the calculations of both simple and compound interest. The simple interest is correctly calculated as Rs. 560, but the compound interest calculation is incorrect, leading to an incorrect difference of 189.3, which does not match any of the provided options. Answer 2 correctly calculates the simple interest as Rs. 560 and the compound interest as approximately Rs. 688.96, leading to a difference of about 129, which matches option a. Answer 3 also calculates the simple interest correctly but misinterprets the question by focusing on the total amounts instead of just the interest difference. It concludes with a difference of 189.3, which is not an option, and incorrectly suggests option b as the closest. Therefore, Answer 2 is the most accurate and aligns with the options provided.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "c142e8fedd7689851945bc25e098bdbdf15c894e4d245dd50b3c78d65dd50c40"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:21:28+00:00",
+            "usage_in": 1554,
+            "usage_out": 179
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 2,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "tokens_in": 1073,
+        "tokens_out": 152,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that there are 29 stations in total (28 between Hyderabad and Bangalore plus the two cities themselves) and uses the combination formula to calculate the number of unique pairs of stations. However, it arrives at an incorrect conclusion that the closest option is 380, which is not accurate based on the calculations. Answer 2 also correctly identifies the total number of stations as 30 and uses the combination formula, but it arrives at 435, which is not among the options. Answer 3 correctly calculates the number of unique pairs of stations as 870, which matches one of the provided options. Therefore, Answer 3 is the most accurate and aligns with the question's requirements.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "48e2b3bdf1832e7f9645a73ec300d85cac560bf827c34ff93dc2b7f5872a25aa"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:21:30+00:00",
+            "usage_in": 1080,
+            "usage_out": 152
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 21,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "W:rewrite1",
+            "L:es"
+        ],
+        "tokens_in": 1607,
+        "tokens_out": 242,
+        "trace": {
+            "judge_output": "Reasoning process\nAll three answers correctly identify that the total age of the 15 students is 210 years and that the total age of the 5 students with an average age of 14 years is 70 years. They also correctly calculate the total age of the 9 students with an average age of 16 years as 144 years. However, they all arrive at the conclusion that the age of the 15th student is -4 years, which is not possible. The inconsistency in the problem leads to the conclusion that there is an error in the data provided. Among the three answers, Answer 2 and Answer 3 both suggest that the age of the 15th student could be interpreted as 4 years, which is the only reasonable option given the choices, despite the negative age calculation. Answer 1, however, does not provide a valid conclusion and states that there is no correct option. Therefore, Answers 2 and 3 are more aligned with the question's requirements, but Answer 2 explicitly states that the age of the 15th student would be 4 years based on the calculations, making it the most straightforward choice.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "6b7aaba573330263396841604d7ccc7c56dd3db93a066d5205150182ecbb1144"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:21:32+00:00",
+            "usage_in": 1614,
+            "usage_out": 242
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 26,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:es",
+            "L:zh"
+        ],
+        "tokens_in": 1022,
+        "tokens_out": 135,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the taxes paid by John and Ingrid, as well as their total income and total taxes. It then accurately computes the combined tax rate as approximately 35.45%, which is closest to option c (35%). Answer 2 also correctly calculates the taxes and total income but incorrectly rounds the combined tax rate to 35.6%, which is not the closest option. Answer 3 follows the same reasoning as Answer 2 and also concludes with 35.6%, which is incorrect. Therefore, Answer 1 is the most accurate and aligns with the correct calculation of the combined tax rate.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "d8160df991c9daeaa54134864e32581aa081067168b79eeac0cbf2f64ea4ea90"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:21:35+00:00",
+            "usage_in": 1029,
+            "usage_out": 135
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 38,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:es",
+            "L:zh"
+        ],
+        "tokens_in": 911,
+        "tokens_out": 101,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first two answers correctly calculate the total number of intersections along Oak Street, which is 5, and identify that the highest-numbered street that intersects Oak Street is 5th Street. However, the third answer incorrectly states that the highest-numbered street is 4th Street, which is not accurate since it fails to account for the last intersection at 2000 meters. Therefore, the correct answer is found in the first two responses.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "86383aea9fa871a75d3d506ea1923c388b4b92f70a2084e0b080825cefccc9d8"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:21:37+00:00",
+            "usage_in": 918,
+            "usage_out": 101
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 41,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "W:rewrite1",
+            "L:es"
+        ],
+        "tokens_in": 2072,
+        "tokens_out": 162,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies the distinct lengths of the segments created by marking the branch and accurately calculates the total length removed and the remaining length. It concludes with the correct fraction of the original branch that remains, which is \\( \\frac{3}{5} \\). \n\nAnswer 2 contains a significant error in calculating the total length removed. It incorrectly sums the lengths and concludes that all segments exceed the total length of the branch, leading to an incorrect final answer of 0 meters remaining. \n\nAnswer 3 also makes an error in the calculation of the total length removed and the remaining length. It incorrectly counts the lengths and arrives at a final answer of \\( \\frac{8}{15} \\), which is not consistent with the correct calculations.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "5e0d37858b1993604f7680ee44de4d88b48c2954745bac455af425ab6e9682f6"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:21:39+00:00",
+            "usage_in": 2079,
+            "usage_out": 162
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 46,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "L:zh",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1446,
+        "tokens_out": 155,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the total work done by the first group and establishes a relationship between the work rates of men and women. However, it does not clearly show the calculations for the second group, which is essential for verifying the work rates. Answer 2 provides a clear and detailed calculation of the work rates and correctly concludes that 15 men and 20 women will take 4 days to complete the work. Answer 3 also arrives at the same conclusion as Answer 2, but it is slightly less clear in its presentation. Both Answers 2 and 3 are correct, but Answer 2 is more straightforward and easier to follow. Therefore, I will select Answer 2 as the most correct one.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "c290a3d6266845b1404e343fa086255a4b17cc14c049af89d2fdc1e0ae984bcd"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:21:41+00:00",
+            "usage_in": 1453,
+            "usage_out": 155
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 53,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "L:zh",
+            "W:rewrite1"
+        ],
+        "tokens_in": 859,
+        "tokens_out": 146,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the votes James received and the votes needed to win, concluding that he needs 990 additional votes. Answer 2, however, incorrectly states that James needs 1001 votes to win, which is not accurate since he only needs more than 1000. Therefore, the calculation of additional votes needed is also incorrect in this answer. Answer 3 also arrives at the correct conclusion of needing 990 additional votes, similar to Answer 1. Since both Answers 1 and 3 provide the correct reasoning and arrive at the same conclusion, but Answer 1 is the first one to present the correct answer, it is the most appropriate choice.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:es",
+            "prompt_sha256": "5597c39763a721b757a28d72d6a5dbe965d82b0525ea61b44a4a3f265416c80d"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:21:42+00:00",
+            "usage_in": 866,
+            "usage_out": 146
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 59,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "W:rewrite1",
+            "L:es"
+        ],
+        "tokens_in": 1528,
+        "tokens_out": 169,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that A's investment is for 12 months and B's investment is for a variable number of months, but it struggles with the calculations and ultimately concludes that B joined after 7 months based on an assumption that the investment amount for B should be 54000 instead of 5400. Answer 2 correctly sets up the equation and finds that B joined after 6 months, which aligns with the profit-sharing ratio of 2:1. Answer 3 incorrectly calculates the time B was in the business and arrives at an incorrect conclusion that B was in the business for 5 months, leading to the assertion that B joined 7 months after A started, which is inconsistent with the calculations. Therefore, Answer 2 is the most accurate and logical choice.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "4693efeccdfe1a34d6a16ed1d0e793d2ef02d75ecc5d599a31091e52c3143242"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:21:46+00:00",
+            "usage_in": 1535,
+            "usage_out": 169
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 66,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:zh",
+            "L:es"
+        ],
+        "tokens_in": 882,
+        "tokens_out": 135,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly solves the equation step by step and arrives at the correct solution \\(x = 4\\), which corresponds to choice d. Answer 2 incorrectly concludes that \\(x = \\frac{40}{9}\\), which is not a valid solution and does not match any of the provided options. Answer 3 also correctly solves the equation and arrives at the same solution \\(x = 4\\) as Answer 1. Since both Answers 1 and 3 provide the correct solution, but Answer 1 is the first to present it, I will select Answer 1 as the most correct.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "8bb761c93460b96fa0b62ffc9e56960db82d7dbbd7259a5de7d30193cfc4e531"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:21:48+00:00",
+            "usage_in": 889,
+            "usage_out": 135
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 73,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:es",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1268,
+        "tokens_out": 119,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies the numbers between 24 and 140 whose digital sums are multiples of 7, calculating a total of 15 such numbers. Answer 2, however, states that the total is 14, which is incorrect. Answer 3 also arrives at a total of 14, which is inconsistent with the correct count provided in Answer 1. Therefore, the most accurate answer is from Answer 1, which correctly concludes that there are 15 numbers with a digital sum that is a multiple of 7.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "f49a19811f9ef0bad57e551278351c67f0278595c702a69d6a72b03c0f2159f7"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:21:49+00:00",
+            "usage_in": 1275,
+            "usage_out": 119
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 78,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "L:zh",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1853,
+        "tokens_out": 156,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly calculates the total time as 24.5 hours, which does not align with the problem's requirements. Answer 2 correctly calculates the time taken for Jim to type the report and Mary to edit it, arriving at approximately 41.43 hours, which is rounded to 41.4 hours, matching one of the provided options. Answer 3 also arrives at the same conclusion as Answer 2, confirming the total time of approximately 41.43 hours and selecting option (a) 41.4. Both Answers 2 and 3 are correct in their calculations, but since they both arrive at the same conclusion, I will select Answer 2 as it is the first correct answer.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "de2128a4778ab3fa06e7062836147df3c2ea93cba566e65cc1a1f630dd091c78"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:21:52+00:00",
+            "usage_in": 1860,
+            "usage_out": 156
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 82,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:zh",
+            "L:es"
+        ],
+        "tokens_in": 1412,
+        "tokens_out": 114,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly derive the ratio of the bases as \\(16:9\\) based on the given ratios of areas and heights. They both use the area formula appropriately and arrive at the same conclusion through valid mathematical steps. Answer 3, however, incorrectly concludes that the ratio of the bases is \\(4:3\\), which contradicts the calculations presented in Answers 1 and 2. Therefore, Answers 1 and 2 are correct, while Answer 3 is incorrect.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "84d4a06d22c3bd6427f46ced67529f327a1b112a47f16fef128b340e1cd3daf0"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:21:54+00:00",
+            "usage_in": 1419,
+            "usage_out": 114
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 85,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:es",
+            "L:zh"
+        ],
+        "tokens_in": 1135,
+        "tokens_out": 141,
+        "trace": {
+            "judge_output": "Reasoning process\nAll three answers correctly calculate the distance the thief travels before the owner starts chasing, which is 25 km. They also correctly determine the relative speed between the owner and the thief as 10 km/h. However, Answers 1 and 2 correctly conclude that the total time from the start when the owner catches up with the thief is 3 hours, which is not an option provided. They both select the closest option, which is 5 hours. Answer 3 incorrectly suggests rounding down to 2 hours, which does not align with the calculated time. Therefore, Answers 1 and 2 are more accurate in their reasoning and conclusion.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "f23edee4bf6f35ceecff6dda0cf3a1087a30e47a3557cebd2fbc04f686923420"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:21:57+00:00",
+            "usage_in": 1142,
+            "usage_out": 141
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 87,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "tokens_in": 1452,
+        "tokens_out": 201,
+        "trace": {
+            "judge_output": "Reasoning process\nAll three answers correctly identify that the word \"good\" consists of four letters, with the letter 'o' repeating twice. They all apply the formula for permutations of a multiset correctly, leading to the conclusion that the number of distinct permutations is 12. However, none of the answers acknowledge that the provided options (18, 20, 22, 23, 24) do not include 12, which is a critical point. The first two answers suggest that the closest option is 18, which is not logically sound since it does not relate to the calculated permutations. The third answer explores the possibility of a misunderstanding of the question but ultimately concludes with option e (24) as the most common error, which is also not justified by the calculations. Therefore, while all answers have their flaws, the third answer provides a more comprehensive exploration of the problem and acknowledges the discrepancy with the options, making it the most reasonable choice.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "06b856f4e511a87672f0af9b5d2742c0ba49b753131c8c8196505e56df40c948"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:21:59+00:00",
+            "usage_in": 1459,
+            "usage_out": 201
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 88,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:es",
+            "L:zh"
+        ],
+        "tokens_in": 1432,
+        "tokens_out": 156,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly sets up the equations based on the problem statement but ultimately arrives at a negative discriminant, indicating no real solutions for the sides of the triangle. This suggests an error in the calculations or assumptions. However, it does correctly calculate the area using the maximum area approach, yielding an area of 450. Answer 2 follows a similar reasoning and also concludes with an area of 450, which is consistent with the correct approach. Answer 3, however, incorrectly calculates the area as 500, which does not align with the correct area derived from the maximum product of the sides. Therefore, Answers 1 and 2 are valid, but Answer 2 is more concise and clear in its reasoning.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:es",
+            "prompt_sha256": "623d3e1552b87c115e9fdb45f361a1c34332e13896c78b75a6255be820f90620"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:01+00:00",
+            "usage_in": 1439,
+            "usage_out": 156
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 90,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "W:rewrite1",
+            "L:es"
+        ],
+        "tokens_in": 1269,
+        "tokens_out": 126,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies 4487 as the largest 4-digit number that is divisible by 7 and becomes divisible by 3 when 19 is added. It accurately checks the divisibility conditions for both 7 and 3. Answer 2 incorrectly concludes that 4473 is the answer, despite it not meeting the criteria for divisibility by 3 after adding 19. Answer 3 also arrives at the correct conclusion but does not provide a clear explanation of the checks performed. Therefore, Answer 1 is the most accurate and thorough in its reasoning.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "a4397429d9ba9f9ba8200d272ffde74d7e18de73b56a42c607b885cd455622c6"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:02+00:00",
+            "usage_in": 1276,
+            "usage_out": 126
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 102,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:es",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1048,
+        "tokens_out": 141,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that there are 30 stations in total (28 between Ernakulam and Chennai plus the two endpoints) and calculates the number of unique pairs of stations as 30 × 29 = 870, which matches one of the provided options. Answer 2 miscalculates the total number of stations and uses an incorrect combination formula, leading to an incorrect conclusion. Answer 3 also miscalculates the number of unique pairs by using the combination formula incorrectly and arrives at a number (378) that does not match any of the options. Therefore, Answer 1 is the most accurate and aligns with the question's requirements.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "abecb462be7fb9595cf691e5fca685f36c711bab0964c7fd706e1c5d262255d9"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:05+00:00",
+            "usage_in": 1055,
+            "usage_out": 141
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 130,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:es",
+            "L:zh"
+        ],
+        "tokens_in": 1498,
+        "tokens_out": 171,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the total work in man-days and determines the work rate of men and women. It arrives at approximately 11.76 days, rounding to 12 and selecting the closest option of 13 days. However, it does not explicitly state the rounding process, which could lead to confusion. Answer 2 also calculates the total work correctly but makes an error in the equivalence of men to women, leading to an incorrect conclusion of 15 days. Answer 3 accurately calculates the daily work rate of 6 men and 11 women and correctly concludes that the work will take 15 days. However, it does not provide a clear explanation of the equivalence between men and women. Overall, Answer 1 provides the most accurate and clear reasoning, despite the rounding issue.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "955bcafc206e1d8c3924a84a085983649455f76f5d2372ecbb065f04a6257605"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:07+00:00",
+            "usage_in": 1505,
+            "usage_out": 171
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 131,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "W:rewrite1",
+            "L:es"
+        ],
+        "tokens_in": 1307,
+        "tokens_out": 117,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the relative speed and arrives at the correct speed of the train as 79 km/h. Answer 2 also arrives at the same conclusion, using a clear step-by-step approach to find the speed of the train. However, Answer 3 incorrectly calculates the distance covered by the train and the man, leading to an incorrect conclusion of 50 km/h. Therefore, Answers 1 and 2 are both correct, but since they both arrive at the same answer, I will select the first one.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "029e0490b93d98614e5c5c19db87123182fc46f74b6febb4feb1b47bceb066c1"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:09+00:00",
+            "usage_in": 1314,
+            "usage_out": 117
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 135,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:es",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1134,
+        "tokens_out": 133,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the circumference of the wheel based on the diameter but misinterprets the number of revolutions needed, concluding that it does not match any options. Answer 2 also calculates the circumference correctly but arrives at a similar conclusion about the number of revolutions being around 20, which is not an option. It then incorrectly chooses option c (14) without justification. Answer 3 provides a thorough calculation and reasoning but ultimately concludes with option a (15) as the closest choice, which is more reasonable than the others. Therefore, Answer 3 is the most accurate and logical choice.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "c7016362c0f6b24397debc11239e33d78e94a3a5001f0f6403f7dfc6fc5dc74a"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:11+00:00",
+            "usage_in": 1141,
+            "usage_out": 133
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 146,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:es",
+            "L:zh"
+        ],
+        "tokens_in": 2132,
+        "tokens_out": 156,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both arrive at the conclusion that the two men will meet after 90 minutes, which is consistent with the calculations regarding the distances and speeds involved. They correctly analyze the time taken for the train to pass each person and the subsequent meeting time based on their relative speeds. However, Answer 3 arrives at a conclusion of 100 minutes, which is not supported by the calculations provided in the other answers. Additionally, it suggests that the answer is \"none of these,\" which contradicts the findings of the other two answers. Therefore, the most accurate and consistent answers are 1 and 2, but since they are identical, I will select Answer 1 as the first correct response.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "c2b9c6f29cff1a812df402d22d455891dc7beea7034e4535b54ad01c07de5258"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:13+00:00",
+            "usage_in": 2139,
+            "usage_out": 156
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 153,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "W:rewrite1",
+            "L:es"
+        ],
+        "tokens_in": 1216,
+        "tokens_out": 149,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both correctly calculate the total work done in man-days and the equivalent work rate of men and boys. They both arrive at the conclusion that 4 men and 9 boys can complete the work in 16 days, which is consistent with the calculations. However, Answer 3 incorrectly concludes that 4 men and 9 boys can complete the work in 2 days, which contradicts the calculations of work rates and total work done. Therefore, Answers 1 and 2 are correct, while Answer 3 is incorrect. Since both Answers 1 and 2 provide the same correct conclusion, I will select Answer 1 for the final choice.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "ba90d5e4d16aa492a3263c00d5d2e5dc6240237322c04946f67ebdbed4e7c3c3"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:16+00:00",
+            "usage_in": 1223,
+            "usage_out": 149
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 158,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "L:zh",
+            "W:rewrite1"
+        ],
+        "tokens_in": 838,
+        "tokens_out": 77,
+        "trace": {
+            "judge_output": "Reasoning process\nThe first two answers correctly calculate f(-1) and arrive at the result of -1, which matches the calculations. However, the third answer incorrectly concludes that f(-1) equals 1, which is not correct based on the calculations provided. Therefore, the first two answers are correct, while the third is incorrect.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:es",
+            "prompt_sha256": "624877045aec9a050a339290a0f2221f18f6a369c9191283c01b790f0c91f3dd"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:17+00:00",
+            "usage_in": 845,
+            "usage_out": 77
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 161,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "W:rewrite1",
+            "L:es"
+        ],
+        "tokens_in": 1311,
+        "tokens_out": 155,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both correctly derive the ratio of water to milk as 3:8, which is consistent with the calculations based on the cost of milk and the desired selling price. They correctly set up the equation based on the cost of the mixture and solve it accurately. Answer 2, however, incorrectly calculates the selling price needed for a 50% profit and arrives at a wrong conclusion about the ratio, suggesting a ratio of 1:12, which is not among the options provided. Therefore, Answer 2 is incorrect. Between Answers 1 and 3, both are correct, but since they arrive at the same conclusion, I will select Answer 1 for the final choice.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "caef2ec4df7ea40ba26ea547c26200bf448a6c28ceeeccf2bd761b4c63337498"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:19+00:00",
+            "usage_in": 1318,
+            "usage_out": 155
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 170,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "W:rewrite1",
+            "L:es"
+        ],
+        "tokens_in": 1135,
+        "tokens_out": 129,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the initial number of wickets taken by the cricketer as 85, which is consistent with the problem's conditions. It accurately sets up the equation based on the average and solves it correctly. Answer 2 also arrives at the correct initial number of wickets (85) but incorrectly states that the family number is 90, which is not an option. Answer 3 incorrectly concludes that the initial number of wickets was 5, which is a significant error in the calculation. Therefore, Answer 1 is the most accurate and aligns with the problem's requirements.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "b7d266c4505c0640a6efd2342fe20d8c45aad66da33c931dbe054aeeac5a092d"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:23+00:00",
+            "usage_in": 1142,
+            "usage_out": 129
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 171,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "W:rewrite1",
+            "L:es"
+        ],
+        "tokens_in": 1191,
+        "tokens_out": 163,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both correctly identify that A invested Rs. 27,000 for 12 months and B invested Rs. 54,000 for a certain number of months, denoted as \\( x \\). They set up the equation based on the profit-sharing ratio of 2:1 and correctly solve for \\( x \\), concluding that B joined 9 months into the year. Answer 3, however, incorrectly calculates the time A was alone and arrives at the wrong conclusion that B joined after 10 months, which contradicts the profit-sharing ratio. Therefore, Answers 1 and 2 are correct, but since they both arrive at the same conclusion, I will select Answer 1 as it is the first correct answer.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "e53d90a1463bfcdd08217582f0cc22ca8c0c1b142f8535ba85d4a523bf02a3b2"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:26+00:00",
+            "usage_in": 1198,
+            "usage_out": 163
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 173,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:zh",
+            "L:es"
+        ],
+        "tokens_in": 1748,
+        "tokens_out": 177,
+        "trace": {
+            "judge_output": "Reasoning process\nAll three answers correctly calculate the work rates of A, B, and C. They also correctly identify that A works with B on one day and with C on the next day. However, Answers 1 and 2 both conclude that the work can be completed in 9 and 8 days respectively, while Answer 3 also concludes 8 days but provides a more detailed breakdown of the cycles. The calculations in Answer 2 and Answer 3 are consistent and correctly identify that after 6 days, additional work is needed on the 7th and 8th days. Answer 1 incorrectly concludes that the work can be completed in 9 days without considering the remaining work after the cycles. Therefore, the most accurate answer is Answer 2, which correctly identifies that the work can be completed in 8 days.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "9e23825bb90bee3d59ff09f3b90392ee53b7e4421cb43d9abdab58413067ef51"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:28+00:00",
+            "usage_in": 1755,
+            "usage_out": 177
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 177,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:es",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1305,
+        "tokens_out": 129,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly derives the ratio of investments as 16:15 by setting up the equation based on the effective yields of the stocks. Answer 2, however, incorrectly simplifies the ratio to 4:3 and then transforms it to 16:12, which does not match the correct calculation. Answer 3 also arrives at the correct ratio of 16:15, similar to Answer 1. Therefore, both Answers 1 and 3 are correct, but since they provide the same conclusion, I will select Answer 1 as it is the first correct answer presented.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "bc8343d974cf3b1abdfd9b4a2e4ad36de2e9bddb371e010fa0e7fa4aa3c9831b"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:31+00:00",
+            "usage_in": 1312,
+            "usage_out": 129
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 189,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:es",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1664,
+        "tokens_out": 122,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both correctly calculate the contributions of A, B, and C, and they arrive at the same difference of Rs. 3600 between B's and C's shares. However, Answer 3 incorrectly calculates the difference as Rs. 2400, which is not consistent with the contributions and profit distribution. Therefore, Answers 1 and 2 are correct, while Answer 3 is incorrect. Since the question asks for the share of B exceeding that of C, the correct answer is Rs. 3600.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:es",
+            "prompt_sha256": "c49aaa27d38b6213ad7d4c15383650a37aa9a54ffa6b3f5832f61c9607a48cbc"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:32+00:00",
+            "usage_in": 1671,
+            "usage_out": 122
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 190,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:es",
+            "L:zh"
+        ],
+        "tokens_in": 2075,
+        "tokens_out": 193,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly sets up the equation for the mixture but concludes with an incorrect interpretation of the ratio. It calculates the ratio of flour costing $0.8 to flour costing $0.9 as 17:3, which is not among the options. It mistakenly suggests that the closest option is e) 3:1, which is not accurate based on the calculations. Answer 2 follows a similar reasoning path and also arrives at the same ratio of 17:3, incorrectly concluding that the answer is e) 3:1. Answer 3 correctly derives the ratio of 17:3 but fails to find a matching option. It then tests the options and finds that 6:1 gives a mixture cost close to $0.815, making it the most reasonable choice among the provided options. Therefore, Answer 3 is the most accurate in terms of matching the options given.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "304fc75a45158831132ec1520db3c1c898cf0044182b871911dbe597eb601196"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:35+00:00",
+            "usage_in": 2082,
+            "usage_out": 193
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 191,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "W:rewrite1",
+            "L:es"
+        ],
+        "tokens_in": 966,
+        "tokens_out": 108,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that the selling price is 80% of the cost price, leading to a 20% loss. Answer 2 also arrives at the same conclusion through a detailed calculation, confirming a 20% loss. However, Answer 3 incorrectly states that the selling price is 1.25 times the cost price, which would imply a profit, not a loss. Therefore, Answers 1 and 2 are correct, while Answer 3 is incorrect.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "db13e3f0ffe7e1d16d6855dd04d3c6284b0d7c31797848cb580ee20eb2e0e0c3"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:37+00:00",
+            "usage_in": 973,
+            "usage_out": 108
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 192,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:es",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1213,
+        "tokens_out": 124,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the distances and times for both runners, concluding that runner a wins by 40 m, which is consistent with the calculations. Answer 2 incorrectly states that runner a wins by 20 m, which does not align with the calculations. Answer 3 also correctly arrives at the conclusion that runner a wins by 40 m, similar to Answer 1. Therefore, Answers 1 and 3 are correct, but since they both arrive at the same conclusion, I will select Answer 1 as it is the first correct answer presented.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "c05d18156b0e6dc41d2e033086026bd3ecf77ce15d56d3eb02e6439303e62a9f"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:39+00:00",
+            "usage_in": 1220,
+            "usage_out": 124
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 202,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:zh",
+            "L:es"
+        ],
+        "tokens_in": 702,
+        "tokens_out": 142,
+        "trace": {
+            "judge_output": "Reasoning process  \nAnswer 1 correctly explains that the average will be influenced more by the group with more numbers, which is a fundamental concept in statistics. However, it jumps to a conclusion about the answer being \"e\" without sufficient justification based on the provided options. Answer 2 and Answer 3 both highlight the lack of specific data to make a definitive choice, which is a valid point. However, they both conclude with \"a,\" which does not align with the reasoning about the influence of group size on averages. Given that Answer 1 provides the most accurate reasoning regarding the influence of group sizes on averages, it is the most correct answer despite its conclusion.\n\nFinal Choice  \n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "b77c8347169e2b16b72706cda83edaca90eb800d3c5db7f5913950613361dbaf"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:41+00:00",
+            "usage_in": 709,
+            "usage_out": 142
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 211,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "L:zh",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1345,
+        "tokens_out": 150,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the number of factors of 5 in \\( 150! \\) as 36, but it incorrectly states that the maximum value of \\( n \\) is 36, which is not accurate since the count of factors of 5 is actually 37. Answer 2 correctly identifies the number of factors of 5 as 37 but fails to mention the factors of 2, which are not limiting in this case. Answer 3 also correctly calculates the number of factors of 5 as 37 and provides a complete analysis, confirming that the limiting factor is indeed the number of 5s. Therefore, Answer 3 is the most accurate and complete.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "c98efa83e564e25097e945e8b0ab98e9aeaf0af15e0529b2467b37ba10f445fc"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:43+00:00",
+            "usage_in": 1352,
+            "usage_out": 150
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 225,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "tokens_in": 6124,
+        "tokens_out": 173,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that \\( k = n \\cdot q + 11 \\) and \\( k = 81.1n \\), leading to the equation \\( n(81.1 - q) = 11 \\). However, it incorrectly concludes that \\( n \\) must be greater than 11 and only checks \\( n = 20 \\) without considering other options thoroughly. Answer 2 also follows the correct approach but fails to find a valid integer \\( n \\) from the calculations, ultimately concluding that \\( n = 20 \\) is the only option without verifying all choices. Answer 3 correctly identifies that \\( n = 81 \\) fits the condition when considering rounding of \\( k/n \\) to 81.1, making it the most accurate answer. \n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "bfc6eb7a3f8bc0e61a88ff8cd0a780bf7cb36bdf7a076ee23756b8ad3629b676"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:45+00:00",
+            "usage_in": 6131,
+            "usage_out": 173
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 227,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:es",
+            "L:zh"
+        ],
+        "tokens_in": 2423,
+        "tokens_out": 126,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that \\( d = 14 \\) satisfies both conditions, while the other answers do not provide valid solutions. Answer 2 incorrectly concludes that \\( d = 12 \\) is the only valid option, despite failing to satisfy both conditions. Answer 3 also concludes \\( d = 12 \\) but does not correctly validate the conditions for \\( d = 12 \\) and overlooks the valid solution of \\( d = 14 \\) found in Answer 1. Therefore, Answer 1 is the most accurate and complete in its reasoning.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "88febdee6d24136d03af5ffd3539dde5176aca8c89b7a404d03e1d72ac51d0d9"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:47+00:00",
+            "usage_in": 2430,
+            "usage_out": 126
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 232,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:es",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1297,
+        "tokens_out": 132,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the annual installment needed to discharge the debt by using the simple interest formula and correctly accounts for the accumulation of payments over the 3 years. It arrives at the correct answer of $325, which matches option d. Answer 2 and Answer 3 both miscalculate the total amount due after 3 years by incorrectly adding the interest to the principal and then dividing by 3, leading to incorrect conclusions. They both suggest that the closest option is e) $415, which does not satisfy the debt requirement. Therefore, Answer 1 is the most accurate and correct response.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "8afe7d4e49a9fca4a9b5ce15441ba5fb7f9b7033166cebeba946cb9a57ebafa9"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:49+00:00",
+            "usage_in": 1304,
+            "usage_out": 132
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 233,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:es",
+            "W:rewrite1"
+        ],
+        "tokens_in": 954,
+        "tokens_out": 130,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies the fraction of spirit in the first solution and calculates the cost based on that fraction. It also correctly calculates the fraction of spirit in the second solution and arrives at the correct cost of 40 cents. Answer 2 makes an error in calculating the cost per liter based on the fraction of spirit, leading to an incorrect rounding to 33 cents. Answer 3 also miscalculates the cost by incorrectly determining the price per liter and arrives at an incorrect conclusion of 20 cents. Therefore, Answer 1 is the most accurate and consistent with the problem's requirements.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "1ebad11f4ab4682861494d279fd285c374e8a7a698dceaea1919b31223a61200"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:51+00:00",
+            "usage_in": 961,
+            "usage_out": 130
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 234,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:es",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1323,
+        "tokens_out": 142,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both correctly calculate the total work done by men and women and arrive at the conclusion that 9 men and 12 women can complete the work in 40 days. They correctly derive the work rates and sum them up to find the total work rate. However, Answer 3 incorrectly calculates the work rates and arrives at an incorrect conclusion of approximately 2.57 days, which does not match any of the provided options. Therefore, the most accurate answers are Answer 1 and Answer 2, but since they both arrive at the same conclusion, I will select Answer 1 as it is the first correct answer.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "6e029b42d13e7b6dcf197aacc4033b5182c2445936aae4738754128f6cde4309"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:53+00:00",
+            "usage_in": 1330,
+            "usage_out": 142
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 235,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:es",
+            "W:rewrite1"
+        ],
+        "tokens_in": 2053,
+        "tokens_out": 148,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies the median of set q as 3 and correctly concludes that for z to be a divisor of 26, m must be 0, which occurs when k = 0. Answer 2 incorrectly states that any value of k is valid, which is misleading since it does not ensure that m is defined. Answer 3 accurately follows the logic of determining the mode based on the value of k and concludes that k = 0 is the only value that allows z to be a divisor of 26. Therefore, both Answer 1 and Answer 3 arrive at the correct conclusion, but Answer 3 provides a clearer step-by-step reasoning process. \n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "8c9ec784b21d26e61431ffa672bbb4ee6be4797ab6314e703237b0296a812e1a"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:55+00:00",
+            "usage_in": 2060,
+            "usage_out": 148
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 239,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "tokens_in": 1075,
+        "tokens_out": 149,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the time the bus stops based on the difference in travel times without and with stoppages. However, it incorrectly concludes that the bus stops for 90 minutes in 2.5 hours, which is not consistent with the average speed of 40 km/h. Answer 2 makes a mistake in calculating the stopping time, as it incorrectly states that the bus stops for 20 minutes instead of the correct 36 minutes. Answer 3 accurately derives the stopping time using the correct mathematical approach and arrives at the conclusion that the bus stops for 36 minutes per hour, which is consistent with the average speeds given. Therefore, Answer 3 is the most accurate.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "fd6a2f2323e4bf733ee3986b88c530954432fbe951b480f4dc915cc45b74dc33"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:22:58+00:00",
+            "usage_in": 1082,
+            "usage_out": 149
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 242,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "e",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "L:zh",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1327,
+        "tokens_out": 149,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly calculates the maximum difference by not adhering to the constraints properly. It suggests a configuration that does not satisfy the requirement of having at least one white tile in every column. Answer 2 correctly identifies the constraints and calculates the maximum difference as 60, which is achievable by having 70 black tiles and 10 white tiles. Answer 3 also arrives at the same conclusion as Answer 2, but its reasoning is less clear and slightly convoluted. However, both Answers 2 and 3 correctly conclude that the maximum difference is 60, making them the most accurate. Since Answer 2 presents a clearer and more straightforward reasoning process, it is the best choice.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "4f40534b0e39ec18c522da8f032797280f9c2fb1a7073c7e3ab440c849e5981d"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:23:00+00:00",
+            "usage_in": 1334,
+            "usage_out": 149
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 243,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:zh",
+            "L:es"
+        ],
+        "tokens_in": 1757,
+        "tokens_out": 133,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the number of multiples of 2, 3, and 6, and applies the principle of inclusion-exclusion accurately, resulting in a total of 45. Answer 2 miscalculates the number of multiples of 6, stating it as 11 instead of the correct 10, leading to an incorrect total of 44. Answer 3 also miscalculates the multiples of 6, stating it as 11, which is incorrect, and thus arrives at the same incorrect total of 44. Therefore, Answer 1 is the most accurate and correct response.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "3209bb4150c44655cdb4f6e805a57936228b7d5da76396cc28ed926582efd8aa"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:23:03+00:00",
+            "usage_in": 1764,
+            "usage_out": 133
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 256,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "tokens_in": 1140,
+        "tokens_out": 94,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both arrive at a total of 168 correct answers, which does not match any of the provided options. They also incorrectly round down the number of odd questions answered correctly. Answer 3 correctly calculates the total number of questions answered correctly as 174, which matches one of the provided options. Therefore, Answer 3 is the most accurate and aligns with the question's requirements.\n\nFinal Choice\n{\"choice\":\"3\"}",
+            "choice": 3,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "6deda009b089ef27bbd448a92f9d5cfe4dc7549bb33aaca5a38391b8ce246972"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:23:04+00:00",
+            "usage_in": 1147,
+            "usage_out": 94
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 270,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "L:zh",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1680,
+        "tokens_out": 185,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly sets up the equations based on the problem statement and arrives at the conclusion that Abhay's speed is 6 km/h. However, it incorrectly states that the final answer is \"b\" when it should be \"c\" based on the calculations. Answer 2 arrives at the conclusion that Abhay's speed is 9 km/h, which contradicts the established equations and is incorrect. Answer 3 also concludes that Abhay's speed is 6 km/h, which aligns with the correct calculations, but it incorrectly states the final answer as \"b\" instead of \"c\". Therefore, the most accurate reasoning is found in Answer 1 and Answer 3, but both incorrectly state the final answer. However, since Answer 1 is the first to arrive at the correct speed, it is the most reliable despite the final answer error.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:es",
+            "prompt_sha256": "d84ba37bc17e33a3c9dd34c967c6a1ca738ce2855fe51a29ac417d47918403fb"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:23:07+00:00",
+            "usage_in": 1687,
+            "usage_out": 185
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 271,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "tokens_in": 1270,
+        "tokens_out": 124,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the area covered by the minute hand in 10 minutes using the sector area formula, but it does not provide the final numerical approximation clearly. Answer 2 provides a detailed calculation and arrives at an area of approximately 16.41 cm², which is accurate and matches one of the options. Answer 3 also arrives at a similar conclusion but slightly miscalculates the final area as approximately 16.42 cm², which is not one of the provided options. Therefore, Answer 2 is the most accurate and clearly presented.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "d289b00e307ce767112cce98e8d7669a09fbadf097d744ee86441403aa840fe8"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:23:09+00:00",
+            "usage_in": 1277,
+            "usage_out": 124
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 273,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:zh",
+            "L:es"
+        ],
+        "tokens_in": 1441,
+        "tokens_out": 170,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the speed conversion and the distance traveled by the train in 1 minute, arriving at a total distance of 1300.2 m. However, it incorrectly concludes that the length of the tunnel is 300.2 m, which is not an option. It then suggests 287 m as the closest option, which is reasonable. Answer 2 also correctly converts the speed and calculates the distance but suggests 288 m as the closest option, which is more aligned with the provided choices. Answer 3 follows a similar reasoning as Answer 1 but arrives at the same conclusion of 300 m and suggests 287 m as the closest option. Between the three, Answer 2 is the most accurate in terms of matching the provided options and reasoning through the problem.\n\nFinal Choice\n{\"choice\":\"2\"}",
+            "choice": 2,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "1ee7f08d1a7059e2a73c1ffc461e8ce5f68703c35d45a35cd8beb385fc67878d"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:23:11+00:00",
+            "usage_in": 1448,
+            "usage_out": 170
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 285,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "d",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:zh",
+            "L:es",
+            "W:rewrite1"
+        ],
+        "tokens_in": 1241,
+        "tokens_out": 145,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly derives the ages using the relationships provided in the problem. It accurately calculates Fred's age as 10 and subsequently finds Jim's age to be 20, which is consistent with the conditions given. Answer 2, however, contains a miscalculation in deriving Fred's age, leading to an incorrect conclusion about Jim's age. Answer 3 follows a similar reasoning as Answer 1 and arrives at the same conclusion, confirming that Jim's age is indeed 20. Therefore, both Answer 1 and Answer 3 are correct, but since Answer 1 is the first to arrive at the correct conclusion, it is the most appropriate choice.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "L:zh",
+            "prompt_sha256": "0999b528664dfe2fbc65bbc1d55c399941f0bfa4323a1624e07e66e3e67d8dcc"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:23:13+00:00",
+            "usage_in": 1248,
+            "usage_out": 145
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 288,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "W:rewrite1",
+            "L:zh"
+        ],
+        "final_answer": "b",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite1",
+            "L:es",
+            "L:zh"
+        ],
+        "tokens_in": 1012,
+        "tokens_out": 123,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly calculates the cost price and selling price per article, leading to the correct profit percentage of 50%. Answer 2 incorrectly calculates the total cost and total revenue, resulting in a loss instead of a profit, which is not aligned with the problem statement. Answer 3 also arrives at the correct profit percentage of 50% through similar calculations as Answer 1. Therefore, Answers 1 and 3 are correct, but since they both provide the same correct answer, I will select Answer 1 as it is the first correct response.\n\nFinal Choice\n{\"choice\":\"1\"}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite1",
+            "prompt_sha256": "227762e2e9e99db3a42d336fcbd10af444c182ee600b7b4833075f351edba7c2"
+        },
+        "call": {
+            "model_version": "gpt-4o-mini-2024-07-18",
+            "called_at": "2026-10-08T00:23:15+00:00",
+            "usage_in": 1019,
+            "usage_out": 123
+        },
+        "donor_position": 3,
+        "pilot": false
+    }
+]
