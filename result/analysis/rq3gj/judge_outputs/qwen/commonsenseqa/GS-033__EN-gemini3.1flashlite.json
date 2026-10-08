@@ -1,0 +1,1734 @@
+[
+    {
+        "Model": {
+            "modelType": "qwen",
+            "temperature": 0.0,
+            "modelName": "qwen3-8b",
+            "displayName": "QWEN"
+        },
+        "Dataset": {
+            "datasetType": "commonsenseqa",
+            "displayName": "CommonSenseQA",
+            "nums": 2000,
+            "sample": 1,
+            "language": "english",
+            "useRewrite": false,
+            "rewriteVersion": 1,
+            "dataNums": 2000
+        },
+        "Strategy": {
+            "strategyType": "aggregate",
+            "displayName": "Judge (L:en vs R:short_cot vs W:rewrite2)",
+            "languages": [
+                "english",
+                "english",
+                "english"
+            ],
+            "promptStyle": "cot",
+            "rewriteVersion": 1
+        },
+        "Aggregator": {
+            "aggregatorType": "judge",
+            "displayName": "Judge",
+            "k": 3,
+            "seed": 0,
+            "threshold": 3
+        },
+        "prompt_version": "choice-k-v1",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "candidate_files": [
+            "result/arms/gemini3.1flashlite/commonsenseqa/L_en.json",
+            "result/arms/qwen/commonsenseqa/R_short_cot.json",
+            "result/arms/qwen/commonsenseqa/W_rewrite2.json"
+        ],
+        "n_items": 2000,
+        "n_disagreement": 612,
+        "prompt_hash_unverified_arms": [],
+        "schema_version": "aggregation/v1",
+        "source": "menu_judge",
+        "menu": "GS-033",
+        "item_filter": "menu_all_answered_disagreement",
+        "n_judged_items": 611,
+        "order_scheme": "rq3gj_planned",
+        "experiment": "rq3gj",
+        "version": "EN-gemini3.1flashlite",
+        "donor": "gemini3.1flashlite",
+        "donor_slot": 0,
+        "donor_arm": "L:en",
+        "order_label": null,
+        "candidate_models": [
+            "gemini3.1flashlite",
+            "qwen",
+            "qwen"
+        ],
+        "n_planned_items": 609,
+        "api_usage": {
+            "calls": 50,
+            "calls_without_usage": 0,
+            "prompt_tokens": 29179,
+            "completion_tokens": 5174,
+            "refusals": 0
+        },
+        "model_versions": {
+            "qwen3-8b": 50
+        },
+        "calls_utc": {
+            "first": "2026-10-08T08:48:40+00:00",
+            "last": "2026-10-08T08:51:37+00:00"
+        }
+    },
+    {
+        "item_id": 2,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:en",
+            "W:rewrite2"
+        ],
+        "tokens_in": 601,
+        "tokens_out": 115,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that the choker is not located in a jewelry box or boutique, but then suggests a jewelry store as the answer. This is incorrect because the question is asking where to locate the choker, not where it would be sold. Answer 2 and Answer 3 correctly identify that the choker would be located on the neck, which is the logical place for it to be worn. However, Answer 3 provides a more thorough elimination of incorrect choices and confirms the correct answer with reasoning.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "0aae594000b88d58022bafaca4cf2db22513f37634902b368902cdab5cc80ab8"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:48:40+00:00",
+            "usage_in": 613,
+            "usage_out": 115
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 4,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "L:en",
+            "R:short_cot"
+        ],
+        "tokens_in": 542,
+        "tokens_out": 99,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both suggest that the fox is looking for its natural habitat, which is a reasonable assumption. However, Answer 2 argues that the fox might be looking for a \"hen house,\" which is a more specific and plausible target for a fox's predatory behavior. The question does not provide enough context to definitively choose between these options, but Answer 2 provides a more direct and behaviorally motivated reasoning.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "6c7a02697421db6fe936e4e2574ba78ac8a69ce67a50e957edb4de83497ab021"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:48:41+00:00",
+            "usage_in": 554,
+            "usage_out": 99
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 6,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "R:short_cot",
+            "L:en"
+        ],
+        "tokens_in": 550,
+        "tokens_out": 102,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that a \"safe\" is a destination for a drawstring bag, but the question refers to the woman \"heading with it,\" implying movement rather than storage. Answer 2 and Answer 3 correctly identify that \"checked\" baggage refers to luggage handed over at an airport for transport. However, Answer 3 provides a more precise explanation of the term \"checked\" in the context of baggage, making it the most accurate.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "86dbe677d32fecd97fe45e32661f688abcc660ddd39d1a409e3a16ef3128fc23"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:48:44+00:00",
+            "usage_in": 562,
+            "usage_out": 102
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 10,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "W:rewrite2",
+            "L:en"
+        ],
+        "tokens_in": 517,
+        "tokens_out": 100,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2's reasoning is incorrect because putting grapes in the mouth just before checking out does not align with typical shopping behavior. The question refers to where grapes are placed *before* checkout, not where they are consumed. Answers 1 and 3 correctly identify the grocery cart as the container used for items before checkout. However, Answer 3 provides a more detailed and accurate explanation of the shopping process, making it the most correct choice.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "96b7bd3af2c6d0dbe38890f716199413c1e5836c092b5413d00d859d97e9f892"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:48:46+00:00",
+            "usage_in": 529,
+            "usage_out": 100
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 11,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:en",
+            "W:rewrite2"
+        ],
+        "tokens_in": 574,
+        "tokens_out": 99,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 both correctly identify \"bitterness\" as the most appropriate choice, as it reflects the long-term emotional state of resentment and frustration from an unequal distribution of labor. Answer 3, while reasonable, is less precise because \"sadness\" is a more general term and does not specifically capture the sense of unfairness and resentment that typically accompanies feeling like one is doing all the work in a relationship.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "2be664c9ed35ac5377abaea19554f417f381c45ab6998da0385a83ed0d7b6d65"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:48:49+00:00",
+            "usage_in": 586,
+            "usage_out": 99
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 12,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "W:rewrite2",
+            "L:en"
+        ],
+        "tokens_in": 577,
+        "tokens_out": 102,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that a garden is the most likely place for hobby-related work and relaxation, but it doesn't account for the possibility of other leisure-oriented locations. Answer 2 overemphasizes the \"unwind\" aspect and incorrectly prioritizes a state park over a rest area. Answer 3 correctly identifies that a rest area is specifically designed for relaxation and sitting on a bench, making it the most logical choice based on the description.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "4e0f87764c20a33d029ba97bd283fa91d6d676f94d8c87ca15ca466f58301c8b"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:48:51+00:00",
+            "usage_in": 589,
+            "usage_out": 102
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 17,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "W:rewrite2",
+            "L:en"
+        ],
+        "tokens_in": 527,
+        "tokens_out": 106,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly selects \"sick person\" (C) as the answer, which is tautological and does not address the question of who typically contracts illness. Answer 3 correctly identifies that \"elderly person\" (D) is more susceptible to illness due to biological factors, while also dismissing irrelevant options. Answer 2 reaches the same conclusion but lacks the clarity and reasoning provided in Answer 3. Therefore, Answer 3 is more comprehensive and accurate.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "f114c49b60f0271cd682ca3a4346d1b063b96df383f77d670fb38f61f800b404"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:48:55+00:00",
+            "usage_in": 539,
+            "usage_out": 106
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 18,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:en",
+            "W:rewrite2"
+        ],
+        "tokens_in": 567,
+        "tokens_out": 75,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 3 is incorrect because \"Little Italy\" is a cultural district that may have pizzerias, but the question specifically asks where you would expect to find a pizzeria *while shopping*. A food court is a more direct and common location within a shopping environment where pizzerias are typically found. \n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "35329d1f34f26aea2947343105122a1c5672f6fab4eaf8427f5279b27a3e895b"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:48:57+00:00",
+            "usage_in": 579,
+            "usage_out": 75
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 19,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "tokens_in": 549,
+        "tokens_out": 96,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that \"full stomach\" is the most direct physical description, but it fails to consider that \"satisfaction\" is a more accurate emotional response to completing a tasting menu. Answer 2 and Answer 3 both correctly identify \"satisfaction\" as the best choice, but Answer 3 provides a more detailed and well-reasoned justification for why \"satisfaction\" is the most appropriate answer.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "b3ddbde8bc928d776b037b5f8aa6913e8031abad719e18cb265395ff2a740978"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:48:58+00:00",
+            "usage_in": 561,
+            "usage_out": 96
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 20,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "W:rewrite2",
+            "L:en"
+        ],
+        "tokens_in": 524,
+        "tokens_out": 96,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both argue that \"fatigue\" (B) is the more appropriate choice due to its specificity and formal usage. However, they fail to recognize that \"getting tired\" (E) is a more direct and commonly understood outcome of prolonged physical activity. Answer 2 correctly identifies \"getting tired\" as the most accurate and general description of the outcome of playing soccer for a long time.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "611ebd2d1ed80439056f9a411b1a56ed82710edf4e2bd6e89c69a2340295279a"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:00+00:00",
+            "usage_in": 536,
+            "usage_out": 96
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 23,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "W:rewrite2",
+            "L:en"
+        ],
+        "tokens_in": 559,
+        "tokens_out": 109,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both suggest that the correct answer is E) airplane, but they fail to recognize that in standard airplanes, the foot pedals control the rudder and not the steering. Steering in airplanes is typically managed through the nose wheel or by turning the aircraft using ailerons and rudder, not directly via foot pedals. Answer 2 correctly identifies that a car uses a hand throttle for acceleration and foot pedals for steering, aligning with the question's description.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "403dfc56d1a877b9ca1ae4cf0f288e8662e1ee66a81fe2c34cab98251f391641"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:04+00:00",
+            "usage_in": 571,
+            "usage_out": 109
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 26,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "tokens_in": 525,
+        "tokens_out": 118,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both suggest \"working\" (C) as the correct answer, which is reasonable as it implies continuous activity. However, Answer 2 argues that \"moving\" (D) is more general and fits the context of continuous bodily engagement. The phrase \"constantly what during the day\" suggests a state of ongoing physical activity, which \"moving\" better captures than \"working,\" as \"working\" can imply mental or non-physical tasks. Therefore, Answer 2 provides a more accurate interpretation.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "039159b2efbdb6fea49838daf8ce6abdac3f20131a8392fb2d3b4584d2bf556f"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:06+00:00",
+            "usage_in": 537,
+            "usage_out": 118
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 33,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "tokens_in": 592,
+        "tokens_out": 89,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify that lighting a fire (D) is a necessary step for cooking, but they fail to recognize that \"grab a match\" (E) is the immediate prerequisite action needed to light the fire. Answer 3 correctly identifies that grabbing a match (E) is the first action required before lighting a fire, making it the most accurate choice.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "81796dc1de39e76cecdd40145c85fb93652b6c86b79d203bbe29219ba7d583b5"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:16+00:00",
+            "usage_in": 604,
+            "usage_out": 89
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 34,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "W:rewrite2",
+            "L:en"
+        ],
+        "tokens_in": 576,
+        "tokens_out": 92,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 correctly identify that being saturated with water (C) is a direct consequence of leaving paper outside, as it can absorb moisture from rain or humidity. Answer 2 suggests crumpling (E) as a possibility due to wind, but the question specifies that the paper does not move, making crumpling less likely. Therefore, the most accurate answer is C.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "89ed1caaf212065a83440807c960660d613a0d7d1b58e0c6c9591d7d0ba71da9"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:18+00:00",
+            "usage_in": 588,
+            "usage_out": 92
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 35,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "tokens_in": 725,
+        "tokens_out": 97,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that the question is a riddle and that \"clear\" is the intended answer based on common colloquial understanding, even though it's not scientifically accurate. Answer 2 incorrectly assumes a change in texture to \"thin,\" which contradicts the initial description of thick semen. Answer 3 incorrectly suggests \"blank\" as the answer, which doesn't align with the riddle's structure and intent.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "13007986fa3f55ee79594a6f0727427ad3098042d738fdbaaf6c293e410e1115"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:20+00:00",
+            "usage_in": 737,
+            "usage_out": 97
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 38,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "tokens_in": 477,
+        "tokens_out": 96,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify \"government\" as the institution led by the president, which is accurate in most political systems where the president serves as both head of state and head of government. Answer 3 incorrectly states that the president is the leader of a \"country,\" which is a political entity rather than an institution. The question specifically asks for an institution, making \"government\" the most precise answer.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "2f5e353e41923c4eadf5b1bf4bc2ccb17a2f6e61bdf04b7abda1cabcb0e224e6"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:21+00:00",
+            "usage_in": 489,
+            "usage_out": 96
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 42,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "R:short_cot",
+            "L:en"
+        ],
+        "tokens_in": 617,
+        "tokens_out": 121,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly states that \"dangerous\" driving is the most accurate choice, but it fails to recognize that \"stressful\" driving can directly lead to accidents due to impaired cognitive and physical functions. Answer 2 correctly identifies \"stressful\" driving as the most direct cause of accidents, as it focuses on the immediate effects of stress on driving behavior. Answer 3 reiterates the reasoning in Answer 1 and fails to address the nuanced distinction between \"stressful\" and \"dangerous\" driving in terms of accident causation.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "8176eac14c6cfc0b539b6b6ff2c643616c210864365ce9fd0963541cb5b6d69b"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:25+00:00",
+            "usage_in": 629,
+            "usage_out": 121
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 43,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "R:short_cot",
+            "L:en"
+        ],
+        "tokens_in": 586,
+        "tokens_out": 99,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and 2 correctly identify acid reflux (E) as the most direct and specific consequence of eating too much dinner. Answer 3 incorrectly prioritizes \"stomach ache\" (C) over \"acid reflux\" (E), which is a more precise and commonly recognized outcome of overeating. Acid reflux is a subset of stomach-related issues and is directly caused by the physical pressure and digestive processes involved in overeating.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "f7d1b719ba48c04082e05f7a5f25b79e9b8625f77bfefd847bd0b4cfc82d0766"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:33+00:00",
+            "usage_in": 598,
+            "usage_out": 99
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 45,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "tokens_in": 637,
+        "tokens_out": 107,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2 incorrectly identifies the windowsill as the most specific and likely answer. While a windowsill can become hot in the sun, the question does not provide any indication that Jame was near a window or on a windowsill. The question focuses on a surface that is typically walked on and becomes hot under sunshine, which aligns more with a street. Answer 1 and Answer 3 correctly identify the street as the most plausible location based on the context of the question.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "80f4078c805d2a87a5b19e95bf915e377da20c3074d4df8f3640e70b80532c96"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:36+00:00",
+            "usage_in": 649,
+            "usage_out": 107
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 46,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:en",
+            "W:rewrite2"
+        ],
+        "tokens_in": 670,
+        "tokens_out": 118,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2 incorrectly assumes that \"hen house\" is a common setting for a thirsty fox in a drought, which is not a logical or contextual connection. The question is clearly a riddle, and the correct approach involves wordplay rather than literal interpretation. Both Answer 1 and Answer 3 correctly identify the riddle nature of the question and the pun on \"where\" and \"water,\" leading to the answer \"painting.\" However, Answer 3 provides a more detailed and coherent explanation of the riddle's logic.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "75740f7778e14057171496d8bbafee0057bc6f1434d2e603a5410500a009a6a2"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:39+00:00",
+            "usage_in": 682,
+            "usage_out": 118
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 50,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "tokens_in": 585,
+        "tokens_out": 110,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies \"advisory\" as the correct answer, but in the context of a mandatory evacuation, the TV would likely broadcast the mandate itself, not just an advisory. Answer 2 and Answer 3 correctly identify \"mandate\" as the appropriate choice, with Answer 3 providing slightly less detailed reasoning but still accurate. Since both Answer 2 and Answer 3 are correct, but Answer 2 provides more thorough reasoning, Answer 2 is the better choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "af7c0b6dd6ae7d5e6ae88eb873a68e575402271ad6c1687f45acacfbbe89fdc5"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:41+00:00",
+            "usage_in": 597,
+            "usage_out": 110
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 55,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "tokens_in": 646,
+        "tokens_out": 86,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 correctly identifies that \"get arrested\" (D) is the immediate action taken by the police when they discover a criminal, while Answers 2 and 3 incorrectly focus on the consequences after arrest rather than the direct action taken by the police. The question specifically asks what the cops might do, which implies the immediate response, not the long-term legal outcome.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "89af81cc9200c00d63bff13256e5d217566d0c0080e7a1884379a081e3054cc1"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:43+00:00",
+            "usage_in": 658,
+            "usage_out": 86
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 57,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "W:rewrite2",
+            "L:en"
+        ],
+        "tokens_in": 551,
+        "tokens_out": 114,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify \"have rest\" (B) as the most appropriate choice, as it is a general and effective method for recovering from exhaustion. However, Answer 3 incorrectly argues that \"go to sleep\" (E) is more accurate, despite the fact that \"have rest\" encompasses a broader range of recovery methods, including sleep. The question specifically asks for the \"only way,\" which implies a singular, comprehensive solution, making \"have rest\" the most fitting choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "6d94697bfada7cbadb771fb5343bab2339c5f03cd16dbd7444bf7be1ecd142e5"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:45+00:00",
+            "usage_in": 563,
+            "usage_out": 114
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 60,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "tokens_in": 569,
+        "tokens_out": 79,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and 2 both incorrectly assume that \"damage\" is the most comprehensive answer, but the question does not specify whether it's asking about the general impact or a specific effect. Answer 3 correctly identifies \"cloud mind\" as a direct and common effect of drug use, which is more specific and accurate in this context.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "269a87c6c7545e3b009d29e9dbbfb805dd1b75c280520e264aaec8089ad45a87"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:47+00:00",
+            "usage_in": 581,
+            "usage_out": 79
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 75,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "L:en",
+            "R:short_cot"
+        ],
+        "tokens_in": 455,
+        "tokens_out": 78,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both claim the John Davis Lodge toll road is in Arizona, but this is incorrect. The correct information is that the John Davis Lodge Turnpike, also known as the Merritt Parkway, is located in Connecticut. Answer 2 correctly identifies Connecticut as the state, making it the most accurate answer.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "5eaaa1e7730f33a2c66ebfe2a504f170447db3771df50ff20a2e9f5a05fd1bee"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:55+00:00",
+            "usage_in": 467,
+            "usage_out": 78
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 77,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "tokens_in": 590,
+        "tokens_out": 121,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 2 incorrectly assumes that \"make larger\" is the most appropriate choice, but the question specifically refers to Jamie's efforts to reduce her waist size failing, which directly implies she continued to gain weight. \"Make larger\" and \"expand\" are less direct in this context compared to \"gain weight.\" Answer 3 suggests \"expand\" as the correct answer, but \"gain weight\" is more precise and natural in the context of waist size reduction failure. Answer 1 correctly identifies \"gain weight\" as the most contextually appropriate choice.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "cfba5d3aa870693c46524ab985603581682753edb674e9c34f222a4cf7f8191a"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:49:58+00:00",
+            "usage_in": 602,
+            "usage_out": 121
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 82,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "L:en",
+            "R:short_cot"
+        ],
+        "tokens_in": 517,
+        "tokens_out": 113,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly suggests \"health\" as the direct result of playing with a dog, but the question asks what the dog \"will have\" when playing, which is more about the immediate experience rather than long-term benefits. Answer 2 and Answer 3 correctly identify \"fun\" as the most direct and logical outcome of playing with a dog. However, Answer 3 is redundant and repeats the reasoning of Answer 2 without adding new information. Therefore, Answer 2 is more comprehensive and accurate.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "4da9d5f7060dea5314b4f4f2d37bd3b6cccbd31df709f2cc94b673f45637e73a"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:50:00+00:00",
+            "usage_in": 529,
+            "usage_out": 113
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 83,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "R:short_cot",
+            "L:en"
+        ],
+        "tokens_in": 568,
+        "tokens_out": 110,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both suggest \"in bed\" (D) as the correct answer, which is reasonable as it is a common place to read. However, Answer 2 provides a strong argument for \"desk\" (E), as it is a typical location for reading materials during work or study. While \"in bed\" is a valid option, \"desk\" is more universally applicable for reading in a personal or professional context. Therefore, Answer 2 is more accurate.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "0df46d3f499c70952af9094ccce00ab7cd3bb81e86eabe19105b49cf2de8fc35"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:50:03+00:00",
+            "usage_in": 580,
+            "usage_out": 110
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 87,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "L:en",
+            "R:short_cot"
+        ],
+        "tokens_in": 565,
+        "tokens_out": 90,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 correctly identify \"unable\" as the most grammatically and semantically appropriate choice. However, Answer 2's reasoning is flawed because \"cant do\" is not a standard verb phrase that fits the structure of the sentence. The correct answer is \"unable,\" making Answer 1 and Answer 3 valid, but Answer 1 provides a more detailed explanation.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "28a93f9e0acaa52465430a461df25da9ed42065affdd2617042c75d29d7a7a6d"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:50:04+00:00",
+            "usage_in": 577,
+            "usage_out": 90
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 90,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "R:short_cot",
+            "L:en"
+        ],
+        "tokens_in": 608,
+        "tokens_out": 118,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that a \"bouquet of flowers\" is more likely to be where bees congregate, but it does not specifically address the mention of red flowers. Answer 2 and Answer 3 correctly identify that a \"rose garden\" (D) is the most specific location that includes red flowers, which aligns with the question's requirement. However, Answer 3 provides a more detailed and accurate reasoning process by explicitly stating that \"rose garden\" accounts for the \"red flowers\" mentioned in the prompt.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "70d6ad5e29786d30cd80f4e7aa99b20a583f88f3fefb92cffa48976e28f35892"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:50:08+00:00",
+            "usage_in": 620,
+            "usage_out": 118
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 96,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "L:en",
+            "R:short_cot"
+        ],
+        "tokens_in": 602,
+        "tokens_out": 97,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies \"increased energy\" as the most specific and accurate benefit, but it fails to recognize that \"healthier\" (B) is a more comprehensive and standard answer for the overall positive outcome of weight loss. Answer 2 correctly identifies \"healthier\" as the best choice by emphasizing its broad and encompassing nature. Answer 3 is overly brief and lacks detailed reasoning compared to Answer 2.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "8460bdddc3a980b863e2d36e54db8f977a65c788f2748a1789f34683a65f0d78"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:50:09+00:00",
+            "usage_in": 614,
+            "usage_out": 97
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 99,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "R:short_cot",
+            "L:en"
+        ],
+        "tokens_in": 504,
+        "tokens_out": 86,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that one would not feel bored after doing housework for hours, which is not necessarily true. Answer 2 and Answer 3 correctly identify boredom as a likely emotional response due to the repetitive and monotonous nature of housework. However, Answer 3 provides a more comprehensive reasoning process by acknowledging the physical and mental aspects of the task.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "6029e5ccc9759673cddbb33af107147782f571a7f5e4eb430471e814374b857d"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:50:12+00:00",
+            "usage_in": 516,
+            "usage_out": 86
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 103,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "W:rewrite2",
+            "L:en"
+        ],
+        "tokens_in": 582,
+        "tokens_out": 105,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that \"paying attention\" is the activity through which one hears testimony, but the question asks what one does to hear testimony, not what one must do to listen. Answer 2 and Answer 3 both correctly identify \"go to church\" (A) as the most logical setting for hearing spiritual testimonies. However, Answer 3 provides a more thorough explanation by explicitly ruling out the other options, making it the most accurate choice.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "73e90fbdf5a07153b9247cc7fb75effc46017e9f886ee65d7c5406939e6f38ef"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:50:13+00:00",
+            "usage_in": 594,
+            "usage_out": 105
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 104,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "R:short_cot",
+            "L:en"
+        ],
+        "tokens_in": 660,
+        "tokens_out": 94,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and 2 correctly identify \"wakefulness\" as the most fitting choice, as it directly relates to the sensation of being alert in the morning after rest. Answer 3 incorrectly interprets the context, suggesting \"active\" as the best fit, which does not align with the phrase \"felt this much what in the morning,\" implying a state of being awake rather than a general state of energy.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "73e4e729164a9504d1d10bb75864915d9f1594fba9d73b64056a776f07af32c4"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:50:35+00:00",
+            "usage_in": 672,
+            "usage_out": 94
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 111,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "W:rewrite2",
+            "L:en"
+        ],
+        "tokens_in": 657,
+        "tokens_out": 122,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that a small apartment would provide a sense of spaciousness, but the question emphasizes that the dog felt like it had \"all the space in the world\" despite being indoors, which is more likely to be true in a larger indoor space like a big house. Answer 2 mistakenly identifies the dog park as an indoor space, which it is not. Answer 3 correctly identifies that a \"big house\" provides the necessary space for the dog to feel like it has \"all the space in the world\" while remaining indoors.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "9a69583873a5c937c5352ef707417f6a4059dc8da1d379de4dd127952beec0b1"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:50:40+00:00",
+            "usage_in": 669,
+            "usage_out": 122
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 113,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "tokens_in": 549,
+        "tokens_out": 115,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly identify that \"missing out\" (D) is the most logical consequence of being sick and staying in bed on the day of an event. Answer 3 incorrectly assumes that \"bed sores\" (C) is the main consequence, but the question specifically focuses on the result of missing the event, not a medical condition. The phrase \"unfortunately this meant she was what?\" clearly refers to the outcome of missing the event, making \"missing out\" the best choice.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "09c8341bb01bfe327643af150eeed58d3b77d50ec314f24c74716cba8a87806e"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:50:43+00:00",
+            "usage_in": 561,
+            "usage_out": 115
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 114,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:en",
+            "W:rewrite2"
+        ],
+        "tokens_in": 545,
+        "tokens_out": 132,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes \"dessert\" is a typo for \"desert,\" but the question does not provide context to support this assumption. Additionally, while deserts are habitats for lizards, the term \"surprise\" implies an unexpected encounter, which is more likely in a garden where people might not expect to see lizards. Answer 2 and Answer 3 both correctly identify the garden as the most plausible location for a lizard to surprise a person due to its domestic setting and the likelihood of unexpected encounters. Answer 2 provides a more detailed reasoning process, making it the better choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "6c56b0fdce98f3d6a2e7938a0ebd2bdb7bedd93f55adceacfb8919f69a9e5ef6"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:50:45+00:00",
+            "usage_in": 557,
+            "usage_out": 132
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 115,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "R:short_cot",
+            "L:en"
+        ],
+        "tokens_in": 541,
+        "tokens_out": 112,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that a picnic is the most logical place for a gathering involving a big game and food, but the phrase \"getting together for the big game\" suggests a more structured social event rather than an informal outdoor activity. Answer 3 correctly identifies that \"friend's house\" fits the context of someone hosting a gathering for a game, and the fact that \"he wasn't hosting\" supports this interpretation. Answer 2 is essentially repeating the reasoning of Answer 3 without additional justification.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "c1b6708421e84be34e5970242c3f48a752c0ff8b0b2673483dd3cfbf38e0f52d"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:50:47+00:00",
+            "usage_in": 553,
+            "usage_out": 112
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 117,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "W:rewrite2",
+            "L:en"
+        ],
+        "tokens_in": 593,
+        "tokens_out": 98,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly suggests that \"store\" (D) is the best choice, but it fails to recognize that a pub (A) is specifically associated with both alcohol and fried foods. Answer 2 and Answer 3 correctly identify \"pub\" (A) as the most appropriate choice, with Answer 3 providing more specific reasoning about typical pub fare. Answer 2 is slightly less precise in its reasoning but still correct.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "1e51cae0581cf71c07fa01230d13e5924201121f29b58bab83dcc469dc084127"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:50:56+00:00",
+            "usage_in": 605,
+            "usage_out": 98
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 124,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "B",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:en",
+            "W:rewrite2"
+        ],
+        "tokens_in": 529,
+        "tokens_out": 112,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both argue that a lap (D) is the best choice, citing warmth, security, and affection. While these are valid factors for a cat's happiness, they focus too narrowly on a single moment of comfort rather than considering the broader context of a cat's environment. Answer 2 correctly identifies \"home\" (B) as the most stable and comprehensive environment that provides safety, care, and affection consistently, which is more representative of a cat's overall happiness.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "22d0937d5d6c4857d2f35c0a4e16e07465f20514d3f97858e2487928a2489108"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:51:00+00:00",
+            "usage_in": 541,
+            "usage_out": 112
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 125,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "C",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:en",
+            "W:rewrite2"
+        ],
+        "tokens_in": 466,
+        "tokens_out": 85,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies \"Florida\" as the answer, but the question asks where such areas are found, not what they are. Answer 2 and Answer 3 correctly identify the United States as the location containing Florida. However, Answer 3 provides a more accurate and concise reasoning process by directly stating that Florida is on the east coast of the United States.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "9ff81a8f03e45956338a3adddf843ca09d54229c270537501c62341fcd1f9474"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:51:02+00:00",
+            "usage_in": 478,
+            "usage_out": 85
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 128,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "R:short_cot",
+            "L:en"
+        ],
+        "tokens_in": 538,
+        "tokens_out": 113,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that \"hot country\" is the most likely place to find a snake instead of potatoes, but this option is not a container or a specific item where such a substitution would occur. Answer 2 and Answer 3 correctly identify \"burlap sack\" as the most logical choice since it is a common container for potatoes and could reasonably contain a snake by mistake. Both Answer 2 and Answer 3 provide consistent reasoning, but Answer 3 is more precise in its explanation.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "b60bbddd282ad6538fbd490895270940c9dfc640da20bdc56339983b29d93e60"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:51:05+00:00",
+            "usage_in": 550,
+            "usage_out": 113
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 130,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "tokens_in": 619,
+        "tokens_out": 122,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that a bridge is the only location over a river, and that elevation is necessary for a big splash. However, the question does not specify that the rock needs to be thrown from above the river, and a bridge is not inherently better than the surface of the earth for creating a splash. Answer 2 and Answer 3 correctly identify that throwing the rock from the surface of the earth (which includes rivers) directly results in a splash. Answer 2 provides a more detailed reasoning process, making it the most correct choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "7b1286226b7b280ed01b8784e13083cbb96cb1c906a8637fac0b1f0fb5b883ce"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:51:08+00:00",
+            "usage_in": 631,
+            "usage_out": 122
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 131,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "L:en",
+            "R:short_cot"
+        ],
+        "tokens_in": 582,
+        "tokens_out": 103,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly states that arrest is the most likely outcome, while the legal process for perjury typically involves an investigation and potential charges before arrest. Answer 2 correctly identifies that \"go to jail\" is the formal legal penalty, but it overlooks that arrest is a necessary precursor to jail time. Answer 3 correctly notes that \"go to jail\" is a more severe and direct outcome than \"arrest,\" making it the most accurate choice.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "05699400c8237087e609ce3935b28ce66ada27f9ede4389a4482d7a462a11d7a"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:51:10+00:00",
+            "usage_in": 594,
+            "usage_out": 103
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 138,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "tokens_in": 552,
+        "tokens_out": 124,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies \"amusement park\" as the most standard location for game ticket booths, which is not necessarily accurate. While amusement parks do have ticket booths, fairgrounds are more commonly associated with games and events where tickets are sold at booths. Answer 2 correctly identifies fairgrounds as a common location for games and ticket booths, making it a valid choice. Answer 3 provides a more detailed reasoning process, correctly eliminating train stations and cathedrals, and concluding that fairgrounds are more commonly associated with games and ticket sales than amusement parks.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "W:rewrite2",
+            "prompt_sha256": "7a54c130a7bbd422d70d064101c435aedde5663c19f766faf6d6e2a496814eeb"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:51:19+00:00",
+            "usage_in": 564,
+            "usage_out": 124
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 140,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "R:short_cot",
+            "L:en",
+            "W:rewrite2"
+        ],
+        "tokens_in": 506,
+        "tokens_out": 89,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 both suggest \"front door\" (C) as the correct answer, which is incorrect. Letters are typically delivered by hand into a \"mail box\" (A), which is specifically designed for receiving mail. The reasoning in Answer 2 correctly identifies the \"mail box\" as the standard container for receiving delivered letters, making it the most accurate choice.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "6bae00c5c96f67f3036dfc0afbcb6f2ce2b57c154ef0261f4586c4795d02dc8a"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:51:22+00:00",
+            "usage_in": 518,
+            "usage_out": 89
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 144,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:en",
+            "W:rewrite2",
+            "R:short_cot"
+        ],
+        "tokens_in": 612,
+        "tokens_out": 92,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 3 is incorrect because \"attacked his country\" (E) is a restatement of the premise, not the decision made in response to the attack. The question asks what the president did, implying an action taken in response, not a description of the attack itself. Answers 1 and 2 correctly identify \"wage war\" (A) as the most logical and formal response.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "d35c46cd9ec6d243a2a86a6026d70d00827c70121bf8b6746319727709217399"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:51:24+00:00",
+            "usage_in": 624,
+            "usage_out": 92
+        },
+        "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 145,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "A",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "L:en",
+            "R:short_cot"
+        ],
+        "tokens_in": 624,
+        "tokens_out": 117,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 3 correctly identify \"sights\" (A) as the term for viewing through an eyepiece, which is accurate in contexts like telescopes or microscopes. Answer 2 incorrectly selects \"light microscope\" (D), which is an instrument, not the action of viewing through an eyepiece. The question specifically asks for the term describing the action, not the instrument itself. Therefore, Answer 1 and Answer 3 are correct, but Answer 1 provides a more comprehensive explanation.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "e279cfaeadc5f13748014b02b380f66a5ba91a0f464a88b56b1638d72c09fe20"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:51:28+00:00",
+            "usage_in": 636,
+            "usage_out": 117
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 146,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "E",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "R:short_cot",
+            "L:en"
+        ],
+        "tokens_in": 593,
+        "tokens_out": 92,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly assumes that \"Halloween\" is a suitable adjective to describe the decorations, which is not grammatically correct. Answer 3 correctly identifies that \"horrible\" fits the context of scary decorations, while Answer 2 also correctly identifies \"horrible\" as the best fit. However, Answer 3 provides a more detailed explanation and correctly concludes with \"E\" as the answer.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "L:en",
+            "prompt_sha256": "e901079e033cc516cf4152de41385f4c8293b7d596ce4b13ddc4efdc4b65deb4"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:51:32+00:00",
+            "usage_in": 605,
+            "usage_out": 92
+        },
+        "donor_position": 3,
+        "pilot": false
+    },
+    {
+        "item_id": 151,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:en",
+            "R:short_cot",
+            "W:rewrite2"
+        ],
+        "final_answer": "D",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "W:rewrite2",
+            "L:en",
+            "R:short_cot"
+        ],
+        "tokens_in": 579,
+        "tokens_out": 109,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 incorrectly identifies \"inside joke\" as the answer, which is not a physical location and thus irrelevant to the question about where a fox might be caught. Answers 2 and 3 correctly identify that \"the forrest\" (D) is a natural habitat for a fox, making it the most plausible answer. However, Answer 3 provides a more detailed reasoning process by explaining the environmental factors that make \"the forrest\" more likely for a fox to be caught.\n\nFinal Choice\n{\"choice\":3}",
+            "choice": 3,
+            "chosen_arm": "R:short_cot",
+            "prompt_sha256": "e944b906771f48ebd43071be353b33336516f43229b85b63f8443fb672fe81b4"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T08:51:37+00:00",
+            "usage_in": 591,
+            "usage_out": 109
+        },
+        "donor_position": 2,
+        "pilot": false
+    }
+]
