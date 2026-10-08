@@ -67,19 +67,19 @@
         ],
         "n_planned_items": 432,
         "api_usage": {
-            "calls": 432,
+            "calls": 434,
             "calls_without_usage": 2,
-            "prompt_tokens": 566404,
-            "completion_tokens": 54083,
+            "prompt_tokens": 568549,
+            "completion_tokens": 54342,
             "refusals": 0
         },
         "model_versions": {
-            "qwen3-8b": 430,
+            "qwen3-8b": 432,
             "": 2
         },
         "calls_utc": {
             "first": "2026-10-07T23:26:21+00:00",
-            "last": "2026-10-08T00:44:01+00:00"
+            "last": "2026-10-08T05:05:07+00:00"
         }
     },
     {
@@ -1004,6 +1004,39 @@
             "usage_out": 80
         },
         "donor_position": 1,
+        "pilot": false
+    },
+    {
+        "item_id": 101,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "P:skeptic",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "c",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "S:T1.0:seed1",
+            "P:skeptic",
+            "L:es"
+        ],
+        "tokens_in": 1439,
+        "tokens_out": 143,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 3 incorrectly calculates the initial votes for the winner and loser. It assumes the winner has $ \\frac{x}{2} + \\frac{x}{20} $ and the loser has $ \\frac{x}{2} - \\frac{x}{20} $, which is not accurate. The correct approach is to use the margin of 10% of total votes, leading to $ W = 0.55x $ and $ L = 0.45x $. Answer 1 and Answer 2 correctly derive these values and solve the equation accurately, arriving at $ x = 40000 $.\n\nFinal Choice\n{\"choice\":2}",
+            "choice": 2,
+            "chosen_arm": "P:skeptic",
+            "prompt_sha256": "2caa4e44333d06f02c531b84a188a2de662914f411f56e028c1e81557e3e054e"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T05:05:05+00:00",
+            "usage_in": 1451,
+            "usage_out": 143
+        },
+        "donor_position": 2,
         "pilot": false
     },
     {
@@ -11298,6 +11331,39 @@
             "called_at": "2026-10-08T00:29:43+00:00",
             "usage_in": 1470,
             "usage_out": 143
+        },
+        "donor_position": 2,
+        "pilot": false
+    },
+    {
+        "item_id": 1603,
+        "aggregator_id": "judge",
+        "candidate_arms": [
+            "L:es",
+            "P:skeptic",
+            "S:T1.0:seed1"
+        ],
+        "final_answer": "a",
+        "off_menu": false,
+        "n_rounds": null,
+        "presentation_order": [
+            "L:es",
+            "P:skeptic",
+            "S:T1.0:seed1"
+        ],
+        "tokens_in": 682,
+        "tokens_out": 116,
+        "trace": {
+            "judge_output": "Reasoning process\nAnswer 1 and Answer 2 correctly solve the equation by rearranging it to ? = 0.002 / 0.01, which results in 0.2. This matches choice (a). However, Answer 3 incorrectly interprets the question as 002 / ? = 01, treating them as whole numbers rather than decimals, leading to an incorrect result of 0.02. The correct interpretation should involve decimal values, making Answer 3's reasoning flawed.\n\nFinal Choice\n{\"choice\":1}",
+            "choice": 1,
+            "chosen_arm": "L:es",
+            "prompt_sha256": "7d14afcd945d587b341832fe0af1b94308fe72f209ec91754aca98cbed39c5a1"
+        },
+        "call": {
+            "model_version": "qwen3-8b",
+            "called_at": "2026-10-08T05:05:07+00:00",
+            "usage_in": 694,
+            "usage_out": 116
         },
         "donor_position": 2,
         "pilot": false
