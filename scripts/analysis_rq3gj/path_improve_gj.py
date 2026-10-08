@@ -647,8 +647,9 @@ def buildReport(args, sha, confirmed, steps, blocks, subs3, subs2, origs, trans,
                              "agg_no_answer": f"{100 * inval.mean():.2f}%",
                              "input（API / 重算）": f"{g.usage_in.mean():.0f} / {g.tokens_in.mean():.0f}",
                              "output（API / 重算）": f"{g.usage_out.mean():.0f} / {g.tokens_out.mean():.0f}",
-                             "費用（美元）": f"{sum(callCost(h, i, o) for i, o in zip(g.usage_in, g.usage_out)):.2f}"})
-    total_cost = sum(callCost(h, i, o) for h, i, o in zip(rec.host, rec.usage_in, rec.usage_out))
+                             "費用（美元）": f"{sum(callCost(h, i, o) for i, o in zip(g.usage_in.fillna(0), g.usage_out.fillna(0))):.2f}"})
+    # 被擋下的呼叫沒有用量（API 不回傳 usage），費用以 0 計
+    total_cost = sum(callCost(h, i, o) for h, i, o in zip(rec.host, rec.usage_in.fillna(0), rec.usage_out.fillna(0)))
     out += ["### 8.9 失敗與成本", "", md(pd.DataFrame(fail), text=True), "",
             f"實際費用合計 {total_cost:.2f} 美元（2026-10-07 查閱的定價；含試跑，不含流程核對）。流程核對的重跑一致率：" +
             "、".join(f"{MODEL_LABELS[h]} {100 * c['agreement']:.1f}%" for h, c in steps["check"]["cells"].items()) + "。", ""]
