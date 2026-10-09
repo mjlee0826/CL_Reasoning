@@ -55,6 +55,7 @@ scripts/analysis_rq3gsk/ RQ3-GSK：落單程度推廣到 K = 5、7，落單的�
 scripts/analysis_rq3gj/ RQ3-GJ：宿主自己當裁判時，該改哪一條 path（K = 3 的四組菜單與 K = 2；呼叫 API）
 scripts/analysis_rq3gjr/ RQ3-GJR：用 RQ3-GJ 的裁判紀錄做條件式 logit，預測裁判的選擇（離線）
 scripts/analysis_rq3gsx/ RQ3-GSX：依正確率加權的投票（WV）下，落單的那條還是最不值得改嗎（K = 3、5、7；離線）
+scripts/analysis_rq3gjt/ RQ3-GJT：只用原本版本的裁判紀錄與假設的改進，預測裁判的變化（三層、五種切法、資料量曲線；離線）
 scripts/legacy_eval/ 舊格式結果的評分與彙整（test_em、test_tokens、test_em_legacy ...）
 scripts/router/      XLM-R router（原論文的 per-query 語言對路由）
 
@@ -379,6 +380,27 @@ python scripts/analysis_rq3gsx/path_improve_gsx.py --workers 14   # -> result/an
 - 先做六項檢查（重現 RQ3-GS / RQ3-GSK 的 V、RQ3-G 的 12 條 WV 與 RQ3-GK K = 3 的 WV − SB、菜單表、權重相同時 WV = V、換成自己、
   純迴圈手算 gpt4omini × mmlu × GS-001 / GS5-001），不過就停、不寫輸出。計算分成（K、區塊、一段菜單）的工作平行跑，依工作順序合併。
 - 輸出：`rq3gsx_blocks.csv`、`rq3gsx_menu_blocks.csv`、`rq3gsx_substitutions.csv`、`fig_a_judgments`、`fig_b_rank_effect`（.png / .pdf）、`report.md`。
+
+**⑳ RQ3-GJT：不用真的去改 path，只用原本版本的裁判紀錄，估得出裁判的變化嗎？**（離線；需要 ⑰ 的 K = 3 Judge 紀錄與預測檔、⑱ 的預測檔與輸出、`result/arms`）
+
+```bash
+python scripts/analysis_rq3gjt/judge_transfer.py --checks-only   # 只跑第 10 節的六項檢查，不寫輸出
+python scripts/analysis_rq3gjt/judge_transfer.py                 # 檢查全過 → 曲線 → 預測檔與 manifest → 評分與報告 -> result/analysis/rq3gjt/
+python scripts/analysis_rq3gjt/judge_transfer.py --score-only    # 預測檔已寫好：核對 sha256 後只重做評分與報告
+```
+
+- 規格與判定標準在 `result/analysis/rq3gjt/rq3gjt_criteria.md`（已確認，不得修改）。三層：A = 只用原本版本的紀錄配適 M3h（M3 拿掉 donor），
+  輸入是原本的三份候選加上「path p 進步」的假設（RQ3-G 的隨機改進，直接算期望值）；B = 7 個版本的紀錄配適 M3，同樣的假設但被改進的那份
+  設 donor = 1；C = RQ3-GJR（真的換進來的候選）。每層另有同樣訓練資料估的 9 格比例表。假設狀態的因素在 `Analysis/judgeTransfer.py`
+  （算法同 `Analysis/judgeRegression.buildGroups`），配適沿用 `Analysis/judgeRegression.py` 的牛頓法。
+- 切法：① 每個資料集各自、② 四個資料集合併（前 20 次切分）、③ 留一個資料集（主要；C 層讀 RQ3-GJR 的存檔）、④ 留一組菜單、⑥ 換裁判
+  （200 次切分）；⑤ 照抄 RQ3-GJR 的 K = 2。判定一 = 明顯落單組的 Δ_E（A 層、M3h、③）；判定二 = 只抽 1% 訓練題目時變化誤差的增加（曲線 (i)）。
+- 先做六項檢查（重現 RQ3-GJR 的判定、係數與預測，第 7 節 5、6；呼叫數；f = 0、換成自己、B 層的路徑餵真的候選 = C 層、純迴圈手算；
+  洩漏；牛頓法 vs statsmodels），任何一項不過就停、不寫輸出。之後才跑曲線並寫預測檔，評分程式讀預測檔前核對 sha256。
+- 輸出：`rq3gjt_blocks.csv`（長表）、`rq3gjt_substitutions.csv`、`rq3gjt_coefficients.csv`、`rq3gjt_curves.csv`、
+  `rq3gjt_predictions_manifest.json`、`fig_a_gain`、`fig_b_cuts`、`fig_c_curves`（.png / .pdf）、`report.md`；
+  預測檔 `rq3gjt_pred_*.csv.gz`、`rq3gjt_curve_*.npz`（約 200 MB，不進 git，manifest 進 git）。
+- `--fake-choices SEED --out-dir <別的目錄>`：乾跑，把裁判的有效選擇換成隨機的，只用來測程式（不能寫到正式的目錄）。
 
 ---
 

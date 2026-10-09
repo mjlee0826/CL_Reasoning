@@ -112,6 +112,18 @@ def ciText(s: dict, d: int = 2, npos: bool = True) -> str:
     return out + (f"，{s['n_positive']}/{s['n_blocks']}" if npos else "")
 
 
+def ciFinite(values, d: int = 2) -> str:
+    """只報告的量：有區塊沒有資料（NaN）時，對有資料的區塊統計並寫明區塊數（同 RQ3-GS 第 9 節 5 的報法）。"""
+    x = np.asarray(values, dtype=float)
+    ok = np.isfinite(x)
+    if ok.all():
+        return ciText(S(x), d)
+    if ok.sum() < 2:
+        return "資料不足（有資料的區塊 < 2）"
+    s = S(x[ok])
+    return f"{pp(s['mean'], d)}（{pp(s['ci_low'], d)} 到 {pp(s['ci_high'], d)}），{s['n_positive']}/{s['n_blocks']}（有資料的 {int(ok.sum())} 個區塊）"
+
+
 def shown(s: dict) -> tuple:
     return (f"{s['mean']:+.2f}", f"{s['ci_low']:+.2f}", f"{s['ci_high']:+.2f}", s["n_positive"])
 
@@ -917,8 +929,8 @@ def buildReport(B, st, checks, hand_rows, menus, thresholds, sha, confirmed, gen
         nonT = [m for m in menus[K] if m["lone"] not in TRANSLATED]
         rng_ = (f"{100 * min(m['degree'] for m in nonT):.3f} 到 {100 * max(m['degree'] for m in nonT):.3f}pp") if nonT else "—"
         rows.append({"K": K, "(a) 落單的不是翻譯 path：E_W": ciText(S(b.E_W_4a)) + f"（{len(nonT)} 份，落單程度 {rng_}）",
-                     "(b) 落單的不是正確率最低：E_W": ciText(S(b.E_W_4b)),
-                     "(c) 其他條 − 正確率最低那條": ciText(S(b.E_W_4c)),
+                     "(b) 落單的不是正確率最低：E_W": ciFinite(b.E_W_4b),
+                     "(c) 其他條 − 正確率最低那條": ciFinite(b.E_W_4c),
                      "(b)(c) 用到的比例": f"{b.share_4bc.mean():.3f}（{b.share_4bc.min():.3f} 到 {b.share_4bc.max():.3f}）"})
     L += [ciTable(rows), "", "### 7.5 模擬（隨機改進模型）", "",
           "轉換率 = 該區塊所有可用的（菜單、供體、切分）× K 條 path 的分子總和 ÷ 分母總和（全部確認用菜單）。", ""]
