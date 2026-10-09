@@ -52,7 +52,30 @@ MODEL_LABELS = {"gpt4omini": "GPT-4o mini", "qwen": "Qwen3-8B"}
 CLEAR, MIDDLE, SYMMETRIC, ENGLISH = GROUP_ORDER
 N_QWEN = 20
 # §8.8 的人工標記：(資料集, 菜單, 版本, item_id) -> (類別, 引用的原文, 說明)。類別：矛盾 / 一致 / 其他。讀完 --dump 的全文後填入。
-LABELS: dict = {}
+LABELS: dict = {
+    ("mmlu", "GS-142", "P1-gemini3.1flashlite", 13193): ("一致", "Answer 2 correctly identifies Option A as the most accurate choice", "選 2"),
+    ("mmlu", "GS-003", "P2-gemini3.1flashlite", 8539): ("一致", "Answer 1 correctly identifies that Scenario 2 involves morally wrong behavior", "選 1"),
+    ("mmlu", "GS-181", "S2-deepseek4.1flash", 13409): ("一致", "Therefore, the correct answer is provided in Answer 1.", "選 1"),
+    ("mmlu", "GS-068", "ES-gemini3.1flashlite", 4904): ("一致", "The reasoning in Answer 2 is more directly aligned with the purpose of universal screening", "選 2"),
+    ("mmlu", "GS-021", "EN-gemini3.1flashlite", 3314): ("一致", "Answer 1 correctly identifies that Calvinists had a theocratic structure", "選 1"),
+    ("mathqa", "GS-142", "orig", 1279): ("一致", "Answer 3 correctly identifies that none of the given choices are accurate", "選 3"),
+    ("truthfulqa", "GS-139", "P1-deepseek4.1flash", 720): ("一致", "Therefore, the correct answer is A, making Answer 2 the most accurate.", "選 2"),
+    ("truthfulqa", "GS-181", "W2-gemini3.1flashlite", 237): ("一致", "The correct interpretation should consider ... the trademarked slogan for Disneyland.",
+                                                             "先說 Answer 1 也有缺點，結論仍支持 Answer 1；選 1"),
+    ("truthfulqa", "GS-150", "P2-gemini3.1flashlite", 583): ("一致", "Answer 2 correctly identifies that while there are no blanket bans", "選 2"),
+    ("truthfulqa", "GS-020", "EN-deepseek4.1flash", 27): ("一致", "The most specific and accurate answer is Answer 1.", "選 1"),
+    ("truthfulqa", "GS-125", "P2-deepseek4.1flash", 95): ("一致", "Therefore, Answer 3 is the most accurate.", "選 3"),
+    ("truthfulqa", "GS-041", "EN-deepseek4.1flash", 524): ("一致", "Answer 3 correctly identifies that ... is a broader and more accurate answer", "選 3"),
+    ("commonsenseqa", "GS-105", "orig", 1350): ("一致", "Therefore, Answer 3 provides a more accurate and comprehensive reasoning.", "選 3"),
+    ("commonsenseqa", "GS-095", "JA-gemini3.1flashlite", 1345): ("一致", "Therefore, Answer 3 provides a more accurate and direct interpretation", "選 3"),
+    ("commonsenseqa", "GS-181", "orig", 63): ("一致", "Answer 3 correctly identifies \"under rocks\" (A) as a suitable environment", "選 3"),
+    ("commonsenseqa", "GS-065", "ES-deepseek4.1flash", 1929): ("一致", "Therefore, Answer 3 provides the most accurate reasoning.", "選 3"),
+    ("commonsenseqa", "GS-068", "P2-deepseek4.1flash", 111): ("一致", "Answer 1 correctly eliminates the dog park (B)", "選 1"),
+    ("commonsenseqa", "GS-109", "S2-gemini3.1flashlite", 1683): ("一致", "Therefore, Answer 3 provides the most accurate reasoning.", "選 3"),
+    ("commonsenseqa", "GS-022", "P1-gemini3.1flashlite", 124): ("一致", "Therefore, Answer 1 provides the most comprehensive and accurate reasoning.", "選 1"),
+    ("commonsenseqa", "GS-021", "P1-gemini3.1flashlite", 1567): ("矛盾", "However, Answer 2 incorrectly assumes that a department store is the most likely place",
+                                                              "文字說 Answer 1、3（gym）對、Answer 2 錯，卻輸出 {\"choice\":2}"),
+}
 READ_J1 = {
     FORWARD: "和投票一樣，裁判之下落單的那條也最不值得改。",
     REVERSE: "裁判之下落單的那條反而比較值得改。",
@@ -717,7 +740,9 @@ def buildReport(args, sha, confirmed, steps, blocks, subs3, subs2, origs, trans,
                              ciRow("英文落單 10 份：Judge 的 E_J", j4), ciRow("英文落單 10 份：多數決的 E", S(f"E_V_{ENGLISH}")),
                              ciRow("兩邊之差（翻譯落單 − 英文落單，Judge，逐區塊相減）", summ(blocks.E_J_middle6 - blocks[f"E_J_{ENGLISH}"]))]), text=True), "",
             f"落單程度平均：翻譯落單 6 份 {deg6:.3f}pp，英文落單 10 份 {deg10:.3f}pp。限制：只有 6 份，其中 4 份落單的是 ES、6 份都含 P2；只當線索。"
-            "「明顯為正」= 這 6 份的 Judge E_J 平均 ≥ 0.5 且 95% 區間不含 0（上表的狀態欄為正向成立）。", ""]
+            "「明顯為正」= 這 6 份的 Judge E_J 平均 ≥ 0.5 且 95% 區間不含 0（上表的狀態欄為正向成立）。"
+            "判定四讀法裡的「兩者相當或更小」= 這 6 份的 Judge E_J 為兩者相當或反向成立；這個操作定義由使用者在 2026-10-08 23:36 CST、"
+            "跑分析之前確認。", ""]
     # (7) 結論
     out += ["## (7) 對照讀法的結論", "",
             f"- 判定一（E_J {pp(j1['mean'])}，[{pp(j1['ci_low'])}, {pp(j1['ci_high'])}]，{j1['n_positive']}/{j1['n_blocks']} 為正）：**{st1}**。{reading1}"

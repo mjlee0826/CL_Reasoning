@@ -53,6 +53,8 @@ scripts/analysis_rq3gk/ RQ3-GK：RQ3-G 推廣到 K = 3–12 的菜單與三種�
 scripts/analysis_rq3gs/ RQ3-GS：在 187 份沒看過的三條菜單上確認挑法（離線）
 scripts/analysis_rq3gsk/ RQ3-GSK：落單程度推廣到 K = 5、7，落單的那條還是最不值得改嗎（離線）
 scripts/analysis_rq3gj/ RQ3-GJ：宿主自己當裁判時，該改哪一條 path（K = 3 的四組菜單與 K = 2；呼叫 API）
+scripts/analysis_rq3gjr/ RQ3-GJR：用 RQ3-GJ 的裁判紀錄做條件式 logit，預測裁判的選擇（離線）
+scripts/analysis_rq3gsx/ RQ3-GSX：依正確率加權的投票（WV）下，落單的那條還是最不值得改嗎（K = 3、5、7；離線）
 scripts/legacy_eval/ 舊格式結果的評分與彙整（test_em、test_tokens、test_em_legacy ...）
 scripts/router/      XLM-R router（原論文的 per-query 語言對路由）
 
@@ -345,6 +347,38 @@ python scripts/analysis_rq3gj/path_improve_gj.py         # 分析（離線，約
 - 計畫（四組 39 份菜單、每份 7 個版本、K = 2 的 3 個配對 × 5 個版本 × 2 種順序、要呼叫的題目、候選順序）在 `Analysis/judgeSubstitution.py`，
   每一步開始時重算並和第零階段的 `rq3gj_stage0_calls.csv` 核對；預測在 `Analysis/judgeSubstitutionPredict.py`；
   Judge 呼叫用 `Strategy/SubstitutionJudge.py`；分析的逐區塊計算在 `Analysis/judgeSubstitutionStats.py`（只讀存好的預測檔，sha256 不符就停）。
+
+**⑱ RQ3-GJR：用裁判紀錄做 regression，預測裁判選哪一個**（離線；需要 ⑰ 的 Judge 紀錄與預測檔、RQ1-KJ 的 Judge 紀錄、`result/arms`）
+
+```bash
+python scripts/analysis_rq3gjr/judge_regression.py --checks-only   # 只跑第 10 節的六項檢查（約 2 分鐘），不寫輸出
+python scripts/analysis_rq3gjr/judge_regression.py                 # 檢查全過才正式計算（約 6 分鐘）-> result/analysis/rq3gjr/
+```
+
+- 規格與判定標準在 `result/analysis/rq3gjr/rq3gjr_criteria.md`（已確認，不得修改）。每次呼叫是一組，候選依顯示的位置排；
+  條件式 logit（不加截距）用自己寫的牛頓法配適（`Analysis/judgeRegression.py`），M0–M4 逐步加入 correct、support、位置、
+  誰寫的、文字類型、loglen（o200k tokens）；M5a、M5b 加 pathacc，只做逐區塊配適。每個裁判分開配適。
+- 判定一 = M3 在留一個資料集下的 D_P；判定二 = T_new（同樣訓練資料重估的 9 格表）與 M3 的平均絕對誤差之差。評分的題目、切分與
+  D_P 的算法和 RQ3-GJ 判定三相同；T_old 是 RQ3-GJ 存好的留一個資料集預測（只讀，sha256 核對）。
+- 先做六項檢查（重現 RQ3-GJ 判定三與留一個資料集、呼叫數、§8.3 採用率表、T_new 的算法重現 RQ3-GJ 的預測、資料結構、
+  牛頓法 vs statsmodels ConditionalLogit 的牛頓法），任何一項不過就停、不寫輸出。
+- 輸出：`rq3gjr_blocks.csv`、`rq3gjr_substitutions.csv`、`rq3gjr_coefficients.csv`（128 次配適）、
+  `rq3gjr_predictions_{T_new,M0,M1,M2,M3,M4,M3chars}.csv.gz` 與 manifest、`fig_a_predictions`、`fig_b_scenarios`（.png / .pdf）、`report.md`。
+
+**⑲ RQ3-GSX：依正確率加權的投票下，和其他條最不像的那條還是最不值得改嗎？**（離線；需要 `result/arms`、`result/analysis/rq3g/`、`rq3gk/`、`rq3gs/`、`rq3gsk/` 的既有輸出）
+
+```bash
+python scripts/analysis_rq3gsx/path_improve_gsx.py --workers 14   # -> result/analysis/rq3gsx/（14 個行程約 1 小時）
+```
+
+- 規格與判定標準在 `result/analysis/rq3gsx/rq3gsx_criteria.md`（已確認，不得修改）。菜單與分組完全沿用 RQ3-GS（K = 3 的 187 份）與
+  RQ3-GSK（K = 5、7 各 762 份，`rq3gsk_menus_K{5,7}.csv`）；每次切分的落單 path 同 RQ3-GSK 第 3 節。
+- WV 的權重 = max(0, ln(p̂ / (1 − p̂)))，p̂ 用選擇半 ∩ 子集二的答對題數；被替換的 path 用供體的答對題數重算。200 次切分的權重一起計分
+  （`Analysis/pathImproveGSX.py` 的 `wvScores`）。效果 = 10 × Σ分子 ÷ Σ分母（規則 C；排除同 RQ3-GS），判定 E_W(K) = 其他條 − 落單那條
+  （明顯落單組；門檻 0.50 / 0.30 / 0.20）；同一批資料上的 V 並排。另有隨機改進的模擬與權重固定的版本（分開答案與權重）。
+- 先做六項檢查（重現 RQ3-GS / RQ3-GSK 的 V、RQ3-G 的 12 條 WV 與 RQ3-GK K = 3 的 WV − SB、菜單表、權重相同時 WV = V、換成自己、
+  純迴圈手算 gpt4omini × mmlu × GS-001 / GS5-001），不過就停、不寫輸出。計算分成（K、區塊、一段菜單）的工作平行跑，依工作順序合併。
+- 輸出：`rq3gsx_blocks.csv`、`rq3gsx_menu_blocks.csv`、`rq3gsx_substitutions.csv`、`fig_a_judgments`、`fig_b_rank_effect`（.png / .pdf）、`report.md`。
 
 ---
 
